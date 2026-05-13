@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About Us – Freemaki</title>
+<meta name="description" content="Learn about Freemaki — a free collection of online tools built for developers, designers, and everyday users. No signup required."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://freemaki.com/about/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="About Us – Freemaki"/>
+<meta property="og:description" content="Learn about Freemaki and our mission to provide free, fast, privacy-friendly online tools."/>
+<meta property="og:url" content="https://freemaki.com/about/"/>
+<meta property="og:site_name" content="Freemaki"/>
+<meta name="twitter:card" content="summary"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f8f7f4; --surface: #ffffff; --surface2: #f2f0ec;
+    --border: rgba(0,0,0,0.10); --text: #1a1a18; --text2: #5f5e5a; --text3: #9e9c97;
+    --accent: #2563eb; --radius: 12px;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+    background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; min-height: 100vh;
+  }
+  .page { max-width: 720px; margin: 0 auto; padding: 48px 16px 80px; }
+  .breadcrumb { font-size: 13px; color: var(--text3); margin-bottom: 24px; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+  .subtitle { font-size: 16px; color: var(--text2); margin-bottom: 32px; }
+  h2 { font-size: 18px; font-weight: 600; margin: 28px 0 12px; }
+  p { margin-bottom: 12px; color: var(--text2); }
+  ul { padding-left: 20px; margin-bottom: 16px; }
+  li { margin-bottom: 8px; color: var(--text2); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 16px 0 24px; }
+  .value-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: center; }
+  .value-card .v-icon { font-size: 28px; margin-bottom: 8px; }
+  .value-card .v-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .value-card .v-desc { font-size: 12px; color: var(--text3); }
+  .lang-btn {
+    position: fixed; top: 16px; right: 16px; padding: 6px 14px;
+    border: 0.5px solid var(--border); border-radius: 20px; background: var(--surface);
+    font-size: 13px; cursor: pointer; color: var(--text2); transition: all 0.15s; z-index: 100;
+  }
+  .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+  footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
+</style>
+</head>
+<body>
+<button class="lang-btn" onclick="toggleLang()" id="langBtn">中文</button>
+<div class="page">
+  <div class="breadcrumb"><a href="/">Freemaki</a> &rsaquo; <span data-i18n="bc">About</span></div>
+  <h1 data-i18n="title">About Freemaki</h1>
+  <p class="subtitle" data-i18n="subtitle">Free, fast, privacy-friendly online tools for everyone.</p>
+
+  <p data-i18n="intro">Freemaki is a free collection of online tools designed for developers, designers, and everyday users. Our goal is simple: provide useful utilities that work instantly in your browser — no signup, no server processing, no data collection.</p>
+
+  <h2 data-i18n="mission_title">Our Mission</h2>
+  <p data-i18n="mission_p">We believe that online tools should be accessible, fast, and respectful of your privacy. Every tool on Freemaki processes data entirely in your browser. Your text, files, and calculations never leave your device.</p>
+
+  <h2 data-i18n="values_title">What We Stand For</h2>
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="v-icon">🔒</div>
+      <div class="v-title" data-i18n="v1_title">Privacy First</div>
+      <div class="v-desc" data-i18n="v1_desc">All processing is local. Your data stays in your browser.</div>
+    </div>
+    <div class="value-card">
+      <div class="v-icon">⚡</div>
+      <div class="v-title" data-i18n="v2_title">Instant & Fast</div>
+      <div class="v-desc" data-i18n="v2_desc">No server round-trips. Results appear as you type.</div>
+    </div>
+    <div class="value-card">
+      <div class="v-icon">🌐</div>
+      <div class="v-title" data-i18n="v3_title">Bilingual</div>
+      <div class="v-desc" data-i18n="v3_desc">Full English and Chinese support on every tool.</div>
+    </div>
+    <div class="value-card">
+      <div class="v-icon">📱</div>
+      <div class="v-title" data-i18n="v4_title">Mobile Friendly</div>
+      <div class="v-desc" data-i18n="v4_desc">Works great on phones, tablets, and desktops.</div>
+    </div>
+  </div>
+
+  <h2 data-i18n="tools_title">Our Tools</h2>
+  <p data-i18n="tools_p">Freemaki offers 19 free tools across four categories:</p>
+  <ul>
+    <li data-i18n="tools_l1"><strong>Developer Tools (7):</strong> JSON Formatter, Regex Tester, Timestamp Converter, Base64 Encoder, JWT Decoder, Hash Generator, Case Converter</li>
+    <li data-i18n="tools_l2"><strong>Design &amp; Color (4):</strong> Color Converter, CSS Gradient Generator, Font Pairing, Aspect Ratio Calculator</li>
+    <li data-i18n="tools_l3"><strong>Productivity (4):</strong> Unit Converter, Random Picker, Character Counter, QR Code Generator</li>
+    <li data-i18n="tools_l4"><strong>Health &amp; Lifestyle (4):</strong> Calorie Calculator, Pomodoro Timer, BMI Calculator, Sleep Calculator</li>
+  </ul>
+
+  <h2 data-i18n="tech_title">Built With</h2>
+  <p data-i18n="tech_p">Freemaki is built with pure HTML, CSS, and JavaScript. No frameworks, no build tools, no heavy dependencies. This keeps the site fast to load and easy to maintain. We use Vercel for hosting and Cloudflare for DNS and CDN.</p>
+
+  <h2 data-i18n="open_title">Open &amp; Transparent</h2>
+  <p data-i18n="open_p">Our source code is publicly available on GitHub. If you find a bug, have a feature request, or want to contribute, feel free to open an issue or pull request.</p>
+  <ul>
+    <li>GitHub: <a href="https://github.com/omcdon/my-tools" target="_blank" rel="noopener">github.com/omcdon/my-tools</a></li>
+  </ul>
+
+  <footer>
+    <p><a href="/privacy/" data-i18n="f_privacy">Privacy Policy</a> · <a href="/disclaimer/" data-i18n="f_disclaimer">Disclaimer</a> · <a href="/about/" data-i18n="f_about">About</a> · <a href="/contact/" data-i18n="f_contact">Contact</a></p>
+    <p style="margin-top:8px">© 2026 Freemaki · <span data-i18n="f_rights">All rights reserved</span></p>
+  </footer>
+</div>
+
+<script>
+const i18n = {
+  en: {
+    bc:'About', title:'About Freemaki', subtitle:'Free, fast, privacy-friendly online tools for everyone.',
+    intro:'Freemaki is a free collection of online tools designed for developers, designers, and everyday users. Our goal is simple: provide useful utilities that work instantly in your browser — no signup, no server processing, no data collection.',
+    mission_title:'Our Mission', mission_p:'We believe that online tools should be accessible, fast, and respectful of your privacy. Every tool on Freemaki processes data entirely in your browser. Your text, files, and calculations never leave your device.',
+    values_title:'What We Stand For',
+    v1_title:'Privacy First', v1_desc:'All processing is local. Your data stays in your browser.',
+    v2_title:'Instant & Fast', v2_desc:'No server round-trips. Results appear as you type.',
+    v3_title:'Bilingual', v3_desc:'Full English and Chinese support on every tool.',
+    v4_title:'Mobile Friendly', v4_desc:'Works great on phones, tablets, and desktops.',
+    tools_title:'Our Tools', tools_p:'Freemaki offers 19 free tools across four categories:',
+    tools_l1:'<strong>Developer Tools (7):</strong> JSON Formatter, Regex Tester, Timestamp Converter, Base64 Encoder, JWT Decoder, Hash Generator, Case Converter',
+    tools_l2:'<strong>Design &amp; Color (4):</strong> Color Converter, CSS Gradient Generator, Font Pairing, Aspect Ratio Calculator',
+    tools_l3:'<strong>Productivity (4):</strong> Unit Converter, Random Picker, Character Counter, QR Code Generator',
+    tools_l4:'<strong>Health &amp; Lifestyle (4):</strong> Calorie Calculator, Pomodoro Timer, BMI Calculator, Sleep Calculator',
+    tech_title:'Built With', tech_p:'Freemaki is built with pure HTML, CSS, and JavaScript. No frameworks, no build tools, no heavy dependencies. This keeps the site fast to load and easy to maintain. We use Vercel for hosting and Cloudflare for DNS and CDN.',
+    open_title:'Open &amp; Transparent', open_p:'Our source code is publicly available on GitHub. If you find a bug, have a feature request, or want to contribute, feel free to open an issue or pull request.',
+    f_privacy:'Privacy Policy', f_disclaimer:'Disclaimer', f_about:'About', f_contact:'Contact', f_rights:'All rights reserved'
+  },
+  zh: {
+    bc:'关于', title:'关于 Freemaki', subtitle:'免费、快速、注重隐私的在线工具。',
+    intro:'Freemaki 是一组面向开发者、设计师和日常用户的免费在线工具集合。我们的目标很简单：提供即时可用的实用工具 — 无需注册、无需服务器处理、不收集数据。',
+    mission_title:'我们的使命', mission_p:'我们认为在线工具应该是便捷、快速且尊重隐私的。Freemaki 上的每个工具都在您的浏览器中完成全部处理。您的文本、文件和计算结果永远不会离开您的设备。',
+    values_title:'我们的理念',
+    v1_title:'隐私优先', v1_desc:'所有处理都在本地完成。您的数据留在浏览器中。',
+    v2_title:'即时快速', v2_desc:'无需服务器通信，输入即得结果。',
+    v3_title:'中英双语', v3_desc:'每个工具都提供完整的中文和英文支持。',
+    v4_title:'移动端适配', v4_desc:'在手机、平板和桌面端都有出色的体验。',
+    tools_title:'我们的工具', tools_p:'Freemaki 提供四个类别的 19 款免费工具：',
+    tools_l1:'<strong>开发者工具（7 个）：</strong>JSON 格式化器、正则表达式测试器、时间戳转换器、Base64 编解码器、JWT 解码器、哈希生成器、驼峰下划线命名转换',
+    tools_l2:'<strong>设计与颜色（4 个）：</strong>颜色转换器、CSS 渐变生成器、字体搭配生成器、比例计算器',
+    tools_l3:'<strong>效率工具（4 个）：</strong>单位换算器、随机抽签与分组、字符统计工具、二维码生成器',
+    tools_l4:'<strong>健康生活（4 个）：</strong>卡路里计算器、番茄钟计时器、BMI 计算器、睡眠周期计算器',
+    tech_title:'技术栈', tech_p:'Freemaki 使用纯 HTML、CSS 和 JavaScript 构建。没有框架、没有构建工具、没有繁重的依赖。这使得网站加载快速且易于维护。我们使用 Vercel 托管，Cloudflare 提供 DNS 和 CDN。',
+    open_title:'开源与透明', open_p:'我们的源代码在 GitHub 上公开。如果您发现 Bug、有功能建议或想要贡献代码，欢迎提交 Issue 或 Pull Request。',
+    f_privacy:'隐私政策', f_disclaimer:'免责声明', f_about:'关于我们', f_contact:'联系我们', f_rights:'版权所有'
+  }
+};
+let lang = 'en';
+function toggleLang() {
+  lang = lang === 'en' ? 'zh' : 'en';
+  document.getElementById('langBtn').textContent = lang === 'en' ? '中文' : 'EN';
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
+  });
+}
+</script>
+</body>
+</html>

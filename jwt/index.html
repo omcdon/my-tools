@@ -341,5 +341,51 @@
       }
     }
   </script>
+
+  <!-- How to Use & FAQ (auto-generated for SEO) -->
+  <div class="seo-content" style="max-width:720px;margin:32px auto 0;padding:0 16px;">
+    <div style="border-top:0.5px solid rgba(0,0,0,0.10);padding-top:28px;">
+      <h2 style="font-size:18px;font-weight:600;margin-bottom:12px;">
+        <span class="en">How to Use This Tool</span>
+        <span class="zh">使用说明</span>
+      </h2>
+      <ol class="en" style="padding-left:20px;margin-bottom:16px;color:#5f5e5a;line-height:1.8;font-size:14px;">
+      <li>Paste your JWT (JSON Web Token) string into the input field.</li>
+      <li>The tool automatically decodes and displays the Header and Payload sections in formatted JSON.</li>
+      <li>Key claims like <code>iss</code> (issuer), <code>exp</code> (expiration), <code>sub</code> (subject), and <code>iat</code> (issued at) are highlighted.</li>
+      <li>If the token has an expiration time, the tool shows whether it is expired or still valid.</li>
+      <li>The Signature section is displayed but not verified (verification requires a secret key).</li>
+      </ol>
+      <ol class="zh" style="display:none;padding-left:20px;margin-bottom:16px;color:#5f5e5a;line-height:1.8;font-size:14px;">
+      <li>将 JWT（JSON Web Token）字符串粘贴到输入框中。</li>
+      <li>工具自动解码并以格式化 JSON 显示 Header 和 Payload 部分。</li>
+      <li>关键声明如 <code>iss</code>（签发者）、<code>exp</code>（过期时间）、<code>sub</code>（主题）、<code>iat</code>（签发时间）会高亮显示。</li>
+      <li>如果令牌有过期时间，工具会显示是否已过期或仍然有效。</li>
+      <li>Signature 部分会显示但不验证（验证需要密钥）。</li>
+      </ol>
+    </div>
+
+    <div style="border-top:0.5px solid rgba(0,0,0,0.10);padding-top:28px;margin-top:8px;">
+      <h2 style="font-size:18px;font-weight:600;margin-bottom:12px;">
+        <span class="en">Frequently Asked Questions</span>
+        <span class="zh">常见问题</span>
+      </h2>
+      <ul class="en" style="list-style:none;padding:0;margin-bottom:16px;">
+      <li><strong>What is a JWT?</strong> — A JSON Web Token is a compact, URL-safe token that consists of three parts: Header (algorithm and token type), Payload (claims/data), and Signature (verification). It is widely used for authentication in web applications.</li>
+      <li><strong>Can you verify the signature?</strong> — This decoder displays the signature but does not verify it, as verification requires the server-side secret key. For verification, use server-side libraries.</li>
+      <li><strong>What do common claims mean?</strong> — <code>sub</code> = subject (user ID), <code>iss</code> = issuer, <code>aud</code> = audience, <code>exp</code> = expiration time, <code>iat</code> = issued at, <code>nbf</code> = not before.</li>
+      </ul>
+      <ul class="zh" style="display:none;list-style:none;padding:0;margin-bottom:16px;">
+      <li><strong>什么是 JWT？</strong> — JWT（JSON Web Token）是一种紧凑的 URL 安全令牌，由三部分组成：Header（算法和令牌类型）、Payload（声明/数据）和 Signature（签名验证）。广泛应用于 Web 应用的身份认证。</li>
+      <li><strong>能验证签名吗？</strong> — 解码器会显示签名但不验证，因为验证需要服务端密钥。如需验证，请使用服务端库。</li>
+      <li><strong>常见声明的含义是什么？</strong> — <code>sub</code> = 主题（用户 ID），<code>iss</code> = 签发者，<code>aud</code> = 受众，<code>exp</code> = 过期时间，<code>iat</code> = 签发时间，<code>nbf</code> = 生效时间。</li>
+      </ul>
+    </div>
+
+    <p style="text-align:center;color:#9e9c97;font-size:12px;margin:16px 0 0;">
+      <a href="/" style="color:#2563eb;text-decoration:none;"><span class="en">← Back to all tools</span><span class="zh">← 返回所有工具</span></a>
+    </p>
+  </div>
+
 </body>
 </html>

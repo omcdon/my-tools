@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Color Conversion Guide for Web Designers: HEX, RGB, HSL, CMYK Explained | Freemaki Blog</title>
+<meta name="description" content="A comprehensive guide to color formats used in web design: HEX, RGB, HSL, and CMYK. Learn when to use each format and how to convert between them. Free color converter tool included."/>
+<meta name="robots" content="index, follow"/>
+<meta name="author" content="Freemaki"/>
+<link rel="canonical" href="https://freemaki.com/blog/color-guide-for-designers/"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Color Conversion Guide for Web Designers"/>
+<meta property="og:description" content="Learn HEX, RGB, HSL, CMYK color formats and when to use each one."/>
+<meta property="og:url" content="https://freemaki.com/blog/color-guide-for-designers/"/>
+<meta property="og:site_name" content="Freemaki"/>
+<meta name="twitter:card" content="summary"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #f8f7f4; --surface: #ffffff; --surface2: #f2f0ec; --border: rgba(0,0,0,0.10); --text: #1a1a18; --text2: #5f5e5a; --text3: #9e9c97; --accent: #2563eb; --radius: 12px; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.8; min-height: 100vh; }
+  .page { max-width: 720px; margin: 0 auto; padding: 48px 16px 80px; }
+  .breadcrumb { font-size: 13px; color: var(--text3); margin-bottom: 24px; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
+  .meta { font-size: 13px; color: var(--text3); margin-bottom: 32px; }
+  h2 { font-size: 20px; font-weight: 700; margin: 36px 0 12px; }
+  h3 { font-size: 17px; font-weight: 600; margin: 24px 0 8px; }
+  p { margin-bottom: 14px; color: var(--text2); }
+  ul, ol { padding-left: 20px; margin-bottom: 14px; }
+  li { margin-bottom: 6px; color: var(--text2); }
+  code { background: var(--surface2); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+  pre { background: #1a1a2e; color: #e0e0ff; padding: 16px; border-radius: var(--radius); overflow-x: auto; margin: 14px 0; font-size: 13px; }
+  pre code { background: none; padding: 0; color: inherit; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  blockquote { border-left: 3px solid var(--accent); padding-left: 16px; margin: 14px 0; color: var(--text3); font-style: italic; }
+  .cta { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: var(--radius); display: inline-block; margin: 8px 4px; font-weight: 600; text-decoration: none; }
+  .cta:hover { opacity: 0.9; text-decoration: none; }
+  .lang-btn { position: fixed; top: 16px; right: 16px; padding: 6px 14px; border: 0.5px solid var(--border); border-radius: 20px; background: var(--surface); font-size: 13px; cursor: pointer; color: var(--text2); z-index: 100; }
+  .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+  footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
+</style>
+</head>
+<body>
+<button class="lang-btn" onclick="toggleLang()" id="langBtn">中文</button>
+<div class="page">
+  <div class="breadcrumb"><a href="/">Freemaki</a> &rsaquo; <span data-i18n="bc">Blog</span></div>
+
+  <h1 data-i18n="title">Color Conversion Guide for Web Designers: HEX, RGB, HSL, CMYK Explained</h1>
+  <p class="meta" data-i18n="meta">Published: May 13, 2026 · 7 min read</p>
+
+  <p data-i18n="intro">As a web designer or developer, you work with colors every day. But do you know the difference between HEX, RGB, HSL, and CMYK — and more importantly, when to use each one? This guide breaks down the four major color formats, explains how they work under the hood, and shows you practical examples of when each format is the right choice.</p>
+
+  <h2 data-i18n="hex_title">HEX: The Web Standard</h2>
+  <p data-i18n="hex_p1">HEX (hexadecimal) is the most common color format in web development. It represents colors as a six-digit hexadecimal number, where each pair of digits represents the Red, Green, and Blue channels (00-FF, or 0-255 in decimal).</p>
+  <pre><code>#FF5733  →  Red: 255, Green: 87, Blue: 51
+#3B82F6  →  Red: 59,  Green: 130, Blue: 246
+#000000  →  Black (all channels at 0)
+#FFFFFF  →  White (all channels at 255)</code></pre>
+  <p data-i18n="hex_p2"><strong>When to use HEX:</strong> CSS stylesheets, HTML attributes, design system tokens, and any web-specific code. It is the most universally supported color format.</p>
+
+  <h2 data-i18n="rgb_title">RGB: The Foundation</h2>
+  <p data-i18n="rgb_p1">RGB (Red, Green, Blue) is the additive color model used by all screens. It mixes red, green, and blue light at different intensities (0-255 each) to create over 16 million possible colors.</p>
+  <pre><code>rgb(255, 87, 51)   →  Same as #FF5733
+rgb(59, 130, 246)  →  Same as #3B82F6
+rgba(59, 130, 246, 0.5)  →  Same color at 50% opacity</code></pre>
+  <p data-i18n="rgb_p2"><strong>When to use RGB:</strong> When you need alpha transparency (use <code>rgba()</code>), when working with Canvas or WebGL APIs, or when generating colors programmatically in JavaScript.</p>
+
+  <h2 data-i18n="hsl_title">HSL: The Designer's Best Friend</h2>
+  <p data-i18n="hsl_p1">HSL (Hue, Saturation, Lightness) represents colors in a way that is much more intuitive for human designers:</p>
+  <ul>
+    <li data-i18n="hsl_l1"><strong>Hue (0-360):</strong> The color's position on the color wheel (0° = red, 120° = green, 240° = blue)</li>
+    <li data-i18n="hsl_l2"><strong>Saturation (0-100%):</strong> How vivid or muted the color is (0% = gray, 100% = full color)</li>
+    <li data-i18n="hsl_l3"><strong>Lightness (0-100%):</strong> How bright the color is (0% = black, 50% = normal, 100% = white)</li>
+  </ul>
+  <pre><code>hsl(11, 100%, 60%)    →  A vibrant orange-red
+hsl(217, 91%, 60%)    →  A bright blue
+hsl(0, 0%, 50%)       →  Pure gray (medium)</code></pre>
+  <p data-i18n="hsl_p2"><strong>When to use HSL:</strong> When creating color palettes, generating shades/tints of a single color, or building design systems. Adjusting saturation and lightness is much more intuitive than tweaking RGB values.</p>
+
+  <h2 data-i18n="cmyk_title">CMYK: The Print Format</h2>
+  <p data-i18n="cmyk_p1">CMYK (Cyan, Magenta, Yellow, Key/Black) is a subtractive color model used in printing. Unlike RGB (additive, for screens), CMYK represents ink percentages (0-100% each).</p>
+  <p data-i18n="cmyk_p2"><strong>When to use CMYK:</strong> When preparing files for print (business cards, brochures, packaging). Web designers rarely need CMYK directly, but understanding it is important when your web designs need to be translated to print materials.</p>
+  <blockquote data-i18n="cmyk_note">Note: The CMYK gamut is smaller than RGB. Bright, saturated screen colors often cannot be reproduced exactly in print. Always check CMYK values before sending files to print.</blockquote>
+
+  <h2 data-i18n="contrast_title">Accessibility: WCAG Contrast Ratios</h2>
+  <p data-i18n="contrast_p1">Web accessibility isn't optional — it's a requirement. The WCAG (Web Content Accessibility Guidelines) defines minimum contrast ratios for text readability:</p>
+  <ul>
+    <li data-i18n="contrast_l1"><strong>AA Normal Text:</strong> 4.5:1 minimum contrast ratio</li>
+    <li data-i18n="contrast_l2"><strong>AA Large Text:</strong> 3:1 minimum contrast ratio</li>
+    <li data-i18n="contrast_l3"><strong>AAA Normal Text:</strong> 7:1 minimum contrast ratio (enhanced)</li>
+  </ul>
+  <p data-i18n="contrast_p2">Before finalizing any color combination, always check the contrast ratio. A quick way is to use the <a href="/color/">Color Converter</a> on Freemaki, which includes a built-in WCAG contrast checker that evaluates your chosen color against white and black backgrounds.</p>
+
+  <h2 data-i18n="tips_title">Practical Tips for Color Management</h2>
+  <ol>
+    <li data-i18n="tip1"><strong>Define a base hue</strong> in HSL, then create variations by adjusting saturation and lightness</li>
+    <li data-i18n="tip2"><strong>Use CSS custom properties</strong> (<code>--color-primary: hsl(217, 91%, 60%)</code>) for easy theme changes</li>
+    <li data-i18n="tip3"><strong>Always test contrast</strong> — never assume a color combination is accessible by eye alone</li>
+    <li data-i18n="tip4"><strong>Keep a palette of 3-5 colors</strong> maximum for a clean, cohesive design</li>
+    <li data-i18n="tip5"><strong>Consider dark mode</strong> — colors that work on white may not work on dark backgrounds</li>
+  </ol>
+
+  <h2 data-i18n="try_title">Try the Color Converter</h2>
+  <p data-i18n="try_p1">Convert between HEX, RGB, HSL, and CMYK instantly — with live preview and WCAG contrast checking:</p>
+  <p style="margin-top:16px">
+    <a href="/color/" class="cta" data-i18n="cta1">Color Converter →</a>
+    <a href="/gradient/" class="cta" data-i18n="cta2">Gradient Generator →</a>
+  </p>
+
+  <footer>
+    <p><a href="/privacy/">Privacy Policy</a> · <a href="/disclaimer/">Disclaimer</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a></p>
+    <p style="margin-top:8px">© 2026 Freemaki · All rights reserved</p>
+  </footer>
+</div>
+<script>
+const i18n={en:{bc:'Blog',title:'Color Conversion Guide for Web Designers: HEX, RGB, HSL, CMYK Explained',meta:'Published: May 13, 2026 · 7 min read',intro:'As a web designer or developer, you work with colors every day. But do you know the difference between HEX, RGB, HSL, and CMYK — and more importantly, when to use each one? This guide breaks down the four major color formats, explains how they work under the hood, and shows you practical examples of when each format is the right choice.',hex_title:'HEX: The Web Standard',hex_p1:'HEX (hexadecimal) is the most common color format in web development. It represents colors as a six-digit hexadecimal number, where each pair of digits represents the Red, Green, and Blue channels (00-FF, or 0-255 in decimal).',hex_p2:'<strong>When to use HEX:</strong> CSS stylesheets, HTML attributes, design system tokens, and any web-specific code. It is the most universally supported color format.',rgb_title:'RGB: The Foundation',rgb_p1:'RGB (Red, Green, Blue) is the additive color model used by all screens. It mixes red, green, and blue light at different intensities (0-255 each) to create over 16 million possible colors.',rgb_p2:'<strong>When to use RGB:</strong> When you need alpha transparency (use <code>rgba()</code>), when working with Canvas or WebGL APIs, or when generating colors programmatically in JavaScript.',hsl_title:'HSL: The Designer\'s Best Friend',hsl_p1:'HSL (Hue, Saturation, Lightness) represents colors in a way that is much more intuitive for human designers:',hsl_l1:'<strong>Hue (0-360):</strong> The color\'s position on the color wheel (0° = red, 120° = green, 240° = blue)',hsl_l2:'<strong>Saturation (0-100%):</strong> How vivid or muted the color is (0% = gray, 100% = full color)',hsl_l3:'<strong>Lightness (0-100%):</strong> How bright the color is (0% = black, 50% = normal, 100% = white)',hsl_p2:'<strong>When to use HSL:</strong> When creating color palettes, generating shades/tints of a single color, or building design systems. Adjusting saturation and lightness is much more intuitive than tweaking RGB values.',cmyk_title:'CMYK: The Print Format',cmyk_p1:'CMYK (Cyan, Magenta, Yellow, Key/Black) is a subtractive color model used in printing. Unlike RGB (additive, for screens), CMYK represents ink percentages (0-100% each).',cmyk_p2:'<strong>When to use CMYK:</strong> When preparing files for print (business cards, brochures, packaging). Web designers rarely need CMYK directly, but understanding it is important when your web designs need to be translated to print materials.',cmyk_note:'<em>Note: The CMYK gamut is smaller than RGB. Bright, saturated screen colors often cannot be reproduced exactly in print. Always check CMYK values before sending files to print.</em>',contrast_title:'Accessibility: WCAG Contrast Ratios',contrast_p1:'Web accessibility isn\'t optional — it\'s a requirement. The WCAG (Web Content Accessibility Guidelines) defines minimum contrast ratios for text readability:',contrast_l1:'<strong>AA Normal Text:</strong> 4.5:1 minimum contrast ratio',contrast_l2:'<strong>AA Large Text:</strong> 3:1 minimum contrast ratio',contrast_l3:'<strong>AAA Normal Text:</strong> 7:1 minimum contrast ratio (enhanced)',contrast_p2:'Before finalizing any color combination, always check the contrast ratio. A quick way is to use the <a href="/color/">Color Converter</a> on Freemaki, which includes a built-in WCAG contrast checker that evaluates your chosen color against white and black backgrounds.',tips_title:'Practical Tips for Color Management',tip1:'<strong>Define a base hue</strong> in HSL, then create variations by adjusting saturation and lightness',tip2:'<strong>Use CSS custom properties</strong> (<code>--color-primary: hsl(217, 91%, 60%)</code>) for easy theme changes',tip3:'<strong>Always test contrast</strong> — never assume a color combination is accessible by eye alone',tip4:'<strong>Keep a palette of 3-5 colors</strong> maximum for a clean, cohesive design',tip5:'<strong>Consider dark mode</strong> — colors that work on white may not work on dark backgrounds',try_title:'Try the Color Converter',try_p1:'Convert between HEX, RGB, HSL, and CMYK instantly — with live preview and WCAG contrast checking:',cta1:'Color Converter →',cta2:'Gradient Generator →',f_privacy:'Privacy Policy',f_disclaimer:'Disclaimer',f_about:'About',f_contact:'Contact',f_rights:'All rights reserved'},zh:{bc:'博客',title:'Web 设计师颜色格式指南：HEX、RGB、HSL、CMYK 详解',meta:'发布：2026年5月13日 · 阅读 7 分钟',intro:'作为 Web 设计师或开发者，你每天都在处理颜色。但你了解 HEX、RGB、HSL 和 CMYK 的区别吗？更重要的是，什么时候该用哪种？本文详细解析四种主要颜色格式的工作原理和最佳使用场景。',hex_title:'HEX：Web 标准',hex_p1:'HEX（十六进制）是 Web 开发中最常见的颜色格式。用六位十六进制数表示颜色，每两位分别代表红、绿、蓝通道（00-FF，即 0-255）。',hex_p2:'<strong>何时使用 HEX：</strong>CSS 样式表、HTML 属性、设计系统 Token 和任何 Web 专用代码。它是通用性最强的颜色格式。',rgb_title:'RGB：基础模型',rgb_p1:'RGB（红、绿、蓝）是所有屏幕使用的加色模型。通过不同强度（各 0-255）混合红、绿、蓝光，可创造超过 1600 万种颜色。',rgb_p2:'<strong>何时使用 RGB：</strong>需要透明度时（用 <code>rgba()</code>），使用 Canvas 或 WebGL API 时，或在 JavaScript 中程序化生成颜色时。',hsl_title:'HSL：设计师的好朋友',hsl_p1:'HSL（色相、饱和度、亮度）以一种对设计师更直观的方式表示颜色：',hsl_l1:'<strong>色相 (0-360)：</strong>色轮上的位置（0°=红色，120°=绿色，240°=蓝色）',hsl_l2:'<strong>饱和度 (0-100%)：</strong>颜色的鲜艳程度（0%=灰色，100%=完全饱和）',hsl_l3:'<strong>亮度 (0-100%)：</strong>颜色的明暗（0%=黑色，50%=正常，100%=白色）',hsl_p2:'<strong>何时使用 HSL：</strong>创建调色板、生成单色的明暗变体、或构建设计系统时。调整饱和度和亮度比微调 RGB 值直观得多。',cmyk_title:'CMYK：印刷格式',cmyk_p1:'CMYK（青、品红、黄、黑）是用于印刷的减色模型。与 RGB（加色，屏幕用）不同，CMYK 用油墨百分比（各 0-100%）表示。',cmyk_p2:'<strong>何时使用 CMYK：</strong>准备印刷文件（名片、手册、包装）时。Web 设计师很少直接需要 CMYK，但当你的 Web 设计需要转为印刷品时，理解它很重要。',cmyk_note:'<em>注意：CMYK 色域比 RGB 小。鲜艳的屏幕颜色通常无法在印刷中精确再现。在交付印刷前务必检查 CMYK 值。</em>',contrast_title:'无障碍：WCAG 对比度',contrast_p1:'Web 无障碍不是可选项——它是要求。WCAG（Web 内容无障碍指南）定义了文本可读性的最低对比度标准：',contrast_l1:'<strong>AA 普通文本：</strong>最低 4.5:1 对比度',contrast_l2:'<strong>AA 大字文本：</strong>最低 3:1 对比度',contrast_l3:'<strong>AAA 普通文本：</strong>最低 7:1 对比度（增强级）',contrast_p2:'在最终确定任何颜色组合之前，务必检查对比度。快速方法是使用 Freemaki 上的<a href="/color/">颜色转换器</a>，内置 WCAG 对比度检查器会评估所选颜色在白色和黑色背景上的表现。',tips_title:'颜色管理实用技巧',tip1:'<strong>在 HSL 中定义基础色相</strong>，然后通过调整饱和度和亮度创建变体',tip2:'<strong>使用 CSS 自定义属性</strong>（<code>--color-primary: hsl(217, 91%, 60%)</code>）方便主题切换',tip3:'<strong>始终测试对比度</strong>——绝不能仅凭肉眼判断颜色组合是否可访问',tip4:'<strong>保持 3-5 种颜色</strong>的调色板，确保设计简洁统一',tip5:'<strong>考虑深色模式</strong>——在白色上好看的颜色在深色背景上可能不适用',try_title:'试试颜色转换器',try_p1:'在 HEX、RGB、HSL 和 CMYK 之间即时转换——带实时预览和 WCAG 对比度检查：',cta1:'颜色转换器 →',cta2:'渐变生成器 →',f_privacy:'隐私政策',f_disclaimer:'免责声明',f_about:'关于我们',f_contact:'联系我们',f_rights:'版权所有'}};
+let lang='en';function toggleLang(){lang=lang==='en'?'zh':'en';document.getElementById('langBtn').textContent=lang==='en'?'中文':'EN';document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(i18n[lang][k])el.innerHTML=i18n[lang][k]});}
+</script>
+</body>
+</html>
