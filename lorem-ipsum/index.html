@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lorem Ipsum & Fake Data Generator – Free Online Tool | Freemaki</title>
+<meta name="description" content="Generate lorem ipsum text, fake names, addresses, emails, phone numbers and company names. Supports both English and Chinese. Free, no signup.">
+<meta name="keywords" content="lorem ipsum generator,fake data generator,dummy text,placeholder text,random names,假数据生成器,占位文字,随机姓名生成">
+<link rel="canonical" href="https://www.freemaki.com/lorem-ipsum/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lorem Ipsum & Fake Data Generator"/>
+<meta property="og:description" content="Generate placeholder text and fake data. Names, addresses, emails in EN/ZH."/>
+<meta property="og:url" content="https://www.freemaki.com/lorem-ipsum/"/>
+<meta property="og:site_name" content="Freemaki">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Free Lorem Ipsum & Fake Data Generator","url":"https://www.freemaki.com/lorem-ipsum/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Generate lorem ipsum text, fake names, addresses, emails and phone numbers in English and Chinese.","browserRequirements":"Requires a modern web browser","softwareVersion":"1.0"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freemaki.com/"},{"@type":"ListItem","position":2,"name":"Lorem Ipsum Generator","item":"https://www.freemaki.com/lorem-ipsum/"}]}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f8f7f4;--surface:#ffffff;--surface2:#f2f0ec;--border:rgba(0,0,0,0.10);--border2:rgba(0,0,0,0.18);--text:#1a1a18;--text2:#5f5e5a;--text3:#9e9c97;--accent:#2563eb;--accent-bg:#eff6ff;--radius:12px;--radius-sm:8px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;min-height:100vh}
+.page{max-width:720px;margin:0 auto;padding:48px 16px 80px}
+.breadcrumb{font-size:13px;color:var(--text3);margin-bottom:24px}
+.breadcrumb a{color:var(--accent);text-decoration:none}
+h1{font-size:28px;font-weight:700;margin-bottom:8px}
+.subtitle{font-size:16px;color:var(--text2);margin-bottom:32px}
+.lang-btn{position:fixed;top:16px;right:16px;padding:6px 14px;border:0.5px solid var(--border);border-radius:20px;background:var(--surface);font-size:13px;cursor:pointer;color:var(--text2);z-index:100}
+.lang-btn:hover{border-color:var(--accent);color:var(--accent)}
+.tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;margin-bottom:20px;background:var(--surface)}
+.tab{flex:1;padding:10px 8px;background:var(--surface);border:none;font-size:13px;cursor:pointer;color:var(--text2);transition:all 0.15s;font-family:inherit;text-align:center}
+.tab.active{background:var(--accent);color:#fff;font-weight:600}
+.tab:hover:not(.active){background:var(--surface2)}
+.card{background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.control-group{display:flex;align-items:center;gap:6px}
+.control-group label{font-size:13px;color:var(--text2);white-space:nowrap}
+select,input[type="number"]{padding:7px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;background:var(--surface);color:var(--text);font-family:inherit;outline:none}
+select:focus,input:focus{border-color:var(--accent)}
+input[type="checkbox"]{accent-color:var(--accent);width:16px;height:16px}
+.btn{padding:9px 18px;border-radius:8px;font-size:13px;cursor:pointer;transition:all 0.15s;font-family:inherit;border:1px solid var(--border);background:var(--surface);color:var(--text)}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:#1d4ed8}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.output-area{width:100%;min-height:200px;max-height:400px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;font-size:13px;line-height:1.6;overflow-y:auto;word-break:break-word;white-space:pre-wrap;font-family:inherit;color:var(--text2)}
+.output-actions{display:flex;gap:8px;margin-top:10px}
+.data-table{width:100%;border-collapse:collapse;font-size:13px}
+.data-table th,.data-table td{padding:8px 10px;border:0.5px solid var(--border);text-align:left}
+.data-table th{background:var(--surface2);font-weight:600;color:var(--text2);font-size:12px;text-transform:uppercase;letter-spacing:0.3px}
+.data-table td{color:var(--text)}
+.related-section{margin-top:40px}
+.related-section h3{font-size:16px;font-weight:600;margin-bottom:12px;color:var(--text)}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.related-card{display:block;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-decoration:none;color:var(--text);transition:border-color .2s,box-shadow .2s}
+.related-card:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(37,99,235,0.08)}
+.related-card h4{font-size:13px;font-weight:600;margin-bottom:4px}
+.related-card p{font-size:12px;color:var(--text2);line-height:1.4}
+.learn-more{margin-top:12px}
+.learn-card{border-color:#2563eb22;background:#f0f5ff}
+.ad-slot{background:var(--surface2);border:0.5px dashed var(--border);border-radius:var(--radius);padding:24px;text-align:center;color:var(--text3);font-size:12px;margin:20px 0;min-height:90px}
+.howto{font-size:14px;color:var(--text2);margin-bottom:8px}
+.howto h3{font-size:16px;font-weight:600;color:var(--text);margin:20px 0 8px}
+.howto ul{padding-left:18px}
+.howto li{margin-bottom:6px}
+.faq-section{border-top:0.5px solid var(--border);padding-top:24px;margin-top:20px}
+.faq-section h2{font-size:18px;font-weight:600;margin-bottom:12px}
+.faq-section ul{list-style:none;padding:0}
+.faq-section li{font-size:14px;color:var(--text2);margin-bottom:10px;line-height:1.7}
+footer{text-align:center;color:var(--text3);font-size:13px;padding-top:24px;border-top:0.5px solid var(--border);margin-top:48px}
+footer a{color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+<button class="lang-btn" onclick="toggleLang()" id="langBtn">中文</button>
+<div class="page">
+  <div class="breadcrumb"><a href="/">Freemaki</a> &rsaquo; <span data-i18n="bc">Lorem Ipsum</span></div>
+  <h1 data-i18n="title">Lorem Ipsum & Fake Data Generator</h1>
+  <p class="subtitle" data-i18n="subtitle">Generate placeholder text, fake names, addresses, emails and more. English & Chinese.</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab(0)" data-i18n="tab_lorem">Lorem Ipsum</button>
+    <button class="tab" onclick="switchTab(1)" data-i18n="tab_names">Fake Names</button>
+    <button class="tab" onclick="switchTab(2)" data-i18n="tab_address">Addresses</button>
+    <button class="tab" onclick="switchTab(3)" data-i18n="tab_contact">Contact Info</button>
+  </div>
+
+  <!-- Tab 0: Lorem Ipsum -->
+  <div class="tab-content active" id="tab0">
+    <div class="card">
+      <div class="controls">
+        <div class="control-group">
+          <label data-i18n="ctrl_type">Type:</label>
+          <select id="loremType"><option value="paragraphs" data-i18n="opt_para">Paragraphs</option><option value="sentences" data-i18n="opt_sent">Sentences</option><option value="words" data-i18n="opt_words">Words</option></select>
+        </div>
+        <div class="control-group">
+          <label data-i18n="ctrl_count">Count:</label>
+          <input type="number" id="loremCount" value="3" min="1" max="100" style="width:60px">
+        </div>
+        <label style="font-size:13px;color:var(--text2);display:flex;align-items:center;gap:4px"><input type="checkbox" id="loremStart" checked> <span data-i18n="ctrl_start">Start with "Lorem ipsum..."</span></label>
+      </div>
+      <button class="btn primary" onclick="generateLorem()" data-i18n="btn_generate">Generate</button>
+    </div>
+    <div class="output-area" id="loremOutput"></div>
+    <div class="output-actions"><button class="btn" onclick="copyText('loremOutput')" data-i18n="btn_copy">Copy</button></div>
+  </div>
+
+  <!-- Tab 1: Fake Names -->
+  <div class="tab-content" id="tab1">
+    <div class="card">
+      <div class="controls">
+        <div class="control-group">
+          <label data-i18n="ctrl_count">Count:</label>
+          <input type="number" id="nameCount" value="10" min="1" max="50" style="width:60px">
+        </div>
+        <div class="control-group">
+          <label data-i18n="ctrl_lang">Language:</label>
+          <select id="nameLang"><option value="en">English</option><option value="zh">中文</option></select>
+        </div>
+        <div class="control-group">
+          <label data-i18n="ctrl_gender">Gender:</label>
+          <select id="nameGender"><option value="all" data-i18n="opt_all">All</option><option value="male" data-i18n="opt_male">Male</option><option value="female" data-i18n="opt_female">Female</option></select>
+        </div>
+      </div>
+      <button class="btn primary" onclick="generateNames()" data-i18n="btn_generate">Generate</button>
+    </div>
+    <div style="overflow-x:auto"><table class="data-table" id="nameTable"></table></div>
+    <div class="output-actions"><button class="btn" onclick="copyTable('nameTable')" data-i18n="btn_copy_all">Copy All</button></div>
+  </div>
+
+  <!-- Tab 2: Addresses -->
+  <div class="tab-content" id="tab2">
+    <div class="card">
+      <div class="controls">
+        <div class="control-group">
+          <label data-i18n="ctrl_count">Count:</label>
+          <input type="number" id="addrCount" value="5" min="1" max="20" style="width:60px">
+        </div>
+        <div class="control-group">
+          <label data-i18n="ctrl_country">Country:</label>
+          <select id="addrCountry"><option value="us">US</option><option value="cn">China</option><option value="uk">UK</option></select>
+        </div>
+      </div>
+      <button class="btn primary" onclick="generateAddresses()" data-i18n="btn_generate">Generate</button>
+    </div>
+    <div style="overflow-x:auto"><table class="data-table" id="addrTable"></table></div>
+    <div class="output-actions"><button class="btn" onclick="copyTable('addrTable')" data-i18n="btn_copy_all">Copy All</button></div>
+  </div>
+
+  <!-- Tab 3: Contact Info -->
+  <div class="tab-content" id="tab3">
+    <div class="card">
+      <div class="controls">
+        <div class="control-group">
+          <label data-i18n="ctrl_count">Count:</label>
+          <input type="number" id="contactCount" value="5" min="1" max="20" style="width:60px">
+        </div>
+        <div class="control-group">
+          <label data-i18n="ctrl_lang">Language:</label>
+          <select id="contactLang"><option value="en">English</option><option value="zh">中文</option></select>
+        </div>
+      </div>
+      <button class="btn primary" onclick="generateContacts()" data-i18n="btn_generate">Generate</button>
+    </div>
+    <div style="overflow-x:auto"><table class="data-table" id="contactTable"></table></div>
+    <div class="output-actions"><button class="btn" onclick="copyTable('contactTable')" data-i18n="btn_copy_all">Copy All</button></div>
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+
+  <div class="howto">
+    <h3 data-i18n="howto_title">How to Use</h3>
+    <ul>
+      <li data-i18n="howto_1">Select a tab: Lorem Ipsum text, Fake Names, Addresses, or Contact Info.</li>
+      <li data-i18n="howto_2">Adjust settings: type, count, language, and country as needed.</li>
+      <li data-i18n="howto_3">Click <strong>Generate</strong> to create random data.</li>
+      <li data-i18n="howto_4">Copy individual items or use "Copy All" for table data.</li>
+      <li data-i18n="howto_5">All data is generated locally — nothing is sent to any server.</li>
+    </ul>
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+
+  <div class="faq-section">
+    <h2 data-i18n="faq_title">Frequently Asked Questions</h2>
+    <ul>
+      <li data-i18n="faq_0"><strong>What is Lorem Ipsum?</strong> — Lorem Ipsum is placeholder text used in printing, typesetting, and web design. It has been the industry standard dummy text since the 1500s.</li>
+      <li data-i18n="faq_1"><strong>Is the generated data realistic?</strong> — The names, addresses, and contact info are randomly assembled from real-name databases. They look realistic but are entirely fictional.</li>
+      <li data-i18n="faq_2"><strong>Can I use this data for testing?</strong> — Yes. This tool is perfect for populating test databases, UI mockups, and demo applications with realistic-looking data.</li>
+      <li data-i18n="faq_3"><strong>Is any data sent to a server?</strong> — No. All data generation happens in your browser using JavaScript. Zero network requests.</li>
+      <li data-i18n="faq_4"><strong>Does it support Chinese names and addresses?</strong> — Yes. Select "中文" in the language dropdown for Chinese names, Pinyin emails, and Chinese addresses.</li>
+    </ul>
+  </div>
+
+  <div class="related-section">
+    <h3 data-i18n="rel_title">Related Tools</h3>
+    <div class="related-grid">
+      <a href="/password/" class="related-card"><h4 data-i18n="rel_pw_t">Password Generator</h4><p data-i18n="rel_pw_d">Generate secure random passwords.</p></a>
+      <a href="/json/" class="related-card"><h4 data-i18n="rel_json_t">JSON Formatter</h4><p data-i18n="rel_json_d">Format and validate JSON data.</p></a>
+      <a href="/markdown/" class="related-card"><h4 data-i18n="rel_md_t">Markdown Editor</h4><p data-i18n="rel_md_d">Edit and preview Markdown with GFM.</p></a>
+    </div>
+    <div class="learn-more">
+      <a href="/blog/developer-tools-guide/" class="related-card learn-card"><h4 data-i18n="learn_t">🛠️ Developer Tools Guide</h4><p data-i18n="learn_d">Discover 7 essential free online tools.</p></a>
+    </div>
+  </div>
+
+  <footer>
+    <p><a href="/privacy/" data-i18n="f_privacy">Privacy Policy</a> · <a href="/disclaimer/" data-i18n="f_disclaimer">Disclaimer</a> · <a href="/about/" data-i18n="f_about">About</a> · <a href="/contact/" data-i18n="f_contact">Contact</a></p>
+    <p style="margin-top:8px">© 2026 Freemaki · <span data-i18n="f_rights">No signup required</span></p>
+  </footer>
+</div>
+
+<script>
+function switchTab(i){document.querySelectorAll('.tab').forEach((t,idx)=>t.classList.toggle('active',idx===i));document.querySelectorAll('.tab-content').forEach((c,idx)=>c.classList.toggle('active',idx===i));}
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function randInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+
+// === DATA ===
+const LOREM_WORDS='lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam quis nostrud exercitation ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure in reprehenderit voluptate velit esse cillum fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt culpa qui officia deserunt mollit anim id est laborum perspiciatis unde omnis iste natus error voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo inventore veritatis quasi architecto beatae vitae dicta explicabo nemo ipsam quia voluptas aspernatur aut odit fugit'.split(' ');
+
+const EN_FIRST_M=['James','John','Robert','Michael','William','David','Richard','Joseph','Thomas','Charles','Christopher','Daniel','Matthew','Anthony','Mark','Steven','Andrew','Joshua','Kevin','Brian','Edward','George','Henry','Alexander','Benjamin','Samuel','Nathan','Ethan','Ryan','Lucas'];
+const EN_FIRST_F=['Mary','Patricia','Jennifer','Linda','Barbara','Elizabeth','Susan','Jessica','Sarah','Karen','Lisa','Nancy','Betty','Margaret','Sandra','Ashley','Dorothy','Kimberly','Emily','Donna','Michelle','Carol','Amanda','Melissa','Deborah','Stephanie','Rebecca','Sharon','Laura','Cynthia'];
+const EN_LAST=['Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis','Rodriguez','Martinez','Hernandez','Lopez','Gonzalez','Wilson','Anderson','Thomas','Taylor','Moore','Jackson','Martin','Lee','Perez','Thompson','White','Harris','Sanchez','Clark','Ramirez','Lewis','Robinson'];
+
+const ZH_LAST=['王','李','张','刘','陈','杨','赵','黄','周','吴','徐','孙','胡','朱','高','林','何','郭','马','罗','梁','宋','郑','谢','韩','唐','冯','于','董','萧'];
+const ZH_FIRST_M=['伟','强','磊','军','勇','杰','涛','明','超','浩','志强','建国','文博','俊','鑫','宇','晨','梓轩','浩然','子豪','天宇','思远','博文','嘉诚','瑞','泽','昊','睿','翔','鹏'];
+const ZH_FIRST_F=['芳','娜','敏','静','丽','燕','艳','玲','秀英','佳','梦琪','诗涵','子萱','欣怡','思琪','雨婷','雅婷','心怡','紫萱','若曦','婷婷','雪','慧','洁','萍','红','英','梅','兰','菊'];
+
+const EN_STREETS=['Main St','Oak Ave','Maple Dr','Cedar Ln','Pine St','Elm St','Washington Blvd','Park Ave','Lake Dr','Hill Rd','Forest Ave','River Rd','Valley Dr','Sunset Blvd','Mountain View Rd','Spring St','Garden Ave','Meadow Ln','Willow Way','Birch Ct'];
+const EN_CITIES=['New York','Los Angeles','Chicago','Houston','Phoenix','San Antonio','San Diego','Dallas','Austin','Jacksonville','San Jose','Indianapolis','Columbus','Charlotte','Denver','Seattle','Portland','Nashville','Oklahoma City','Las Vegas'];
+const EN_STATES=['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD'];
+const UK_CITIES=['London','Manchester','Birmingham','Liverpool','Leeds','Sheffield','Bristol','Edinburgh','Glasgow','Cardiff','Belfast','Nottingham','Newcastle','Brighton','Oxford'];
+const UK_STREETS=['High St','Church Rd','Station Rd','Mill Ln','Park Ave','Queen St','King St','Victoria Rd','George St','Bridge St'];
+const UK_POSTCODES=['SW1A','EC1A','W1A','NW1','E1','SE1','N1','WC1','BR1','CR0'];
+
+const ZH_CITIES=['北京','上海','广州','深圳','杭州','成都','武汉','南京','重庆','天津','西安','苏州','长沙','青岛','大连','厦门','宁波','济南','郑州','沈阳'];
+const ZH_DISTRICTS=['朝阳区','海淀区','浦东新区','静安区','南山区','天河区','武昌区','鼓楼区','渝中区','和平区','雁塔区','姑苏区','芙蓉区','市南区','中山区','思明区','鄞州区','历下区','金水区','沈河区'];
+const ZH_STREETS=['长安街','中山路','人民路','解放路','建设路','和平路','文化路','科技路','创新大道','滨河路','花园路','学院路','朝阳路','迎春路','光华路'];
+
+const COMP_PREFIX=['Tech','Digital','Global','Smart','Cloud','Nova','Alpha','Apex','Quantum','Bright','Prime','Stellar','Core','Nexus','Pulse'];
+const COMP_SUFFIX=['Solutions','Labs','Systems','Inc','Corp','Group','Tech','Media','Dynamics','Networks','Services','Ventures','Studios','Software','Creative'];
+const EN_DOMAINS=['gmail.com','yahoo.com','outlook.com','hotmail.com','example.com','company.com','mail.com'];
+const ZH_DOMAINS=['qq.com','163.com','126.com','sina.com','foxmail.com','yeah.net','sohu.com'];
+
+// === GENERATORS ===
+function genLoremSentence(){
+  const len=randInt(8,15);const words=[];for(let i=0;i<len;i++)words.push(pick(LOREM_WORDS));
+  words[0]=words[0].charAt(0).toUpperCase()+words[0].slice(1);return words.join(' ')+'.';
+}
+function genLoremParagraph(){
+  const count=randInt(4,7);const sentences=[];for(let i=0;i<count;i++)sentences.push(genLoremSentence());return sentences.join(' ');
+}
+
+function generateLorem(){
+  const type=document.getElementById('loremType').value;
+  const count=Math.max(1,Math.min(100,parseInt(document.getElementById('loremCount').value)||3));
+  const startWith=document.getElementById('loremStart').checked;
+  let result='';
+  if(type==='paragraphs'){
+    const paras=[];for(let i=0;i<count;i++)paras.push(genLoremParagraph());
+    if(startWith)paras[0]='Lorem ipsum dolor sit amet, consectetur adipiscing elit. '+paras[0];
+    result=paras.join('\n\n');
+  }else if(type==='sentences'){
+    const sents=[];for(let i=0;i<count;i++)sents.push(genLoremSentence());
+    if(startWith)sents[0]='Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+    result=sents.join(' ');
+  }else{
+    const words=[];for(let i=0;i<count;i++)words.push(pick(LOREM_WORDS));
+    if(startWith){words.unshift('lorem','ipsum','dolor','sit','amet');words.length=count;}
+    words[0]=words[0].charAt(0).toUpperCase()+words[0].slice(1);
+    result=words.join(' ');
+  }
+  document.getElementById('loremOutput').textContent=result;
+}
+
+function genName(lang,gender){
+  if(lang==='zh'){
+    const last=pick(ZH_LAST);
+    const first=gender==='male'?pick(ZH_FIRST_M):gender==='female'?pick(ZH_FIRST_F):pick(Math.random()>0.5?ZH_FIRST_M:ZH_FIRST_F);
+    return last+first;
+  }
+  const first=gender==='male'?pick(EN_FIRST_M):gender==='female'?pick(EN_FIRST_F):pick(Math.random()>0.5?EN_FIRST_M:EN_FIRST_F);
+  return first+' '+pick(EN_LAST);
+}
+
+function generateNames(){
+  const count=Math.max(1,Math.min(50,parseInt(document.getElementById('nameCount').value)||10));
+  const lang=document.getElementById('nameLang').value;
+  const gender=document.getElementById('nameGender').value;
+  const genderVal=gender==='all'?null:gender;
+  const rows=[['#',lang==='zh'?'姓名':'Name',lang==='zh'?'性别':'Gender']];
+  for(let i=0;i<count;i++){
+    const g=genderVal||(Math.random()>0.5?'male':'female');
+    rows.push([i+1,genName(lang,g),g==='male'?(lang==='zh'?'男':'Male'):(lang==='zh'?'女':'Female')]);
+  }
+  document.getElementById('nameTable').innerHTML=rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('');
+}
+
+function generateAddresses(){
+  const count=Math.max(1,Math.min(20,parseInt(document.getElementById('addrCount').value)||5));
+  const country=document.getElementById('addrCountry').value;
+  const rows=[['#','Street','City','Region','Zip']];
+  for(let i=0;i<count;i++){
+    if(country==='cn'){rows.push([i+1,pick(ZH_STREETS)+randInt(1,999)+'号',pick(ZH_CITIES),pick(ZH_DISTRICTS),randInt(100000,999999)]);}
+    else if(country==='uk'){rows.push([i+1,randInt(1,200)+' '+pick(UK_STREETS),pick(UK_CITIES),'UK',pick(UK_POSTCODES)+' '+randInt(1,9)+'AA')];}
+    else{rows.push([i+1,randInt(1,9999)+' '+pick(EN_STREETS),pick(EN_CITIES),pick(EN_STATES),String(randInt(10000,99999))]);}
+  }
+  document.getElementById('addrTable').innerHTML=rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('');
+}
+
+function genEmail(name,lang){
+  if(lang==='zh'){const pinyin=name.split('').slice(1).join('').toLowerCase();return pinyin+randInt(1,999)+'@'+pick(ZH_DOMAINS);}
+  const parts=name.toLowerCase().replace(/[^a-z]/g,' ');const words=parts.split(' ');
+  return (words[0]+'.'+words[1]+randInt(1,99))+'@'+pick(EN_DOMAINS);
+}
+function genPhone(country){
+  if(country==='cn')return '1'+pick(['3','5','7','8','9'])+String(randInt(100000000,999999999));
+  return '('+randInt(200,999)+') '+randInt(200,999)+'-'+String(randInt(1000,9999));
+}
+function genCompany(){return pick(COMP_PREFIX)+' '+pick(COMP_SUFFIX);}
+
+function generateContacts(){
+  const count=Math.max(1,Math.min(20,parseInt(document.getElementById('contactCount').value)||5));
+  const lang=document.getElementById('contactLang').value;
+  const gender=Math.random()>0.5?'male':'female';
+  const country=lang==='zh'?'cn':'us';
+  const rows=[['#',lang==='zh'?'姓名':'Name','Email',lang==='zh'?'电话':'Phone',lang==='zh'?'公司':'Company']];
+  for(let i=0;i<count;i++){
+    const g=Math.random()>0.5?'male':'female';
+    const name=genName(lang,g);
+    rows.push([i+1,name,genEmail(name,lang),genPhone(country),genCompany()]);
+  }
+  document.getElementById('contactTable').innerHTML=rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('');
+}
+
+function copyText(id){
+  const text=document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(()=>{const l=document.documentElement.lang;const b=event.target;b.textContent=l==='zh'?'已复制!':'Copied!';setTimeout(()=>{b.textContent=l==='zh'?'复制':'Copy';},1500);});
+}
+function copyTable(id){
+  const table=document.getElementById(id);
+  const rows=Array.from(table.querySelectorAll('tr')).map(tr=>Array.from(tr.querySelectorAll('td,th')).map(td=>td.textContent).join('\t'));
+  navigator.clipboard.writeText(rows.join('\n')).then(()=>{const l=document.documentElement.lang;const b=event.target;b.textContent=l==='zh'?'已复制!':'Copied!';setTimeout(()=>{b.textContent=l==='zh'?'复制全部':'Copy All';},1500);});
+}
+
+// Auto-generate on load
+generateLorem();
+
+const i18n={
+  en:{
+    bc:'Lorem Ipsum',title:'Lorem Ipsum & Fake Data Generator',subtitle:'Generate placeholder text, fake names, addresses, emails and more. English & Chinese.',
+    tab_lorem:'Lorem Ipsum',tab_names:'Fake Names',tab_address:'Addresses',tab_contact:'Contact Info',
+    ctrl_type:'Type:',ctrl_count:'Count:',ctrl_lang:'Language:',ctrl_gender:'Gender:',ctrl_country:'Country:',ctrl_start:'Start with "Lorem ipsum..."',
+    opt_para:'Paragraphs',opt_sent:'Sentences',opt_words:'Words',opt_all:'All',opt_male:'Male',opt_female:'Female',
+    btn_generate:'Generate',btn_copy:'Copy',btn_copy_all:'Copy All',
+    howto_title:'How to Use',
+    howto_1:'Select a tab: Lorem Ipsum text, Fake Names, Addresses, or Contact Info.',
+    howto_2:'Adjust settings: type, count, language, and country as needed.',
+    howto_3:'Click <strong>Generate</strong> to create random data.',
+    howto_4:'Copy individual items or use "Copy All" for table data.',
+    howto_5:'All data is generated locally — nothing is sent to any server.',
+    faq_title:'Frequently Asked Questions',
+    faq_0:'<strong>What is Lorem Ipsum?</strong> — Lorem Ipsum is placeholder text used in printing, typesetting, and web design. It has been the industry standard dummy text since the 1500s.',
+    faq_1:'<strong>Is the generated data realistic?</strong> — The names, addresses, and contact info are randomly assembled from real-name databases. They look realistic but are entirely fictional.',
+    faq_2:'<strong>Can I use this data for testing?</strong> — Yes. This tool is perfect for populating test databases, UI mockups, and demo applications with realistic-looking data.',
+    faq_3:'<strong>Is any data sent to a server?</strong> — No. All data generation happens in your browser using JavaScript. Zero network requests.',
+    faq_4:'<strong>Does it support Chinese names and addresses?</strong> — Yes. Select "中文" in the language dropdown for Chinese names, Pinyin emails, and Chinese addresses.',
+    rel_title:'Related Tools',rel_pw_t:'Password Generator',rel_pw_d:'Generate secure random passwords.',
+    rel_json_t:'JSON Formatter',rel_json_d:'Format and validate JSON data.',
+    rel_md_t:'Markdown Editor',rel_md_d:'Edit and preview Markdown with GFM.',
+    learn_t:'🛠️ Developer Tools Guide',learn_d:'Discover 7 essential free online tools.',
+    f_privacy:'Privacy Policy',f_disclaimer:'Disclaimer',f_about:'About',f_contact:'Contact',f_rights:'No signup required'
+  },
+  zh:{
+    bc:'假数据生成',title:'占位文字与假数据生成器',subtitle:'生成占位文字、假姓名、地址、邮箱和更多。支持中英文。',
+    tab_lorem:'占位文字',tab_names:'假姓名',tab_address:'假地址',tab_contact:'联系方式',
+    ctrl_type:'类型:',ctrl_count:'数量:',ctrl_lang:'语言:',ctrl_gender:'性别:',ctrl_country:'国家:',ctrl_start:'以"Lorem ipsum..."开头',
+    opt_para:'段落',opt_sent:'句子',opt_words:'单词',opt_all:'全部',opt_male:'男',opt_female:'女',
+    btn_generate:'生成',btn_copy:'复制',btn_copy_all:'复制全部',
+    howto_title:'使用说明',
+    howto_1:'选择标签页：占位文字、假姓名、假地址或联系方式。',
+    howto_2:'调整设置：类型、数量、语言和国家。',
+    howto_3:'点击 <strong>生成</strong> 创建随机数据。',
+    howto_4:'复制单个项目或使用"复制全部"复制表格数据。',
+    howto_5:'所有数据均在本地生成——不会发送到任何服务器。',
+    faq_title:'常见问题',
+    faq_0:'<strong>什么是 Lorem Ipsum？</strong> — Lorem Ipsum 是印刷、排版和网页设计中使用的占位文字，自 16 世纪以来一直是行业标准。',
+    faq_1:'<strong>生成的数据真实吗？</strong> — 姓名和地址是从真实姓名库中随机组合的，看起来真实但完全虚构。',
+    faq_2:'<strong>可以用于测试吗？</strong> — 可以。非常适合为测试数据库、UI 原型和演示应用填充逼真的假数据。',
+    faq_3:'<strong>数据会被发送到服务器吗？</strong> — 不会。所有数据在浏览器中通过 JavaScript 生成，零网络请求。',
+    faq_4:'<strong>支持中文姓名和地址吗？</strong> — 支持。选择"中文"可生成中文姓名、拼音邮箱和中文地址。',
+    rel_title:'相关工具',rel_pw_t:'密码生成器',rel_pw_d:'生成安全的随机密码。',
+    rel_json_t:'JSON 格式化器',rel_json_d:'格式化和校验 JSON 数据。',
+    rel_md_t:'Markdown 编辑器',rel_md_d:'编辑和预览 Markdown（GFM）。',
+    learn_t:'🛠️ 开发者工具指南',learn_d:'发现 7 个必备的免费在线工具。',
+    f_privacy:'隐私政策',f_disclaimer:'免责声明',f_about:'关于我们',f_contact:'联系我们',f_rights:'无需注册'
+  }
+};
+let lang='en';
+function toggleLang(){lang=lang==='en'?'zh':'en';document.getElementById('langBtn').textContent=lang==='en'?'中文':'EN';document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(i18n[lang][k])el.innerHTML=i18n[lang][k];});}
+</script>
+</body>
+</html>

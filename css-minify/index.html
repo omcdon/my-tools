@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Minifier & Beautifier – Free Online Tool | Freemaki</title>
+<meta name="description" content="Free online CSS minifier and beautifier. Compress CSS for production or format it for readability. Shows size savings. No signup.">
+<meta name="keywords" content="css minifier,css beautifier,css compressor,css formatter,css压缩,css美化,css格式化">
+<link rel="canonical" href="https://www.freemaki.com/css-minify/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSS Minifier & Beautifier">
+<meta property="og:description" content="Minify or beautify CSS instantly. See size savings. Free, no signup.">
+<meta property="og:url" content="https://www.freemaki.com/css-minify/">
+<meta property="og:site_name" content="Freemaki">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Free CSS Minifier & Beautifier","url":"https://www.freemaki.com/css-minify/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Minify or beautify CSS code instantly in your browser. Shows size reduction.","browserRequirements":"Requires a modern web browser","softwareVersion":"1.0"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freemaki.com/"},{"@type":"ListItem","position":2,"name":"CSS Minifier","item":"https://www.freemaki.com/css-minify/"}]}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f8f7f4;--surface:#ffffff;--surface2:#f2f0ec;--border:rgba(0,0,0,0.10);--border2:rgba(0,0,0,0.18);--text:#1a1a18;--text2:#5f5e5a;--text3:#9e9c97;--accent:#2563eb;--accent-bg:#eff6ff;--radius:12px;--radius-sm:8px;--green:#22c55e}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;min-height:100vh}
+.page{max-width:960px;margin:0 auto;padding:48px 16px 80px}
+.breadcrumb{font-size:13px;color:var(--text3);margin-bottom:24px}
+.breadcrumb a{color:var(--accent);text-decoration:none}
+h1{font-size:28px;font-weight:700;margin-bottom:8px}
+.subtitle{font-size:16px;color:var(--text2);margin-bottom:32px}
+.lang-btn{position:fixed;top:16px;right:16px;padding:6px 14px;border:0.5px solid var(--border);border-radius:20px;background:var(--surface);font-size:13px;cursor:pointer;color:var(--text2);z-index:100}
+.lang-btn:hover{border-color:var(--accent);color:var(--accent)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.btn{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;color:var(--text);cursor:pointer;transition:all 0.15s;font-family:inherit}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:#1d4ed8}
+.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:680px){.editor-grid{grid-template-columns:1fr}}
+.editor-label{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
+textarea{width:100%;height:360px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;color:var(--text);font-size:13px;font-family:'Consolas','Monaco',monospace;resize:vertical;outline:none;line-height:1.5}
+textarea:focus{border-color:var(--accent)}
+.stats-bar{display:flex;gap:16px;flex-wrap:wrap;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);margin-top:16px;font-size:13px}
+.stat{display:flex;align-items:center;gap:6px}
+.stat-label{color:var(--text3)}
+.stat-value{font-weight:700;color:var(--text)}
+.stat-savings{color:var(--green);font-weight:700}
+.related-section{margin-top:40px}
+.related-section h3{font-size:16px;font-weight:600;margin-bottom:12px;color:var(--text)}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.related-card{display:block;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-decoration:none;color:var(--text);transition:border-color .2s,box-shadow .2s}
+.related-card:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(37,99,235,0.08)}
+.related-card h4{font-size:13px;font-weight:600;margin-bottom:4px}
+.related-card p{font-size:12px;color:var(--text2);line-height:1.4}
+.learn-more{margin-top:12px}
+.learn-card{border-color:#2563eb22;background:#f0f5ff}
+.ad-slot{background:var(--surface2);border:0.5px dashed var(--border);border-radius:var(--radius);padding:24px;text-align:center;color:var(--text3);font-size:12px;margin:20px 0;min-height:90px}
+.howto{font-size:14px;color:var(--text2);margin-bottom:8px}
+.howto h3{font-size:16px;font-weight:600;color:var(--text);margin:20px 0 8px}
+.howto ul{padding-left:18px}
+.howto li{margin-bottom:6px}
+.faq-section{border-top:0.5px solid var(--border);padding-top:24px;margin-top:20px}
+.faq-section h2{font-size:18px;font-weight:600;margin-bottom:12px}
+.faq-section ul{list-style:none;padding:0}
+.faq-section li{font-size:14px;color:var(--text2);margin-bottom:10px;line-height:1.7}
+footer{text-align:center;color:var(--text3);font-size:13px;padding-top:24px;border-top:0.5px solid var(--border);margin-top:48px}
+footer a{color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+<button class="lang-btn" onclick="toggleLang()" id="langBtn">中文</button>
+<div class="page">
+  <div class="breadcrumb"><a href="/">Freemaki</a> &rsaquo; <span data-i18n="bc">CSS Minifier</span></div>
+  <h1 data-i18n="title">CSS Minifier & Beautifier</h1>
+  <p class="subtitle" data-i18n="subtitle">Compress CSS for production or format it for readability. All processing runs locally.</p>
+
+  <div class="toolbar">
+    <button class="btn primary" onclick="minifyCSS()" data-i18n="btn_minify">Minify</button>
+    <button class="btn" onclick="beautifyCSS()" data-i18n="btn_beautify">Beautify</button>
+    <button class="btn" onclick="copyOutput()" data-i18n="btn_copy">Copy Output</button>
+    <button class="btn" onclick="clearAll()" data-i18n="btn_clear">Clear</button>
+  </div>
+
+  <div class="editor-grid">
+    <div>
+      <div class="editor-label" data-i18n="lbl_input">Input CSS</div>
+      <textarea id="input" placeholder="body {&#10;  font-family: Arial, sans-serif;&#10;  color: #333;&#10;  margin: 0;&#10;  padding: 20px;&#10;}&#10;&#10;.container {&#10;  max-width: 1200px;&#10;  margin: 0 auto;&#10;  padding: 0 16px;&#10;}" spellcheck="false"></textarea>
+    </div>
+    <div>
+      <div class="editor-label" data-i18n="lbl_output">Output</div>
+      <textarea id="output" readonly placeholder="Output will appear here..." spellcheck="false"></textarea>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-label" data-i18n="stat_orig">Original:</span><span class="stat-value" id="origSize">0 B</span></div>
+    <div class="stat"><span class="stat-label" data-i18n="stat_comp">Minified:</span><span class="stat-value" id="compSize">0 B</span></div>
+    <div class="stat"><span class="stat-label" data-i18n="stat_saved">Saved:</span><span class="stat-savings" id="savings">0%</span></div>
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+
+  <div class="howto">
+    <h3 data-i18n="howto_title">How to Use</h3>
+    <ul>
+      <li data-i18n="howto_1">Paste your CSS code into the input area on the left.</li>
+      <li data-i18n="howto_2">Click <strong>Minify</strong> to compress (remove whitespace, comments) for production.</li>
+      <li data-i18n="howto_3">Click <strong>Beautify</strong> to format CSS with proper indentation for readability.</li>
+      <li data-i18n="howto_4">Check the stats bar to see original size, minified size, and savings percentage.</li>
+      <li data-i18n="howto_5">Click <strong>Copy Output</strong> to copy the result to your clipboard.</li>
+    </ul>
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+
+  <div class="faq-section">
+    <h2 data-i18n="faq_title">Frequently Asked Questions</h2>
+    <ul>
+      <li data-i18n="faq_0"><strong>What is CSS minification?</strong> — CSS minification removes unnecessary characters (spaces, newlines, comments) from CSS files without changing functionality. This reduces file size and improves page load speed.</li>
+      <li data-i18n="faq_1"><strong>How much can CSS be compressed?</strong> — Typically 20-40% reduction. Well-commented CSS with lots of whitespace can see up to 50% savings.</li>
+      <li data-i18n="faq_2"><strong>Is my CSS sent to a server?</strong> — No. All processing happens in your browser using JavaScript. Your CSS never leaves your device.</li>
+      <li data-i18n="faq_3"><strong>Will minification break my CSS?</strong> — No. The minifier only removes whitespace and comments. It preserves all selectors, properties, and values.</li>
+      <li data-i18n="faq_4"><strong>Should I minify CSS in development?</strong> — No. Keep readable CSS during development for easier debugging. Minify only for production builds.</li>
+    </ul>
+  </div>
+
+  <div class="related-section">
+    <h3 data-i18n="rel_title">Related Tools</h3>
+    <div class="related-grid">
+      <a href="/json/" class="related-card"><h4 data-i18n="rel_json_t">JSON Formatter</h4><p data-i18n="rel_json_d">Format, validate and minify JSON data.</p></a>
+      <a href="/base64/" class="related-card"><h4 data-i18n="rel_b64_t">Base64 Encoder</h4><p data-i18n="rel_b64_d">Encode and decode Base64 strings.</p></a>
+      <a href="/hash/" class="related-card"><h4 data-i18n="rel_hash_t">Hash Generator</h4><p data-i18n="rel_hash_d">Generate MD5, SHA-1, SHA-256 hashes.</p></a>
+    </div>
+    <div class="learn-more">
+      <a href="/blog/developer-tools-guide/" class="related-card learn-card"><h4 data-i18n="learn_t">🛠️ Developer Tools Guide</h4><p data-i18n="learn_d">Discover 7 essential free online tools.</p></a>
+    </div>
+  </div>
+
+  <footer>
+    <p><a href="/privacy/" data-i18n="f_privacy">Privacy Policy</a> · <a href="/disclaimer/" data-i18n="f_disclaimer">Disclaimer</a> · <a href="/about/" data-i18n="f_about">About</a> · <a href="/contact/" data-i18n="f_contact">Contact</a></p>
+    <p style="margin-top:8px">© 2026 Freemaki · <span data-i18n="f_rights">No signup required</span></p>
+  </footer>
+</div>
+
+<script>
+function minifyCSS(){
+  const css=document.getElementById('input').value;
+  if(!css.trim()){document.getElementById('output').value='';updateStats('','');return;}
+  let min=css;
+  min=min.replace(/\/\*[\s\S]*?\*\//g,'');
+  min=min.replace(/\s+/g,' ');
+  min=min.replace(/\s*([{}:;,>+~])\s*/g,'$1');
+  min=min.replace(/;}/g,'}');
+  min=min.trim();
+  document.getElementById('output').value=min;
+  updateStats(css,min);
+}
+
+function beautifyCSS(){
+  const css=document.getElementById('input').value;
+  if(!css.trim()){document.getElementById('output').value='';updateStats('','');return;}
+  let b=css.replace(/\/\*[\s\S]*?\*\//g,'');
+  b=b.replace(/\s+/g,' ');
+  b=b.replace(/\s*([{}:;,>+~])\s*/g,'$1');
+  b=b.replace(/;}/g,'}');
+  let indent=0;let result='';
+  let inBlock=false;
+  for(let i=0;i<b.length;i++){
+    const c=b[i];
+    if(c==='{'){result+='\n'+'  '.repeat(indent)+c+'\n';indent++;inBlock=true;}
+    else if(c=='}'){indent--;result+='\n'+'  '.repeat(indent)+c+'\n';inBlock=false;}
+    else if(c==';'&&inBlock){result+=c+'\n'+'  '.repeat(indent);}
+    else if(c==','&&!inBlock){result+=c+'\n';}
+    else{result+=c;}
+  }
+  document.getElementById('output').value=result.trim();
+  updateStats(css,document.getElementById('output').value);
+}
+
+function formatBytes(b){
+  if(b<1024)return b+' B';
+  if(b<1048576)return(b/1024).toFixed(1)+' KB';
+  return(b/1048576).toFixed(1)+' MB';
+}
+
+function updateStats(orig,comp){
+  const origB=new Blob([orig]).size;
+  const compB=new Blob([comp]).size;
+  document.getElementById('origSize').textContent=formatBytes(origB);
+  document.getElementById('compSize').textContent=formatBytes(compB);
+  if(origB>0){const pct=Math.round((1-compB/origB)*100);document.getElementById('savings').textContent=(pct>0?pct:0)+'%';}
+  else{document.getElementById('savings').textContent='0%';}
+}
+
+function copyOutput(){
+  const out=document.getElementById('output').value;
+  if(!out)return;
+  navigator.clipboard.writeText(out).then(()=>{
+    const lang=document.documentElement.lang;
+    const btn=document.querySelector('[onclick="copyOutput()"]');
+    const orig=btn.textContent;btn.textContent=lang==='zh'?'已复制!':'Copied!';setTimeout(()=>{btn.textContent=orig;},1500);
+  });
+}
+
+function clearAll(){document.getElementById('input').value='';document.getElementById('output').value='';updateStats('','');}
+
+const i18n={
+  en:{
+    bc:'CSS Minifier',title:'CSS Minifier & Beautifier',subtitle:'Compress CSS for production or format it for readability. All processing runs locally.',
+    btn_minify:'Minify',btn_beautify:'Beautify',btn_copy:'Copy Output',btn_clear:'Clear',
+    lbl_input:'Input CSS',lbl_output:'Output',
+    stat_orig:'Original:',stat_comp:'Minified:',stat_saved:'Saved:',
+    howto_title:'How to Use',
+    howto_1:'Paste your CSS code into the input area on the left.',
+    howto_2:'Click <strong>Minify</strong> to compress (remove whitespace, comments) for production.',
+    howto_3:'Click <strong>Beautify</strong> to format CSS with proper indentation for readability.',
+    howto_4:'Check the stats bar to see original size, minified size, and savings percentage.',
+    howto_5:'Click <strong>Copy Output</strong> to copy the result to your clipboard.',
+    faq_title:'Frequently Asked Questions',
+    faq_0:'<strong>What is CSS minification?</strong> — CSS minification removes unnecessary characters (spaces, newlines, comments) from CSS files without changing functionality. This reduces file size and improves page load speed.',
+    faq_1:'<strong>How much can CSS be compressed?</strong> — Typically 20-40% reduction. Well-commented CSS with lots of whitespace can see up to 50% savings.',
+    faq_2:'<strong>Is my CSS sent to a server?</strong> — No. All processing happens in your browser using JavaScript. Your CSS never leaves your device.',
+    faq_3:'<strong>Will minification break my CSS?</strong> — No. The minifier only removes whitespace and comments. It preserves all selectors, properties, and values.',
+    faq_4:'<strong>Should I minify CSS in development?</strong> — No. Keep readable CSS during development for easier debugging. Minify only for production builds.',
+    rel_title:'Related Tools',rel_json_t:'JSON Formatter',rel_json_d:'Format, validate and minify JSON data.',
+    rel_b64_t:'Base64 Encoder',rel_b64_d:'Encode and decode Base64 strings.',
+    rel_hash_t:'Hash Generator',rel_hash_d:'Generate MD5, SHA-1, SHA-256 hashes.',
+    learn_t:'🛠️ Developer Tools Guide',learn_d:'Discover 7 essential free online tools.',
+    f_privacy:'Privacy Policy',f_disclaimer:'Disclaimer',f_about:'About',f_contact:'Contact',f_rights:'No signup required'
+  },
+  zh:{
+    bc:'CSS 压缩',title:'CSS 压缩与美化工具',subtitle:'压缩 CSS 用于生产环境，或美化格式提升可读性。全部在浏览器本地处理。',
+    btn_minify:'压缩',btn_beautify:'美化',btn_copy:'复制结果',btn_clear:'清空',
+    lbl_input:'输入 CSS',lbl_output:'输出结果',
+    stat_orig:'原始大小:',stat_comp:'压缩后:',stat_saved:'节省:',
+    howto_title:'使用说明',
+    howto_1:'将 CSS 代码粘贴到左侧输入区域。',
+    howto_2:'点击 <strong>压缩</strong> 移除空白和注释，用于生产环境。',
+    howto_3:'点击 <strong>美化</strong> 添加缩进和换行，提升可读性。',
+    howto_4:'查看底部统计栏，了解原始大小、压缩大小和节省百分比。',
+    howto_5:'点击 <strong>复制结果</strong> 将输出复制到剪贴板。',
+    faq_title:'常见问题',
+    faq_0:'<strong>什么是 CSS 压缩？</strong> — CSS 压缩（Minification）移除不必要的字符（空格、换行、注释），在不改变功能的前提下减小文件体积，加快页面加载速度。',
+    faq_1:'<strong>CSS 能压缩多少？</strong> — 通常可以减少 20-40%。注释多、空白多的 CSS 可以节省高达 50%。',
+    faq_2:'<strong>CSS 会被发送到服务器吗？</strong> — 不会。所有处理在浏览器中通过 JavaScript 完成，CSS 不会离开你的设备。',
+    faq_3:'<strong>压缩会破坏 CSS 吗？</strong> — 不会。压缩器只移除空白和注释，保留所有选择器、属性和值。',
+    faq_4:'<strong>开发时应该压缩 CSS 吗？</strong> — 不应该。开发时保持可读的 CSS 方便调试，只在生产构建时压缩。',
+    rel_title:'相关工具',rel_json_t:'JSON 格式化器',rel_json_d:'格式化、校验和压缩 JSON 数据。',
+    rel_b64_t:'Base64 编解码器',rel_b64_d:'编码和解码 Base64 字符串。',
+    rel_hash_t:'哈希生成器',rel_hash_d:'生成 MD5、SHA-1、SHA-256 哈希值。',
+    learn_t:'🛠️ 开发者工具指南',learn_d:'发现 7 个必备的免费在线工具。',
+    f_privacy:'隐私政策',f_disclaimer:'免责声明',f_about:'关于我们',f_contact:'联系我们',f_rights:'无需注册'
+  }
+};
+let lang='en';
+function toggleLang(){lang=lang==='en'?'zh':'en';document.getElementById('langBtn').textContent=lang==='en'?'中文':'EN';document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(i18n[lang][k])el.innerHTML=i18n[lang][k];});}
+</script>
+</body>
+</html>

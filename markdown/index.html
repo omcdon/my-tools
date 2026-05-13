@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Markdown Editor – Live Preview with GFM | Freemaki</title>
+<meta name="description" content="Free online Markdown editor with live preview. Supports GitHub Flavored Markdown (GFM), tables, task lists, syntax highlighting. No signup, no data sent to servers.">
+<meta name="keywords" content="markdown editor,markdown preview,GFM,github flavored markdown,online markdown,markdown转html,markdown编辑器">
+<link rel="canonical" href="https://www.freemaki.com/markdown/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Online Markdown Editor – Live Preview with GFM">
+<meta property="og:description" content="Edit and preview Markdown in real-time. GFM, tables, task lists supported. Free, no signup.">
+<meta property="og:url" content="https://www.freemaki.com/markdown/">
+<meta property="og:site_name" content="Freemaki">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Free Online Markdown Editor","url":"https://www.freemaki.com/markdown/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Edit and preview Markdown with GFM support. Free, no signup required.","browserRequirements":"Requires a modern web browser","softwareVersion":"1.0"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.freemaki.com/"},{"@type":"ListItem","position":2,"name":"Markdown Editor","item":"https://www.freemaki.com/markdown/"}]}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f8f7f4;--surface:#ffffff;--surface2:#f2f0ec;--border:rgba(0,0,0,0.10);--border2:rgba(0,0,0,0.18);--text:#1a1a18;--text2:#5f5e5a;--text3:#9e9c97;--accent:#2563eb;--accent-bg:#eff6ff;--radius:12px;--radius-sm:8px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;min-height:100vh}
+.page{max-width:960px;margin:0 auto;padding:48px 16px 80px}
+.breadcrumb{font-size:13px;color:var(--text3);margin-bottom:24px}
+.breadcrumb a{color:var(--accent);text-decoration:none}
+h1{font-size:28px;font-weight:700;margin-bottom:8px}
+.subtitle{font-size:16px;color:var(--text2);margin-bottom:24px}
+.lang-btn{position:fixed;top:16px;right:16px;padding:6px 14px;border:0.5px solid var(--border);border-radius:20px;background:var(--surface);font-size:13px;cursor:pointer;color:var(--text2);z-index:100}
+.lang-btn:hover{border-color:var(--accent);color:var(--accent)}
+.toolbar{display:flex;flex-wrap:wrap;gap:4px;padding:8px;background:var(--surface);border:1px solid var(--border);border-bottom:none;border-radius:var(--radius-sm) var(--radius-sm) 0 0}
+.tool-btn{padding:6px 10px;background:none;border:1px solid transparent;border-radius:6px;font-size:12px;cursor:pointer;color:var(--text2);transition:all 0.15s;font-family:inherit}
+.tool-btn:hover{background:var(--surface2);color:var(--text);border-color:var(--border)}
+.tool-sep{width:1px;background:var(--border);margin:4px 6px}
+.action-btns{display:flex;gap:4px;margin-left:auto}
+.action-btn{padding:6px 12px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit;transition:opacity 0.15s}
+.action-btn:hover{opacity:0.85}
+.editor-wrap{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:0 0 var(--radius-sm) var(--radius-sm);overflow:hidden;min-height:420px}
+@media(max-width:680px){.editor-wrap{grid-template-columns:1fr;grid-template-rows:1fr 1fr}}
+.pane{display:flex;flex-direction:column}
+.pane-header{padding:8px 12px;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;background:var(--surface2);border-bottom:0.5px solid var(--border)}
+textarea#editor{flex:1;width:100%;border:none;outline:none;resize:none;padding:16px;font-size:13px;font-family:'Consolas','Monaco','Courier New',monospace;line-height:1.6;background:var(--surface);color:var(--text);tab-size:2}
+#preview{flex:1;width:100%;border:none;outline:none;overflow-y:auto;padding:16px;font-size:14px;line-height:1.7;background:#fff;color:var(--text)}
+#preview h1{font-size:1.8em;font-weight:700;margin:16px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+#preview h2{font-size:1.4em;font-weight:600;margin:14px 0 6px;padding-bottom:4px;border-bottom:1px solid #f0f0f0}
+#preview h3{font-size:1.2em;font-weight:600;margin:12px 0 4px}
+#preview p{margin:8px 0}
+#preview ul,#preview ol{padding-left:24px;margin:8px 0}
+#preview li{margin:4px 0}
+#preview code{background:var(--surface2);padding:2px 6px;border-radius:4px;font-size:0.9em;font-family:'Consolas','Monaco',monospace}
+#preview pre{background:#1e1e2e;color:#cdd6f4;padding:16px;border-radius:8px;overflow-x:auto;margin:12px 0}
+#preview pre code{background:none;padding:0}
+#preview blockquote{border-left:3px solid var(--accent);padding:4px 12px;margin:8px 0;color:var(--text2);background:var(--accent-bg);border-radius:0 8px 8px 0}
+#preview table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+#preview th,#preview td{padding:8px 12px;border:1px solid var(--border);text-align:left}
+#preview th{background:var(--surface2);font-weight:600}
+#preview a{color:var(--accent)}
+#preview hr{border:none;border-top:1px solid var(--border);margin:16px 0}
+#preview img{max-width:100%;border-radius:6px}
+#preview input[type="checkbox"]{margin-right:6px;accent-color:var(--accent)}
+.stats-bar{display:flex;gap:16px;padding:8px 12px;background:var(--surface2);font-size:12px;color:var(--text3);border-top:0.5px solid var(--border)}
+.related-section{margin-top:40px}
+.related-section h3{font-size:16px;font-weight:600;margin-bottom:12px;color:var(--text)}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.related-card{display:block;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;text-decoration:none;color:var(--text);transition:border-color .2s,box-shadow .2s}
+.related-card:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(37,99,235,0.08)}
+.related-card h4{font-size:13px;font-weight:600;margin-bottom:4px}
+.related-card p{font-size:12px;color:var(--text2);line-height:1.4}
+.learn-more{margin-top:12px}
+.learn-card{border-color:#2563eb22;background:#f0f5ff}
+.ad-slot{background:var(--surface2);border:0.5px dashed var(--border);border-radius:var(--radius);padding:24px;text-align:center;color:var(--text3);font-size:12px;margin:20px 0;min-height:90px}
+.howto{font-size:14px;color:var(--text2);margin-bottom:8px}
+.howto h3{font-size:16px;font-weight:600;color:var(--text);margin:20px 0 8px}
+.howto ul{padding-left:18px}
+.howto li{margin-bottom:6px}
+.faq-section{border-top:0.5px solid var(--border);padding-top:24px;margin-top:20px}
+.faq-section h2{font-size:18px;font-weight:600;margin-bottom:12px}
+.faq-section ul{list-style:none;padding:0}
+.faq-section li{font-size:14px;color:var(--text2);margin-bottom:10px;line-height:1.7}
+footer{text-align:center;color:var(--text3);font-size:13px;padding-top:24px;border-top:0.5px solid var(--border);margin-top:48px}
+footer a{color:var(--accent);text-decoration:none}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+</head>
+<body>
+<button class="lang-btn" onclick="toggleLang()" id="langBtn">中文</button>
+<div class="page">
+  <div class="breadcrumb"><a href="/">Freemaki</a> &rsaquo; <span data-i18n="bc">Markdown Editor</span></div>
+  <h1 data-i18n="title">Markdown Editor</h1>
+  <p class="subtitle" data-i18n="subtitle">Edit Markdown with live preview. Supports GFM, tables, task lists, and more.</p>
+
+  <div class="toolbar">
+    <button class="tool-btn" onclick="insert('**','**')" title="Bold"><strong>B</strong></button>
+    <button class="tool-btn" onclick="insert('*','*')" title="Italic"><em>I</em></button>
+    <button class="tool-btn" onclick="insert('~~','~~')" title="Strikethrough"><s>S</s></button>
+    <div class="tool-sep"></div>
+    <button class="tool-btn" onclick="insert('# ','')" title="Heading 1">H1</button>
+    <button class="tool-btn" onclick="insert('## ','')" title="Heading 2">H2</button>
+    <button class="tool-btn" onclick="insert('### ','')" title="Heading 3">H3</button>
+    <div class="tool-sep"></div>
+    <button class="tool-btn" onclick="insert('[','](url)')" title="Link">Link</button>
+    <button class="tool-btn" onclick="insert('![alt](',')')" title="Image">Img</button>
+    <button class="tool-btn" onclick="insert('\`','\`')" title="Inline Code">&lt;/&gt;</button>
+    <button class="tool-btn" onclick="insert('\n\`\`\`\n','\n\`\`\`\n')" title="Code Block">Block</button>
+    <div class="tool-sep"></div>
+    <button class="tool-btn" onclick="insert('- ','')" title="List">List</button>
+    <button class="tool-btn" onclick="insert('- [ ] ','')" title="Task">Task</button>
+    <button class="tool-btn" onclick="insert('> ','')" title="Quote">Quote</button>
+    <button class="tool-btn" onclick="insert('\n---\n','')" title="HR">HR</button>
+    <div class="tool-sep"></div>
+    <button class="tool-btn" onclick="insertTable()" title="Table">Table</button>
+    <div class="action-btns">
+      <button class="action-btn" onclick="copyHTML()" data-i18n="btn_copy_html">Copy HTML</button>
+      <button class="action-btn" onclick="clearEditor()" data-i18n="btn_clear">Clear</button>
+    </div>
+  </div>
+
+  <div class="editor-wrap">
+    <div class="pane">
+      <div class="pane-header" data-i18n="lbl_edit">Markdown</div>
+      <textarea id="editor" spellcheck="false" placeholder="Type Markdown here..."></textarea>
+    </div>
+    <div class="pane">
+      <div class="pane-header" data-i18n="lbl_preview">Preview</div>
+      <div id="preview"></div>
+    </div>
+  </div>
+  <div class="stats-bar">
+    <span id="charCount">0 chars</span>
+    <span id="wordCount">0 words</span>
+    <span id="lineCount">0 lines</span>
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+
+  <div class="howto">
+    <h3 data-i18n="howto_title">How to Use</h3>
+    <ul>
+      <li data-i18n="howto_1">Type or paste Markdown in the left editor. The preview updates in real-time on the right.</li>
+      <li data-i18n="howto_2">Use the toolbar buttons to insert formatting: bold, italic, headings, links, code blocks, etc.</li>
+      <li data-i18n="howto_3">GFM is supported: tables, task lists (checkboxes), strikethrough, and autolinks.</li>
+      <li data-i18n="howto_4">Click "Copy HTML" to copy the rendered HTML to your clipboard.</li>
+      <li data-i18n="howto_5">All processing is done locally in your browser. No data is sent to any server.</li>
+    </ul>
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+
+  <div class="faq-section">
+    <h2 data-i18n="faq_title">Frequently Asked Questions</h2>
+    <ul>
+      <li data-i18n="faq_0"><strong>What is Markdown?</strong> — Markdown is a lightweight markup language for creating formatted text using a plain-text editor. It was created by John Gruber in 2004 and is now widely used for documentation, README files, and content management.</li>
+      <li data-i18n="faq_1"><strong>What is GFM?</strong> — GitHub Flavored Markdown (GFM) extends standard Markdown with features like tables, task lists, strikethrough, and fenced code blocks. This editor supports all GFM features.</li>
+      <li data-i18n="faq_2"><strong>Is my content saved?</strong> — No. All content exists only in your browser's memory. If you refresh the page, your content will be lost. Use "Copy HTML" to save your work.</li>
+      <li data-i18n="faq_3"><strong>Is the output sanitized?</strong> — Yes. The preview uses DOMPurify to prevent XSS attacks. Any potentially dangerous HTML is automatically removed.</li>
+      <li data-i18n="faq_4"><strong>Can I use this for writing documentation?</strong> — Absolutely. This editor is perfect for writing README files, documentation, blog posts, and any content that uses Markdown formatting.</li>
+    </ul>
+  </div>
+
+  <div class="related-section">
+    <h3 data-i18n="rel_title">Related Tools</h3>
+    <div class="related-grid">
+      <a href="/json/" class="related-card"><h4 data-i18n="rel_json_t">JSON Formatter</h4><p data-i18n="rel_json_d">Format, validate and minify JSON data.</p></a>
+      <a href="/regex/" class="related-card"><h4 data-i18n="rel_regex_t">Regex Tester</h4><p data-i18n="rel_regex_d">Test and debug regular expressions.</p></a>
+      <a href="/base64/" class="related-card"><h4 data-i18n="rel_b64_t">Base64 Encoder</h4><p data-i18n="rel_b64_d">Encode and decode Base64 strings.</p></a>
+    </div>
+    <div class="learn-more">
+      <a href="/blog/developer-tools-guide/" class="related-card learn-card"><h4 data-i18n="learn_t">🛠️ Developer Tools Guide</h4><p data-i18n="learn_d">Discover 7 essential free online tools.</p></a>
+    </div>
+  </div>
+
+  <footer>
+    <p><a href="/privacy/" data-i18n="f_privacy">Privacy Policy</a> · <a href="/disclaimer/" data-i18n="f_disclaimer">Disclaimer</a> · <a href="/about/" data-i18n="f_about">About</a> · <a href="/contact/" data-i18n="f_contact">Contact</a></p>
+    <p style="margin-top:8px">© 2026 Freemaki · <span data-i18n="f_rights">No signup required</span></p>
+  </footer>
+</div>
+
+<script>
+const editor=document.getElementById('editor');
+const preview=document.getElementById('preview');
+let renderTimer=null;
+
+// Configure marked
+if(typeof marked!=='undefined'){
+  marked.setOptions({gfm:true,breaks:true,headerIds:false,mangle:false});
+}
+
+function render(){
+  const md=editor.value;
+  if(typeof marked!=='undefined'&&typeof DOMPurify!=='undefined'){
+    const raw=marked.parse(md);
+    preview.innerHTML=DOMPurify.sanitize(raw);
+  }else{
+    preview.textContent=md;
+  }
+  updateStats(md);
+}
+
+function updateStats(md){
+  const chars=md.length;
+  const words=md.trim()?md.trim().split(/\s+/).length:0;
+  const lines=md?md.split('\n').length:0;
+  document.getElementById('charCount').textContent=chars+' chars';
+  document.getElementById('wordCount').textContent=words+' words';
+  document.getElementById('lineCount').textContent=lines+' lines';
+}
+
+editor.addEventListener('input',()=>{clearTimeout(renderTimer);renderTimer=setTimeout(render,150);});
+
+function insert(before,after){
+  const start=editor.selectionStart;const end=editor.selectionEnd;
+  const selected=editor.value.substring(start,end)||'';
+  const replacement=before+selected+after;
+  editor.setRangeText(replacement,start,end,'end');
+  editor.focus();render();
+}
+
+function insertTable(){
+  const table='\n| Column 1 | Column 2 | Column 3 |\n|----------|----------|----------|\n| Cell 1   | Cell 2   | Cell 3   |\n| Cell 4   | Cell 5   | Cell 6   |\n';
+  const pos=editor.selectionStart;
+  editor.setRangeText(table,pos,pos,'end');
+  editor.focus();render();
+}
+
+function copyHTML(){
+  const html=preview.innerHTML;
+  if(!html.trim())return;
+  navigator.clipboard.writeText(html).then(()=>{
+    const lang=document.documentElement.lang;const btn=document.querySelector('[onclick="copyHTML()"]');
+    const orig=btn.textContent;btn.textContent=lang==='zh'?'已复制!':'Copied!';setTimeout(()=>{btn.textContent=orig;},1500);
+  });
+}
+
+function clearEditor(){editor.value='';render();}
+
+// Default content
+editor.value=`# Markdown Editor
+
+Welcome to the **Freemaki Markdown Editor** with live preview!
+
+## Features
+
+- **GitHub Flavored Markdown** (GFM) support
+- Real-time preview as you type
+- Toolbar for quick formatting
+- Safe HTML output (XSS sanitized)
+- Works 100% offline in your browser
+
+## GFM Extensions
+
+### Task Lists
+
+- [x] Write documentation
+- [x] Add live preview
+- [ ] Add syntax highlighting themes
+- [ ] Add file export
+
+### Tables
+
+| Feature   | Status    | Priority |
+|-----------|-----------|----------|
+| GFM       | Supported | High     |
+| Syntax HL | Planned   | Medium   |
+| Export    | Planned   | Low      |
+
+### Code Blocks
+
+\`\`\`javascript
+function hello(name) {
+  return \`Hello, \${name}!\`;
+}
+console.log(hello('World'));
+\`\`\`
+
+> **Tip:** All content is processed locally in your browser. No data is ever sent to a server.
+
+---
+
+*Start editing to see the live preview update instantly.*`;
+
+render();
+
+const i18n={
+  en:{
+    bc:'Markdown Editor',title:'Markdown Editor',subtitle:'Edit Markdown with live preview. Supports GFM, tables, task lists, and more.',
+    lbl_edit:'Markdown',lbl_preview:'Preview',btn_copy_html:'Copy HTML',btn_clear:'Clear',
+    howto_title:'How to Use',
+    howto_1:'Type or paste Markdown in the left editor. The preview updates in real-time on the right.',
+    howto_2:'Use the toolbar buttons to insert formatting: bold, italic, headings, links, code blocks, etc.',
+    howto_3:'GFM is supported: tables, task lists (checkboxes), strikethrough, and autolinks.',
+    howto_4:'Click "Copy HTML" to copy the rendered HTML to your clipboard.',
+    howto_5:'All processing is done locally in your browser. No data is sent to any server.',
+    faq_title:'Frequently Asked Questions',
+    faq_0:'<strong>What is Markdown?</strong> — Markdown is a lightweight markup language for creating formatted text using a plain-text editor. It was created by John Gruber in 2004 and is now widely used for documentation, README files, and content management.',
+    faq_1:'<strong>What is GFM?</strong> — GitHub Flavored Markdown (GFM) extends standard Markdown with features like tables, task lists, strikethrough, and fenced code blocks. This editor supports all GFM features.',
+    faq_2:'<strong>Is my content saved?</strong> — No. All content exists only in your browser\'s memory. If you refresh the page, your content will be lost. Use "Copy HTML" to save your work.',
+    faq_3:'<strong>Is the output sanitized?</strong> — Yes. The preview uses DOMPurify to prevent XSS attacks. Any potentially dangerous HTML is automatically removed.',
+    faq_4:'<strong>Can I use this for writing documentation?</strong> — Absolutely. This editor is perfect for writing README files, documentation, blog posts, and any content that uses Markdown formatting.',
+    rel_title:'Related Tools',rel_json_t:'JSON Formatter',rel_json_d:'Format, validate and minify JSON data.',
+    rel_regex_t:'Regex Tester',rel_regex_d:'Test and debug regular expressions.',
+    rel_b64_t:'Base64 Encoder',rel_b64_d:'Encode and decode Base64 strings.',
+    learn_t:'🛠️ Developer Tools Guide',learn_d:'Discover 7 essential free online tools.',
+    f_privacy:'Privacy Policy',f_disclaimer:'Disclaimer',f_about:'About',f_contact:'Contact',f_rights:'No signup required'
+  },
+  zh:{
+    bc:'Markdown 编辑器',title:'Markdown 编辑器',subtitle:'实时编辑和预览 Markdown。支持 GFM、表格、任务列表等。',
+    lbl_edit:'Markdown',lbl_preview:'预览',btn_copy_html:'复制 HTML',btn_clear:'清空',
+    howto_title:'使用说明',
+    howto_1:'在左侧编辑器中输入或粘贴 Markdown，右侧实时更新预览。',
+    howto_2:'使用工具栏按钮插入格式：加粗、斜体、标题、链接、代码块等。',
+    howto_3:'支持 GFM 扩展：表格、任务列表（复选框）、删除线和自动链接。',
+    howto_4:'点击"复制 HTML"将渲染后的 HTML 复制到剪贴板。',
+    howto_5:'所有处理在浏览器本地完成，不会发送数据到任何服务器。',
+    faq_title:'常见问题',
+    faq_0:'<strong>什么是 Markdown？</strong> — Markdown 是一种轻量级标记语言，用于使用纯文本编辑器创建格式化文本。由 John Gruber 于 2004 年创建，现广泛用于文档、README 和内容管理。',
+    faq_1:'<strong>什么是 GFM？</strong> — GitHub Flavored Markdown (GFM) 扩展了标准 Markdown，增加了表格、任务列表、删除线和围栏代码块等功能。本编辑器支持所有 GFM 特性。',
+    faq_2:'<strong>内容会被保存吗？</strong> — 不会。所有内容仅存在于浏览器内存中。刷新页面内容会丢失，请使用"复制 HTML"保存。',
+    faq_3:'<strong>输出是否安全？</strong> — 是的。预览使用 DOMPurify 防止 XSS 攻击，任何潜在危险的 HTML 会被自动移除。',
+    faq_4:'<strong>可以用来写文档吗？</strong> — 当然。本编辑器非常适合编写 README 文件、文档、博客文章和使用 Markdown 格式的任何内容。',
+    rel_title:'相关工具',rel_json_t:'JSON 格式化器',rel_json_d:'格式化、校验和压缩 JSON 数据。',
+    rel_regex_t:'正则表达式测试器',rel_regex_d:'测试和调试正则表达式。',
+    rel_b64_t:'Base64 编解码器',rel_b64_d:'编码和解码 Base64 字符串。',
+    learn_t:'🛠️ 开发者工具指南',learn_d:'发现 7 个必备的免费在线工具。',
+    f_privacy:'隐私政策',f_disclaimer:'免责声明',f_about:'关于我们',f_contact:'联系我们',f_rights:'无需注册'
+  }
+};
+let lang='en';
+function toggleLang(){lang=lang==='en'?'zh':'en';document.getElementById('langBtn').textContent=lang==='en'?'中文':'EN';document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(i18n[lang][k])el.innerHTML=i18n[lang][k];});}
+</script>
+</body>
+</html>
