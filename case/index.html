@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freemaki Case Converter – 驼峰下划线命名转换</title>
+  <meta name="description" content="Free online case converter. Instantly convert text to camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, and dot.case. Developer utility tool.">
+  <meta name="keywords" content="case converter,camelCase,PascalCase,snake_case,kebab-case,underscore,命名转换,驼峰命名">
+  <link rel="canonical" href="https://www.freemaki.com/case/">
+  <meta property="og:title" content="Freemaki Case Converter">
+  <meta property="og:description" content="Convert text to camelCase, PascalCase, snake_case, kebab-case and more instantly.">
+  <meta property="og:url" content="https://www.freemaki.com/case/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root {
+      --bg: #0f0f1a;
+      --surface: #1a1a2e;
+      --surface2: #252540;
+      --accent: #6c5ce7;
+      --accent2: #a29bfe;
+      --accent-glow: rgba(108, 92, 231, 0.35);
+      --green: #2ecc71;
+      --text: #e0e0ff;
+      --text-dim: #8888bb;
+      --border: rgba(108,92,231,0.25);
+      --radius: 14px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --red: #e74c3c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    /* Lang Toggle */
+    .lang-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      overflow: hidden;
+      z-index: 100;
+    }
+    .lang-btn {
+      padding: 6px 14px;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font);
+    }
+    .lang-btn.active { background: var(--accent); color: #fff; }
+    .lang-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 40px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 14px;
+      color: var(--text-dim);
+    }
+    .breadcrumb a { color: var(--accent2); text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+
+    /* Card */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 700px;
+      text-align: center;
+    }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 14px; color: var(--text-dim); margin-bottom: 28px; }
+
+    /* Input */
+    .input-section { margin-bottom: 24px; text-align: left; }
+    .input-label {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    textarea {
+      width: 100%;
+      height: 110px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      color: var(--text);
+      font-size: 16px;
+      font-family: var(--font);
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+      line-height: 1.5;
+    }
+    textarea:focus { border-color: var(--accent); }
+    textarea::placeholder { color: var(--text-dim); }
+    .hint { font-size: 12px; color: var(--text-dim); margin-top: 6px; }
+
+    /* Results Grid */
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 560px) {
+      .results-grid { grid-template-columns: 1fr; }
+    }
+    .result-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      text-align: left;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .result-card:hover { border-color: var(--accent2); box-shadow: 0 0 12px rgba(162,155,254,0.1); }
+    .result-card .case-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .result-card .case-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      word-break: break-all;
+      line-height: 1.5;
+      min-height: 22px;
+      font-variant-numeric: tabular-nums;
+    }
+    .result-card .case-value.empty { color: var(--text-dim); font-weight: 400; font-size: 13px; }
+    .copy-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 2px 8px;
+      font-size: 11px;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: var(--font);
+    }
+    .copy-btn:hover { border-color: var(--green); color: var(--green); }
+    .copy-btn.copied { border-color: var(--green); color: var(--green); }
+
+    /* Quick Examples */
+    .examples {
+      margin-top: 16px;
+      text-align: left;
+    }
+    .examples-title {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .example-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .example-chip {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: var(--font);
+    }
+    .example-chip:hover { border-color: var(--accent2); color: var(--text); }
+    .example-chip::before { content: '↓ '; opacity: 0.5; }
+
+    /* Tips */
+    .tips {
+      margin-top: 24px;
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+    .tips-title {
+      font-weight: 600;
+      color: var(--accent2);
+      margin-bottom: 6px;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 32px;
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      gap: 20px;
+    }
+    .footer a { color: var(--accent2); text-decoration: none; }
+    .footer a:hover { color: #fff; }
+
+    [lang="en"] .zh { display: none; }
+    [lang="zh"] .en { display: none; }
+  </style>
+</head>
+<body lang="zh">
+
+  <button class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </button>
+
+  <nav class="breadcrumb">
+    <a href="../">Freemaki</a>
+    <span>/</span>
+    <span class="zh">命名转换</span><span class="en">Case Converter</span>
+  </nav>
+
+  <div class="card">
+    <h1 class="zh">驼峰 & 下划线命名转换</h1>
+    <h1 class="en">Case Converter</h1>
+    <p class="subtitle zh">输入任意文字，实时转换为 6 种命名格式</p>
+    <p class="subtitle en">Convert text to camelCase, PascalCase, snake_case, and more</p>
+
+    <!-- Input -->
+    <div class="input-section">
+      <div class="input-label">
+        <span class="zh">输入文本</span><span class="en">Enter text</span>
+        <span class="hint" id="hint">CamelCase / space-separated / snake_case 皆可</span>
+      </div>
+      <textarea id="inputText" placeholder="hello world example text" oninput="convertAll()"></textarea>
+    </div>
+
+    <!-- Results -->
+    <div class="results-grid">
+      <div class="result-card" id="card-camel">
+        <div class="case-label">
+          camelCase
+          <button class="copy-btn" onclick="copy('camel')">
+            <span class="zh">复制</span><span class="en">Copy</span>
+          </button>
+        </div>
+        <div class="case-value empty" id="val-camel">—</div>
+      </div>
+      <div class="result-card" id="card-pascal">
+        <div class="case-label">
+          PascalCase
+          <button class="copy-btn" onclick="copy('pascal')">
+            <span class="zh">复制</span><span class="en">Copy</span>
+          </button>
+        </div>
+        <div class="case-value empty" id="val-pascal">—</div>
+      </div>
+      <div class="result-card" id="card-snake">
+        <div class="case-label">
+          snake_case
+          <button class="copy-btn" onclick="copy('snake')">
+            <span class="zh">复制</span><span class="en">Copy</span>
+          </button>
+        </div>
+        <div class="case-value empty" id="val-snake">—</div>
+      </div>
+      <div class="result-card" id="card-kebab">
+        <div class="case-label">
+          kebab-case
+          <button class="copy-btn" onclick="copy('kebab')">
+            <span class="zh">复制</span><span class="en">Copy</span>
+          </button>
+        </div>
+        <div class="case-value empty" id="val-kebab">—</div>
+      </div>
+      <div class="result-card" id="card-constant">
+        <div class="case-label">
+          CONSTANT_CASE
+          <button class="copy-btn" onclick="copy('constant')">
+            <span class="zh">复制</span><span class="en">Copy</span>
+          </button>
+        </div>
+        <div class="case-value empty" id="val-constant">—</div>
+      </div>
+      <div class="result-card" id="card-dot">
+        <div class="case-label">
+          dot.case
+          <button class="copy-btn" onclick="copy('dot')">
+            <span class="zh">复制</span><span class="en">Copy</span>
+          </button>
+        </div>
+        <div class="case-value empty" id="val-dot">—</div>
+      </div>
+    </div>
+
+    <!-- Quick Examples -->
+    <div class="examples">
+      <div class="examples-title">
+        <span class="zh">快捷示例</span><span class="en">Quick Examples</span>
+      </div>
+      <div class="example-chips">
+        <button class="example-chip" onclick="setExample('user profile name')">user profile name</button>
+        <button class="example-chip" onclick="setExample('getHTTPResponse')">getHTTPResponse</button>
+        <button class="example-chip" onclick="setExample('total_order_count')">total_order_count</button>
+        <button class="example-chip" onclick="setExample('max-file-size')">max-file-size</button>
+        <button class="example-chip" onclick="setExample('API_ENDPOINT_URL')">API_ENDPOINT_URL</button>
+        <button class="example-chip" onclick="setExample('Hello World 你好世界')">Hello World 你好世界</button>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div class="tips">
+      <div class="tips-title">
+        <span class="zh">💡 支持的输入格式</span><span class="en">💡 Supported Input Formats</span>
+      </div>
+      <span class="zh">
+        空格分隔（hello world）、驼峰（helloWorld）、下划线（hello_world）、
+        短横线（hello-world）、常量格式（HELLO_WORLD）均可自动识别并转换。
+        支持中英文混合。
+      </span>
+      <span class="en">
+        Space-separated, camelCase, snake_case, kebab-case, and CONSTANT_CASE are all auto-detected and converted.
+        Supports mixed Chinese and English text.
+      </span>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <a href="../random/">
+      <span class="zh">随机抽签</span><span class="en">Random Picker</span>
+    </a>
+    <a href="../converter/">
+      <span class="zh">单位换算</span><span class="en">Unit Converter</span>
+    </a>
+  </footer>
+
+  <script>
+    // ── Tokenizer ─────────────────────────────────────────────
+    // Split text into word tokens (supports EN, ZH, numbers, special chars)
+    function tokenize(str) {
+      if (!str) return [];
+      return str
+        .trim()
+        // Split on spaces, underscores, hyphens
+        .replace(/[-_\s]+/g, ' ')
+        // Separate camelCase: helloWorld → hello World
+        .replace(/([a-z])([A-Z])/g, '$1 $2')
+        // Separate mixed: HTTPResponse → HTTP Response
+        .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+        // Split numbers from letters: var1Name → var 1 Name
+        .replace(/([a-zA-Z\u4e00-\u9fa5])(\d)/g, '$1 $2')
+        .replace(/(\d)([a-zA-Z\u4e00-\u9fa5])/g, '$1 $2')
+        .split(' ')
+        .map(s => s.trim())
+        .filter(s => s.length > 0);
+    }
+
+    function toTitleCase(words) {
+      return words.map(w =>
+        w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()
+      );
+    }
+
+    function toUpper(words) {
+      return words.map(w => w.toUpperCase());
+    }
+
+    // ── Convertors ───────────────────────────────────────────
+    function toCamel(words) {
+      const title = toTitleCase(words);
+      if (!title.length) return '';
+      return title[0].toLowerCase() + title.slice(1).join('');
+    }
+
+    function toPascal(words) {
+      return toTitleCase(words).join('');
+    }
+
+    function toSnake(words) {
+      return words.map(w => w.toLowerCase()).join('_');
+    }
+
+    function toKebab(words) {
+      return words.map(w => w.toLowerCase()).join('-');
+    }
+
+    function toConstant(words) {
+      return toUpper(words).join('_');
+    }
+
+    function toDot(words) {
+      return words.map(w => w.toLowerCase()).join('.');
+    }
+
+    // ── Render ───────────────────────────────────────────────
+    const CONVERTERS = {
+      camel: toCamel,
+      pascal: toPascal,
+      snake: toSnake,
+      kebab: toKebab,
+      constant: toConstant,
+      dot: toDot,
+    };
+
+    function convertAll() {
+      const text = document.getElementById('inputText').value;
+      const words = tokenize(text);
+
+      Object.keys(CONVERTERS).forEach(key => {
+        const el = document.getElementById(`val-${key}`);
+        const card = document.getElementById(`card-${key}`);
+        if (!text.trim()) {
+          el.textContent = '—';
+          el.className = 'case-value empty';
+        } else {
+          const result = CONVERTERS[key](words);
+          el.textContent = result;
+          el.className = 'case-value';
+        }
+      });
+    }
+
+    // ── Copy ────────────────────────────────────────────────
+    function copy(key) {
+      const val = document.getElementById(`val-${key}`).textContent;
+      if (!val || val === '—') return;
+      navigator.clipboard.writeText(val).then(() => {
+        const btn = event.currentTarget;
+        const isZh = document.body.lang === 'zh';
+        btn.textContent = isZh ? '已复制!' : 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = isZh ? '复制' : 'Copy';
+          btn.classList.remove('copied');
+        }, 1500);
+      });
+    }
+
+    // ── Examples ────────────────────────────────────────────
+    function setExample(text) {
+      document.getElementById('inputText').value = text;
+      convertAll();
+    }
+
+    // ── Language ─────────────────────────────────────────────
+    function setLang(lang) {
+      document.body.lang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.textContent.includes(lang === 'zh' ? '中文' : 'EN'));
+      });
+      document.getElementById('hint').textContent =
+        lang === 'zh' ? '空格 / camelCase / snake_case / kebab-case 均可' : 'Space / camelCase / snake_case / kebab-case all OK';
+      convertAll();
+    }
+
+    // Init
+    convertAll();
+  </script>
+</body>
+</html>

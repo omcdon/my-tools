@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freemaki Random Picker – 随机抽签与分组</title>
+  <meta name="description" content="Free random picker and team generator. Draw one from a list, or split a group into teams. Perfect for raffles, lucky draws, and random selection.">
+  <meta name="keywords" content="random picker,lucky draw,random selector,team generator,randomizer,抽签,随机分组,抽签工具">
+  <link rel="canonical" href="https://www.freemaki.com/random/">
+  <meta property="og:title" content="Freemaki Random Picker">
+  <meta property="og:description" content="Free random picker and team generator. Draw one from a list, or split into teams.">
+  <meta property="og:url" content="https://www.freemaki.com/random/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root {
+      --bg: #0f0f1a;
+      --surface: #1a1a2e;
+      --surface2: #252540;
+      --accent: #6c5ce7;
+      --accent2: #a29bfe;
+      --accent-glow: rgba(108, 92, 231, 0.35);
+      --green: #2ecc71;
+      --green-glow: rgba(46, 204, 113, 0.3);
+      --text: #e0e0ff;
+      --text-dim: #8888bb;
+      --border: rgba(108,92,231,0.25);
+      --radius: 14px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    /* Lang Toggle */
+    .lang-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      overflow: hidden;
+      z-index: 100;
+    }
+    .lang-btn {
+      padding: 6px 14px;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font);
+    }
+    .lang-btn.active { background: var(--accent); color: #fff; }
+    .lang-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 40px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 14px;
+      color: var(--text-dim);
+    }
+    .breadcrumb a { color: var(--accent2); text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+
+    /* Card */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 14px; color: var(--text-dim); margin-bottom: 28px; }
+
+    /* Mode Tabs */
+    .mode-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .mode-tab {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text-dim);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font);
+    }
+    .mode-tab.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px var(--accent-glow);
+    }
+    .mode-tab:hover:not(.active) { color: var(--text); }
+    .mode-tab .tab-icon { font-size: 18px; display: block; margin-bottom: 2px; }
+
+    /* Input Area */
+    .input-area {
+      margin-bottom: 20px;
+    }
+    .input-label {
+      display: block;
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+      text-align: left;
+    }
+    textarea {
+      width: 100%;
+      height: 140px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      color: var(--text);
+      font-size: 15px;
+      font-family: var(--font);
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+      line-height: 1.6;
+    }
+    textarea:focus { border-color: var(--accent); }
+    textarea::placeholder { color: var(--text-dim); }
+    .char-count {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    /* Options Row */
+    .options-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .option-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface2);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+    .option-group label { white-space: nowrap; }
+    .option-group input {
+      width: 56px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: var(--font);
+    }
+    .option-group input:focus { outline: none; border-color: var(--accent); }
+
+    /* Buttons */
+    .btn-primary {
+      padding: 12px 36px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px var(--accent-glow);
+      margin-bottom: 10px;
+    }
+    .btn-primary:hover { background: #7d6ef0; transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-secondary {
+      padding: 8px 20px;
+      background: var(--surface2);
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { color: var(--text); background: #2e2e50; }
+
+    /* Spin Animation */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(var(--target-deg, 720deg)); }
+    }
+
+    /* Result Display */
+    .result-area {
+      margin-top: 24px;
+      min-height: 120px;
+    }
+    .pick-display {
+      font-size: 80px;
+      line-height: 1.1;
+      margin: 16px 0 8px;
+      transition: transform 0.1s;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 4px;
+      max-width: 100%;
+    }
+    .pick-display .entry {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--green);
+      animation: popIn 0.3s ease;
+      box-shadow: 0 4px 16px var(--green-glow);
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      70% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .pick-note {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    /* Group Result */
+    .groups-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
+      text-align: left;
+    }
+    .group-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .group-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent2);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .group-members {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .group-members span {
+      display: inline-block;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 10px;
+      margin: 2px 4px 2px 0;
+      font-size: 14px;
+    }
+
+    /* History */
+    .history {
+      margin-top: 24px;
+      text-align: left;
+    }
+    .history-title {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .history-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .history-item {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 32px;
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      gap: 20px;
+    }
+    .footer a { color: var(--accent2); text-decoration: none; }
+    .footer a:hover { color: #fff; }
+
+    [lang="en"] .zh { display: none; }
+    [lang="zh"] .en { display: none; }
+  </style>
+</head>
+<body lang="zh">
+
+  <button class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </button>
+
+  <nav class="breadcrumb">
+    <a href="../">Freemaki</a>
+    <span>/</span>
+    <span class="zh">随机抽签</span><span class="en">Random Picker</span>
+  </nav>
+
+  <div class="card">
+    <h1 class="zh">随机抽签 & 分组工具</h1>
+    <h1 class="en">Random Picker & Group Generator</h1>
+    <p class="subtitle zh">抽签、随机分组、摇号，轻松搞定</p>
+    <p class="subtitle en">Pick one randomly or split into teams</p>
+
+    <!-- Mode Tabs -->
+    <div class="mode-tabs">
+      <button class="mode-tab active" data-mode="pick" onclick="setMode('pick')">
+        <span class="tab-icon">🎯</span>
+        <span class="zh">随机抽取</span><span class="en">Draw One</span>
+      </button>
+      <button class="mode-tab" data-mode="group" onclick="setMode('group')">
+        <span class="tab-icon">👥</span>
+        <span class="zh">随机分组</span><span class="en">Split Teams</span>
+      </button>
+    </div>
+
+    <!-- Input -->
+    <div class="input-area">
+      <label class="input-label">
+        <span class="zh">输入名单（每行一个）</span><span class="en">Enter names/items (one per line)</span>
+      </label>
+      <textarea id="entriesInput" placeholder="张三&#10;李四&#10;王五&#10;赵六&#10;..." oninput="updateCount()"></textarea>
+      <div class="char-count" id="charCount">0 条目</div>
+    </div>
+
+    <!-- Pick Options -->
+    <div class="options-row" id="pickOptions">
+      <div class="option-group" id="countGroup">
+        <label>
+          <span class="zh">抽取数量</span><span class="en">Pick</span>
+        </label>
+        <input type="number" id="pickCount" value="1" min="1" max="100">
+        <span class="zh">个</span><span class="en">item(s)</span>
+      </div>
+    </div>
+
+    <!-- Group Options (hidden by default) -->
+    <div class="options-row" id="groupOptions" style="display:none;">
+      <div class="option-group">
+        <label>
+          <span class="zh">分成</span><span class="en">Groups</span>
+        </label>
+        <input type="number" id="groupNum" value="3" min="2" max="20" onchange="updateGroupMode('num')">
+        <span class="zh">组</span><span class="en">teams</span>
+      </div>
+      <div class="option-group">
+        <label>
+          <span class="zh">每组</span><span class="en">Each</span>
+        </label>
+        <input type="number" id="perGroup" value="3" min="1" max="100" onchange="updateGroupMode('per')">
+        <span class="zh">人</span><span class="en">per team</span>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <button class="btn-primary" onclick="execute()">
+      <span class="zh" id="pickBtn">开始抽签</span>
+      <span class="en" id="pickBtnEn">Start Drawing</span>
+    </button>
+    <br>
+    <button class="btn-secondary" onclick="clearAll()">
+      <span class="zh">清空</span><span class="en">Clear All</span>
+    </button>
+
+    <!-- Result -->
+    <div class="result-area" id="resultArea"></div>
+
+    <!-- History -->
+    <div class="history" id="historyArea" style="display:none;">
+      <div class="history-title">
+        <span class="zh">最近抽取记录</span><span class="en">Recent Picks</span>
+      </div>
+      <div class="history-list" id="historyList"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <a href="../case/">
+      <span class="zh">命名转换</span><span class="en">Case Converter</span>
+    </a>
+    <a href="../pomodoro/">
+      <span class="zh">番茄钟</span><span class="en">Pomodoro Timer</span>
+    </a>
+  </footer>
+
+  <script>
+    // ── State ─────────────────────────────────────────────────
+    let mode = 'pick';
+    let history = [];
+
+    // ── Elements ─────────────────────────────────────────────
+    const entriesInput = document.getElementById('entriesInput');
+    const charCount = document.getElementById('charCount');
+    const resultArea = document.getElementById('resultArea');
+    const historyArea = document.getElementById('historyArea');
+    const historyList = document.getElementById('historyList');
+    const pickBtn = document.getElementById('pickBtn');
+    const pickBtnEn = document.getElementById('pickBtnEn');
+
+    // ── Mode ─────────────────────────────────────────────────
+    function setMode(m) {
+      mode = m;
+      document.querySelectorAll('.mode-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.mode === m);
+      });
+      document.getElementById('pickOptions').style.display = m === 'pick' ? '' : 'none';
+      document.getElementById('groupOptions').style.display = m === 'group' ? '' : 'none';
+      if (m === 'pick') {
+        pickBtn.textContent = document.body.lang === 'zh' ? '开始抽签' : 'Start Drawing';
+        pickBtnEn.textContent = 'Start Drawing';
+      } else {
+        pickBtn.textContent = document.body.lang === 'zh' ? '开始分组' : 'Generate Teams';
+        pickBtnEn.textContent = 'Generate Teams';
+      }
+    }
+
+    // ── Char Count ────────────────────────────────────────────
+    function updateCount() {
+      const lines = getEntries();
+      charCount.textContent = `${lines.length} ${document.body.lang === 'zh' ? '条目' : 'items'}`;
+    }
+
+    function getEntries() {
+      return entriesInput.value.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+    }
+
+    // ── Group mode ────────────────────────────────────────────
+    function updateGroupMode(type) {
+      // Just switches UI feedback, logic in execute
+    }
+
+    // ── Execute ───────────────────────────────────────────────
+    function execute() {
+      const entries = getEntries();
+      if (entries.length < 1) {
+        resultArea.innerHTML = `<p style="color:var(--text-dim);font-size:14px;">${document.body.lang === 'zh' ? '请先输入名单' : 'Enter at least one item'}</p>`;
+        return;
+      }
+
+      if (mode === 'pick') {
+        const count = Math.min(parseInt(document.getElementById('pickCount').value) || 1, entries.length);
+        const shuffled = shuffle([...entries]);
+        const picked = shuffled.slice(0, count);
+
+        // Add to history
+        picked.forEach(p => {
+          history.unshift(p);
+          if (history.length > 20) history.pop();
+        });
+        renderHistory();
+
+        // Render result
+        const isZh = document.body.lang === 'zh';
+        resultArea.innerHTML = `
+          <div class="pick-display">
+            ${picked.map(p => `<div class="entry">${escapeHtml(p)}</div>`).join('')}
+          </div>
+          <div class="pick-note">${count > 1 ? (isZh ? `从 ${entries.length} 条中抽取 ${count} 个` : `Picked ${count} from ${entries.length}`) : ''}</div>
+        `;
+      } else {
+        const groupNum = parseInt(document.getElementById('groupNum').value) || 3;
+        const perGroup = parseInt(document.getElementById('perGroup').value) || 3;
+        const shuffled = shuffle([...entries]);
+        const isZh = document.body.lang === 'zh';
+
+        // Split into groups: use smaller of groupNum vs perGroup mode
+        let groups = [];
+        const entriesPerGroup = Math.ceil(entries.length / groupNum);
+        for (let i = 0; i < shuffled.length; i += entriesPerGroup) {
+          groups.push(shuffled.slice(i, i + entriesPerGroup));
+        }
+
+        const groupLabels = isZh
+          ? groups.map((_, i) => `第 ${i + 1} 组`)
+          : groups.map((_, i) => `Team ${i + 1}`);
+
+        resultArea.innerHTML = `
+          <div class="groups-container">
+            ${groups.map((members, i) => `
+              <div class="group-card" style="animation-delay:${i * 80}ms">
+                <div class="group-title">${groupLabels[i]} (${members.length} ${isZh ? '人' : 'members'})</div>
+                <div class="group-members">
+                  ${members.map(m => `<span>${escapeHtml(m)}</span>`).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="pick-note" style="margin-top:16px;">${isZh ? `共 ${groups.length} 组，${entries.length} 人` : `${groups.length} teams, ${entries.length} people total`}</div>
+        `;
+      }
+    }
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── History ──────────────────────────────────────────────
+    function renderHistory() {
+      if (history.length === 0) {
+        historyArea.style.display = 'none';
+        return;
+      }
+      historyArea.style.display = '';
+      historyList.innerHTML = history.map(h =>
+        `<div class="history-item">${escapeHtml(h)}</div>`
+      ).join('');
+    }
+
+    // ── Clear ────────────────────────────────────────────────
+    function clearAll() {
+      entriesInput.value = '';
+      resultArea.innerHTML = '';
+      history = [];
+      updateCount();
+      renderHistory();
+    }
+
+    // ── Language ─────────────────────────────────────────────
+    function setLang(lang) {
+      document.body.lang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.textContent.includes(lang === 'zh' ? '中文' : 'EN'));
+      });
+      updateCount();
+      setMode(mode); // Refresh labels
+    }
+  </script>
+</body>
+</html>
