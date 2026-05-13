@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Freemaki – Free Online Tools (6 Free Tools)</title>
-<meta name="description" content="Free online tools: calorie calculator, color converter, Pomodoro timer, unit converter, random picker, case converter. No signup. Works offline. Bilingual EN/ZH."/>
-<meta name="keywords" content="free online tools, calorie calculator, color converter, pomodoro timer, unit converter, random picker, case converter, camelCase, free tools, no signup"/>
+<title>Freemaki – Free Online Tools (12 Free Tools)</title>
+<meta name="description" content="Free online tools: calorie calculator, color converter, Pomodoro timer, unit converter, random picker, case converter, JSON formatter, regex tester, timestamp converter, Base64, JWT decoder, hash generator. No signup. Works offline."/>
+<meta name="keywords" content="free online tools, calorie calculator, color converter, pomodoro timer, unit converter, random picker, case converter, JSON formatter, regex tester, timestamp, Base64, JWT, hash generator, free tools, developer tools"/>
 <meta name="robots" content="index, follow"/>
 <meta name="author" content="Freemaki"/>
 <link rel="canonical" href="https://freemaki.com/"/>
@@ -205,7 +205,7 @@
   <div class="ad-slot" data-i18n="adPlaceholder">Advertisement Space</div>
 
   <!-- Tools Grid -->
-  <div class="tools-grid">
+  <div class="tools-grid" style="grid-template-columns: repeat(3, 1fr);">
     <!-- Calorie Calculator -->
     <a href="./calorie/" class="tool-card">
       <div class="tool-icon">🔥</div>
@@ -304,6 +304,102 @@
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
       </div>
     </a>
+
+    <!-- JSON Formatter -->
+    <a href="./json/" class="tool-card">
+      <div class="tool-icon">{ }</div>
+      <h2 data-i18n="tool7_name">JSON Formatter</h2>
+      <p data-i18n="tool7_desc">Format, minify, and validate JSON data instantly. Real-time syntax checking and character count.</p>
+      <div class="tool-tags">
+        <span class="tag">JSON</span>
+        <span class="tag">Validate</span>
+        <span class="tag">Prettify</span>
+      </div>
+      <div class="arrow">
+        <span data-i18n="open_tool">Open tool</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </a>
+
+    <!-- Regex Tester -->
+    <a href="./regex/" class="tool-card">
+      <div class="tool-icon">.*</div>
+      <h2 data-i18n="tool8_name">Regex Tester</h2>
+      <p data-i18n="tool8_desc">Test regular expressions in real-time with match highlighting, groups, and flags support.</p>
+      <div class="tool-tags">
+        <span class="tag">Regex</span>
+        <span class="tag">Match</span>
+        <span class="tag">Groups</span>
+      </div>
+      <div class="arrow">
+        <span data-i18n="open_tool">Open tool</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </a>
+
+    <!-- Timestamp Converter -->
+    <a href="./timestamp/" class="tool-card">
+      <div class="tool-icon">⏱</div>
+      <h2 data-i18n="tool9_name">Timestamp Converter</h2>
+      <p data-i18n="tool9_desc">Convert between Unix timestamp and human-readable date. Supports seconds, milliseconds, and current time.</p>
+      <div class="tool-tags">
+        <span class="tag">Unix</span>
+        <span class="tag">Epoch</span>
+        <span class="tag">ISO 8601</span>
+      </div>
+      <div class="arrow">
+        <span data-i18n="open_tool">Open tool</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </a>
+
+    <!-- Base64 -->
+    <a href="./base64/" class="tool-card">
+      <div class="tool-icon">🔐</div>
+      <h2 data-i18n="tool10_name">Base64 Encoder</h2>
+      <p data-i18n="tool10_desc">Encode and decode Base64 strings instantly. All processing done locally in your browser.</p>
+      <div class="tool-tags">
+        <span class="tag">Base64</span>
+        <span class="tag">Encode</span>
+        <span class="tag">Decode</span>
+      </div>
+      <div class="arrow">
+        <span data-i18n="open_tool">Open tool</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </a>
+
+    <!-- JWT Decoder -->
+    <a href="./jwt/" class="tool-card">
+      <div class="tool-icon">🎫</div>
+      <h2 data-i18n="tool11_name">JWT Decoder</h2>
+      <p data-i18n="tool11_desc">Decode and inspect JSON Web Tokens. View header, payload, and claims with expiration status.</p>
+      <div class="tool-tags">
+        <span class="tag">JWT</span>
+        <span class="tag">Token</span>
+        <span class="tag">Decode</span>
+      </div>
+      <div class="arrow">
+        <span data-i18n="open_tool">Open tool</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </a>
+
+    <!-- Hash Generator -->
+    <a href="./hash/" class="tool-card">
+      <div class="tool-icon">#</div>
+      <h2 data-i18n="tool12_name">Hash Generator</h2>
+      <p data-i18n="tool12_desc">Generate MD5, SHA-1, SHA-256, SHA-512 hashes instantly. All computed locally in your browser.</p>
+      <div class="tool-tags">
+        <span class="tag">MD5</span>
+        <span class="tag">SHA-256</span>
+        <span class="tag">SHA-512</span>
+      </div>
+      <div class="arrow">
+        <span data-i18n="open_tool">Open tool</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </a>
   </div>
 
   <!-- Features -->
@@ -350,6 +446,18 @@
       tool5_desc: 'Draw one from a list, or split a group into teams. Perfect for lucky draws, raffles and random selection.',
       tool6_name: 'Case Converter',
       tool6_desc: 'Convert text to camelCase, PascalCase, snake_case, kebab-case and more instantly.',
+      tool7_name: 'JSON Formatter',
+      tool7_desc: 'Format, minify, and validate JSON data instantly. Real-time syntax checking and character count.',
+      tool8_name: 'Regex Tester',
+      tool8_desc: 'Test regular expressions in real-time with match highlighting, groups, and flags support.',
+      tool9_name: 'Timestamp Converter',
+      tool9_desc: 'Convert between Unix timestamp and human-readable date. Supports seconds, milliseconds, and current time.',
+      tool10_name: 'Base64 Encoder',
+      tool10_desc: 'Encode and decode Base64 strings instantly. All processing done locally in your browser.',
+      tool11_name: 'JWT Decoder',
+      tool11_desc: 'Decode and inspect JSON Web Tokens. View header, payload, and claims with expiration status.',
+      tool12_name: 'Hash Generator',
+      tool12_desc: 'Generate MD5, SHA-1, SHA-256, SHA-512 hashes instantly. All computed locally in your browser.',
       open_tool: 'Open tool',
       tag_metric: 'Metric/Imperial',
       tag_contrast: 'Contrast Check',
@@ -375,6 +483,18 @@
       tool5_desc: '从名单中随机抽取一人或自动分成若干小组，适用于抽签、摇号、随机分组等场景。',
       tool6_name: '驼峰下划线命名转换',
       tool6_desc: '输入文字，实时转换为驼峰、帕斯卡、下划线、短横线等6种编程命名格式。',
+      tool7_name: 'JSON 格式化器',
+      tool7_desc: '实时格式化、美化、校验 JSON 数据，支持语法检查和字符统计。',
+      tool8_name: '正则表达式测试器',
+      tool8_desc: '实时测试正则表达式，支持匹配分组高亮和标志位切换。',
+      tool9_name: 'Unix 时间戳转换器',
+      tool9_desc: '时间戳与可读日期互转，支持秒/毫秒，自动显示当前时间。',
+      tool10_name: 'Base64 编解码器',
+      tool10_desc: '文本与 Base64 格式实时互转，全部在浏览器本地完成。',
+      tool11_name: 'JWT 解码器',
+      tool11_desc: '解析 JSON Web Token，查看 Header、Payload 和 Claims 及过期状态。',
+      tool12_name: '哈希生成器',
+      tool12_desc: '生成 MD5、SHA-1、SHA-256、SHA-512 哈希值，全部在浏览器本地计算。',
       open_tool: '打开工具',
       tag_metric: '公制/英制',
       tag_contrast: '对比度检查',

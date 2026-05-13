@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freemaki Timestamp Converter – Unix时间戳转换工具</title>
+  <meta name="description" content="Free online Unix timestamp converter. Convert between Unix timestamp, human-readable date, and ISO 8601 format instantly. Supports milliseconds and seconds.">
+  <meta name="keywords" content="timestamp converter,unix timestamp,epoch,ISO 8601,时间戳转换,unix时间戳">
+  <link rel="canonical" href="https://www.freemaki.com/timestamp/">
+  <meta property="og:title" content="Freemaki Timestamp Converter">
+  <meta property="og:description" content="Convert Unix timestamp to date and vice versa, instantly.">
+  <meta property="og:url" content="https://www.freemaki.com/timestamp/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root {
+      --bg: #0f0f1a; --surface: #1a1a2e; --surface2: #252540;
+      --accent: #6c5ce7; --accent2: #a29bfe; --accent-glow: rgba(108,92,231,0.35);
+      --green: #2ecc71; --red: #e74c3c; --text: #e0e0ff; --text-dim: #8888bb;
+      --border: rgba(108,92,231,0.25); --radius: 14px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font);
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+
+    .lang-toggle { position: fixed; top: 20px; right: 20px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 8px; display: flex; overflow: hidden; z-index: 100; }
+    .lang-btn { padding: 6px 14px; background: none; border: none; color: var(--text-dim);
+      font-size: 13px; cursor: pointer; transition: all 0.2s; font-family: var(--font); }
+    .lang-btn.active { background: var(--accent); color: #fff; }
+    .lang-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    .breadcrumb { width: 100%; max-width: 700px; margin-bottom: 40px; display: flex;
+      gap: 8px; align-items: center; font-size: 14px; color: var(--text-dim); }
+    .breadcrumb a { color: var(--accent2); text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 40px 36px; width: 100%; max-width: 700px; }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 14px; color: var(--text-dim); margin-bottom: 28px; }
+
+    .mode-tabs { display: flex; gap: 0; margin-bottom: 28px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .mode-tab { flex: 1; padding: 10px; background: var(--surface2); border: none; color: var(--text-dim);
+      font-size: 14px; cursor: pointer; transition: all 0.2s; font-family: var(--font); }
+    .mode-tab.active { background: var(--accent); color: #fff; }
+    .mode-tab:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    .section { margin-bottom: 24px; }
+    .section-title { font-size: 13px; color: var(--accent2); font-weight: 600; margin-bottom: 10px; }
+
+    .input-row { display: flex; gap: 10px; margin-bottom: 8px; }
+    .input-row input { flex: 1; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px 16px; color: var(--text); font-size: 15px; font-family: var(--font);
+      outline: none; transition: border-color 0.2s; }
+    .input-row input:focus { border-color: var(--accent); }
+    .input-row input::placeholder { color: var(--text-dim); }
+    .input-row select { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 14px; color: var(--text); font-size: 14px; font-family: var(--font); outline: none;
+      cursor: pointer; }
+    .input-row select:focus { border-color: var(--accent); }
+
+    .result-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 16px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+    .result-label { font-size: 12px; color: var(--text-dim); }
+    .result-value { font-size: 14px; color: var(--text); font-family: 'Consolas','Monaco',monospace;
+      word-break: break-all; display: flex; align-items: center; gap: 8px; }
+    .result-value .copy-btn {
+      background: none; border: 1px solid var(--border); border-radius: 5px; padding: 2px 8px;
+      font-size: 11px; color: var(--text-dim); cursor: pointer; transition: all 0.15s; font-family: var(--font);
+    }
+    .result-value .copy-btn:hover { border-color: var(--green); color: var(--green); }
+
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 8px 16px; font-size: 13px; color: var(--text); cursor: pointer; transition: all 0.15s;
+      font-family: var(--font); }
+    .btn:hover { border-color: var(--accent2); color: #fff; }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.primary:hover { background: var(--accent2); }
+
+    .tips { margin-top: 24px; background: var(--surface2); border-radius: 10px; padding: 14px 16px;
+      text-align: left; font-size: 13px; color: var(--text-dim); }
+    .tips-title { font-weight: 600; color: var(--accent2); margin-bottom: 6px; }
+
+    .footer { margin-top: 32px; font-size: 12px; color: var(--text-dim); display: flex; gap: 20px; }
+    .footer a { color: var(--accent2); text-decoration: none; }
+    .footer a:hover { color: #fff; }
+
+    [lang="en"] .zh { display: none; }
+    [lang="zh"] .en { display: none; }
+  </style>
+</head>
+<body lang="zh">
+  <button class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </button>
+
+  <nav class="breadcrumb">
+    <a href="../">Freemaki</a>
+    <span>/</span>
+    <span class="zh">时间戳</span><span class="en">Timestamp</span>
+  </nav>
+
+  <div class="card">
+    <h1 class="zh">Unix 时间戳转换器</h1>
+    <h1 class="en">Unix Timestamp Converter</h1>
+    <p class="subtitle zh">时间戳 ↔ 可读日期，支持毫秒/秒，自动识别</p>
+    <p class="subtitle en">Convert between Unix timestamp and human-readable date</p>
+
+    <div class="mode-tabs">
+      <button class="mode-tab active" onclick="setMode('toHuman')">
+        <span class="zh">时间戳 → 日期</span><span class="en">Timestamp → Date</span>
+      </button>
+      <button class="mode-tab" onclick="setMode('toStamp')">
+        <span class="zh">日期 → 时间戳</span><span class="en">Date → Timestamp</span>
+      </button>
+      <button class="mode-tab" onclick="setMode('now')">
+        <span class="zh">当前时间</span><span class="en">Now</span>
+      </button>
+    </div>
+
+    <!-- Timestamp → Date -->
+    <div id="panel-toHuman" class="section">
+      <div class="section-title">
+        <span class="zh">输入时间戳</span><span class="en">Enter Timestamp</span>
+      </div>
+      <div class="input-row">
+        <input type="text" id="input-ts" placeholder="1747123200" oninput="tsToHuman()">
+        <select id="ts-unit" onchange="tsToHuman()">
+          <option value="s">秒 / sec</option>
+          <option value="ms">毫秒 / ms</option>
+        </select>
+      </div>
+      <div id="human-results"></div>
+    </div>
+
+    <!-- Date → Timestamp -->
+    <div id="panel-toStamp" class="section" style="display:none">
+      <div class="section-title">
+        <span class="zh">输入日期时间</span><span class="en">Enter Date & Time</span>
+      </div>
+      <div class="input-row">
+        <input type="datetime-local" id="input-date" onchange="humanToTs()">
+      </div>
+      <div id="stamp-results"></div>
+    </div>
+
+    <!-- Now -->
+    <div id="panel-now" class="section" style="display:none">
+      <div id="now-results"></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn primary" onclick="copyNow()">
+        <span class="zh">📋 复制当前时间戳</span><span class="en">📋 Copy Current Timestamp</span>
+      </button>
+      <button class="btn" onclick="refreshNow()">
+        <span class="zh">🔄 刷新</span><span class="en">🔄 Refresh</span>
+      </button>
+    </div>
+
+    <div class="tips">
+      <div class="tips-title">
+        <span class="zh">💡 关于时间戳</span>
+        <span class="en">💡 About Timestamps</span>
+      </div>
+      <span class="zh">
+        Unix 时间戳是自 1970-01-01 00:00:00 UTC 起的秒数（JavaScript 使用毫秒）。
+        本工具自动识别 10 位（秒）和 13 位（毫秒）时间戳。
+        负数时间戳支持 1970 年之前的日期。
+      </span>
+      <span class="en">
+        Unix timestamp is seconds since 1970-01-01 00:00:00 UTC (JavaScript uses milliseconds).
+        This tool auto-detects 10-digit (seconds) and 13-digit (milliseconds) timestamps.
+        Negative timestamps support dates before 1970.
+      </span>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <a href="../json/"><span class="zh">JSON 格式化</span><span class="en">JSON Formatter</span></a>
+    <a href="../base64/"><span class="zh">Base64</span><span class="en">Base64</span></a>
+    <a href="../regex/"><span class="zh">正则测试</span><span class="en">Regex Tester</span></a>
+  </footer>
+
+  <script>
+    let currentMode = 'toHuman';
+
+    function setMode(mode) {
+      currentMode = mode;
+      document.querySelectorAll('.mode-tab').forEach((t, i) => {
+        const modes = ['toHuman', 'toStamp', 'now'];
+        t.classList.toggle('active', modes[i] === mode);
+      });
+      document.getElementById('panel-toHuman').style.display = mode === 'toHuman' ? '' : 'none';
+      document.getElementById('panel-toStamp').style.display = mode === 'toStamp' ? '' : 'none';
+      document.getElementById('panel-now').style.display = mode === 'now' ? '' : 'none';
+      if (mode === 'now') refreshNow();
+    }
+
+    function addResult(containerId, label, value) {
+      const c = document.getElementById(containerId);
+      c.innerHTML = `
+        <div class="result-card">
+          <span class="result-label">${label}</span>
+          <span class="result-value">${value}</span>
+        </div>
+      `;
+    }
+
+    function tsToHuman() {
+      const input = document.getElementById('input-ts').value.trim();
+      const unit = document.getElementById('ts-unit').value;
+      const container = document.getElementById('human-results');
+      if (!input || isNaN(input)) { container.innerHTML = ''; return; }
+
+      let ms = parseInt(input) * (unit === 's' ? 1000 : 1);
+      // Handle negative
+      if (input.startsWith('-')) {
+        ms = -1 * (Math.abs(parseInt(input)) * (unit === 's' ? 1000 : 1));
+      }
+      const d = new Date(ms);
+      if (isNaN(d.getTime())) { container.innerHTML = ''; return; }
+
+      const iso = d.toISOString();
+      const local = d.toLocaleString('zh-CN', { timeZoneName: 'short' });
+      const localDate = d.toLocaleDateString('zh-CN');
+      const localTime = d.toLocaleTimeString('zh-CN');
+
+      container.innerHTML = `
+        <div class="result-card"><span class="result-label">ISO 8601</span><span class="result-value">${iso} <button class="copy-btn" onclick="copy('${iso}')"><span class="zh">复制</span><span class="en">Copy</span></button></span></div>
+        <div class="result-card"><span class="result-label"><span class="zh">本地时间</span><span class="en">Local</span></span><span class="result-value">${local}</span></div>
+        <div class="result-card"><span class="result-label"><span class="zh">日期</span><span class="en">Date</span></span><span class="result-value">${localDate}</span></div>
+        <div class="result-card"><span class="result-label"><span class="zh">时间</span><span class="en">Time</span></span><span class="result-value">${localTime}</span></div>
+        <div class="result-card"><span class="result-label"><span class="zh">毫秒</span><span class="en">Milliseconds</span></span><span class="result-value">${d.getTime()} <button class="copy-btn" onclick="copy('${d.getTime()}')"><span class="zh">复制</span><span class="en">Copy</span></button></span></div>
+      `;
+    }
+
+    function humanToTs() {
+      const val = document.getElementById('input-date').value;
+      const container = document.getElementById('stamp-results');
+      if (!val) { container.innerHTML = ''; return; }
+      const d = new Date(val);
+      if (isNaN(d.getTime())) { container.innerHTML = ''; return; }
+      const ms = d.getTime();
+      const s = Math.floor(ms / 1000);
+      container.innerHTML = `
+        <div class="result-card"><span class="result-label"><span class="zh">秒</span><span class="en">Seconds</span></span><span class="result-value">${s} <button class="copy-btn" onclick="copy('${s}')"><span class="zh">复制</span><span class="en">Copy</span></button></span></div>
+        <div class="result-card"><span class="result-label"><span class="zh">毫秒</span><span class="en">Milliseconds</span></span><span class="result-value">${ms} <button class="copy-btn" onclick="copy('${ms}')"><span class="zh">复制</span><span class="en">Copy</span></button></span></div>
+        <div class="result-card"><span class="result-label">ISO 8601</span><span class="result-value">${d.toISOString()}</span></div>
+      `;
+    }
+
+    function refreshNow() {
+      const now = Date.now();
+      const s = Math.floor(now / 1000);
+      const d = new Date(now);
+      const container = document.getElementById('now-results');
+      container.innerHTML = `
+        <div class="result-card"><span class="result-label"><span class="zh">秒</span><span class="en">Seconds</span></span><span class="result-value">${s} <button class="copy-btn" onclick="copy('${s}')"><span class="zh">复制</span><span class="en">Copy</span></button></span></div>
+        <div class="result-card"><span class="result-label"><span class="zh">毫秒</span><span class="en">Milliseconds</span></span><span class="result-value">${now} <button class="copy-btn" onclick="copy('${now}')"><span class="zh">复制</span><span class="en">Copy</span></button></span></div>
+        <div class="result-card"><span class="result-label">ISO 8601</span><span class="result-value">${d.toISOString()}</span></div>
+        <div class="result-card"><span class="result-label"><span class="zh">本地</span><span class="en">Local</span></span><span class="result-value">${d.toLocaleString('zh-CN', {timeZoneName:'short'})}</span></div>
+      `;
+    }
+
+    function copyNow() {
+      copy(String(Math.floor(Date.now() / 1000)));
+    }
+
+    function copy(val) {
+      navigator.clipboard.writeText(val).then(() => {
+        const isZh = document.body.lang === 'zh';
+        const orig = event.currentTarget.innerHTML;
+        event.currentTarget.innerHTML = isZh ? '✓' : '✓';
+        setTimeout(() => event.currentTarget.innerHTML = orig, 1000);
+      });
+    }
+
+    function setLang(lang) {
+      document.body.lang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.textContent.includes(lang === 'zh' ? '中文' : 'EN'));
+      });
+      if (currentMode === 'now') refreshNow();
+      else if (currentMode === 'toHuman') tsToHuman();
+      else humanToTs();
+    }
+
+    // Init
+    refreshNow();
+  </script>
+</body>
+</html>

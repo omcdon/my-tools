@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freemaki Regex Tester – 在线正则表达式测试工具</title>
+  <meta name="description" content="Free online regex tester and debugger. Test regular expressions in real-time with syntax highlighting, match groups, and replacements. Supports JavaScript regex syntax.">
+  <meta name="keywords" content="regex tester,regular expression,regexp,online regex,regex debugger,正则表达式,正则测试">
+  <link rel="canonical" href="https://www.freemaki.com/regex/">
+  <meta property="og:title" content="Freemaki Regex Tester">
+  <meta property="og:description" content="Test regular expressions in real-time with match highlighting and groups.">
+  <meta property="og:url" content="https://www.freemaki.com/regex/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root {
+      --bg: #0f0f1a; --surface: #1a1a2e; --surface2: #252540;
+      --accent: #6c5ce7; --accent2: #a29bfe; --accent-glow: rgba(108,92,231,0.35);
+      --green: #2ecc71; --red: #e74c3c; --yellow: #f1c40f; --text: #e0e0ff; --text-dim: #8888bb;
+      --border: rgba(108,92,231,0.25); --radius: 14px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font);
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+
+    .lang-toggle { position: fixed; top: 20px; right: 20px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 8px; display: flex; overflow: hidden; z-index: 100; }
+    .lang-btn { padding: 6px 14px; background: none; border: none; color: var(--text-dim);
+      font-size: 13px; cursor: pointer; transition: all 0.2s; font-family: var(--font); }
+    .lang-btn.active { background: var(--accent); color: #fff; }
+    .lang-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    .breadcrumb { width: 100%; max-width: 800px; margin-bottom: 40px; display: flex;
+      gap: 8px; align-items: center; font-size: 14px; color: var(--text-dim); }
+    .breadcrumb a { color: var(--accent2); text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 40px 36px; width: 100%; max-width: 800px; }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 14px; color: var(--text-dim); margin-bottom: 28px; }
+
+    .input-section { margin-bottom: 16px; text-align: left; }
+    .input-label { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; font-weight: 600; }
+
+    .regex-input-wrap { display: flex; gap: 0; margin-bottom: 8px; }
+    .regex-input-wrap input {
+      flex: 1; background: var(--bg); border: 1px solid var(--border); border-right: none;
+      border-radius: 10px 0 0 10px; padding: 12px 16px; color: var(--text);
+      font-size: 15px; font-family: 'Consolas','Monaco',monospace; outline: none; transition: border-color 0.2s;
+    }
+    .regex-input-wrap input:focus { border-color: var(--accent); }
+    .regex-input-wrap input::placeholder { color: var(--text-dim); font-family: var(--font); }
+    .flags-wrap { display: flex; gap: 0; }
+    .flag-btn { background: var(--surface2); border: 1px solid var(--border); padding: 0 12px;
+      color: var(--text-dim); font-size: 14px; cursor: pointer; transition: all 0.15s;
+      font-family: var(--font); user-select: none; }
+    .flag-btn:first-child { border-radius: 0; border-left: none; }
+    .flag-btn:last-child { border-radius: 0 10px 10px 0; }
+    .flag-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .flag-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    .error-msg { font-size: 12px; color: var(--red); margin-bottom: 8px; min-height: 16px; }
+
+    textarea { width: 100%; height: 160px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px; color: var(--text); font-size: 14px; font-family: 'Consolas','Monaco',monospace;
+      resize: vertical; outline: none; transition: border-color 0.2s; line-height: 1.6; }
+    textarea:focus { border-color: var(--accent); }
+    textarea::placeholder { color: var(--text-dim); font-family: var(--font); }
+
+    .stats { margin-top: 8px; font-size: 13px; color: var(--text-dim); display: flex; gap: 16px; }
+    .stats strong { color: var(--green); }
+
+    .matches { margin-top: 16px; background: var(--surface2); border-radius: 10px; padding: 16px;
+      text-align: left; max-height: 240px; overflow-y: auto; }
+    .matches-title { font-size: 13px; color: var(--accent2); font-weight: 600; margin-bottom: 12px; }
+    .match-item { background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 10px 14px; margin-bottom: 8px; font-size: 13px; font-family: 'Consolas','Monaco',monospace; }
+    .match-item:last-child { margin-bottom: 0; }
+    .match-index { color: var(--text-dim); margin-right: 8px; }
+    .match-full { color: var(--green); word-break: break-all; }
+    .match-groups { margin-top: 4px; padding-left: 16px; font-size: 12px; color: var(--accent2); }
+    .no-match { color: var(--text-dim); font-size: 13px; text-align: center; padding: 20px; }
+
+    .tips { margin-top: 24px; background: var(--surface2); border-radius: 10px; padding: 14px 16px;
+      text-align: left; font-size: 13px; color: var(--text-dim); }
+    .tips-title { font-weight: 600; color: var(--accent2); margin-bottom: 6px; }
+
+    .footer { margin-top: 32px; font-size: 12px; color: var(--text-dim); display: flex; gap: 20px; }
+    .footer a { color: var(--accent2); text-decoration: none; }
+    .footer a:hover { color: #fff; }
+
+    [lang="en"] .zh { display: none; }
+    [lang="zh"] .en { display: none; }
+  </style>
+</head>
+<body lang="zh">
+  <button class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </button>
+
+  <nav class="breadcrumb">
+    <a href="../">Freemaki</a>
+    <span>/</span>
+    <span class="zh">正则测试</span><span class="en">Regex Tester</span>
+  </nav>
+
+  <div class="card">
+    <h1 class="zh">正则表达式测试器</h1>
+    <h1 class="en">Regex Tester</h1>
+    <p class="subtitle zh">实时测试正则表达式，支持匹配分组高亮</p>
+    <p class="subtitle en">Test regular expressions in real-time with match highlighting and groups</p>
+
+    <div class="input-section">
+      <div class="input-label">
+        <span class="zh">正则表达式</span><span class="en">Regular Expression</span>
+      </div>
+      <div class="regex-input-wrap">
+        <input type="text" id="regexInput" placeholder="[a-z]+" oninput="runTest()">
+        <div class="flags-wrap">
+          <button class="flag-btn active" data-flag="g" onclick="toggleFlag(this, 'g')">g</button>
+          <button class="flag-btn" data-flag="i" onclick="toggleFlag(this, 'i')">i</button>
+        </div>
+      </div>
+      <div class="error-msg" id="errorMsg"></div>
+    </div>
+
+    <div class="input-section">
+      <div class="input-label">
+        <span class="zh">测试文本</span><span class="en">Test String</span>
+      </div>
+      <textarea id="testString" placeholder="Hello World 123" oninput="runTest()"></textarea>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="matches" id="matches">
+      <div class="matches-title">
+        <span class="zh">匹配结果</span><span class="en">Matches</span>
+      </div>
+      <div class="no-match" id="noMatch">
+        <span class="zh">输入正则和文本查看匹配结果</span><span class="en">Enter a pattern and text to see matches</span>
+      </div>
+    </div>
+
+    <div class="tips">
+      <div class="tips-title">
+        <span class="zh">💡 支持 JavaScript 正则语法</span>
+        <span class="en">💡 JavaScript Regex Syntax</span>
+      </div>
+      <span class="zh">
+        支持常用元字符：<code>.</code> <code>\d</code> <code>\w</code> <code>\s</code>
+        <code>^</code> <code>$</code> <code>*</code> <code>+</code> <code>?</code>
+        <code>[]</code> <code>()</code> <code>|</code> 等。
+        点击 <strong>g</strong> 标记全局匹配，<strong>i</strong> 不区分大小写。
+      </span>
+      <span class="en">
+        Supports common metacharacters: <code>.</code> <code>\d</code> <code>\w</code> <code>\s</code>
+        <code>^</code> <code>$</code> <code>*</code> <code>+</code> <code>?</code>
+        <code>[]</code> <code>()</code> <code>|</code> and more.
+        Toggle <strong>g</strong> for global, <strong>i</strong> for case-insensitive.
+      </span>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <a href="../json/"><span class="zh">JSON 格式化</span><span class="en">JSON Formatter</span></a>
+    <a href="../base64/"><span class="zh">Base64</span><span class="en">Base64</span></a>
+    <a href="../timestamp/"><span class="zh">时间戳</span><span class="en">Timestamp</span></a>
+  </footer>
+
+  <script>
+    const regexInput = document.getElementById('regexInput');
+    const testString = document.getElementById('testString');
+    const errorMsg = document.getElementById('errorMsg');
+    const stats = document.getElementById('stats');
+    const matches = document.getElementById('matches');
+    const noMatch = document.getElementById('noMatch');
+
+    let activeFlags = new Set(['g']);
+
+    function toggleFlag(btn, flag) {
+      if (activeFlags.has(flag)) {
+        activeFlags.delete(flag);
+        btn.classList.remove('active');
+      } else {
+        activeFlags.add(flag);
+        btn.classList.add('active');
+      }
+      runTest();
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function runTest() {
+      errorMsg.textContent = '';
+      const pattern = regexInput.value;
+      const text = testString.value;
+      stats.innerHTML = '';
+
+      if (!pattern || !text) {
+        noMatch.style.display = 'block';
+        document.querySelectorAll('.match-item').forEach(el => el.remove());
+        return;
+      }
+
+      let flags = [...activeFlags].join('');
+      let regex;
+      try {
+        regex = new RegExp(pattern, flags);
+      } catch (e) {
+        errorMsg.textContent = e.message;
+        return;
+      }
+
+      if (activeFlags.has('g')) {
+        let match;
+        const results = [];
+        while ((match = regex.exec(text)) !== null) {
+          results.push(match);
+          if (match[0].length === 0) regex.lastIndex++;
+        }
+
+        if (results.length === 0) {
+          noMatch.style.display = 'block';
+          document.querySelectorAll('.match-item').forEach(el => el.remove());
+        } else {
+          noMatch.style.display = 'none';
+          const isZh = document.body.lang === 'zh';
+          stats.innerHTML = `<span class="zh"><strong>${results.length}</strong> 个匹配</span><span class="en"><strong>${results.length}</strong> match(es)</span>`;
+
+          // Clear old items
+          document.querySelectorAll('.match-item').forEach(el => el.remove());
+
+          results.forEach((m, i) => {
+            let html = `<div class="match-item"><span class="match-index">#${i + 1}</span><span class="match-full">${escapeHtml(m[0])}</span>`;
+            if (m.length > 1) {
+              html += '<div class="match-groups">';
+              for (let j = 1; j < m.length; j++) {
+                html += `<div>Group ${j}: ${escapeHtml(m[j] ?? 'undefined')}</div>`;
+              }
+              html += '</div>';
+            }
+            html += '</div>';
+            matches.insertAdjacentHTML('beforeend', html);
+          });
+        }
+      } else {
+        const m = text.match(regex);
+        if (m) {
+          noMatch.style.display = 'none';
+          const isZh = document.body.lang === 'zh';
+          stats.innerHTML = `<span class="zh"><strong>1</strong> 个匹配</span><span class="en"><strong>1</strong> match</span>`;
+          document.querySelectorAll('.match-item').forEach(el => el.remove());
+          let html = `<div class="match-item"><span class="match-index">#1</span><span class="match-full">${escapeHtml(m[0])}</span>`;
+          if (m.length > 1) {
+            html += '<div class="match-groups">';
+            for (let j = 1; j < m.length; j++) {
+              html += `<div>Group ${j}: ${escapeHtml(m[j] ?? 'undefined')}</div>`;
+            }
+            html += '</div>';
+          }
+          html += '</div>';
+          matches.insertAdjacentHTML('beforeend', html);
+        } else {
+          noMatch.style.display = 'block';
+          document.querySelectorAll('.match-item').forEach(el => el.remove());
+        }
+      }
+    }
+
+    function setLang(lang) {
+      document.body.lang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.textContent.includes(lang === 'zh' ? '中文' : 'EN'));
+      });
+      runTest();
+    }
+  </script>
+</body>
+</html>
