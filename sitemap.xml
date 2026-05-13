@@ -1,169 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://freemaki.com/</loc>
+    <loc>https://www.freemaki.com/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/calorie/</loc>
+    <loc>https://www.freemaki.com/calorie/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/color/</loc>
+    <loc>https://www.freemaki.com/color/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/pomodoro/</loc>
+    <loc>https://www.freemaki.com/pomodoro/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/converter/</loc>
+    <loc>https://www.freemaki.com/converter/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/random/</loc>
+    <loc>https://www.freemaki.com/random/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/case/</loc>
+    <loc>https://www.freemaki.com/case/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/json/</loc>
+    <loc>https://www.freemaki.com/json/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/regex/</loc>
+    <loc>https://www.freemaki.com/regex/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/timestamp/</loc>
+    <loc>https://www.freemaki.com/timestamp/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/base64/</loc>
+    <loc>https://www.freemaki.com/base64/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/jwt/</loc>
+    <loc>https://www.freemaki.com/jwt/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/hash/</loc>
+    <loc>https://www.freemaki.com/hash/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/gradient/</loc>
+    <loc>https://www.freemaki.com/gradient/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/font/</loc>
+    <loc>https://www.freemaki.com/font/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/aspect/</loc>
+    <loc>https://www.freemaki.com/aspect/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/counter/</loc>
+    <loc>https://www.freemaki.com/counter/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/qrcode/</loc>
+    <loc>https://www.freemaki.com/qrcode/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/bmi/</loc>
+    <loc>https://www.freemaki.com/bmi/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/sleep/</loc>
+    <loc>https://www.freemaki.com/sleep/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/privacy/</loc>
+    <loc>https://www.freemaki.com/privacy/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/about/</loc>
+    <loc>https://www.freemaki.com/about/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/contact/</loc>
+    <loc>https://www.freemaki.com/contact/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/disclaimer/</loc>
+    <loc>https://www.freemaki.com/disclaimer/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/blog/developer-tools-guide/</loc>
+    <loc>https://www.freemaki.com/blog/developer-tools-guide/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/blog/calorie-bmi-health-guide/</loc>
+    <loc>https://www.freemaki.com/blog/calorie-bmi-health-guide/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/blog/color-guide-for-designers/</loc>
+    <loc>https://www.freemaki.com/blog/color-guide-for-designers/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://freemaki.com/blog/productivity-tools-guide/</loc>
+    <loc>https://www.freemaki.com/blog/productivity-tools-guide/</loc>
     <lastmod>2026-05-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
