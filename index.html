@@ -44,17 +44,17 @@
     min-height: 100vh;
   }
 
-  .page { max-width: 720px; margin: 0 auto; padding: 48px 16px 80px; }
+  .page { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
 
   /* Header */
-  .site-header { text-align: center; margin-bottom: 48px; }
+  .site-header { text-align: center; margin-bottom: 56px; }
   .site-header h1 {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 700;
     letter-spacing: -0.5px;
     margin-bottom: 8px;
   }
-  .site-header p { font-size: 16px; color: var(--text2); }
+  .site-header p { font-size: 17px; color: var(--text2); }
 
   /* Category Section */
   .category {
@@ -93,20 +93,22 @@
   .tools-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 18px;
   }
   @media (max-width: 900px) {
     .tools-grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 560px) {
     .tools-grid { grid-template-columns: 1fr; }
+    .page { max-width: 100%; padding: 32px 16px 60px; }
+    .site-header h1 { font-size: 28px; }
   }
 
   .tool-card {
     background: var(--surface);
     border: 0.5px solid var(--border);
     border-radius: var(--radius);
-    padding: 24px 20px;
+    padding: 24px 22px;
     text-decoration: none;
     color: var(--text);
     transition: all 0.2s;
@@ -116,7 +118,7 @@
   }
   .tool-card:hover {
     border-color: var(--accent);
-    box-shadow: 0 4px 20px rgba(37,99,235,0.10);
+    box-shadow: 0 6px 24px rgba(37,99,235,0.10);
     transform: translateY(-2px);
   }
   .tool-card .tool-icon {
