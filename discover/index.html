@@ -150,7 +150,24 @@
 <script>
 document.getElementById('urlInput').addEventListener('keydown', function(e) { if (e.key === 'Enter') runCheck(); });
 
-const PROXY = 'https://api.allorigins.win/raw?url=';
+const PROXIES = [
+  'https://api.allorigins.win/raw?url=',
+  'https://corsproxy.io/?',
+  'https://api.codetabs.com/v1/proxy?quest='
+];
+
+async function fetchWithFallback(url) {
+  let lastErr;
+  for (const proxy of PROXIES) {
+    try {
+      const res = await fetch(proxy + encodeURIComponent(url), { signal: AbortSignal.timeout(12000) });
+      if (!res.ok) continue;
+      const html = await res.text();
+      if (html && html.length > 50) return html;
+    } catch(e) { lastErr = e; }
+  }
+  throw new Error(lastErr ? lastErr.message : 'All proxies failed. The target site may block third-party access.');
+}
 
 async function runCheck() {
   let url = document.getElementById('urlInput').value.trim();
@@ -161,19 +178,17 @@ async function runCheck() {
   const loading = document.getElementById('loading');
   const error = document.getElementById('errorMsg');
   const dashboard = document.getElementById('dashboard');
-  const checks = document.getElementById('checksList');
+  const checksEl = document.getElementById('checksList');
   const urlInfo = document.getElementById('urlInfo');
   error.style.display = 'none';
   loading.style.display = 'block';
   dashboard.style.display = 'none';
-  checks.style.display = 'none';
+  checksEl.style.display = 'none';
   urlInfo.style.display = 'none';
   document.getElementById('checkBtn').disabled = true;
 
   try {
-    const res = await fetch(PROXY + encodeURIComponent(url));
-    if (!res.ok) throw new Error('Failed to fetch page (HTTP ' + res.status + ')');
-    const html = await res.text();
+    const html = await fetchWithFallback(url);
     const doc = new DOMParser().parseFromString(html, 'text/html');
     const meta = (name) => {
       const el = doc.querySelector(`meta[name="${name}"]`) || doc.querySelector(`meta[property="${name}"]`);
