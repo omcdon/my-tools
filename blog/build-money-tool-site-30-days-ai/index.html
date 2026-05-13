@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>How I Built a Money-Making Tool Site in 30 Days Using AI | Freemaki Blog</title>
+<meta name="description" content="Learn how to build a free online tool website with AI assistance in 30 days, covering site architecture, tool selection, SEO optimization, and AdSense monetization."/>
+<meta name="keywords" content="30天用AI打造免费在线工具网站，涵盖站点架构、工具选型、SEO优化和AdSense变现方法"/>
+<meta name="robots" content="index, follow"/>
+<meta name="author" content="Freemaki"/>
+<link rel="canonical" href="https://www.freemaki.com/blog/build-money-tool-site-30-days-ai/"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="How I Built a Money-Making Tool Site in 30 Days Using AI"/>
+<meta property="og:description" content="Learn how to build a free online tool website with AI assistance in 30 days, covering site architecture, tool selection, SEO optimization, and AdSense monetization."/>
+<meta property="og:url" content="https://www.freemaki.com/blog/build-money-tool-site-30-days-ai/"/>
+<meta property="og:site_name" content="Freemaki"/>
+<meta name="twitter:card" content="summary"/>
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f8f7f4; --surface: #ffffff; --surface2: #f2f0ec;
+    --border: rgba(0,0,0,0.10); --text: #1a1a18; --text2: #5f5e5a; --text3: #9e9c97;
+    --accent: #2563eb; --accent-bg: #eff6ff; --radius: 12px;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.8; min-height: 100vh; }
+  .page { max-width: 720px; margin: 0 auto; padding: 48px 16px 80px; }
+  .breadcrumb { font-size: 13px; color: var(--text3); margin-bottom: 24px; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
+  .meta { font-size: 13px; color: var(--text3); margin-bottom: 32px; }
+  h2 { font-size: 20px; font-weight: 700; margin: 36px 0 12px; }
+  h3 { font-size: 17px; font-weight: 600; margin: 24px 0 8px; }
+  p { margin-bottom: 14px; color: var(--text2); }
+  ul, ol { padding-left: 20px; margin-bottom: 14px; }
+  li { margin-bottom: 6px; color: var(--text2); }
+  code { background: var(--surface2); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+  pre { background: #1a1a2e; color: #e0e0ff; padding: 16px; border-radius: var(--radius); overflow-x: auto; margin: 14px 0; font-size: 13px; line-height: 1.6; }
+  pre code { background: none; padding: 0; color: inherit; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  blockquote { border-left: 3px solid var(--accent); padding-left: 16px; margin: 14px 0; color: var(--text3); font-style: italic; }
+  .tip { background: var(--accent-bg); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 0 var(--radius) var(--radius) 0; margin: 16px 0; font-size: 14px; }
+  .tip strong { color: var(--accent); }
+  .cta { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: var(--radius); display: inline-block; margin: 8px 4px; font-weight: 600; text-decoration: none; transition: opacity 0.15s; }
+  .cta:hover { opacity: 0.9; text-decoration: none; }
+  .lang-btn { position: fixed; top: 16px; right: 16px; padding: 6px 14px; border: 0.5px solid var(--border); border-radius: 20px; background: var(--surface); font-size: 13px; cursor: pointer; color: var(--text2); z-index: 100; }
+  .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+  footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
+
+</style>
+</head>
+<body>
+<button class="lang-btn" onclick="toggleLang()" id="langBtn">中文</button>
+<div class="page">
+  <div class="breadcrumb"><a href="/">Freemaki</a> &rsaquo; <span data-i18n="bc">Blog</span></div>
+  <h1 data-i18n="title">How I Built a Money-Making Tool Site in 30 Days Using AI</h1>
+  <p class="meta" data-i18n="meta">Published: May 13, 2026 &middot; 12 min read</p>
+  <p data-i18n="intro">In early 2026, I challenged myself to build a profitable tool website from scratch using only AI assistance. No professional design team, no marketing budget &mdash; just ChatGPT for code and content. Thirty days later, the site was live with 21 tools, bilingual support, and a clear path to AdSense revenue. Here is exactly how I did it, step by step.</p>
+
+  <h2 data-i18n="s1_title">Why Tool Sites Are a Great First Project</h2>
+  <p data-i18n="s1_p1">Tool websites have several advantages over other online business models. They solve real, immediate problems (format this JSON, convert this color, calculate this BMI), which means people find them through search engines naturally. Unlike content blogs that need months of SEO work, a well-built calculator or converter can start ranking within weeks.</p>
+  <ul>
+    <li data-i18n="s1_l1"><strong>Zero inventory.</strong> No products to ship, no suppliers to manage</li>
+    <li data-i18n="s1_l2"><strong>Low maintenance.</strong> Tools either work or they don't &mdash; no content updates needed</li>
+    <li data-i18n="s1_l3"><strong>High search demand.</strong> Queries like "JSON formatter" get 500K+ monthly searches</li>
+    <li data-i18n="s1_l4"><strong>Ad-friendly.</strong> Utility sites are perfect for AdSense &mdash; Google explicitly favors them</li>
+  </ul>
+
+  <h2 data-i18n="s2_title">Week 1: Planning and Architecture</h2>
+  <p data-i18n="s2_p1">I started by researching which tool categories had the highest search volume and lowest competition. The sweet spot was developer utilities and everyday calculators &mdash; things people search for dozens of times a day but don't want to install an app for.</p>
+  <p data-i18n="s2_p2">I organized the site into five categories:</p>
+  <ol>
+    <li data-i18n="s2_l1"><strong>Developer Tools</strong> &mdash; JSON formatter, regex tester, timestamp converter, Base64 encoder, JWT decoder, hash generator, case converter</li>
+    <li data-i18n="s2_l2"><strong>Design &amp; Color</strong> &mdash; Color converter, gradient generator, font pairing, aspect ratio calculator</li>
+    <li data-i18n="s2_l3"><strong>Productivity</strong> &mdash; Unit converter, random picker, character counter, QR code generator, pomodoro timer</li>
+    <li data-i18n="s2_l4"><strong>Health &amp; Lifestyle</strong> &mdash; Calorie calculator, BMI calculator, sleep cycle calculator</li>
+    <li data-i18n="s2_l5"><strong>SEO &amp; Marketing</strong> &mdash; Reddit trending finder, Google Discover checker</li>
+  </ol>
+
+  <h2 data-i18n="s3_title">Week 2: Building the Core Tools</h2>
+  <p data-i18n="s3_p1">Every tool is a single HTML file with embedded CSS and JavaScript &mdash; no frameworks, no build process. This is crucial for performance and simplicity. Each tool processes data entirely in the browser, so there are no server costs.</p>
+  <div class="tip">
+    <strong data-i18n="s3_tip_label">Key Insight:</strong>
+    <span data-i18n="s3_tip">All computation happens locally in the browser. No data is sent to any server. This eliminates server costs entirely and makes the site incredibly fast.</span>
+  </div>
+  <p data-i18n="s3_p2">I used AI to generate the initial code for each tool. The workflow: describe the tool's behavior in detail, ask for clean vanilla HTML/CSS/JS, then iterate on the design. Most tools took 2-3 prompts to get right.</p>
+
+  <h2 data-i18n="s4_title">Week 3: SEO and Content</h2>
+  <p data-i18n="s4_p1">A tool site without SEO is invisible. I invested heavily in three areas:</p>
+  <h3 data-i18n="s4_h3_1">Meta Tags and Structured Data</h3>
+  <p data-i18n="s4_p1b">Every page has a unique title, description, canonical URL, and Open Graph tags. I used the <a href="/discover/">Discover optimization checker</a> to validate each page.</p>
+  <h3 data-i18n="s4_h3_2">Bilingual Content (EN + ZH)</h3>
+  <p data-i18n="s4_p2">Adding Chinese language support doubled the potential audience. Each page has a language toggle and all UI text is served in both languages.</p>
+  <h3 data-i18n="s4_h3_3">Blog Articles for Long-Tail Keywords</h3>
+  <p data-i18n="s4_p3">Tool pages rank for head terms ("JSON formatter"), but blog articles capture long-tail queries ("how to validate JSON in JavaScript").</p>
+
+  <h2 data-i18n="s5_title">Week 4: Monetization Prep</h2>
+  <p data-i18n="s5_p1">Before applying for AdSense, I made sure the site met all requirements:</p>
+  <ul>
+    <li data-i18n="s5_l1"><strong>Privacy Policy, Disclaimer, About, Contact</strong> &mdash; four essential pages that AdSense reviewers look for</li>
+    <li data-i18n="s5_l2"><strong>Original content</strong> &mdash; every article is genuinely useful, not thin or duplicated</li>
+    <li data-i18n="s5_l3"><strong>Clean navigation</strong> &mdash; clear category structure, breadcrumbs on every page</li>
+    <li data-i18n="s5_l4"><strong>Mobile responsive</strong> &mdash; all 21 tools work perfectly on phones</li>
+  </ul>
+  <div class="tip">
+    <strong data-i18n="s5_tip_label">Pro Tip:</strong>
+    <span data-i18n="s5_tip">Apply for AdSense only after you have at least 15-20 quality pages with real content. Tool pages count, but blog articles give reviewers confidence that your site is a legitimate resource.</span>
+  </div>
+
+  <h2 data-i18n="s6_title">Results and Lessons Learned</h2>
+  <p data-i18n="s6_p1">After 30 days: 21 functional tools, guide articles, deployed on Vercel with a custom domain. Total cost: $0. The keys to making this work with AI:</p>
+  <ul>
+    <li data-i18n="s6_l1"><strong>Be specific in your prompts.</strong> Don't say "make a calculator." Say "build a calorie calculator with BMR using Mifflin-St Jeor, supporting metric and imperial."</li>
+    <li data-i18n="s6_l2"><strong>Test every tool thoroughly.</strong> AI code looks correct but often has edge case bugs</li>
+    <li data-i18n="s6_l3"><strong>Maintain design consistency.</strong> Use the same color scheme, font, and layout across all tools</li>
+    <li data-i18n="s6_l4"><strong>Focus on search intent.</strong> Build tools people actually search for</li>
+  </ul>
+
+  <h2 data-i18n="s7_title">Ready to Start Your Own?</h2>
+  <p data-i18n="s7_p1">Building a tool site is one of the most accessible online business models. You don't need capital, inventory, or technical expertise &mdash; just AI assistance and persistence.</p>
+  <p style="margin-top:16px">
+    <a href="/json/" class="cta" data-i18n="cta1">JSON Formatter &rarr;</a>
+    <a href="/calorie/" class="cta" data-i18n="cta2">Calorie Calculator &rarr;</a>
+    <a href="/discover/" class="cta" data-i18n="cta3">Discover Checker &rarr;</a>
+  </p>
+
+  <footer>
+    <p><a href="/privacy/">Privacy Policy</a> &middot; <a href="/disclaimer/">Disclaimer</a> &middot; <a href="/about/">About</a> &middot; <a href="/contact/">Contact</a></p>
+    <p style="margin-top:8px">&copy; 2026 Freemaki &middot; All rights reserved</p>
+  </footer>
+
+</div>
+<script>
+const i18n={
+  en:{
+    bc:'Blog', title:'How I Built a Money-Making Tool Site in 30 Days Using AI',
+    meta:'Published: May 13, 2026 \u00b7 12 min read',
+    intro:'In early 2026, I challenged myself to build a profitable tool website from scratch using only AI assistance. No professional design team, no marketing budget &mdash; just ChatGPT for code and content. Thirty days later, the site was live with 21 tools, bilingual support, and a clear path to AdSense revenue.',
+    s1_title:'Why Tool Sites Are a Great First Project',
+    s1_p1:'Tool websites solve real, immediate problems. Unlike content blogs that need months of SEO, a well-built calculator can start ranking within weeks.',
+    s1_l1:'<strong>Zero inventory.</strong> No products to ship, no suppliers to manage',
+    s1_l2:'<strong>Low maintenance.</strong> Tools either work or they don\'t',
+    s1_l3:'<strong>High search demand.</strong> "JSON formatter" gets 500K+ monthly searches',
+    s1_l4:'<strong>Ad-friendly.</strong> Google explicitly favors utility sites for AdSense',
+    s2_title:'Week 1: Planning and Architecture',
+    s2_p1:'I researched tool categories with highest search volume and lowest competition. The sweet spot: developer utilities and everyday calculators.',
+    s2_p2:'Five categories:',
+    s2_l1:'<strong>Developer Tools</strong> &mdash; JSON, regex, timestamps, Base64, JWT, hash, case converter',
+    s2_l2:'<strong>Design &amp; Color</strong> &mdash; Color converter, gradient, fonts, aspect ratio',
+    s2_l3:'<strong>Productivity</strong> &mdash; Unit converter, random picker, character counter, QR code, pomodoro',
+    s2_l4:'<strong>Health &amp; Lifestyle</strong> &mdash; Calorie, BMI, sleep cycle calculators',
+    s2_l5:'<strong>SEO &amp; Marketing</strong> &mdash; Reddit trending, Google Discover checker',
+    s3_title:'Week 2: Building the Core Tools',
+    s3_p1:'Every tool is a single HTML file with embedded CSS and JS. No frameworks, no build process. All computation happens in the browser.',
+    s3_tip_label:'Key Insight:',
+    s3_tip:'All computation happens locally in the browser. No server costs, incredibly fast.',
+    s3_p2:'AI generated initial code for each tool. Most took 2-3 prompts to get right.',
+    s4_title:'Week 3: SEO and Content',
+    s4_p1:'A tool site without SEO is invisible.',
+    s4_h3_1:'Meta Tags and Structured Data',
+    s4_p1b:'Every page has unique title, description, canonical URL, and OG tags. Validated with the <a href="/discover/">Discover checker</a>.',
+    s4_h3_2:'Bilingual Content (EN + ZH)',
+    s4_p2:'Chinese language support doubled the potential audience.',
+    s4_h3_3:'Blog Articles for Long-Tail Keywords',
+    s4_p3:'Tool pages rank for head terms; blog articles capture long-tail queries.',
+    s5_title:'Week 4: Monetization Prep',
+    s5_p1:'Before AdSense, the site needed:',
+    s5_l1:'<strong>Privacy Policy, Disclaimer, About, Contact</strong> pages',
+    s5_l2:'<strong>Original content</strong> on every page',
+    s5_l3:'<strong>Clean navigation</strong> with breadcrumbs',
+    s5_l4:'<strong>Mobile responsive</strong> design',
+    s5_tip_label:'Pro Tip:',
+    s5_tip:'Apply for AdSense only after 15-20 quality pages. Blog articles give reviewers confidence.',
+    s6_title:'Results and Lessons Learned',
+    s6_p1:'21 tools, deployed on Vercel. Total cost: $0.',
+    s6_l1:'<strong>Be specific in prompts.</strong> Describe exact features and formulas.',
+    s6_l2:'<strong>Test thoroughly.</strong> AI code has edge case bugs.',
+    s6_l3:'<strong>Design consistency.</strong> Same colors, fonts, layout everywhere.',
+    s6_l4:'<strong>Focus on search intent.</strong> Build what people search for.',
+    s7_title:'Ready to Start Your Own?',
+    s7_p1:'You don\'t need capital or technical expertise &mdash; just AI and persistence.',
+    cta1:'JSON Formatter &rarr;',
+    cta2:'Calorie Calculator &rarr;',
+    cta3:'Discover Checker &rarr;'
+  },
+  zh:{
+    bc:'博客', title:'30天用AI打造一个赚钱的工具网站',
+    meta:'发布于 May 13, 2026 \u00b7 阅读 12 分钟',
+    intro:'2026\u5e74\u521d\uff0c\u6211\u5411\u81ea\u5df1\u53d1\u8d77\u4e86\u4e00\u4e2a\u6311\u6218\uff1a\u5b8c\u5168\u4f9d\u9760 AI \u52a9\u624b\u4ece\u96f6\u5f00\u59cb\u642d\u5efa\u4e00\u4e2a\u80fd\u8d5a\u94b1\u7684\u5de5\u5177\u7f51\u7ad9\u3002\u6ca1\u6709\u8bbe\u8ba1\u56e2\u961f\uff0c\u6ca1\u6709\u8425\u9500\u9884\u7b97\u2014\u201430 \u5929\u540e\uff0c21 \u4e2a\u5de5\u5177\u3001\u4e2d\u82f1\u53cc\u8bed\u3001\u6e05\u6670\u7684 AdSense \u53d8\u73b0\u8def\u5f84\u3002',
+    s1_title:'\u4e3a\u4ec0\u4e48\u5de5\u5177\u7ad9\u662f\u6700\u4f73\u521d\u521b\u9879\u76ee',
+    s1_p1:'\u5de5\u5177\u7f51\u7ad9\u89e3\u51b3\u771f\u5b9e\u3001\u5373\u65f6\u7684\u95ee\u9898\uff0c\u4eba\u4eec\u901a\u8fc7\u641c\u7d22\u5f15\u64ce\u81ea\u7136\u5730\u627e\u5230\u5b83\u4eec\u3002',
+    s1_l1:'<strong>\u96f6\u5e93\u5b58\u3002</strong>\u65e0\u9700\u53d1\u8d27\u3001\u7ba1\u7406\u4f9b\u5e94\u5546',
+    s1_l2:'<strong>\u4f4e\u7ef4\u62a4\u3002</strong>\u5de5\u5177\u8981\u4e48\u80fd\u7528\u8981\u4e48\u4e0d\u80fd\u7528',
+    s1_l3:'<strong>\u9ad8\u641c\u7d22\u91cf\u3002</strong>\u201cJSON \u683c\u5f0f\u5316\u201d\u6bcf\u6708 50\u4e07+\u6b21\u641c\u7d22',
+    s1_l4:'<strong>\u5e7f\u544a\u53cb\u597d\u3002</strong>Google \u660e\u786e\u504f\u597d\u5de5\u5177\u7c7b\u7ad9\u70b9',
+    s2_title:'\u7b2c\u4e00\u5468\uff1a\u89c4\u5212\u4e0e\u67b6\u6784',
+    s2_p1:'\u6211\u7814\u7a76\u4e86\u641c\u7d22\u91cf\u6700\u9ad8\u4e14\u7ade\u4e89\u6700\u5c0f\u7684\u5de5\u5177\u7c7b\u522b\u3002',
+    s2_p2:'\u4e94\u4e2a\u5206\u7c7b\uff1a',
+    s2_l1:'<strong>\u5f00\u53d1\u8005\u5de5\u5177</strong> \u2014 JSON\u3001\u6b63\u5219\u3001\u65f6\u95f4\u6233\u3001Base64\u3001JWT\u3001\u54c8\u5e0c\u3001\u547d\u540d\u8f6c\u6362',
+    s2_l2:'<strong>\u8bbe\u8ba1\u4e0e\u989c\u8272</strong> \u2014 \u989c\u8272\u8f6c\u6362\u3001\u6e10\u53d8\u3001\u5b57\u4f53\u3001\u6bd4\u4f8b',
+    s2_l3:'<strong>\u6548\u7387\u5de5\u5177</strong> \u2014 \u5355\u4f4d\u6362\u7b97\u3001\u968f\u673a\u62bd\u7b7e\u3001\u5b57\u7b26\u7edf\u8ba1\u3001\u4e8c\u7ef4\u7801\u3001\u756a\u8304\u949f',
+    s2_l4:'<strong>\u5065\u5eb7\u751f\u6d3b</strong> \u2014 \u5361\u8def\u91cc\u3001BMI\u3001\u7761\u7720\u5468\u671f',
+    s2_l5:'<strong>SEO \u4e0e\u8425\u9500</strong> \u2014 Reddit \u70ed\u70b9\u3001Discover \u68c0\u6d4b',
+    s3_title:'\u7b2c\u4e8c\u5468\uff1a\u6784\u5efa\u6838\u5fc3\u5de5\u5177',
+    s3_p1:'\u6bcf\u4e2a\u5de5\u5177\u662f\u5355\u4e2a HTML \u6587\u4ef6\u3002\u65e0\u6846\u67b6\u3001\u65e0\u6784\u5efa\u6d41\u7a0b\u3002\u5168\u90e8\u5728\u6d4f\u89c8\u5668\u4e2d\u8ba1\u7b97\u3002',
+    s3_tip_label:'\u6838\u5fc3\u89c1\u89e3\uff1a',
+    s3_tip:'\u5168\u90e8\u8ba1\u7b97\u5728\u6d4f\u89c8\u5668\u672c\u5730\u5b8c\u6210\uff0c\u65e0\u670d\u52a1\u5668\u6210\u672c\uff0c\u6781\u5176\u5feb\u901f\u3002',
+    s3_p2:'\u7528 AI \u751f\u6210\u521d\u59cb\u4ee3\u7801\uff0c\u5927\u591a\u6570 2-3 \u6b21\u63d0\u793a\u5c31\u80fd\u5b8c\u6210\u3002',
+    s4_title:'\u7b2c\u4e09\u5468\uff1aSEO \u4e0e\u5185\u5bb9',
+    s4_p1:'\u6ca1\u6709 SEO \u7684\u5de5\u5177\u7ad9\u662f\u770b\u4e0d\u89c1\u7684\u3002',
+    s4_h3_1:'Meta \u6807\u7b7e\u4e0e\u7ed3\u6784\u5316\u6570\u636e',
+    s4_p1b:'\u6bcf\u9875\u90fd\u6709\u72ec\u7279\u7684 title\u3001description\u3001canonical URL\u3002\u7528 <a href="/discover/">Discover \u68c0\u6d4b\u5668</a> \u9a8c\u8bc1\u3002',
+    s4_h3_2:'\u53cc\u8bed\u5185\u5bb9\uff08\u4e2d\u6587 + \u82f1\u6587\uff09',
+    s4_p2:'\u4e2d\u6587\u8bed\u8a00\u652f\u6301\u5c06\u53d7\u4f17\u7ffb\u4e86\u4e00\u500d\u3002',
+    s4_h3_3:'\u535a\u5ba2\u6587\u7ae0\u6293\u957f\u5c3e\u5173\u952e\u8bcd',
+    s4_p3:'\u5de5\u5177\u9875\u8d1f\u8d23\u6838\u5fc3\u5173\u952e\u8bcd\uff0c\u535a\u5ba2\u6355\u83b7\u957f\u5c3e\u67e5\u8be2\u3002',
+    s5_title:'\u7b2c\u56db\u5468\uff1a\u53d8\u73b0\u51c6\u5907',
+    s5_p1:'AdSense \u8981\u6c42\uff1a',
+    s5_l1:'<strong>\u9690\u79c1\u653f\u7b56\u3001\u514d\u8d23\u58f0\u660e\u3001\u5173\u4e8e\u3001\u8054\u7cfb\u6211\u4eec</strong>\u56db\u4e2a\u9875\u9762',
+    s5_l2:'<strong>\u539f\u521b\u5185\u5bb9</strong>',
+    s5_l3:'<strong>\u6e05\u6670\u5bfc\u822a</strong>\u548c\u9762\u5305\u5c51',
+    s5_l4:'<strong>\u79fb\u52a8\u7aef\u9002\u914d</strong>',
+    s5_tip_label:'\u5b9e\u7528\u5efa\u8bae\uff1a',
+    s5_tip:'15-20 \u4e2a\u9ad8\u8d28\u91cf\u9875\u9762\u540e\u518d\u7533\u8bf7 AdSense\u3002',
+    s6_title:'\u6210\u679c\u4e0e\u7ecf\u9a8c\u603b\u7ed3',
+    s6_p1:'21 \u4e2a\u5de5\u5177\uff0cVercel \u90e8\u7f72\uff0c\u603b\u6210\u672c $0\u3002',
+    s6_l1:'<strong>\u63d0\u793a\u8981\u5177\u4f53\u3002</strong>\u63cf\u8ff0\u786e\u5207\u7684\u529f\u80fd\u548c\u516c\u5f0f\u3002',
+    s6_l2:'<strong>\u5145\u5206\u6d4b\u8bd5\u3002</strong>AI \u4ee3\u7801\u6709\u8fb9\u754c bug\u3002',
+    s6_l3:'<strong>\u8bbe\u8ba1\u4e00\u81f4\u3002</strong>\u7edf\u4e00\u914d\u8272\u548c\u5e03\u5c40\u3002',
+    s6_l4:'<strong>\u805a\u7126\u641c\u7d22\u610f\u56fe\u3002</strong>\u5efa\u8bbe\u4eba\u4eec\u771f\u6b63\u4f1a\u641c\u7d22\u7684\u5de5\u5177\u3002',
+    s7_title:'\u51c6\u5907\u597d\u5f00\u59cb\u4e86\u5417\uff1f',
+    s7_p1:'\u4e0d\u9700\u8981\u8d44\u91d1\u6216\u6280\u672f\u4e13\u4e1a\u77e5\u8bc6\u2014\u2014\u53ea\u9700 AI \u52a9\u529b\u548c\u575a\u6301\u3002',
+    cta1:'JSON \u683c\u5f0f\u5316\u5668 &rarr;',
+    cta2:'\u5361\u8def\u91cc\u8ba1\u7b97\u5668 &rarr;',
+    cta3:'Discover \u68c0\u6d4b\u5668 &rarr;'
+  }
+};
+let lang='en';
+function toggleLang(){lang=lang==='en'?'zh':'en';document.getElementById('langBtn').textContent=lang==='en'?'中文':'EN';document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(i18n[lang][k])el.innerHTML=i18n[lang][k]});}
+</script>
+</body>
+</html>
