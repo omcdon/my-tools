@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Font Pairing Generator – Google Fonts Combinations | Freemaki</title>
+  <meta name="description" content="Free font pairing generator. Preview popular Google Fonts combinations with live text. Copy CSS @import code instantly. Bilingual EN/ZH. No signup.">
+  <meta name="keywords" content="font pairing, Google Fonts, font combination, typography, CSS font, free font pairing tool">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Freemaki">
+  <link rel="canonical" href="https://freemaki.com/font/">
+  <meta property="og:title" content="Free Font Pairing Generator – Google Fonts">
+  <meta property="og:description" content="Preview Google Fonts pairings with live text. Copy CSS instantly.">
+  <meta property="og:url" content="https://freemaki.com/font/">
+  <meta property="og:site_name" content="Freemaki">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Font Pairing Generator">
+  <meta name="twitter:description" content="Google Fonts pairings with live preview.">
+  <style>
+    :root {
+      --bg: #0f0f1a; --surface: #1a1a2e; --surface2: #252540;
+      --accent: #6c5ce7; --accent2: #a29bfe; --accent-glow: rgba(108,92,231,0.35);
+      --green: #2ecc71; --red: #e74c3c; --text: #e0e0ff; --text-dim: #8888bb;
+      --border: rgba(108,92,231,0.25); --radius: 14px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font);
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+
+    .lang-toggle { position: fixed; top: 20px; right: 20px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 8px; display: flex; overflow: hidden; z-index: 100; }
+    .lang-btn { padding: 6px 14px; background: none; border: none; color: var(--text-dim);
+      font-size: 13px; cursor: pointer; transition: all 0.2s; font-family: var(--font); }
+    .lang-btn.active { background: var(--accent); color: #fff; }
+    .lang-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    .breadcrumb { width: 100%; max-width: 700px; margin-bottom: 32px; display: flex;
+      gap: 8px; align-items: center; font-size: 14px; color: var(--text-dim); }
+    .breadcrumb a { color: var(--accent2); text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 32px 28px; width: 100%; max-width: 700px; }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 14px; color: var(--text-dim); margin-bottom: 24px; }
+
+    /* Pairing Selector */
+    .pairing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 24px; }
+    @media (max-width: 520px) { .pairing-grid { grid-template-columns: 1fr; } }
+    .pairing-card {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 16px; cursor: pointer; transition: all 0.15s; text-align: left;
+    }
+    .pairing-card:hover { border-color: var(--accent2); }
+    .pairing-card.active { border-color: var(--accent); background: rgba(108,92,231,0.12); }
+    .pairing-card .pairing-label { font-size: 12px; color: var(--accent2); font-weight: 600; margin-bottom: 4px; }
+    .pairing-card .pairing-fonts { font-size: 15px; color: var(--text); }
+    .pairing-card .pairing-style { font-size: 12px; color: var(--text-dim); margin-top: 3px; }
+
+    /* Preview */
+    .preview-area {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 28px 24px; margin-bottom: 20px; min-height: 120px;
+    }
+    .preview-heading { font-size: 28px; color: #fff; line-height: 1.3; margin-bottom: 8px; }
+    .preview-body { font-size: 16px; color: var(--text); line-height: 1.7; }
+
+    /* Font Size Slider */
+    .font-size-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .font-size-label { font-size: 13px; color: var(--text-dim); white-space: nowrap; font-weight: 600; }
+    .font-size-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px;
+      background: var(--surface2); outline: none; }
+    .font-size-slider::-webkit-slider-thumb { -webkit-appearance: none;
+      width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: pointer; }
+    .font-size-value { font-size: 13px; color: var(--accent2); min-width: 40px; font-weight: 600; }
+
+    /* Input Text */
+    .input-row { margin-bottom: 20px; }
+    .input-label { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; font-weight: 600; }
+    textarea { width: 100%; height: 80px; background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 10px 14px; color: var(--text); font-size: 14px; font-family: var(--font);
+      resize: vertical; outline: none; transition: border-color 0.2s; line-height: 1.5; }
+    textarea:focus { border-color: var(--accent); }
+
+    /* CSS Result */
+    .result-section { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px; text-align: left; }
+    .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .result-label { font-size: 13px; color: var(--accent2); font-weight: 600; }
+    .copy-btn {
+      background: none; border: 1px solid var(--border); border-radius: 6px; padding: 4px 12px;
+      font-size: 12px; color: var(--text-dim); cursor: pointer; transition: all 0.15s; font-family: var(--font);
+    }
+    .copy-btn:hover { border-color: var(--green); color: var(--green); }
+    .copy-btn.copied { border-color: var(--green); color: var(--green); }
+    .result-text { font-size: 13px; color: var(--text); font-family: 'Consolas','Monaco',monospace;
+      word-break: break-all; line-height: 1.7; white-space: pre-wrap; }
+
+    .footer { margin-top: 32px; font-size: 12px; color: var(--text-dim); display: flex; gap: 20px; }
+    .footer a { color: var(--accent2); text-decoration: none; }
+    .footer a:hover { color: #fff; }
+
+    [lang="en"] .zh { display: none; }
+    [lang="zh"] .en { display: none; }
+  </style>
+</head>
+<body lang="zh">
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+
+  <div class="breadcrumb">
+    <a href="/">Home</a>
+    <span>›</span>
+    <a href="/font/" class="en">Font Pairing</a>
+    <a href="/font/" class="zh">字体搭配</a>
+  </div>
+
+  <div class="card">
+    <h1 class="en">Font Pairing Generator</h1>
+    <h1 class="zh">字体搭配生成器</h1>
+    <p class="subtitle en">Preview popular Google Fonts combinations. Copy CSS @import code instantly.</p>
+    <p class="subtitle zh">预览流行 Google Fonts 字体组合，实时文字效果，一键复制 CSS 代码。</p>
+
+    <!-- Pairing Cards -->
+    <div class="pairing-grid" id="pairingGrid"></div>
+
+    <!-- Preview -->
+    <div class="preview-area" id="previewArea">
+      <div class="preview-heading" id="previewHeading">The quick brown fox</div>
+      <div class="preview-body" id="previewBody">jumps over the lazy dog. 0123456789 中文字体测试</div>
+    </div>
+
+    <!-- Font Size -->
+    <div class="font-size-row">
+      <span class="font-size-label en">Heading Size</span>
+      <span class="font-size-label zh">标题大小</span>
+      <input type="range" class="font-size-slider" id="sizeSlider" min="20" max="56" value="28">
+      <span class="font-size-value" id="sizeValue">28px</span>
+    </div>
+
+    <!-- Custom Text -->
+    <div class="input-row">
+      <div class="input-label en">Custom Preview Text</div>
+      <div class="input-label zh">自定义预览文字</div>
+      <textarea id="customText" placeholder="Type your text here..."></textarea>
+    </div>
+
+    <!-- CSS Result -->
+    <div class="result-section">
+      <div class="result-header">
+        <span class="result-label en">CSS Code</span>
+        <span class="result-label zh">CSS 代码</span>
+        <button class="copy-btn" id="copyBtn" onclick="copyCSS(this)">复制</button>
+      </div>
+      <div class="result-text" id="cssCode"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="/">← <span class="en">All Tools</span><span class="zh">返回首页</span></a>
+    <a href="/color/"><span class="en">Color Converter</span><span class="zh">颜色转换器</span></a>
+    <a href="/gradient/"><span class="en">Gradient Generator</span><span class="zh">渐变生成器</span></a>
+  </div>
+
+  <script>
+    let lang = 'zh';
+
+    const pairings = [
+      {
+        id: 'playfair-lato',
+        label: 'Elegant Editorial',
+        heading: 'Playfair Display',
+        body: 'Lato',
+        zhLabel: '优雅编辑风',
+        headingText: 'Playfair Display',
+        bodyText: 'Lato / 优雅的衬线标题配无衬线正文'
+      },
+      {
+        id: 'roboto-mono',
+        label: 'Modern Developer',
+        heading: 'Roboto',
+        body: 'Roboto Mono',
+        zhLabel: '现代开发者',
+        headingText: 'Roboto Slab',
+        bodyText: 'Roboto Mono / 等宽与标题的现代组合'
+      },
+      {
+        id: 'merriweather',
+        label: 'Classic Serif',
+        heading: 'Merriweather',
+        body: 'Source Sans 3',
+        zhLabel: '经典衬线',
+        headingText: 'Merriweather',
+        bodyText: 'Source Sans 3 / 传统报纸排版风格'
+      },
+      {
+        id: 'poppins-quicksand',
+        label: 'Friendly Startup',
+        heading: 'Poppins',
+        body: 'Quicksand',
+        zhLabel: '友好创业风',
+        headingText: 'Poppins',
+        bodyText: 'Quicksand / 轻盈现代的互联网产品风格'
+      },
+      {
+        id: 'oswald',
+        label: 'Bold Impact',
+        heading: 'Oswald',
+        body: 'Open Sans',
+        zhLabel: '大胆冲击力',
+        headingText: 'Oswald',
+        bodyText: 'Open Sans / 粗标题配柔和正文的经典组合'
+      },
+      {
+        id: 'noto',
+        label: 'Bilingual Global',
+        heading: 'Noto Serif SC',
+        body: 'Noto Sans SC',
+        zhLabel: '中英双语通用',
+        headingText: 'Noto Serif SC',
+        bodyText: 'Noto Sans SC / 思源宋体+黑体，完美的中英文排版'
+      }
+    ];
+
+    let current = pairings[0];
+
+    function setLang(l) {
+      lang = l;
+      document.body.lang = l;
+      document.querySelectorAll('.lang-toggle .lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.lang-toggle .lang-btn[onclick="setLang(\'' + l + '\')"]').classList.add('active');
+      renderPairings();
+      update();
+    }
+
+    function renderPairings() {
+      const grid = document.getElementById('pairingGrid');
+      grid.innerHTML = '';
+      pairings.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'pairing-card' + (p.id === current.id ? ' active' : '');
+        card.onclick = () => selectPairing(p);
+        const isZh = lang === 'zh';
+        card.innerHTML =
+          '<div class="pairing-label">' + (isZh ? p.zhLabel : p.label) + '</div>' +
+          '<div class="pairing-fonts">' + p.heading + ' + ' + p.body + '</div>' +
+          '<div class="pairing-style">' + (isZh ? p.zhLabel : p.label) + '</div>';
+        grid.appendChild(card);
+      });
+    }
+
+    function selectPairing(p) {
+      current = p;
+      renderPairings();
+      update();
+    }
+
+    function update() {
+      const isZh = lang === 'zh';
+      const headingEl = document.getElementById('previewHeading');
+      const bodyEl = document.getElementById('previewBody');
+      const customText = document.getElementById('customText').value.trim();
+
+      headingEl.style.fontFamily = "'" + current.heading + "', serif";
+      bodyEl.style.fontFamily = "'" + current.body + "', sans-serif";
+
+      if (customText) {
+        const lines = customText.split('\n');
+        headingEl.textContent = lines[0] || '';
+        bodyEl.textContent = lines.slice(1).join('\n') || (isZh ? current.bodyText : current.zhLabel);
+      } else {
+        headingEl.textContent = isZh ? current.headingText : current.label;
+        bodyEl.textContent = isZh ? current.bodyText : current.zhLabel;
+      }
+
+      const css = "@import url('https://fonts.googleapis.com/css2?family=" +
+        current.heading.replace(/ /g, '+') + ":wght@700&family=" +
+        current.body.replace(/ /g, '+') + ":wght@400;wght@400;display=swap');\n\n" +
+        ".heading { font-family: '" + current.heading + "', serif; }\n" +
+        ".body { font-family: '" + current.body + "', sans-serif; }";
+
+      document.getElementById('cssCode').textContent = css;
+      document.getElementById('copyBtn').textContent = isZh ? '复制' : 'Copy';
+    }
+
+    function copyCSS(btn) {
+      navigator.clipboard.writeText(document.getElementById('cssCode').textContent).then(() => {
+        const isZh = lang === 'zh';
+        btn.textContent = isZh ? '✓ 已复制' : '✓ Copied';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = isZh ? '复制' : 'Copy';
+          btn.classList.remove('copied');
+        }, 1500);
+      });
+    }
+
+    document.getElementById('sizeSlider').addEventListener('input', function() {
+      document.getElementById('previewHeading').style.fontSize = this.value + 'px';
+      document.getElementById('sizeValue').textContent = this.value + 'px';
+    });
+
+    document.getElementById('customText').addEventListener('input', update);
+
+    renderPairings();
+    update();
+  </script>
+</body>
+</html>

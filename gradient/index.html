@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free CSS Gradient Generator – Linear & Radial | Freemaki</title>
+  <meta name="description" content="Free online CSS gradient generator. Create linear, radial and conic gradients with live preview. Export clean CSS code. No signup. EN/ZH bilingual.">
+  <meta name="keywords" content="CSS gradient generator, linear gradient, radial gradient, conic gradient, CSS gradient, gradient generator online">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Freemaki">
+  <link rel="canonical" href="https://freemaki.com/gradient/">
+  <meta property="og:title" content="Free CSS Gradient Generator – Linear & Radial">
+  <meta property="og:description" content="Create beautiful CSS gradients with live preview. Export clean CSS code instantly.">
+  <meta property="og:url" content="https://freemaki.com/gradient/">
+  <meta property="og:site_name" content="Freemaki">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free CSS Gradient Generator">
+  <meta name="twitter:description" content="Create CSS gradients with live preview and export.">
+  <style>
+    :root {
+      --bg: #0f0f1a; --surface: #1a1a2e; --surface2: #252540;
+      --accent: #6c5ce7; --accent2: #a29bfe; --accent-glow: rgba(108,92,231,0.35);
+      --green: #2ecc71; --red: #e74c3c; --text: #e0e0ff; --text-dim: #8888bb;
+      --border: rgba(108,92,231,0.25); --radius: 14px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font);
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+
+    .lang-toggle { position: fixed; top: 20px; right: 20px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 8px; display: flex; overflow: hidden; z-index: 100; }
+    .lang-btn { padding: 6px 14px; background: none; border: none; color: var(--text-dim);
+      font-size: 13px; cursor: pointer; transition: all 0.2s; font-family: var(--font); }
+    .lang-btn.active { background: var(--accent); color: #fff; }
+    .lang-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    .breadcrumb { width: 100%; max-width: 700px; margin-bottom: 32px; display: flex;
+      gap: 8px; align-items: center; font-size: 14px; color: var(--text-dim); }
+    .breadcrumb a { color: var(--accent2); text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 32px 28px; width: 100%; max-width: 700px; }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 14px; color: var(--text-dim); margin-bottom: 28px; }
+
+    /* Preview */
+    .preview-box {
+      width: 100%; height: 180px; border-radius: 10px; margin-bottom: 24px;
+      transition: background 0.3s; border: 1px solid var(--border);
+    }
+
+    /* Controls */
+    .control-group { margin-bottom: 20px; text-align: left; }
+    .control-label { font-size: 13px; color: var(--text-dim); margin-bottom: 10px; font-weight: 600; }
+
+    .type-toggle { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .type-btn { flex: 1; padding: 8px 12px; background: var(--surface2); border: none; color: var(--text-dim);
+      font-size: 13px; cursor: pointer; transition: all 0.15s; font-family: var(--font); }
+    .type-btn.active { background: var(--accent); color: #fff; }
+    .type-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    .angle-row { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+    .angle-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px;
+      background: var(--surface2); outline: none; }
+    .angle-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none;
+      width: 18px; height: 18px; border-radius: 50%; background: var(--accent); cursor: pointer; }
+    .angle-value { min-width: 44px; text-align: center; font-size: 13px; color: var(--accent2); font-weight: 600; }
+
+    /* Color Stops */
+    .stop-list { display: flex; flex-direction: column; gap: 10px; }
+    .stop-row { display: flex; align-items: center; gap: 10px; }
+    .color-swatch {
+      width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border);
+      cursor: pointer; overflow: hidden; padding: 0; background: none; flex-shrink: 0;
+    }
+    .color-swatch input[type="color"] { width: 50px; height: 50px; border: none; cursor: pointer;
+      transform: translate(-7px, -7px); display: block; }
+    .pos-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px;
+      background: var(--surface2); outline: none; }
+    .pos-slider::-webkit-slider-thumb { -webkit-appearance: none;
+      width: 14px; height: 14px; border-radius: 50%; background: var(--accent2); cursor: pointer; }
+    .pos-label { min-width: 40px; text-align: right; font-size: 12px; color: var(--text-dim); }
+    .remove-stop {
+      background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--text-dim);
+      cursor: pointer; padding: 4px 8px; font-size: 16px; line-height: 1; transition: all 0.15s;
+    }
+    .remove-stop:hover { border-color: var(--red); color: var(--red); }
+
+    .btn-row { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+    .btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 9px 18px; font-size: 13px; color: var(--text); cursor: pointer; transition: all 0.15s;
+      font-family: var(--font); }
+    .btn:hover { border-color: var(--accent2); color: #fff; }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.primary:hover { background: var(--accent2); border-color: var(--accent2); }
+
+    /* Result */
+    .result-section { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px; margin-top: 20px; text-align: left; }
+    .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .result-label { font-size: 13px; color: var(--accent2); font-weight: 600; }
+    .copy-btn {
+      background: none; border: 1px solid var(--border); border-radius: 6px; padding: 4px 12px;
+      font-size: 12px; color: var(--text-dim); cursor: pointer; transition: all 0.15s; font-family: var(--font);
+    }
+    .copy-btn:hover { border-color: var(--green); color: var(--green); }
+    .copy-btn.copied { border-color: var(--green); color: var(--green); }
+    .result-text { font-size: 13px; color: var(--text); font-family: 'Consolas','Monaco',monospace;
+      word-break: break-all; line-height: 1.7; white-space: pre-wrap; }
+
+    .footer { margin-top: 32px; font-size: 12px; color: var(--text-dim); display: flex; gap: 20px; }
+    .footer a { color: var(--accent2); text-decoration: none; }
+    .footer a:hover { color: #fff; }
+
+    [lang="en"] .zh { display: none; }
+    [lang="zh"] .en { display: none; }
+  </style>
+</head>
+<body lang="zh">
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+
+  <div class="breadcrumb">
+    <a href="/">Home</a>
+    <span>›</span>
+    <a href="/gradient/" class="en">CSS Gradient Generator</a>
+    <a href="/gradient/" class="zh">CSS渐变生成器</a>
+  </div>
+
+  <div class="card">
+    <h1 class="en">CSS Gradient Generator</h1>
+    <h1 class="zh">CSS 渐变生成器</h1>
+    <p class="subtitle en">Create linear, radial and conic gradients with live preview. Export clean CSS code.</p>
+    <p class="subtitle zh">创建线性、径向、圆锥渐变，实时预览，一键复制 CSS 代码。</p>
+
+    <!-- Live Preview -->
+    <div class="preview-box" id="preview"></div>
+
+    <!-- Type -->
+    <div class="control-group">
+      <div class="control-label en">Gradient Type</div>
+      <div class="control-label zh">渐变类型</div>
+      <div class="type-toggle">
+        <button class="type-btn active" id="btn-linear" onclick="setType('linear')">Linear</button>
+        <button class="type-btn" id="btn-radial" onclick="setType('radial')">Radial</button>
+        <button class="type-btn" id="btn-conic" onclick="setType('conic')">Conic</button>
+      </div>
+      <div class="angle-row" id="angleRow">
+        <div class="control-label en" style="margin:0;flex-shrink:0">Angle</div>
+        <div class="control-label zh" style="margin:0;flex-shrink:0">角度</div>
+        <input type="range" class="angle-slider" id="angleSlider" min="0" max="360" value="135">
+        <span class="angle-value" id="angleValue">135°</span>
+      </div>
+    </div>
+
+    <!-- Color Stops -->
+    <div class="control-group">
+      <div class="control-label en">Color Stops</div>
+      <div class="control-label zh">颜色节点</div>
+      <div class="stop-list" id="stopList"></div>
+      <div class="btn-row">
+        <button class="btn" onclick="addStop()" id="addBtnEn">+ Add Color</button>
+        <button class="btn" onclick="addStop()" id="addBtnZh">+ 添加颜色</button>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div class="result-section">
+      <div class="result-header">
+        <span class="result-label en">CSS Code</span>
+        <span class="result-label zh">CSS 代码</span>
+        <button class="copy-btn" id="copyBtn" onclick="copyCSS(this)">复制</button>
+      </div>
+      <div class="result-text" id="cssCode"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="/">← <span class="en">All Tools</span><span class="zh">返回首页</span></a>
+    <a href="/color/"><span class="en">Color Converter</span><span class="zh">颜色转换器</span></a>
+    <a href="/font/"><span class="en">Font Pairing</span><span class="zh">字体搭配</span></a>
+  </div>
+
+  <script>
+    let lang = 'zh';
+    let gradType = 'linear';
+    let angle = 135;
+    let stops = [
+      { color: '#6c5ce7', pos: 0 },
+      { color: '#a29bfe', pos: 100 },
+    ];
+
+    function setLang(l) {
+      lang = l;
+      document.body.lang = l;
+      document.querySelectorAll('.lang-toggle .lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.lang-toggle .lang-btn[onclick="setLang(\'' + l + '\')"]').classList.add('active');
+      update();
+    }
+
+    function setType(t) {
+      gradType = t;
+      document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('btn-' + t).classList.add('active');
+      document.getElementById('angleRow').style.display = t === 'radial' ? 'none' : 'flex';
+      update();
+    }
+
+    function buildStops() {
+      const list = document.getElementById('stopList');
+      list.innerHTML = '';
+      stops.forEach((s, i) => {
+        const row = document.createElement('div');
+        row.className = 'stop-row';
+        row.innerHTML =
+          '<div class="color-swatch"><input type="color" value="' + s.color + '" onchange="updateStop(' + i + ', this.value, null)"></div>' +
+          '<input type="range" class="pos-slider" min="0" max="100" value="' + s.pos + '" oninput="updateStop(' + i + ', null, this.value)">' +
+          '<span class="pos-label">' + s.pos + '%</span>' +
+          (stops.length > 2 ? '<button class="remove-stop" onclick="removeStop(' + i + ')">×</button>' : '');
+        list.appendChild(row);
+      });
+    }
+
+    function addStop() {
+      // Pick a color between last two or random
+      const last = stops[stops.length - 1];
+      const penult = stops.length > 1 ? stops[stops.length - 2] : { color: '#ffffff', pos: 0 };
+      const newPos = Math.round((last.pos + (penult.pos || 0)) / 2);
+      stops.splice(stops.length - 1, 0, { color: shiftColor(last.color, 60), pos: newPos });
+      buildStops();
+      update();
+    }
+
+    function removeStop(i) {
+      if (stops.length <= 2) return;
+      stops.splice(i, 1);
+      buildStops();
+      update();
+    }
+
+    function updateStop(i, color, pos) {
+      if (color !== null) stops[i].color = color;
+      if (pos !== null) {
+        stops[i].pos = parseInt(pos);
+        stops[i].$label && (stops[i].$label.textContent = stops[i].pos + '%');
+      }
+      // Update pos label if exists
+      const labels = document.querySelectorAll('.pos-label');
+      if (labels[i]) labels[i].textContent = stops[i].pos + '%';
+      update();
+    }
+
+    function shiftColor(hex, amount) {
+      let r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+      r = Math.min(255, Math.max(0, r + amount));
+      g = Math.min(255, Math.max(0, g + amount));
+      b = Math.min(255, Math.max(0, b - amount));
+      return '#' + [r,g,b].map(v => v.toString(16).padStart(2,'0')).join('');
+    }
+
+    function buildGradient() {
+      const sorted = [...stops].sort((a, b) => a.pos - b.pos);
+      const stopStr = sorted.map(s => s.color + ' ' + s.pos + '%').join(', ');
+      if (gradType === 'linear') {
+        return 'linear-gradient(' + angle + 'deg, ' + stopStr + ')';
+      } else if (gradType === 'radial') {
+        return 'radial-gradient(circle, ' + stopStr + ')';
+      } else {
+        return 'conic-gradient(from ' + angle + 'deg, ' + stopStr + ')';
+      }
+    }
+
+    function update() {
+      const grad = buildGradient();
+      document.getElementById('preview').style.background = grad;
+      const isZh = lang === 'zh';
+      document.getElementById('cssCode').textContent =
+        'background: ' + grad + ';' + '\n' +
+        '/* ' + (isZh ? '在 background-image 中使用' : 'Use in background-image') + ' */' + '\n' +
+        'background-image: ' + grad + ';';
+      document.getElementById('copyBtn').textContent = isZh ? '复制' : 'Copy';
+    }
+
+    function copyCSS(btn) {
+      const text = document.getElementById('cssCode').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const isZh = lang === 'zh';
+        btn.textContent = isZh ? '✓ 已复制' : '✓ Copied';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = isZh ? '复制' : 'Copy';
+          btn.classList.remove('copied');
+        }, 1500);
+      });
+    }
+
+    document.getElementById('angleSlider').addEventListener('input', function() {
+      angle = parseInt(this.value);
+      document.getElementById('angleValue').textContent = angle + '°';
+      update();
+    });
+
+    buildStops();
+    update();
+  </script>
+</body>
+</html>
