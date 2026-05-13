@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free QR Code Generator – Create & Download QR Codes | Freemaki</title>
+  <meta name="description" content="Free online QR code generator. Generate QR codes from text or URL instantly. Download as PNG image. No signup. EN/ZH bilingual.">
+  <meta name="keywords" content="QR code generator, QR code maker, create QR code, download QR code, QR code PNG, 在线二维码生成器">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Freemaki">
+  <link rel="canonical" href="https://freemaki.com/qrcode/">
+  <meta property="og:title" content="Free QR Code Generator">
+  <meta property="og:description" content="Generate QR codes from text or URL. Download as PNG. Free and instant.">
+  <meta property="og:url" content="https://freemaki.com/qrcode/">
+  <meta property="og:site_name" content="Freemaki">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root {
+      --bg: #0f0f1a; --surface: #1a1a2e; --surface2: #252540;
+      --accent: #6c5ce7; --accent2: #a29bfe; --accent-glow: rgba(108,92,231,0.35);
+      --green: #2ecc71; --red: #e74c3c; --text: #e0e0ff; --text-dim: #8888bb;
+      --border: rgba(108,92,231,0.25); --radius: 14px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font);
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+
+    .lang-toggle { position: fixed; top: 20px; right: 20px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 8px; display: flex; overflow: hidden; z-index: 100; }
+    .lang-btn { padding: 6px 14px; background: none; border: none; color: var(--text-dim);
+      font-size: 13px; cursor: pointer; transition: all 0.2s; font-family: var(--font); }
+    .lang-btn.active { background: var(--accent); color: #fff; }
+    .lang-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    .breadcrumb { width: 100%; max-width: 700px; margin-bottom: 32px; display: flex;
+      gap: 8px; align-items: center; font-size: 14px; color: var(--text-dim); }
+    .breadcrumb a { color: var(--accent2); text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 32px 28px; width: 100%; max-width: 700px; }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 14px; color: var(--text-dim); margin-bottom: 24px; }
+
+    .input-group { margin-bottom: 20px; text-align: left; }
+    .control-label { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; font-weight: 600; }
+
+    textarea {
+      width: 100%; min-height: 120px; background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px; font-size: 15px; color: var(--text); resize: vertical;
+      font-family: var(--font); line-height: 1.6; outline: none; transition: border-color 0.2s;
+    }
+    textarea:focus { border-color: var(--accent2); }
+    textarea::placeholder { color: var(--text-dim); }
+
+    .options-row { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+    .option-group { flex: 1; min-width: 140px; text-align: left; }
+    .option-label { font-size: 12px; color: var(--text-dim); margin-bottom: 6px; font-weight: 600; }
+    select {
+      width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 9px 12px; font-size: 13px; color: var(--text); font-family: var(--font); outline: none;
+      cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238888bb' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+    }
+    select:focus { border-color: var(--accent2); }
+    select option { background: var(--surface); }
+
+    .qr-output {
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 12px;
+      padding: 24px; margin-top: 8px;
+    }
+    #qrcode { background: #fff; border-radius: 8px; padding: 12px; display: inline-block; }
+    #qrcode canvas { display: block; }
+
+    .qr-placeholder {
+      width: 200px; height: 200px; border: 2px dashed var(--border); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim); font-size: 13px; text-align: center; padding: 20px;
+    }
+
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 9px 18px; font-size: 13px; color: var(--text); cursor: pointer; transition: all 0.15s;
+      font-family: var(--font); }
+    .btn:hover { border-color: var(--accent2); color: #fff; }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.primary:hover { background: var(--accent2); border-color: var(--accent2); }
+    .btn.success { border-color: var(--green); color: var(--green); }
+    .btn.success:hover { background: var(--green); color: #fff; }
+
+    .note { font-size: 11px; color: var(--text-dim); margin-top: 8px; text-align: center; }
+
+    .footer { margin-top: 32px; font-size: 12px; color: var(--text-dim); display: flex; gap: 20px; }
+    .footer a { color: var(--accent2); text-decoration: none; }
+    .footer a:hover { color: #fff; }
+
+    [lang="en"] .zh { display: none; }
+    [lang="zh"] .en { display: none; }
+  </style>
+</head>
+<body lang="zh">
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+
+  <div class="breadcrumb">
+    <a href="/">Home</a>
+    <span>›</span>
+    <a href="/qrcode/" class="en">QR Code Generator</a>
+    <a href="/qrcode/" class="zh">二维码生成器</a>
+  </div>
+
+  <div class="card">
+    <h1 class="en">QR Code Generator</h1>
+    <h1 class="zh">二维码生成器</h1>
+    <p class="subtitle en">Enter text or URL to generate a QR code instantly. Download as PNG image.</p>
+    <p class="subtitle zh">输入文本或网址，即时生成二维码，支持下载为 PNG 图片。</p>
+
+    <div class="input-group">
+      <div class="control-label en">Text or URL</div>
+      <div class="control-label zh">文本或网址</div>
+      <textarea id="textInput" placeholder="https://example.com&#10;&#10;Hello, World!"></textarea>
+    </div>
+
+    <div class="options-row">
+      <div class="option-group">
+        <div class="option-label en">Size</div>
+        <div class="option-label zh">尺寸</div>
+        <select id="sizeSelect">
+          <option value="150">150×150</option>
+          <option value="200" selected>200×200</option>
+          <option value="250">250×250</option>
+          <option value="300">300×300</option>
+          <option value="400">400×400</option>
+        </select>
+      </div>
+      <div class="option-group">
+        <div class="option-label en">Correction Level</div>
+        <div class="option-label zh">纠错等级</div>
+        <select id="ecSelect">
+          <option value="L">L (7%)</option>
+          <option value="M" selected>M (15%)</option>
+          <option value="Q">Q (25%)</option>
+          <option value="H">H (30%)</option>
+        </select>
+      </div>
+      <div class="option-group">
+        <div class="option-label en">BG Color</div>
+        <div class="option-label zh">背景色</div>
+        <select id="bgSelect">
+          <option value="#FFFFFF" selected>White</option>
+          <option value="#000000">Black</option>
+          <option value="#F8F8F8">Light Gray</option>
+          <option value="#0f0f1a">Dark</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="qr-output">
+      <div id="qrcode">
+        <div class="qr-placeholder en">Enter text above<br>to generate QR code</div>
+        <div class="qr-placeholder zh">在上方输入文本<br>即可生成二维码</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn primary" id="generateBtn" onclick="generateQR()">
+          <span class="en">Generate</span>
+          <span class="zh">生成</span>
+        </button>
+        <button class="btn success" id="downloadBtn" onclick="downloadQR()" style="display:none">
+          <span class="en">Download PNG</span>
+          <span class="zh">下载 PNG</span>
+        </button>
+      </div>
+    </div>
+
+    <p class="note en">Powered by qrcode-generator library (no external API, runs locally)</p>
+    <p class="note zh">使用 qrcode-generator 库，纯本地计算，无需上传</p>
+  </div>
+
+  <div class="footer">
+    <a href="/">← <span class="en">All Tools</span><span class="zh">返回首页</span></a>
+    <a href="/color/"><span class="en">Color Converter</span><span class="zh">颜色转换器</span></a>
+    <a href="/counter/"><span class="en">Character Counter</span><span class="zh">字符统计</span></a>
+  </div>
+
+  <!-- QR Code Generator library (MIT License) -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+  <script>
+    let lang = 'zh';
+    let currentQR = null;
+    let currentText = '';
+
+    function setLang(l) {
+      lang = l;
+      document.body.lang = l;
+      document.querySelectorAll('.lang-toggle .lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.lang-toggle .lang-btn[onclick="setLang(\'' + l + '\')"]').classList.add('active');
+      if (currentText) generateQR();
+    }
+
+    function generateQR() {
+      const text = document.getElementById('textInput').value.trim();
+      if (!text) return;
+      currentText = text;
+
+      const size = parseInt(document.getElementById('sizeSelect').value);
+      const ecLevel = document.getElementById('ecSelect').value;
+      const bgColor = document.getElementById('bgSelect').value;
+
+      // Clear previous
+      const container = document.getElementById('qrcode');
+      container.innerHTML = '';
+
+      try {
+        const qr = qrcode(0, ecLevel);
+        qr.addData(text);
+        qr.make();
+        currentQR = qr;
+
+        const moduleCount = qr.getModuleCount();
+        const cellSize = Math.floor(size / moduleCount);
+
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext('2d');
+
+        // Background
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, size, size);
+
+        // QR modules
+        ctx.fillStyle = '#000000';
+        for (let r = 0; r < moduleCount; r++) {
+          for (let c = 0; c < moduleCount; c++) {
+            if (qr.isDark(r, c)) {
+              ctx.fillRect(c * cellSize, r * cellSize, cellSize, cellSize);
+            }
+          }
+        }
+
+        container.appendChild(canvas);
+        document.getElementById('downloadBtn').style.display = '';
+      } catch (e) {
+        const isZh = lang === 'zh';
+        container.innerHTML = '<div class="qr-placeholder" style="color:var(--red)">' +
+          (isZh ? '内容过长，请缩短文本或降低纠错等级' : 'Content too long. Shorten text or lower error correction.') + '</div>';
+        document.getElementById('downloadBtn').style.display = 'none';
+      }
+    }
+
+    function downloadQR() {
+      const canvas = document.querySelector('#qrcode canvas');
+      if (!canvas) return;
+      const link = document.createElement('a');
+      link.download = 'qrcode.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    document.getElementById('textInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        generateQR();
+      }
+    });
+
+    document.getElementById('bgSelect').addEventListener('change', function() {
+      if (currentText) generateQR();
+    });
+    document.getElementById('sizeSelect').addEventListener('change', function() {
+      if (currentText) generateQR();
+    });
+    document.getElementById('ecSelect').addEventListener('change', function() {
+      if (currentText) generateQR();
+    });
+  </script>
+</body>
+</html>

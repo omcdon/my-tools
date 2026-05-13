@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Sleep Calculator – Best Sleep & Wake Times | Freemaki</title>
+  <meta name="description" content="Free online sleep calculator. Find the best time to sleep or wake up using 90-minute sleep cycles. Get optimal sleep schedules instantly. EN/ZH bilingual.">
+  <meta name="keywords" content="sleep calculator, sleep cycle calculator, best time to sleep, best time to wake up, 睡眠计算器, 睡眠周期">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Freemaki">
+  <link rel="canonical" href="https://freemaki.com/sleep/">
+  <meta property="og:title" content="Free Sleep Calculator">
+  <meta property="og:description" content="Find the best time to sleep or wake up. Based on 90-minute sleep cycles.">
+  <meta property="og:url" content="https://freemaki.com/sleep/">
+  <meta property="og:site_name" content="Freemaki">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root {
+      --bg: #0f0f1a; --surface: #1a1a2e; --surface2: #252540;
+      --accent: #6c5ce7; --accent2: #a29bfe; --accent-glow: rgba(108,92,231,0.35);
+      --purple: #9b59b6; --blue: #3498db; --cyan: #1abc9c;
+      --green: #2ecc71; --yellow: #f1c40f; --orange: #e67e22; --red: #e74c3c;
+      --text: #e0e0ff; --text-dim: #8888bb;
+      --border: rgba(108,92,231,0.25); --radius: 14px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font);
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+
+    .lang-toggle { position: fixed; top: 20px; right: 20px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 8px; display: flex; overflow: hidden; z-index: 100; }
+    .lang-btn { padding: 6px 14px; background: none; border: none; color: var(--text-dim);
+      font-size: 13px; cursor: pointer; transition: all 0.2s; font-family: var(--font); }
+    .lang-btn.active { background: var(--accent); color: #fff; }
+    .lang-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    .breadcrumb { width: 100%; max-width: 700px; margin-bottom: 32px; display: flex;
+      gap: 8px; align-items: center; font-size: 14px; color: var(--text-dim); }
+    .breadcrumb a { color: var(--accent2); text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 32px 28px; width: 100%; max-width: 700px; }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 14px; color: var(--text-dim); margin-bottom: 24px; }
+
+    /* Mode Tabs */
+    .mode-tabs { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+      margin-bottom: 24px; max-width: 400px; }
+    .mode-tab { flex: 1; padding: 10px; background: var(--surface2); border: none; color: var(--text-dim);
+      font-size: 13px; cursor: pointer; transition: all 0.15s; font-family: var(--font); font-weight: 600; }
+    .mode-tab.active { background: var(--accent); color: #fff; }
+    .mode-tab:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    /* Time Input */
+    .time-input-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .time-input-group { flex: 1; min-width: 120px; }
+    .control-label { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; font-weight: 600; }
+    .time-wrapper { display: flex; align-items: center; gap: 8px; }
+    input[type="number"] {
+      flex: 1; min-width: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 10px 12px; font-size: 18px; color: var(--text); font-family: var(--font); outline: none;
+      transition: border-color 0.2s; -moz-appearance: textfield; text-align: center;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+    input[type="number"]:focus { border-color: var(--accent2); }
+    .time-sep { font-size: 20px; color: var(--accent2); font-weight: 700; }
+
+    /* Sleep cycles info */
+    .cycle-info {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 16px; margin-bottom: 20px; font-size: 13px; color: var(--text-dim); text-align: center;
+    }
+
+    /* Results Grid */
+    .results-title { font-size: 15px; font-weight: 700; color: var(--accent2); margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px; }
+    .results-title .badge {
+      background: var(--accent); color: #fff; font-size: 11px; padding: 2px 8px;
+      border-radius: 10px; font-weight: 600;
+    }
+
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+    @media (max-width: 560px) { .results-grid { grid-template-columns: repeat(2, 1fr); } }
+    .result-card {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px 12px; text-align: center; cursor: pointer; transition: all 0.2s; position: relative;
+    }
+    .result-card:hover { border-color: var(--accent2); transform: translateY(-2px); }
+    .result-card .cycles {
+      font-size: 11px; color: var(--text-dim); margin-bottom: 6px;
+    }
+    .result-card .time {
+      font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 4px;
+    }
+    .result-card .sleep-hrs {
+      font-size: 12px; color: var(--text-dim);
+    }
+    .result-card .quality-dot {
+      position: absolute; top: 8px; right: 8px; width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .result-card.best { border-color: var(--green); }
+    .result-card.best .quality-dot { background: var(--green); }
+    .result-card.good .quality-dot { background: var(--yellow); }
+    .result-card.ok .quality-dot { background: var(--orange); }
+
+    /* Tip */
+    .tip-box {
+      background: linear-gradient(135deg, rgba(108,92,231,0.15), rgba(155,89,182,0.15));
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px; margin-top: 16px; text-align: center;
+    }
+    .tip-box .tip-title { font-size: 13px; font-weight: 700; color: var(--accent2); margin-bottom: 6px; }
+    .tip-box .tip-text { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+
+    /* Recommended section */
+    .rec-section { margin-top: 20px; }
+    .rec-row { display: flex; gap: 10px; margin-bottom: 12px; align-items: center; flex-wrap: wrap; }
+    .rec-item {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 12px 16px; flex: 1; min-width: 180px; text-align: center;
+    }
+    .rec-item .rec-label { font-size: 11px; color: var(--text-dim); margin-bottom: 4px; }
+    .rec-item .rec-time { font-size: 18px; font-weight: 700; color: var(--accent2); }
+    .rec-item .rec-note { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+
+    .btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 9px 18px; font-size: 13px; color: var(--text); cursor: pointer; transition: all 0.15s;
+      font-family: var(--font); }
+    .btn:hover { border-color: var(--accent2); color: #fff; }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.primary:hover { background: var(--accent2); border-color: var(--accent2); }
+    .btn-row { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+
+    .footer { margin-top: 32px; font-size: 12px; color: var(--text-dim); display: flex; gap: 20px; }
+    .footer a { color: var(--accent2); text-decoration: none; }
+    .footer a:hover { color: #fff; }
+
+    [lang="en"] .zh { display: none; }
+    [lang="zh"] .en { display: none; }
+  </style>
+</head>
+<body lang="zh">
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+
+  <div class="breadcrumb">
+    <a href="/">Home</a>
+    <span>›</span>
+    <a href="/sleep/" class="en">Sleep Calculator</a>
+    <a href="/sleep/" class="zh">睡眠计算器</a>
+  </div>
+
+  <div class="card">
+    <h1 class="en">Sleep Calculator</h1>
+    <h1 class="zh">睡眠周期计算器</h1>
+    <p class="subtitle en">Find the best time to sleep or wake up based on 90-minute sleep cycles. Get optimal rest with 5 or 6 complete cycles.</p>
+    <p class="subtitle zh">基于 90 分钟睡眠周期，推荐最佳入睡和起床时间。5-6 个完整周期 = 高质量睡眠。</p>
+
+    <!-- Mode Tabs -->
+    <div class="mode-tabs">
+      <button class="mode-tab active" id="tab-sleep" onclick="setMode('sleep')">
+        <span class="en">I want to sleep at…</span>
+        <span class="zh">计算入睡时间</span>
+      </button>
+      <button class="mode-tab" id="tab-wake" onclick="setMode('wake')">
+        <span class="en">I want to wake up at…</span>
+        <span class="zh">计算起床时间</span>
+      </button>
+    </div>
+
+    <!-- Time Input -->
+    <div class="time-input-row">
+      <div class="time-input-group">
+        <div class="control-label en">Time</div>
+        <div class="control-label zh">时间</div>
+        <div class="time-wrapper">
+          <input type="number" id="hourInput" min="0" max="23" value="22" placeholder="22">
+          <span class="time-sep">:</span>
+          <input type="number" id="minInput" min="0" max="59" value="0" step="5" placeholder="00">
+        </div>
+      </div>
+    </div>
+
+    <div class="cycle-info en" id="cycleInfoSleep">
+      Sleep cycle = 90 min. Enter the time you plan to fall asleep, and we'll show you the best wake-up times with 6, 5, or 4 complete cycles.
+    </div>
+    <div class="cycle-info zh" id="cycleInfoWake">
+      睡眠周期 = 90 分钟。输入计划起床时间，我们会为你推荐最佳入睡时间，分别对应 6、5、4 个完整睡眠周期。
+    </div>
+
+    <div class="results-title">
+      <span class="en">Recommended Wake-Up Times</span>
+      <span class="zh">推荐起床时间</span>
+      <span class="badge en">Sleep Mode</span>
+      <span class="badge zh">入睡模式</span>
+    </div>
+
+    <div class="results-grid" id="resultsGrid">
+      <!-- Filled by JS -->
+    </div>
+
+    <div class="rec-section">
+      <div class="results-title">
+        <span class="en">Sleep Now (Right Now)</span>
+        <span class="zh">现在睡觉（立即）</span>
+        <span class="badge en">Now</span>
+        <span class="badge zh">立即</span>
+      </div>
+      <div class="rec-row" id="sleepNowRow">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-title en">💡 Pro Tip</div>
+      <div class="tip-title zh">💡 小贴士</div>
+      <div class="tip-text en" id="tipText">
+        It takes the average person about 14 minutes to fall asleep. We add this buffer automatically. For the best results, aim for 5–6 complete cycles (7.5–9 hours).
+      </div>
+      <div class="tip-text zh" id="tipTextZh">
+        普通人平均约需 14 分钟入睡，我们已自动加入缓冲。最理想的是完成 5–6 个睡眠周期（7.5–9 小时）。
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn primary" onclick="calculate()">
+        <span class="en">Calculate</span>
+        <span class="zh">计算</span>
+      </button>
+      <a href="/bmi/" class="btn">
+        <span class="en">BMI Calculator →</span>
+        <span class="zh">BMI计算器 →</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="/">← <span class="en">All Tools</span><span class="zh">返回首页</span></a>
+    <a href="/bmi/"><span class="en">BMI Calculator</span><span class="zh">BMI计算器</span></a>
+    <a href="/calorie/"><span class="en">Calorie Calculator</span><span class="zh">卡路里计算器</span></a>
+  </div>
+
+  <script>
+    let lang = 'zh';
+    let mode = 'sleep';
+    const FALL_ASLEEP_MIN = 14; // average time to fall asleep
+
+    function setLang(l) {
+      lang = l;
+      document.body.lang = l;
+      document.querySelectorAll('.lang-toggle .lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.lang-toggle .lang-btn[onclick="setLang(\'' + l + '\')"]').classList.add('active');
+      updateLabels();
+      calculate();
+    }
+
+    function setMode(m) {
+      mode = m;
+      document.querySelectorAll('.mode-tab').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + m).classList.add('active');
+      const badge = document.querySelector('.results-title .badge');
+      if (badge) {
+        badge.textContent = m === 'sleep'
+          ? (lang === 'zh' ? '入睡模式' : 'Sleep Mode')
+          : (lang === 'zh' ? '起床模式' : 'Wake Mode');
+      }
+      document.querySelectorAll('.results-title span').forEach(s => {
+        if (s.classList.contains('en')) {
+          s.textContent = m === 'sleep'
+            ? 'Recommended Wake-Up Times'
+            : 'Recommended Sleep Times';
+        }
+        if (s.classList.contains('zh')) {
+          s.textContent = m === 'sleep'
+            ? '推荐起床时间'
+            : '推荐入睡时间';
+        }
+      });
+      updateLabels();
+      calculate();
+    }
+
+    function updateLabels() {
+      const infoSleep = document.getElementById('cycleInfoSleep');
+      const infoWake = document.getElementById('cycleInfoWake');
+      if (infoSleep) infoSleep.style.display = mode === 'sleep' ? '' : 'none';
+      if (infoWake) infoWake.style.display = mode === 'wake' ? '' : 'none';
+
+      document.getElementById('tipText').style.display = lang === 'en' ? '' : 'none';
+      document.getElementById('tipTextZh').style.display = lang === 'zh' ? '' : 'none';
+    }
+
+    function formatTime(date) {
+      const h = String(date.getHours()).padStart(2, '0');
+      const m = String(date.getMinutes()).padStart(2, '0');
+      return h + ':' + m;
+    }
+
+    function getQualityClass(cycles) {
+      if (cycles === 6) return 'best';
+      if (cycles === 5) return 'good';
+      return 'ok';
+    }
+
+    function getQualityLabel(cycles, isZh) {
+      if (cycles === 6) return isZh ? '最佳' : 'Best';
+      if (cycles === 5) return isZh ? '良好' : 'Good';
+      return isZh ? '一般' : 'OK';
+    }
+
+    function calculate() {
+      const hour = parseInt(document.getElementById('hourInput').value) || 0;
+      const min = parseInt(document.getElementById('minInput').value) || 0;
+      const isZh = lang === 'zh';
+
+      if (mode === 'sleep') {
+        // Given: time to fall asleep → show wake-up times
+        const fallAsleep = new Date();
+        fallAsleep.setHours(hour, min, 0, 0);
+        // If the time is before now, add a day
+        const now = new Date();
+        if (fallAsleep <= now) fallAsleep.setDate(fallAsleep.getDate() + 1);
+
+        const grid = document.getElementById('resultsGrid');
+        grid.innerHTML = '';
+
+        // 6, 5, 4 cycles (descending quality)
+        [6, 5, 4].forEach(cycles => {
+          const sleepMs = cycles * 90 * 60 * 1000;
+          const wake = new Date(fallAsleep.getTime() + sleepMs);
+          const card = document.createElement('div');
+          card.className = 'result-card ' + getQualityClass(cycles);
+          const hrs = cycles * 1.5;
+          card.innerHTML =
+            '<div class="quality-dot"></div>' +
+            '<div class="cycles">' + cycles + '×90min · ' + hrs + 'h</div>' +
+            '<div class="time">' + formatTime(wake) + '</div>' +
+            '<div class="sleep-hrs">' + getQualityLabel(cycles, isZh) + '</div>';
+          grid.appendChild(card);
+        });
+
+        // Sleep now recommendations
+        const nowSleep = new Date();
+        const sleepNowRow = document.getElementById('sleepNowRow');
+        sleepNowRow.innerHTML = '';
+        [6, 5].forEach(cycles => {
+          const wakeNow = new Date(nowSleep.getTime() + cycles * 90 * 60 * 1000);
+          const div = document.createElement('div');
+          div.className = 'rec-item';
+          div.innerHTML =
+            '<div class="rec-label">' + cycles + ' cycles · ' + (cycles * 1.5) + 'h</div>' +
+            '<div class="rec-time">' + formatTime(wakeNow) + '</div>' +
+            '<div class="rec-note">' + getQualityLabel(cycles, isZh) + '</div>';
+          sleepNowRow.appendChild(div);
+        });
+
+      } else {
+        // Given: wake-up time → show sleep times
+        const wakeUp = new Date();
+        wakeUp.setHours(hour, min, 0, 0);
+        // If the wake time is before now, assume it's tomorrow
+        const now = new Date();
+        if (wakeUp <= now) wakeUp.setDate(wakeUp.getDate() + 1);
+
+        const grid = document.getElementById('resultsGrid');
+        grid.innerHTML = '';
+
+        // 6, 5, 4 cycles from wake-up time (back-calculated)
+        [6, 5, 4].forEach(cycles => {
+          const sleepMs = cycles * 90 * 60 * 1000;
+          const sleepTime = new Date(wakeUp.getTime() - sleepMs);
+          const fallAsleepTime = new Date(sleepTime.getTime() - FALL_ASLEEP_MIN * 60 * 1000);
+
+          const card = document.createElement('div');
+          card.className = 'result-card ' + getQualityClass(cycles);
+          const hrs = cycles * 1.5;
+          card.innerHTML =
+            '<div class="quality-dot"></div>' +
+            '<div class="cycles">' + cycles + '×90min · ' + hrs + 'h</div>' +
+            '<div class="time">' + formatTime(fallAsleepTime) + '</div>' +
+            '<div class="sleep-hrs">' + getQualityLabel(cycles, isZh) + '</div>';
+          grid.appendChild(card);
+        });
+
+        // Sleep now section: when to sleep NOW to wake at target
+        const sleepNowRow = document.getElementById('sleepNowRow');
+        sleepNowRow.innerHTML = '';
+        const sleepNowTarget = new Date(wakeUp.getTime() - 6 * 90 * 60 * 1000);
+        const div = document.createElement('div');
+        div.className = 'rec-item';
+        div.innerHTML =
+          '<div class="rec-label en">Fall asleep at to wake at ' + formatTime(wakeUp) + '</div>' +
+          '<div class="rec-label zh">入睡时间（' + formatTime(wakeUp) + '起床）</div>' +
+          '<div class="rec-time">' + formatTime(sleepNowTarget) + '</div>' +
+          '<div class="rec-note en">' + FALL_ASLEEP_MIN + 'min to fall asleep included</div>' +
+          '<div class="rec-note zh">已含' + FALL_ASLEEP_MIN + '分钟入睡时间</div>';
+        sleepNowRow.appendChild(div);
+      }
+    }
+
+    document.getElementById('hourInput').addEventListener('input', calculate);
+    document.getElementById('minInput').addEventListener('input', calculate);
+    updateLabels();
+    calculate();
+  </script>
+</body>
+</html>

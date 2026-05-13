@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Character Counter – Count Chars, Words, Sentences | Freemaki</title>
+  <meta name="description" content="Free online character counter. Count characters, words, sentences, paragraphs in real-time. Supports mixed Chinese and English text. No signup. EN/ZH bilingual.">
+  <meta name="keywords" content="character counter, word counter, sentence counter, text counter, Chinese character counter, 在线字符统计, 字数统计">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Freemaki">
+  <link rel="canonical" href="https://freemaki.com/counter/">
+  <meta property="og:title" content="Free Character Counter">
+  <meta property="og:description" content="Count characters, words, and sentences in real-time. Supports mixed Chinese and English text.">
+  <meta property="og:url" content="https://freemaki.com/counter/">
+  <meta property="og:site_name" content="Freemaki">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root {
+      --bg: #0f0f1a; --surface: #1a1a2e; --surface2: #252540;
+      --accent: #6c5ce7; --accent2: #a29bfe; --accent-glow: rgba(108,92,231,0.35);
+      --green: #2ecc71; --red: #e74c3c; --yellow: #f1c40f;
+      --text: #e0e0ff; --text-dim: #8888bb;
+      --border: rgba(108,92,231,0.25); --radius: 14px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font);
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+
+    .lang-toggle { position: fixed; top: 20px; right: 20px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 8px; display: flex; overflow: hidden; z-index: 100; }
+    .lang-btn { padding: 6px 14px; background: none; border: none; color: var(--text-dim);
+      font-size: 13px; cursor: pointer; transition: all 0.2s; font-family: var(--font); }
+    .lang-btn.active { background: var(--accent); color: #fff; }
+    .lang-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    .breadcrumb { width: 100%; max-width: 700px; margin-bottom: 32px; display: flex;
+      gap: 8px; align-items: center; font-size: 14px; color: var(--text-dim); }
+    .breadcrumb a { color: var(--accent2); text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 32px 28px; width: 100%; max-width: 700px; }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 14px; color: var(--text-dim); margin-bottom: 24px; }
+
+    textarea {
+      width: 100%; min-height: 200px; background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px; font-size: 15px; color: var(--text); resize: vertical;
+      font-family: var(--font); line-height: 1.7; outline: none; transition: border-color 0.2s;
+    }
+    textarea:focus { border-color: var(--accent2); }
+    textarea::placeholder { color: var(--text-dim); }
+
+    /* Stats */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 20px; }
+    @media (max-width: 560px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    .stat-card {
+      background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px 12px; text-align: center; transition: all 0.2s;
+    }
+    .stat-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .stat-value { font-size: 28px; font-weight: 700; color: var(--accent2); margin-bottom: 4px; }
+    .stat-label { font-size: 12px; color: var(--text-dim); }
+    .stat-card.highlight .stat-value { color: var(--yellow); }
+
+    .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+    @media (max-width: 560px) { .detail-grid { grid-template-columns: 1fr 1fr; } }
+    .detail-item {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 10px 12px; display: flex; justify-content: space-between; align-items: center;
+    }
+    .detail-label { font-size: 12px; color: var(--text-dim); }
+    .detail-value { font-size: 13px; font-weight: 600; color: var(--accent2); }
+
+    .btn-row { display: flex; gap: 10px; margin-top: 16px; }
+    .btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 9px 18px; font-size: 13px; color: var(--text); cursor: pointer; transition: all 0.15s;
+      font-family: var(--font); }
+    .btn:hover { border-color: var(--accent2); color: #fff; }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.primary:hover { background: var(--accent2); border-color: var(--accent2); }
+
+    .footer { margin-top: 32px; font-size: 12px; color: var(--text-dim); display: flex; gap: 20px; }
+    .footer a { color: var(--accent2); text-decoration: none; }
+    .footer a:hover { color: #fff; }
+
+    [lang="en"] .zh { display: none; }
+    [lang="zh"] .en { display: none; }
+  </style>
+</head>
+<body lang="zh">
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+
+  <div class="breadcrumb">
+    <a href="/">Home</a>
+    <span>›</span>
+    <a href="/counter/" class="en">Character Counter</a>
+    <a href="/counter/" class="zh">字符统计</a>
+  </div>
+
+  <div class="card">
+    <h1 class="en">Character Counter</h1>
+    <h1 class="zh">字符统计工具</h1>
+    <p class="subtitle en">Count characters, words, sentences, and paragraphs in real-time. Supports mixed Chinese and English text.</p>
+    <p class="subtitle zh">实时统计字符、单词、句子、段落数量，支持中英文混合文本。</p>
+
+    <textarea id="textInput" placeholder="Start typing or paste your text here...&#10;&#10;开始输入或粘贴文本..."></textarea>
+
+    <div class="stats-grid">
+      <div class="stat-card highlight">
+        <div class="stat-value" id="statChars">0</div>
+        <div class="stat-label en">Characters</div>
+        <div class="stat-label zh">字符</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statWords">0</div>
+        <div class="stat-label en">Words</div>
+        <div class="stat-label zh">单词</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statSentences">0</div>
+        <div class="stat-label en">Sentences</div>
+        <div class="stat-label zh">句子</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statParagraphs">0</div>
+        <div class="stat-label en">Paragraphs</div>
+        <div class="stat-label zh">段落</div>
+      </div>
+    </div>
+
+    <div class="detail-grid">
+      <div class="detail-item">
+        <span class="detail-label en">Chinese Chars</span>
+        <span class="detail-label zh">中文字符</span>
+        <span class="detail-value" id="statCN">0</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label en">English Words</span>
+        <span class="detail-label zh">英文字符</span>
+        <span class="detail-value" id="statEN">0</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label en">Digits</span>
+        <span class="detail-label zh">数字</span>
+        <span class="detail-value" id="statDigits">0</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label en">Spaces</span>
+        <span class="detail-label zh">空格</span>
+        <span class="detail-value" id="statSpaces">0</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label en">Lines</span>
+        <span class="detail-label zh">行数</span>
+        <span class="detail-value" id="statLines">0</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label en">Reading Time</span>
+        <span class="detail-label zh">阅读时间</span>
+        <span class="detail-value" id="statReadTime">0s</span>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" onclick="clearText()">
+        <span class="en">Clear</span>
+        <span class="zh">清空</span>
+      </button>
+      <button class="btn primary" onclick="copyStats()">
+        <span class="en">Copy Stats</span>
+        <span class="zh">复制统计</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="/">← <span class="en">All Tools</span><span class="zh">返回首页</span></a>
+    <a href="/converter/"><span class="en">Unit Converter</span><span class="zh">单位换算</span></a>
+    <a href="/case/"><span class="en">Case Converter</span><span class="zh">驼峰转换</span></a>
+  </div>
+
+  <script>
+    let lang = 'zh';
+
+    function setLang(l) {
+      lang = l;
+      document.body.lang = l;
+      document.querySelectorAll('.lang-toggle .lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.lang-toggle .lang-btn[onclick="setLang(\'' + l + '\')"]').classList.add('active');
+    }
+
+    function countChars(str) {
+      return str.length;
+    }
+
+    function countWords(str) {
+      // Chinese chars counted individually, English words split by whitespace
+      const cnChars = (str.match(/[\u4e00-\u9fff]/g) || []).length;
+      const enWords = str.replace(/[\u4e00-\u9fff]/g, ' ').trim().split(/\s+/).filter(w => w.length > 0).length;
+      return cnChars + enWords;
+    }
+
+    function countSentences(str) {
+      const s = str.replace(/[\u4e00-\u9fff]/g, '');
+      const sentences = s.match(/[.!?。！？]+/g);
+      return sentences ? sentences.length : 0;
+    }
+
+    function countParagraphs(str) {
+      const paras = str.split(/\n\s*\n/).filter(p => p.trim().length > 0);
+      return paras.length > 0 ? paras.length : (str.trim().length > 0 ? 1 : 0);
+    }
+
+    function countCN(str) {
+      return (str.match(/[\u4e00-\u9fff]/g) || []).length;
+    }
+
+    function countEN(str) {
+      return (str.match(/[a-zA-Z]/g) || []).length;
+    }
+
+    function countDigits(str) {
+      return (str.match(/\d/g) || []).length;
+    }
+
+    function countSpaces(str) {
+      return (str.match(/ /g) || []).length;
+    }
+
+    function countLines(str) {
+      return str.split('\n').length;
+    }
+
+    function getReadTime(str, isZh) {
+      // Chinese: ~400 chars/min, English: ~200 words/min
+      const cnChars = countCN(str);
+      const enWords = str.replace(/[\u4e00-\u9fff]/g, ' ').trim().split(/\s+/).filter(w => w.length > 0).length;
+      const minutes = (cnChars / 400 + enWords / 200);
+      if (minutes < 1) {
+        return Math.ceil(minutes * 60) + (isZh ? '秒' : 's');
+      }
+      return Math.ceil(minutes) + (isZh ? '分钟' : 'min');
+    }
+
+    function update() {
+      const text = document.getElementById('textInput').value;
+      const isZh = lang === 'zh';
+      document.getElementById('statChars').textContent = countChars(text);
+      document.getElementById('statWords').textContent = countWords(text);
+      document.getElementById('statSentences').textContent = countSentences(text);
+      document.getElementById('statParagraphs').textContent = countParagraphs(text);
+      document.getElementById('statCN').textContent = countCN(text);
+      document.getElementById('statEN').textContent = countEN(text);
+      document.getElementById('statDigits').textContent = countDigits(text);
+      document.getElementById('statSpaces').textContent = countSpaces(text);
+      document.getElementById('statLines').textContent = countLines(text);
+      document.getElementById('statReadTime').textContent = getReadTime(text, isZh);
+    }
+
+    function clearText() {
+      document.getElementById('textInput').value = '';
+      update();
+    }
+
+    function copyStats() {
+      const isZh = lang === 'zh';
+      const text = document.getElementById('textInput').value;
+      const lines = [
+        isZh ? '📊 文本统计' : '📊 Text Statistics',
+        isZh ? '字符数：' : 'Characters: ' + countChars(text),
+        '',
+      ];
+      const stats = [
+        isZh ? '字符数：' + countChars(text) : 'Characters: ' + countChars(text),
+        isZh ? '单词数：' + countWords(text) : 'Words: ' + countWords(text),
+        isZh ? '句子数：' + countSentences(text) : 'Sentences: ' + countSentences(text),
+        isZh ? '段落数：' + countParagraphs(text) : 'Paragraphs: ' + countParagraphs(text),
+        isZh ? '中文字符：' + countCN(text) : 'Chinese Chars: ' + countCN(text),
+        isZh ? '英文字符：' + countEN(text) : 'English Chars: ' + countEN(text),
+        isZh ? '数字：' + countDigits(text) : 'Digits: ' + countDigits(text),
+        isZh ? '阅读时间：' + getReadTime(text, true) : 'Reading Time: ' + getReadTime(text, false),
+      ];
+      navigator.clipboard.writeText(stats.join('\n')).then(() => {
+        const btn = document.querySelector('.btn.primary');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '✓';
+        setTimeout(() => { btn.innerHTML = orig; }, 1200);
+      });
+    }
+
+    document.getElementById('textInput').addEventListener('input', update);
+    update();
+  </script>
+</body>
+</html>
