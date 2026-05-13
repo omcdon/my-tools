@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freemaki Unit Converter – 单位换算</title>
+  <meta name="description" content="Free online unit converter. Convert length, weight, temperature, and area units instantly. No signup required.">
+  <meta name="keywords" content="unit converter,单位换算,长度换算,重量换算,温度换算,面积换算,length converter,weight converter">
+  <link rel="canonical" href="https://www.freemaki.com/converter/">
+  <meta property="og:title" content="Freemaki Unit Converter – 单位换算">
+  <meta property="og:description" content="Free online unit converter for length, weight, temperature, and area.">
+  <meta property="og:url" content="https://www.freemaki.com/converter/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Freemaki Unit Converter">
+  <meta name="twitter:description" content="Free online unit converter for length, weight, temperature, and area.">
+  <style>
+    :root {
+      --bg: #0f0f1a;
+      --surface: #1a1a2e;
+      --surface2: #252540;
+      --accent: #6c5ce7;
+      --accent2: #a29bfe;
+      --accent-glow: rgba(108, 92, 231, 0.35);
+      --text: #e0e0ff;
+      --text-dim: #8888bb;
+      --border: rgba(108,92,231,0.25);
+      --radius: 14px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --green: #2ecc71;
+      --orange: #e17055;
+      --blue: #0984e3;
+      --teal: #00b894;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    /* Language Toggle */
+    .lang-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      overflow: hidden;
+      z-index: 100;
+    }
+    .lang-btn {
+      padding: 6px 14px;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font);
+    }
+    .lang-btn.active { background: var(--accent); color: #fff; }
+    .lang-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 40px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 14px;
+      color: var(--text-dim);
+    }
+    .breadcrumb a { color: var(--accent2); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: #fff; }
+
+    /* Card */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 560px;
+      text-align: center;
+    }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 14px; color: var(--text-dim); margin-bottom: 32px; }
+
+    /* Category Tabs */
+    .cat-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 28px;
+    }
+    .cat-tab {
+      padding: 10px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text-dim);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .cat-tab .cat-icon { font-size: 18px; }
+    .cat-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 4px 16px var(--accent-glow); }
+    .cat-tab:hover:not(.active) { color: var(--text); background: #2e2e50; }
+    .cat-tab.active[data-cat="length"] { background: var(--blue); border-color: var(--blue); box-shadow: 0 4px 16px rgba(9,132,227,0.35); }
+    .cat-tab.active[data-cat="weight"] { background: var(--orange); border-color: var(--orange); box-shadow: 0 4px 16px rgba(225,112,85,0.35); }
+    .cat-tab.active[data-cat="temp"] { background: #e74c3c; border-color: #e74c3c; box-shadow: 0 4px 16px rgba(231,76,60,0.35); }
+    .cat-tab.active[data-cat="area"] { background: var(--teal); border-color: var(--teal); box-shadow: 0 4px 16px rgba(0,184,148,0.35); }
+
+    /* Converter UI */
+    .convert-box {
+      background: var(--surface2);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .convert-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .convert-row:last-child { margin-bottom: 0; }
+    .convert-input {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--text);
+      font-size: 20px;
+      font-weight: 700;
+      font-family: var(--font);
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .convert-input:focus { border-color: var(--accent); }
+    .convert-input::placeholder { color: var(--text-dim); font-weight: 400; font-size: 14px; }
+    .convert-select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 10px;
+      color: var(--text);
+      font-size: 14px;
+      font-family: var(--font);
+      cursor: pointer;
+      outline: none;
+      min-width: 100px;
+      transition: border-color 0.2s;
+    }
+    .convert-select:focus { border-color: var(--accent); }
+    .convert-select option { background: var(--surface); }
+    .swap-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--text-dim);
+      transition: all 0.2s;
+      flex-shrink: 0;
+      flex-direction: column;
+      gap: 0;
+    }
+    .swap-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .swap-line {
+      width: 12px;
+      height: 1px;
+      background: currentColor;
+      position: relative;
+    }
+
+    /* Result */
+    .result-box {
+      background: var(--surface2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      transition: border-color 0.3s;
+    }
+    .result-box.highlight { border-color: var(--accent2); box-shadow: 0 0 20px rgba(162,155,254,0.15); }
+    .result-label {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .result-value {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--accent2);
+      font-variant-numeric: tabular-nums;
+      word-break: break-all;
+      line-height: 1.2;
+    }
+    .result-unit { font-size: 14px; color: var(--text-dim); margin-top: 4px; font-weight: 400; }
+    .result-copy {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+    .copy-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px 10px;
+      color: var(--text-dim);
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font);
+    }
+    .copy-btn:hover { border-color: var(--accent); color: var(--accent2); }
+    .copy-btn.copied { border-color: var(--green); color: var(--green); }
+
+    /* Quick Reference Table */
+    .ref-section { margin-top: 24px; text-align: left; }
+    .ref-title {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .ref-table td {
+      padding: 7px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: var(--text);
+    }
+    .ref-table tr:last-child td { border-bottom: none; }
+    .ref-table td:first-child { color: var(--text-dim); }
+    .ref-table td:last-child { color: var(--accent2); font-weight: 600; text-align: right; }
+    .ref-table tr:hover td { background: rgba(108,92,231,0.08); }
+
+    /* Footer */
+    .footer {
+      margin-top: 32px;
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      gap: 20px;
+    }
+    .footer a { color: var(--accent2); text-decoration: none; }
+    .footer a:hover { color: #fff; }
+
+    /* Lang toggle */
+    [lang="en"] .zh { display: none; }
+    [lang="zh"] .en { display: none; }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .cat-tabs { grid-template-columns: repeat(2, 1fr); }
+      .convert-row { flex-wrap: wrap; }
+      .convert-select { min-width: 80px; }
+    }
+  </style>
+</head>
+<body lang="zh">
+
+  <button class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </button>
+
+  <nav class="breadcrumb">
+    <a href="../">Freemaki</a>
+    <span>/</span>
+    <span class="zh">单位换算</span><span class="en">Unit Converter</span>
+  </nav>
+
+  <div class="card">
+    <h1 class="zh">单位换算器</h1>
+    <h1 class="en">Unit Converter</h1>
+    <p class="subtitle zh">长度 · 重量 · 温度 · 面积，实时转换</p>
+    <p class="subtitle en">Length · Weight · Temperature · Area</p>
+
+    <!-- Category Tabs -->
+    <div class="cat-tabs">
+      <button class="cat-tab active" data-cat="length" onclick="setCategory('length')">
+        <span class="cat-icon">📏</span>
+        <span class="zh">长度</span><span class="en">Length</span>
+      </button>
+      <button class="cat-tab" data-cat="weight" onclick="setCategory('weight')">
+        <span class="cat-icon">⚖️</span>
+        <span class="zh">重量</span><span class="en">Weight</span>
+      </button>
+      <button class="cat-tab" data-cat="temp" onclick="setCategory('temp')">
+        <span class="cat-icon">🌡️</span>
+        <span class="zh">温度</span><span class="en">Temp</span>
+      </button>
+      <button class="cat-tab" data-cat="area" onclick="setCategory('area')">
+        <span class="cat-icon">📐</span>
+        <span class="zh">面积</span><span class="en">Area</span>
+      </button>
+    </div>
+
+    <!-- Converter -->
+    <div class="convert-box">
+      <div class="convert-row">
+        <input type="number" class="convert-input" id="inputVal" placeholder="输入数值..." oninput="convert()" value="1">
+        <select class="convert-select" id="fromUnit" onchange="convert()"></select>
+      </div>
+      <div class="convert-row" style="justify-content:center;">
+        <button class="swap-btn" onclick="swapUnits()" title="交换单位" id="swapBtn">
+          <span style="font-size:14px;">⇅</span>
+        </button>
+      </div>
+      <div class="convert-row">
+        <input type="text" class="convert-input" id="outputVal" readonly placeholder="结果...">
+        <select class="convert-select" id="toUnit" onchange="convert()"></select>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div class="result-box" id="resultBox">
+      <div class="result-label">
+        <span class="zh">转换结果</span><span class="en">Result</span>
+      </div>
+      <div class="result-value" id="resultValue">—</div>
+      <div class="result-unit" id="resultUnit"></div>
+      <div class="result-copy">
+        <button class="copy-btn" id="copyBtn" onclick="copyResult()">
+          <span class="zh">复制</span><span class="en">Copy</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Reference -->
+    <div class="ref-section" id="refSection"></div>
+  </div>
+
+  <footer class="footer">
+    <a href="../pomodoro/">
+      <span class="zh">番茄钟</span><span class="en">Pomodoro Timer</span>
+    </a>
+    <a href="../calorie/">
+      <span class="zh">卡路里计算</span><span class="en">Calorie Calculator</span>
+    </a>
+  </footer>
+
+  <script>
+    // ── Unit Data ─────────────────────────────────────────────
+    const CATEGORIES = {
+      length: {
+        label: { zh: '长度', en: 'Length' },
+        units: [
+          { id: 'mm',   label: 'mm',   name: { zh: '毫米', en: 'Millimeter' },  factor: 0.001 },
+          { id: 'cm',   label: 'cm',   name: { zh: '厘米', en: 'Centimeter' },   factor: 0.01 },
+          { id: 'm',    label: 'm',    name: { zh: '米', en: 'Meter' },          factor: 1 },
+          { id: 'km',   label: 'km',   name: { zh: '公里', en: 'Kilometer' },    factor: 1000 },
+          { id: 'in',   label: 'in',   name: { zh: '英寸', en: 'Inch' },         factor: 0.0254 },
+          { id: 'ft',   label: 'ft',   name: { zh: '英尺', en: 'Foot' },         factor: 0.3048 },
+          { id: 'yd',   label: 'yd',   name: { zh: '码', en: 'Yard' },           factor: 0.9144 },
+          { id: 'mi',   label: 'mi',   name: { zh: '英里', en: 'Mile' },        factor: 1609.344 },
+        ],
+        default: ['m', 'ft'],
+        refBase: 'm',
+        refItems: [
+          { label: { zh: '1 米 =', en: '1 m =' }, value: '3.281 ft' },
+          { label: { zh: '1 公里 =', en: '1 km =' }, value: '0.6214 mi' },
+          { label: { zh: '1 英寸 =', en: '1 in =' }, value: '2.54 cm' },
+          { label: { zh: '1 英尺 =', en: '1 ft =' }, value: '30.48 cm' },
+        ]
+      },
+      weight: {
+        label: { zh: '重量', en: 'Weight' },
+        units: [
+          { id: 'mg',   label: 'mg',   name: { zh: '毫克', en: 'Milligram' },   factor: 0.000001 },
+          { id: 'g',    label: 'g',    name: { zh: '克', en: 'Gram' },           factor: 0.001 },
+          { id: 'kg',   label: 'kg',  name: { zh: '千克', en: 'Kilogram' },     factor: 1 },
+          { id: 't',    label: 't',   name: { zh: '吨', en: 'Ton' },            factor: 1000 },
+          { id: 'oz',   label: 'oz',  name: { zh: '盎司', en: 'Ounce' },        factor: 0.0283495 },
+          { id: 'lb',   label: 'lb',  name: { zh: '磅', en: 'Pound' },          factor: 0.453592 },
+          { id: 'st',   label: 'st',  name: { zh: '英石', en: 'Stone' },        factor: 6.35029 },
+        ],
+        default: ['kg', 'lb'],
+        refBase: 'kg',
+        refItems: [
+          { label: { zh: '1 千克 =', en: '1 kg =' }, value: '2.205 lb' },
+          { label: { zh: '1 磅 =', en: '1 lb =' }, value: '453.6 g' },
+          { label: { zh: '1 盎司 =', en: '1 oz =' }, value: '28.35 g' },
+          { label: { zh: '1 吨 =', en: '1 t =' }, value: '1000 kg' },
+        ]
+      },
+      temp: {
+        label: { zh: '温度', en: 'Temperature' },
+        units: [
+          { id: 'c', label: '°C', name: { zh: '摄氏度', en: 'Celsius' }, factor: null },
+          { id: 'f', label: '°F', name: { zh: '华氏度', en: 'Fahrenheit' }, factor: null },
+          { id: 'k', label: 'K',  name: { zh: '开尔文', en: 'Kelvin' }, factor: null },
+        ],
+        default: ['c', 'f'],
+        refBase: 'c',
+        refItems: [
+          { label: { zh: '0°C =', en: '0°C =' }, value: '32°F = 273.15K' },
+          { label: { zh: '100°C =', en: '100°C =' }, value: '212°F = 373.15K' },
+          { label: { zh: '37°C =', en: '37°C =' }, value: '98.6°F (体温)' },
+          { label: { zh: '20°C =', en: '20°C =' }, value: '68°F (室温)' },
+        ]
+      },
+      area: {
+        label: { zh: '面积', en: 'Area' },
+        units: [
+          { id: 'cm2', label: 'cm²', name: { zh: '平方厘米', en: 'Sq. Centimeter' }, factor: 0.0001 },
+          { id: 'm2',  label: 'm²',  name: { zh: '平方米', en: 'Sq. Meter' },        factor: 1 },
+          { id: 'km2', label: 'km²', name: { zh: '平方公里', en: 'Sq. Kilometer' },  factor: 1000000 },
+          { id: 'ha',  label: 'ha',  name: { zh: '公顷', en: 'Hectare' },            factor: 10000 },
+          { id: 'ac',  label: 'ac',  name: { zh: '英亩', en: 'Acre' },              factor: 4046.856 },
+          { id: 'ft2', label: 'ft²', name: { zh: '平方英尺', en: 'Sq. Foot' },      factor: 0.092903 },
+          { id: 'yd2', label: 'yd²', name: { zh: '平方码', en: 'Sq. Yard' },        factor: 0.836127 },
+        ],
+        default: ['m2', 'ft2'],
+        refBase: 'm2',
+        refItems: [
+          { label: { zh: '1 m² =', en: '1 m² =' }, value: '10.76 ft²' },
+          { label: { zh: '1 公顷 =', en: '1 ha =' }, value: '2.471 ac' },
+          { label: { zh: '1 km² =', en: '1 km² =' }, value: '100 ha' },
+          { label: { zh: '1 英亩 =', en: '1 ac =' }, value: '4047 m²' },
+        ]
+      }
+    };
+
+    // ── State ─────────────────────────────────────────────────
+    let currentCat = 'length';
+
+    // ── Elements ─────────────────────────────────────────────
+    const inputVal  = document.getElementById('inputVal');
+    const fromUnit  = document.getElementById('fromUnit');
+    const toUnit    = document.getElementById('toUnit');
+    const outputVal = document.getElementById('outputVal');
+    const resultBox = document.getElementById('resultBox');
+    const resultValue = document.getElementById('resultValue');
+    const resultUnit   = document.getElementById('resultUnit');
+    const refSection   = document.getElementById('refSection');
+
+    // ── Build selects ────────────────────────────────────────
+    function buildSelects() {
+      const cat = CATEGORIES[currentCat];
+      [fromUnit, toUnit].forEach((sel, i) => {
+        const def = i === 0 ? cat.default[0] : cat.default[1];
+        sel.innerHTML = cat.units.map(u =>
+          `<option value="${u.id}" ${u.id === def ? 'selected' : ''}>${u.label} – ${u.name.zh} / ${u.name.en}</option>`
+        ).join('');
+      });
+    }
+
+    // ── Build reference table ────────────────────────────────
+    function buildRef() {
+      const cat = CATEGORIES[currentCat];
+      const isZh = document.body.lang === 'zh';
+      refSection.innerHTML = `
+        <div class="ref-title">
+          <span class="zh">常用换算参考</span><span class="en">Quick Reference</span>
+        </div>
+        <table class="ref-table">
+          ${cat.refItems.map(item => `
+            <tr>
+              <td>${item.label.zh} ${item.label.en}</td>
+              <td>${item.value}</td>
+            </tr>
+          `).join('')}
+        </table>
+      `;
+    }
+
+    // ── Convert ──────────────────────────────────────────────
+    function convert() {
+      const val = parseFloat(inputVal.value);
+      if (isNaN(val) || inputVal.value === '') {
+        outputVal.value = '';
+        resultValue.textContent = '—';
+        resultUnit.textContent = '';
+        resultBox.classList.remove('highlight');
+        return;
+      }
+
+      const cat = CATEGORIES[currentCat];
+      const from = cat.units.find(u => u.id === fromUnit.value);
+      const to   = cat.units.find(u => u.id === toUnit.value);
+
+      let result;
+      if (currentCat === 'temp') {
+        result = convertTemp(val, from.id, to.id);
+      } else {
+        const base = val * from.factor;
+        result = base / to.factor;
+      }
+
+      const displayResult = formatNumber(result);
+      outputVal.value = displayResult;
+      resultValue.textContent = displayResult;
+      resultUnit.textContent = `${from.label} = ${displayResult} ${to.label}`;
+      resultBox.classList.add('highlight');
+    }
+
+    function convertTemp(val, from, to) {
+      // Convert to Celsius first
+      let c;
+      if (from === 'c') c = val;
+      else if (from === 'f') c = (val - 32) * 5/9;
+      else if (from === 'k') c = val - 273.15;
+
+      // Convert from Celsius to target
+      if (to === 'c') return c;
+      if (to === 'f') return c * 9/5 + 32;
+      if (to === 'k') return c + 273.15;
+    }
+
+    function formatNumber(n) {
+      if (Math.abs(n) < 0.0001 && n !== 0) return n.toExponential(4);
+      if (Math.abs(n) >= 1e10) return n.toExponential(4);
+      const r = Math.round(n * 1e8) / 1e8;
+      return r.toLocaleString('en-US', { maximumFractionDigits: 8 }).replace(/,/g, ' ');
+    }
+
+    // ── Swap ────────────────────────────────────────────────
+    function swapUnits() {
+      const tmp = fromUnit.value;
+      fromUnit.value = toUnit.value;
+      toUnit.value = tmp;
+      // Swap display values too
+      const tmpDisplay = inputVal.value;
+      inputVal.value = outputVal.value;
+      outputVal.value = tmpDisplay;
+      convert();
+    }
+
+    // ── Copy ────────────────────────────────────────────────
+    function copyResult() {
+      const text = `${outputVal.value} ${toUnit.options[toUnit.selectedIndex].text.split(' – ')[0]}`;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copyBtn');
+        const isZh = document.body.lang === 'zh';
+        btn.textContent = isZh ? '已复制!' : 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = isZh ? '复制' : 'Copy';
+          btn.classList.remove('copied');
+        }, 1500);
+      });
+    }
+
+    // ── Category ─────────────────────────────────────────────
+    function setCategory(cat) {
+      currentCat = cat;
+      document.querySelectorAll('.cat-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+      buildSelects();
+      convert();
+      buildRef();
+    }
+
+    // ── Language ─────────────────────────────────────────────
+    function setLang(lang) {
+      document.body.lang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.textContent.includes(lang === 'zh' ? '中文' : 'EN'));
+      });
+      buildSelects();
+      buildRef();
+      convert();
+    }
+
+    // ── Init ────────────────────────────────────────────────
+    buildSelects();
+    buildRef();
+    convert();
+  </script>
+</body>
+</html>

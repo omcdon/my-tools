@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freemaki Pomodoro Timer – 番茄钟</title>
+  <meta name="description" content="Free online Pomodoro timer. 25-minute focus sessions, 5-minute breaks. Stay productive with customizable work intervals.">
+  <meta name="keywords" content="pomodoro timer,番茄钟,专注计时器,番茄工作法,productivity timer,focus timer">
+  <link rel="canonical" href="https://www.freemaki.com/pomodoro/">
+  <meta property="og:title" content="Freemaki Pomodoro Timer – 番茄钟">
+  <meta property="og:description" content="Free online Pomodoro timer. 25-minute focus sessions, 5-minute breaks.">
+  <meta property="og:url" content="https://www.freemaki.com/pomodoro/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Freemaki Pomodoro Timer">
+  <meta name="twitter:description" content="Free online Pomodoro timer. 25-minute focus sessions.">
+  <style>
+    :root {
+      --bg: #0f0f1a;
+      --surface: #1a1a2e;
+      --surface2: #252540;
+      --accent: #6c5ce7;
+      --accent2: #a29bfe;
+      --accent-glow: rgba(108, 92, 231, 0.35);
+      --text: #e0e0ff;
+      --text-dim: #8888bb;
+      --border: rgba(108,92,231,0.25);
+      --radius: 14px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    /* Nav */
+    .breadcrumb {
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 40px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 14px;
+      color: var(--text-dim);
+    }
+    .breadcrumb a {
+      color: var(--accent2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .breadcrumb a:hover { color: #fff; }
+    .breadcrumb span { color: var(--text-dim); }
+
+    /* Language Toggle */
+    .lang-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      overflow: hidden;
+      z-index: 100;
+    }
+    .lang-btn {
+      padding: 6px 14px;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font);
+    }
+    .lang-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    .lang-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    /* Card */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 560px;
+      text-align: center;
+    }
+
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 14px; color: var(--text-dim); margin-bottom: 36px; }
+
+    /* Timer Ring */
+    .timer-container {
+      position: relative;
+      width: 240px;
+      height: 240px;
+      margin: 0 auto 32px;
+    }
+    .timer-ring-bg {
+      fill: none;
+      stroke: var(--surface2);
+      stroke-width: 10;
+    }
+    .timer-ring-progress {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 10;
+      stroke-linecap: round;
+      transform: rotate(-90deg);
+      transform-origin: center;
+      filter: drop-shadow(0 0 8px var(--accent-glow));
+      transition: stroke-dashoffset 0.8s ease;
+    }
+    .timer-ring-glow {
+      fill: none;
+      stroke: var(--accent2);
+      stroke-width: 2;
+      stroke-linecap: round;
+      transform: rotate(-90deg);
+      transform-origin: center;
+      opacity: 0.4;
+    }
+    .timer-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .timer-time {
+      font-size: 52px;
+      font-weight: 800;
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+    .timer-mode-label {
+      font-size: 12px;
+      color: var(--accent2);
+      margin-top: 6px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Session Dots */
+    .session-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .session-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    .session-dot.done {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 6px var(--accent-glow);
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .btn {
+      padding: 10px 28px;
+      border-radius: 10px;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 16px var(--accent-glow);
+    }
+    .btn-primary:hover { background: #7d6ef0; transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: #2e2e50; }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    /* Mode Tabs */
+    .mode-tabs {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      margin-bottom: 28px;
+      background: var(--surface2);
+      border-radius: 12px;
+      padding: 5px;
+    }
+    .mode-tab {
+      flex: 1;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 9px;
+      background: none;
+      color: var(--text-dim);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: var(--font);
+    }
+    .mode-tab.active {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+    .mode-tab:hover:not(.active) { color: var(--text); }
+
+    /* Settings */
+    .settings {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+    .settings label { display: flex; align-items: center; gap: 6px; }
+    .settings input {
+      width: 60px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+      text-align: center;
+      font-size: 13px;
+      font-family: var(--font);
+    }
+    .settings input:focus { outline: none; border-color: var(--accent); }
+
+    /* Stats */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item { text-align: center; }
+    .stat-value { font-size: 28px; font-weight: 800; color: var(--accent2); }
+    .stat-label { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+
+    /* Alert overlay */
+    .alert-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,15,26,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      backdrop-filter: blur(4px);
+    }
+    .alert-overlay.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .alert-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 48px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .alert-icon { font-size: 48px; margin-bottom: 12px; }
+    .alert-title { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .alert-msg { font-size: 15px; color: var(--text-dim); margin-bottom: 24px; }
+    .alert-overlay .btn { min-width: 140px; }
+
+    /* Footer */
+    .footer {
+      margin-top: 32px;
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      gap: 20px;
+    }
+    .footer a { color: var(--accent2); text-decoration: none; }
+    .footer a:hover { color: #fff; }
+
+    /* Animations */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+    .timer-ring-progress.running { animation: pulse 2s ease-in-out infinite; }
+
+    [lang="en"] .zh { display: none; }
+    [lang="zh"] .en { display: none; }
+  </style>
+</head>
+<body lang="zh">
+
+  <button class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </button>
+
+  <nav class="breadcrumb">
+    <a href="../">Freemaki</a>
+    <span>/</span>
+    <span class="zh">番茄钟</span><span class="en">Pomodoro Timer</span>
+  </nav>
+
+  <div class="card">
+    <h1 class="zh">番茄钟 · 专注计时器</h1>
+    <h1 class="en">Pomodoro Timer</h1>
+    <p class="subtitle zh">专注25分钟，休息5分钟，保持高效节奏</p>
+    <p class="subtitle en">25 min focus · 5 min break · Stay productive</p>
+
+    <!-- Mode Tabs -->
+    <div class="mode-tabs" id="modeTabs">
+      <button class="mode-tab active" data-mode="focus" onclick="selectMode('focus')">
+        <span class="zh">专注</span><span class="en">Focus</span>
+      </button>
+      <button class="mode-tab" data-mode="shortBreak" onclick="selectMode('shortBreak')">
+        <span class="zh">短休息</span><span class="en">Short Break</span>
+      </button>
+      <button class="mode-tab" data-mode="longBreak" onclick="selectMode('longBreak')">
+        <span class="zh">长休息</span><span class="en">Long Break</span>
+      </button>
+    </div>
+
+    <!-- Ring -->
+    <div class="timer-container">
+      <svg viewBox="0 0 240 240" width="240" height="240">
+        <circle class="timer-ring-bg" cx="120" cy="120" r="105"/>
+        <circle class="timer-ring-glow" cx="120" cy="120" r="105"
+          stroke-dasharray="660" stroke-dashoffset="165"/>
+        <circle class="timer-ring-progress" id="timerRing"
+          cx="120" cy="120" r="105"
+          stroke-dasharray="660" stroke-dashoffset="0"/>
+      </svg>
+      <div class="timer-center">
+        <div class="timer-time" id="timerDisplay">25:00</div>
+        <div class="timer-mode-label" id="modeLabel">
+          <span class="zh">专注中</span><span class="en">FOCUS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Session Dots -->
+    <div class="session-dots" id="sessionDots">
+      <div class="session-dot" data-index="0"></div>
+      <div class="session-dot" data-index="1"></div>
+      <div class="session-dot" data-index="2"></div>
+      <div class="session-dot" data-index="3"></div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button class="btn btn-primary" id="startBtn" onclick="toggleTimer()">
+        <span class="zh">开始</span><span class="en">Start</span>
+      </button>
+      <button class="btn btn-secondary" id="resetBtn" onclick="resetTimer()">
+        <span class="zh">重置</span><span class="en">Reset</span>
+      </button>
+      <button class="btn btn-secondary" id="skipBtn" onclick="skipSession()">
+        <span class="zh">跳过</span><span class="en">Skip</span>
+      </button>
+    </div>
+
+    <!-- Settings -->
+    <div class="settings">
+      <label>
+        <span class="zh">专注(分)</span><span class="en">Focus</span>
+        <input type="number" id="focusMin" value="25" min="1" max="120">
+      </label>
+      <label>
+        <span class="zh">短休(分)</span><span class="en">Short</span>
+        <input type="number" id="shortMin" value="5" min="1" max="30">
+      </label>
+      <label>
+        <span class="zh">长休(分)</span><span class="en">Long</span>
+        <input type="number" id="longMin" value="15" min="1" max="60">
+      </label>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-value" id="totalPomodoros">0</div>
+        <div class="stat-label zh">完成番茄</div>
+        <div class="stat-label en">Pomodoros</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" id="totalMinutes">0</div>
+        <div class="stat-label zh">专注分钟</div>
+        <div class="stat-label en">Focus Min</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <a href="../color/">
+      <span class="zh">配色方案</span><span class="en">Color Converter</span>
+    </a>
+    <a href="../calorie/">
+      <span class="zh">卡路里计算</span><span class="en">Calorie Calculator</span>
+    </a>
+  </footer>
+
+  <!-- Alert Overlay -->
+  <div class="alert-overlay" id="alertOverlay">
+    <div class="alert-box">
+      <div class="alert-icon" id="alertIcon">🎉</div>
+      <div class="alert-title" id="alertTitle">
+        <span class="zh">时间到！</span><span class="en">Time's up!</span>
+      </div>
+      <div class="alert-msg" id="alertMsg">
+        <span class="zh">休息一下吧</span><span class="en">Take a break</span>
+      </div>
+      <button class="btn btn-primary" onclick="dismissAlert()">
+        <span class="zh">知道了</span><span class="en">Got it</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // ── State ──────────────────────────────────────────────────
+    const RING_CIRCUMFERENCE = 2 * Math.PI * 105; // ≈ 660
+    let timer = null;
+    let remaining = 25 * 60;
+    let totalSeconds = 25 * 60;
+    let isRunning = false;
+    let currentMode = 'focus';
+    let completedInCycle = 0;
+    let totalPomodoros = 0;
+
+    // ── Elements ─────────────────────────────────────────────
+    const timerDisplay = document.getElementById('timerDisplay');
+    const timerRing = document.getElementById('timerRing');
+    const modeLabel = document.getElementById('modeLabel');
+    const startBtn = document.getElementById('startBtn');
+    const alertOverlay = document.getElementById('alertOverlay');
+    const alertIcon = document.getElementById('alertIcon');
+    const alertTitle = document.getElementById('alertTitle');
+    const alertMsg = document.getElementById('alertMsg');
+    const sessionDots = document.querySelectorAll('.session-dot');
+
+    // ── Mode durations (seconds) ──────────────────────────────
+    function getDurations() {
+      return {
+        focus: parseInt(document.getElementById('focusMin').value || 25) * 60,
+        shortBreak: parseInt(document.getElementById('shortMin').value || 5) * 60,
+        longBreak: parseInt(document.getElementById('longMin').value || 15) * 60,
+      };
+    }
+
+    // ── Ring update ───────────────────────────────────────────
+    function updateRing() {
+      const progress = 1 - remaining / totalSeconds;
+      const offset = RING_CIRCUMFERENCE * (1 - progress);
+      timerRing.style.strokeDasharray = RING_CIRCUMFERENCE;
+      timerRing.style.strokeDashoffset = offset;
+    }
+
+    // ── Display ───────────────────────────────────────────────
+    function formatTime(s) {
+      const m = Math.floor(s / 60).toString().padStart(2, '0');
+      const sec = (s % 60).toString().padStart(2, '0');
+      return `${m}:${sec}`;
+    }
+
+    function updateDisplay() {
+      timerDisplay.textContent = formatTime(remaining);
+      document.title = `${formatTime(remaining)} ${currentMode === 'focus' ? '🔴' : '🟢'} Freemaki Pomodoro`;
+      updateRing();
+    }
+
+    // ── Timer logic ──────────────────────────────────────────
+    function tick() {
+      remaining--;
+      updateDisplay();
+      if (remaining <= 0) {
+        clearInterval(timer);
+        isRunning = false;
+        timerRing.classList.remove('running');
+        onSessionEnd();
+      }
+    }
+
+    function onSessionEnd() {
+      if (currentMode === 'focus') {
+        totalPomodoros++;
+        completedInCycle++;
+        document.getElementById('totalPomodoros').textContent = totalPomodoros;
+        document.getElementById('totalMinutes').textContent =
+          parseInt(document.getElementById('totalMinutes').textContent) + parseInt(document.getElementById('focusMin').value || 25);
+        // Mark dot
+        if (completedInCycle <= 4) {
+          sessionDots[completedInCycle - 1].classList.add('done');
+        }
+        playBeep();
+        if (completedInCycle >= 4) {
+          setMode('longBreak');
+          completedInCycle = 0;
+          clearDots();
+          showAlert('🎉', zh('干得漂亮！'), zh('完成4个番茄，休息15分钟吧'),
+                    en('Well done!'), en('4 pomodoros done! Rest 15 min.'));
+        } else {
+          setMode('shortBreak');
+          showAlert('⏰', zh('专注结束'), zh('休息5分钟吧'),
+                    en('Focus done!'), en('Take a 5 min break.'));
+        }
+      } else {
+        playBeep();
+        setMode('focus');
+        showAlert('💪', zh('休息结束'), zh('开始下一个番茄！'),
+                  en('Break over!'), en('Time to focus again!'));
+      }
+    }
+
+    function playBeep() {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const freq = currentMode === 'focus' ? 880 : 660;
+        [0, 0.15, 0.3].forEach((delay, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.frequency.value = freq;
+          osc.type = 'sine';
+          gain.gain.setValueAtTime(0.4, ctx.currentTime + delay);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 0.3);
+          osc.start(ctx.currentTime + delay);
+          osc.stop(ctx.currentTime + delay + 0.3);
+        });
+      } catch (e) {}
+    }
+
+    // ── Mode control ──────────────────────────────────────────
+    function setMode(mode) {
+      currentMode = mode;
+      const durations = getDurations();
+      totalSeconds = durations[mode];
+      remaining = totalSeconds;
+
+      document.querySelectorAll('.mode-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.mode === mode);
+      });
+
+      const labels = {
+        focus: { zh: '专注中', en: 'FOCUS' },
+        shortBreak: { zh: '短休息', en: 'SHORT BREAK' },
+        longBreak: { zh: '长休息', en: 'LONG BREAK' },
+      };
+      timerLabelSet(labels[mode]);
+      timerRing.style.stroke = mode === 'focus' ? 'var(--accent)' : '#2ecc71';
+
+      updateDisplay();
+      isRunning = false;
+      startBtn.innerHTML = `<span class="zh">开始</span><span class="en">Start</span>`;
+      timerRing.classList.remove('running');
+    }
+
+    function selectMode(mode) { setMode(mode); }
+
+    function timerLabelSet(label) {
+      modeLabel.innerHTML = label.zh ? `<span class="zh">${label.zh}</span><span class="en">${label.en}</span>` : label.en || label.zh;
+    }
+
+    function clearDots() {
+      sessionDots.forEach(d => d.classList.remove('done'));
+    }
+
+    // ── Controls ──────────────────────────────────────────────
+    function toggleTimer() {
+      if (isRunning) {
+        clearInterval(timer);
+        isRunning = false;
+        startBtn.innerHTML = `<span class="zh">继续</span><span class="en">Resume</span>`;
+        timerRing.classList.remove('running');
+      } else {
+        isRunning = true;
+        startBtn.innerHTML = `<span class="zh">暂停</span><span class="en">Pause</span>`;
+        timerRing.classList.add('running');
+        timer = setInterval(tick, 1000);
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      isRunning = false;
+      startBtn.innerHTML = `<span class="zh">开始</span><span class="en">Start</span>`;
+      timerRing.classList.remove('running');
+      setMode(currentMode);
+    }
+
+    function skipSession() {
+      clearInterval(timer);
+      isRunning = false;
+      timerRing.classList.remove('running');
+      onSessionEnd();
+    }
+
+    // ── Alert ─────────────────────────────────────────────────
+    function showAlert(icon, title, msg, enTitle, enMsg) {
+      const isZh = document.body.lang === 'zh';
+      alertIcon.textContent = icon;
+      alertTitle.innerHTML = isZh ? title : enTitle;
+      alertMsg.innerHTML = isZh ? msg : enMsg;
+      alertOverlay.classList.add('show');
+    }
+
+    function dismissAlert() {
+      alertOverlay.classList.remove('show');
+    }
+
+    // ── Language ──────────────────────────────────────────────
+    function setLang(lang) {
+      document.body.lang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.textContent.includes(lang === 'zh' ? '中文' : 'EN'));
+      });
+      // Sync mode label
+      const durations = getDurations();
+      const modeDuration = Math.ceil(remaining / 60);
+      const labels = {
+        focus: { zh: '专注中', en: 'FOCUS' },
+        shortBreak: { zh: '短休息', en: 'SHORT BREAK' },
+        longBreak: { zh: '长休息', en: 'LONG BREAK' },
+      };
+      timerLabelSet(labels[currentMode]);
+      // Update h1/p
+      document.querySelectorAll('h1').forEach(el => {
+        if (!el.classList.contains('zh') && !el.classList.contains('en')) return;
+      });
+    }
+
+    // ── Init ──────────────────────────────────────────────────
+    updateDisplay();
+    timerRing.style.strokeDasharray = RING_CIRCUMFERENCE;
+    timerRing.style.strokeDashoffset = RING_CIRCUMFERENCE;
+
+    function zh(t) { return t; }
+    function en(t) { return t; }
+  </script>
+</body>
+</html>
