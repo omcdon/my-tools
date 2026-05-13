@@ -4,19 +4,19 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Freemaki – Free Online Tools (12 Free Tools)</title>
-<meta name="description" content="Free online tools: calorie calculator, color converter, Pomodoro timer, unit converter, random picker, case converter, JSON formatter, regex tester, timestamp converter, Base64, JWT decoder, hash generator. No signup. Works offline."/>
+<meta name="description" content="12 free online tools: calorie calculator, color converter, Pomodoro timer, unit converter, random picker, case converter, JSON formatter, regex tester, timestamp converter, Base64, JWT decoder, hash generator. No signup. Works offline."/>
 <meta name="keywords" content="free online tools, calorie calculator, color converter, pomodoro timer, unit converter, random picker, case converter, JSON formatter, regex tester, timestamp, Base64, JWT, hash generator, free tools, developer tools"/>
 <meta name="robots" content="index, follow"/>
 <meta name="author" content="Freemaki"/>
 <link rel="canonical" href="https://freemaki.com/"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Freemaki – Free Online Tools"/>
-<meta property="og:description" content="Free calorie calculator and color converter. No signup required."/>
+<meta property="og:description" content="12 free online tools. No signup required."/>
 <meta property="og:url" content="https://freemaki.com/"/>
 <meta property="og:site_name" content="Freemaki"/>
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Freemaki – Free Online Tools"/>
-<meta name="twitter:description" content="Free calorie calculator and color converter. No signup required."/>
+<meta name="twitter:description" content="12 free online tools. No signup required."/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -56,12 +56,44 @@
   }
   .site-header p { font-size: 16px; color: var(--text2); }
 
+  /* Category Section */
+  .category {
+    margin-bottom: 48px;
+  }
+  .category:last-child { margin-bottom: 32px; }
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .category-icon {
+    font-size: 22px;
+    line-height: 1;
+  }
+  .category-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .category-divider {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .category-count {
+    font-size: 12px;
+    color: var(--text3);
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 2px 10px;
+  }
+
   /* Tools Grid */
   .tools-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
-    margin-bottom: 32px;
   }
   @media (max-width: 900px) {
     .tools-grid { grid-template-columns: repeat(2, 1fr); }
@@ -74,7 +106,7 @@
     background: var(--surface);
     border: 0.5px solid var(--border);
     border-radius: var(--radius);
-    padding: 28px 24px;
+    padding: 24px 20px;
     text-decoration: none;
     color: var(--text);
     transition: all 0.2s;
@@ -88,12 +120,12 @@
     transform: translateY(-2px);
   }
   .tool-card .tool-icon {
-    font-size: 36px;
+    font-size: 34px;
     line-height: 1;
     margin-bottom: 4px;
   }
   .tool-card h2 {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
   }
   .tool-card p {
@@ -207,202 +239,251 @@
   <!-- Ad: Top Banner -->
   <div class="ad-slot" data-i18n="adPlaceholder">Advertisement Space</div>
 
-  <!-- Tools Grid -->
-  <div class="tools-grid">
-    <!-- Calorie Calculator -->
-    <a href="./calorie/" class="tool-card">
-      <div class="tool-icon">🔥</div>
-      <h2 data-i18n="tool1_name">Calorie Calculator</h2>
-      <p data-i18n="tool1_desc">Calculate your BMR, TDEE and daily calorie targets for weight loss, maintenance or muscle gain.</p>
-      <div class="tool-tags">
-        <span class="tag">BMR</span>
-        <span class="tag">TDEE</span>
-        <span class="tag">Macros</span>
-        <span class="tag" data-i18n="tag_metric">Metric/Imperial</span>
-      </div>
-      <div class="arrow">
-        <span data-i18n="open_tool">Open tool</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </a>
+  <!-- Category 1: Developer Tools -->
+  <div class="category">
+    <div class="category-header">
+      <span class="category-icon">💻</span>
+      <span class="category-title" data-i18n="cat1_title">Developer Tools</span>
+      <div class="category-divider"></div>
+      <span class="category-count" data-i18n="cat1_count">7 tools</span>
+    </div>
+    <div class="tools-grid">
 
-    <!-- Color Converter -->
-    <a href="./color/" class="tool-card">
-      <div class="tool-icon">🎨</div>
-      <h2 data-i18n="tool2_name">Color Converter</h2>
-      <p data-i18n="tool2_desc">Convert between HEX, RGB, HSL, CMYK formats with live preview and WCAG contrast checker.</p>
-      <div class="tool-tags">
-        <span class="tag">HEX</span>
-        <span class="tag">RGB / HSL</span>
-        <span class="tag">CMYK</span>
-        <span class="tag" data-i18n="tag_contrast">Contrast Check</span>
-      </div>
-      <div class="arrow">
-        <span data-i18n="open_tool">Open tool</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </a>
+      <!-- JSON Formatter -->
+      <a href="./json/" class="tool-card">
+        <div class="tool-icon">{ }</div>
+        <h2 data-i18n="tool7_name">JSON Formatter</h2>
+        <p data-i18n="tool7_desc">Format, minify, and validate JSON data instantly. Real-time syntax checking and character count.</p>
+        <div class="tool-tags">
+          <span class="tag">JSON</span>
+          <span class="tag">Validate</span>
+          <span class="tag">Prettify</span>
+        </div>
+        <div class="arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
 
-    <!-- Pomodoro Timer -->
-    <a href="./pomodoro/" class="tool-card">
-      <div class="tool-icon">🍅</div>
-      <h2 data-i18n="tool3_name">Pomodoro Timer</h2>
-      <p data-i18n="tool3_desc">25-minute focus sessions with 5-minute breaks. Track your productivity and stay in the zone.</p>
-      <div class="tool-tags">
-        <span class="tag">Focus</span>
-        <span class="tag">Productivity</span>
-        <span class="tag">Timer</span>
-      </div>
-      <div class="arrow">
-        <span data-i18n="open_tool">Open tool</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </a>
+      <!-- Regex Tester -->
+      <a href="./regex/" class="tool-card">
+        <div class="tool-icon">.*</div>
+        <h2 data-i18n="tool8_name">Regex Tester</h2>
+        <p data-i18n="tool8_desc">Test regular expressions in real-time with match highlighting, groups, and flags support.</p>
+        <div class="tool-tags">
+          <span class="tag">Regex</span>
+          <span class="tag">Match</span>
+          <span class="tag">Groups</span>
+        </div>
+        <div class="arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
 
-    <!-- Unit Converter -->
-    <a href="./converter/" class="tool-card">
-      <div class="tool-icon">📏</div>
-      <h2 data-i18n="tool4_name">Unit Converter</h2>
-      <p data-i18n="tool4_desc">Convert length, weight, temperature and area units instantly with real-time results.</p>
-      <div class="tool-tags">
-        <span class="tag">Length</span>
-        <span class="tag">Weight</span>
-        <span class="tag">Temperature</span>
-        <span class="tag">Area</span>
-      </div>
-      <div class="arrow">
-        <span data-i18n="open_tool">Open tool</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </a>
+      <!-- Timestamp Converter -->
+      <a href="./timestamp/" class="tool-card">
+        <div class="tool-icon">⏱</div>
+        <h2 data-i18n="tool9_name">Timestamp Converter</h2>
+        <p data-i18n="tool9_desc">Convert between Unix timestamp and human-readable date. Supports seconds, milliseconds, and current time.</p>
+        <div class="tool-tags">
+          <span class="tag">Unix</span>
+          <span class="tag">Epoch</span>
+          <span class="tag">ISO 8601</span>
+        </div>
+        <div class="arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
 
-    <!-- Random Picker -->
-    <a href="./random/" class="tool-card">
-      <div class="tool-icon">🎲</div>
-      <h2 data-i18n="tool5_name">Random Picker</h2>
-      <p data-i18n="tool5_desc">Draw one from a list, or split a group into teams. Perfect for lucky draws, raffles and random selection.</p>
-      <div class="tool-tags">
-        <span class="tag">Lucky Draw</span>
-        <span class="tag">Team Generator</span>
-        <span class="tag">Randomizer</span>
-      </div>
-      <div class="arrow">
-        <span data-i18n="open_tool">Open tool</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </a>
+      <!-- Base64 -->
+      <a href="./base64/" class="tool-card">
+        <div class="tool-icon">🔐</div>
+        <h2 data-i18n="tool10_name">Base64 Encoder</h2>
+        <p data-i18n="tool10_desc">Encode and decode Base64 strings instantly. All processing done locally in your browser.</p>
+        <div class="tool-tags">
+          <span class="tag">Base64</span>
+          <span class="tag">Encode</span>
+          <span class="tag">Decode</span>
+        </div>
+        <div class="arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
 
-    <!-- Case Converter -->
-    <a href="./case/" class="tool-card">
-      <div class="tool-icon">🔤</div>
-      <h2 data-i18n="tool6_name">Case Converter</h2>
-      <p data-i18n="tool6_desc">Convert text to camelCase, PascalCase, snake_case, kebab-case and more instantly.</p>
-      <div class="tool-tags">
-        <span class="tag">camelCase</span>
-        <span class="tag">snake_case</span>
-        <span class="tag">kebab-case</span>
-      </div>
-      <div class="arrow">
-        <span data-i18n="open_tool">Open tool</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </a>
+      <!-- JWT Decoder -->
+      <a href="./jwt/" class="tool-card">
+        <div class="tool-icon">🎫</div>
+        <h2 data-i18n="tool11_name">JWT Decoder</h2>
+        <p data-i18n="tool11_desc">Decode and inspect JSON Web Tokens. View header, payload, and claims with expiration status.</p>
+        <div class="tool-tags">
+          <span class="tag">JWT</span>
+          <span class="tag">Token</span>
+          <span class="tag">Decode</span>
+        </div>
+        <div class="arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
 
-    <!-- JSON Formatter -->
-    <a href="./json/" class="tool-card">
-      <div class="tool-icon">{ }</div>
-      <h2 data-i18n="tool7_name">JSON Formatter</h2>
-      <p data-i18n="tool7_desc">Format, minify, and validate JSON data instantly. Real-time syntax checking and character count.</p>
-      <div class="tool-tags">
-        <span class="tag">JSON</span>
-        <span class="tag">Validate</span>
-        <span class="tag">Prettify</span>
-      </div>
-      <div class="arrow">
-        <span data-i18n="open_tool">Open tool</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </a>
+      <!-- Hash Generator -->
+      <a href="./hash/" class="tool-card">
+        <div class="tool-icon">#</div>
+        <h2 data-i18n="tool12_name">Hash Generator</h2>
+        <p data-i18n="tool12_desc">Generate MD5, SHA-1, SHA-256, SHA-512 hashes instantly. All computed locally in your browser.</p>
+        <div class="tool-tags">
+          <span class="tag">MD5</span>
+          <span class="tag">SHA-256</span>
+          <span class="tag">SHA-512</span>
+        </div>
+        <div class="arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
 
-    <!-- Regex Tester -->
-    <a href="./regex/" class="tool-card">
-      <div class="tool-icon">.*</div>
-      <h2 data-i18n="tool8_name">Regex Tester</h2>
-      <p data-i18n="tool8_desc">Test regular expressions in real-time with match highlighting, groups, and flags support.</p>
-      <div class="tool-tags">
-        <span class="tag">Regex</span>
-        <span class="tag">Match</span>
-        <span class="tag">Groups</span>
-      </div>
-      <div class="arrow">
-        <span data-i18n="open_tool">Open tool</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </a>
+      <!-- Case Converter -->
+      <a href="./case/" class="tool-card">
+        <div class="tool-icon">🔤</div>
+        <h2 data-i18n="tool6_name">Case Converter</h2>
+        <p data-i18n="tool6_desc">Convert text to camelCase, PascalCase, snake_case, kebab-case and more instantly.</p>
+        <div class="tool-tags">
+          <span class="tag">camelCase</span>
+          <span class="tag">snake_case</span>
+          <span class="tag">kebab-case</span>
+        </div>
+        <div class="arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
 
-    <!-- Timestamp Converter -->
-    <a href="./timestamp/" class="tool-card">
-      <div class="tool-icon">⏱</div>
-      <h2 data-i18n="tool9_name">Timestamp Converter</h2>
-      <p data-i18n="tool9_desc">Convert between Unix timestamp and human-readable date. Supports seconds, milliseconds, and current time.</p>
-      <div class="tool-tags">
-        <span class="tag">Unix</span>
-        <span class="tag">Epoch</span>
-        <span class="tag">ISO 8601</span>
-      </div>
-      <div class="arrow">
-        <span data-i18n="open_tool">Open tool</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </a>
+    </div>
+  </div>
 
-    <!-- Base64 -->
-    <a href="./base64/" class="tool-card">
-      <div class="tool-icon">🔐</div>
-      <h2 data-i18n="tool10_name">Base64 Encoder</h2>
-      <p data-i18n="tool10_desc">Encode and decode Base64 strings instantly. All processing done locally in your browser.</p>
-      <div class="tool-tags">
-        <span class="tag">Base64</span>
-        <span class="tag">Encode</span>
-        <span class="tag">Decode</span>
-      </div>
-      <div class="arrow">
-        <span data-i18n="open_tool">Open tool</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </a>
+  <!-- Category 2: Design & Color -->
+  <div class="category">
+    <div class="category-header">
+      <span class="category-icon">🎨</span>
+      <span class="category-title" data-i18n="cat2_title">Design & Color</span>
+      <div class="category-divider"></div>
+      <span class="category-count" data-i18n="cat2_count">1 tool</span>
+    </div>
+    <div class="tools-grid">
 
-    <!-- JWT Decoder -->
-    <a href="./jwt/" class="tool-card">
-      <div class="tool-icon">🎫</div>
-      <h2 data-i18n="tool11_name">JWT Decoder</h2>
-      <p data-i18n="tool11_desc">Decode and inspect JSON Web Tokens. View header, payload, and claims with expiration status.</p>
-      <div class="tool-tags">
-        <span class="tag">JWT</span>
-        <span class="tag">Token</span>
-        <span class="tag">Decode</span>
-      </div>
-      <div class="arrow">
-        <span data-i18n="open_tool">Open tool</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </a>
+      <!-- Color Converter -->
+      <a href="./color/" class="tool-card">
+        <div class="tool-icon">🎨</div>
+        <h2 data-i18n="tool2_name">Color Converter</h2>
+        <p data-i18n="tool2_desc">Convert between HEX, RGB, HSL, CMYK formats with live preview and WCAG contrast checker.</p>
+        <div class="tool-tags">
+          <span class="tag">HEX</span>
+          <span class="tag">RGB / HSL</span>
+          <span class="tag">CMYK</span>
+          <span class="tag" data-i18n="tag_contrast">Contrast Check</span>
+        </div>
+        <div class="arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
 
-    <!-- Hash Generator -->
-    <a href="./hash/" class="tool-card">
-      <div class="tool-icon">#</div>
-      <h2 data-i18n="tool12_name">Hash Generator</h2>
-      <p data-i18n="tool12_desc">Generate MD5, SHA-1, SHA-256, SHA-512 hashes instantly. All computed locally in your browser.</p>
-      <div class="tool-tags">
-        <span class="tag">MD5</span>
-        <span class="tag">SHA-256</span>
-        <span class="tag">SHA-512</span>
-      </div>
-      <div class="arrow">
-        <span data-i18n="open_tool">Open tool</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-      </div>
-    </a>
+    </div>
+  </div>
+
+  <!-- Category 3: Productivity -->
+  <div class="category">
+    <div class="category-header">
+      <span class="category-icon">⚡</span>
+      <span class="category-title" data-i18n="cat3_title">Productivity</span>
+      <div class="category-divider"></div>
+      <span class="category-count" data-i18n="cat3_count">2 tools</span>
+    </div>
+    <div class="tools-grid">
+
+      <!-- Unit Converter -->
+      <a href="./converter/" class="tool-card">
+        <div class="tool-icon">📏</div>
+        <h2 data-i18n="tool4_name">Unit Converter</h2>
+        <p data-i18n="tool4_desc">Convert length, weight, temperature and area units instantly with real-time results.</p>
+        <div class="tool-tags">
+          <span class="tag">Length</span>
+          <span class="tag">Weight</span>
+          <span class="tag">Temperature</span>
+          <span class="tag">Area</span>
+        </div>
+        <div class="arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
+
+      <!-- Random Picker -->
+      <a href="./random/" class="tool-card">
+        <div class="tool-icon">🎲</div>
+        <h2 data-i18n="tool5_name">Random Picker</h2>
+        <p data-i18n="tool5_desc">Draw one from a list, or split a group into teams. Perfect for lucky draws, raffles and random selection.</p>
+        <div class="tool-tags">
+          <span class="tag">Lucky Draw</span>
+          <span class="tag">Team Generator</span>
+          <span class="tag">Randomizer</span>
+        </div>
+        <div class="arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Category 4: Health & Lifestyle -->
+  <div class="category">
+    <div class="category-header">
+      <span class="category-icon">🍎</span>
+      <span class="category-title" data-i18n="cat4_title">Health & Lifestyle</span>
+      <div class="category-divider"></div>
+      <span class="category-count" data-i18n="cat4_count">2 tools</span>
+    </div>
+    <div class="tools-grid">
+
+      <!-- Calorie Calculator -->
+      <a href="./calorie/" class="tool-card">
+        <div class="tool-icon">🔥</div>
+        <h2 data-i18n="tool1_name">Calorie Calculator</h2>
+        <p data-i18n="tool1_desc">Calculate your BMR, TDEE and daily calorie targets for weight loss, maintenance or muscle gain.</p>
+        <div class="tool-tags">
+          <span class="tag">BMR</span>
+          <span class="tag">TDEE</span>
+          <span class="tag">Macros</span>
+          <span class="tag" data-i18n="tag_metric">Metric/Imperial</span>
+        </div>
+        <div class="arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
+
+      <!-- Pomodoro Timer -->
+      <a href="./pomodoro/" class="tool-card">
+        <div class="tool-icon">🍅</div>
+        <h2 data-i18n="tool3_name">Pomodoro Timer</h2>
+        <p data-i18n="tool3_desc">25-minute focus sessions with 5-minute breaks. Track your productivity and stay in the zone.</p>
+        <div class="tool-tags">
+          <span class="tag">Focus</span>
+          <span class="tag">Productivity</span>
+          <span class="tag">Timer</span>
+        </div>
+        <div class="arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
+
+    </div>
   </div>
 
   <!-- Features -->
@@ -436,7 +517,15 @@
   const i18n = {
     en: {
       site_title: 'Free Online Tools',
-      site_desc: 'No signup · No ads on tools · Works offline after first load',
+      site_desc: '12 free tools · No signup · No ads on tools · Works offline after first load',
+      cat1_title: 'Developer Tools',
+      cat1_count: '7 tools',
+      cat2_title: 'Design & Color',
+      cat2_count: '1 tool',
+      cat3_title: 'Productivity',
+      cat3_count: '2 tools',
+      cat4_title: 'Health & Lifestyle',
+      cat4_count: '2 tools',
       tool1_name: 'Calorie Calculator',
       tool1_desc: 'Calculate your BMR, TDEE and daily calorie targets for weight loss, maintenance or muscle gain.',
       tool2_name: 'Color Converter',
@@ -473,7 +562,15 @@
     },
     zh: {
       site_title: '免费在线工具',
-      site_desc: '无需注册 · 工具内无广告 · 首次加载后离线可用',
+      site_desc: '12款免费工具 · 无需注册 · 工具内无广告 · 首次加载后离线可用',
+      cat1_title: '开发者工具',
+      cat1_count: '7个工具',
+      cat2_title: '设计与颜色',
+      cat2_count: '1个工具',
+      cat3_title: '效率工具',
+      cat3_count: '2个工具',
+      cat4_title: '健康生活',
+      cat4_count: '2个工具',
       tool1_name: '卡路里计算器',
       tool1_desc: '计算你的基础代谢率(BMR)、每日总消耗(TDEE)和目标热量，支持减脂、维持、增肌三种方案。',
       tool2_name: '颜色转换器',
