@@ -8,14 +8,14 @@
 <link rel="dns-prefetch" href="https://www.freemaki.com"/>
 <meta name="theme-color" content="#2563eb"/>
 <title>Site Updates: May 2026 Changelog | Freemaki Blog</title>
-<meta name="description" content="What's new on Freemaki in May 2026: 5 new tools, 5 AI side-hustle blog articles, homepage redesign, and bug fixes. See everything that changed."/>
-<meta name="keywords" content="Freemaki更新日志，2026年5月：新增5个工具、5篇AI副业博客文章、首页改版和Bug修复"/>
+<meta name="description" content="What's new on Freemaki in May 2026: 8 new tools, 7 new articles, homepage redesign, and performance optimization. Daily changelog."/>
+<meta name="keywords" content="Freemaki更新日志，2026年5月：新增工具、博客文章、首页改版、性能优化"/>
 <meta name="robots" content="index, follow"/>
 <meta name="author" content="Freemaki"/>
 <link rel="canonical" href="https://www.freemaki.com/blog/changelog-may-2026/"/>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="Site Updates: May 2026 Changelog"/>
-<meta property="og:description" content="What's new on Freemaki in May 2026: 5 new tools, 5 blog articles, homepage redesign, and bug fixes."/>
+<meta property="og:description" content="Daily changelog for Freemaki in May 2026: new tools, articles, improvements, and fixes."/>
 <meta property="og:url" content="https://www.freemaki.com/blog/changelog-may-2026/"/>
 <meta property="og:site_name" content="Freemaki"/>
 <meta name="twitter:card" content="summary"/>
@@ -44,25 +44,31 @@
   code { background: var(--surface2); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
 
   /* Changelog specific */
-  .version { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; }
-  .version-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .date-group { margin-bottom: 32px; }
+  .date-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+  .date-header h2 { margin: 0; font-size: 18px; }
+  .date-header .weekday { font-size: 13px; color: var(--text3); }
+  .version { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; }
+  .version:last-child { margin-bottom: 0; }
+  .version-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
   .version-badge {
-    display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 20px;
-    font-size: 12px; font-weight: 600;
+    display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.3px;
   }
   .badge-new { background: var(--green-bg); color: var(--green); }
   .badge-fix { background: var(--orange-bg); color: var(--orange); }
   .badge-improve { background: var(--purple-bg); color: var(--purple); }
   .badge-tool { background: var(--accent-bg); color: var(--accent); }
-  .version-date { font-size: 13px; color: var(--text3); margin-left: auto; }
-  .version h3 { margin-top: 0; margin-bottom: 10px; font-size: 16px; }
+  .badge-perf { background: #fef3c7; color: #b45309; }
+  .version h3 { margin-top: 0; margin-bottom: 10px; font-size: 15px; }
   .change-list { list-style: none; padding: 0; }
-  .change-list li { padding: 6px 0; padding-left: 20px; position: relative; }
-  .change-list li::before { position: absolute; left: 0; font-size: 14px; }
+  .change-list li { padding: 5px 0; padding-left: 20px; position: relative; font-size: 14px; }
+  .change-list li::before { position: absolute; left: 0; font-size: 13px; }
   .change-list.new li::before { content: '+'; color: var(--green); font-weight: 700; }
   .change-list.fix li::before { content: '!'; color: var(--orange); font-weight: 700; }
   .change-list.improve li::before { content: '~'; color: var(--purple); font-weight: 700; }
   .change-list.tool li::before { content: '#'; color: var(--accent); font-weight: 700; }
+  .change-list.perf li::before { content: '>'; color: #b45309; font-weight: 700; }
 
   .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
   .stat-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 16px; text-align: center; }
@@ -83,108 +89,162 @@
 <div class="page">
   <div class="breadcrumb"><a href="/">Freemaki</a> &rsaquo; <span data-i18n="bc">Blog</span></div>
   <h1 data-i18n="title">Site Updates: May 2026 Changelog</h1>
-  <p class="meta" data-i18n="meta">May 13, 2026 &middot; 4 min read &middot; Freemaki Team</p>
+  <p class="meta" data-i18n="meta">Updated daily &middot; Freemaki Team</p>
 
   <div class="stat-grid">
     <div class="stat-card">
-      <div class="stat-num">5</div>
+      <div class="stat-num">8</div>
       <div class="stat-label" data-i18n="stat1">New Tools</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num">5</div>
+      <div class="stat-num">7</div>
       <div class="stat-label" data-i18n="stat2">New Articles</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num">21</div>
+      <div class="stat-num">24</div>
       <div class="stat-label" data-i18n="stat3">Total Tools</div>
     </div>
   </div>
 
-  <p data-i18n="intro">May 2026 was a big month for Freemaki. We added 5 new tools, published 5 in-depth blog articles on AI side hustles and content entrepreneurship, and shipped several quality-of-life improvements. Here's everything that changed.</p>
+  <p data-i18n="intro">May 2026 is a busy month for Freemaki. We're shipping new tools, blog articles, and improvements almost daily. This changelog is updated in real time &mdash; bookmark it to follow along.</p>
 
-  <!-- New Tools -->
-  <div class="version">
-    <div class="version-header">
-      <span class="version-badge badge-tool">Tools</span>
-      <span class="version-date">2026-05-12</span>
+  <!-- May 13 -->
+  <div class="date-group">
+    <div class="date-header">
+      <h2 data-i18n="d1_title">May 13</h2>
+      <span class="weekday">Tuesday</span>
     </div>
-    <h3 data-i18n="v1_title">New Tools Added</h3>
-    <ul class="change-list tool">
-      <li data-i18n="v1_1"><a href="/counter/">Character Counter</a> &mdash; Real-time word, character, sentence, and paragraph counting with readability metrics.</li>
-      <li data-i18n="v1_2"><a href="/qrcode/">QR Code Generator</a> &mdash; Create customizable QR codes with color options, embedded logos, and instant PNG download.</li>
-      <li data-i18n="v1_3"><a href="/bmi/">BMI Calculator</a> &mdash; Calculate Body Mass Index with WHO category classification and visual range indicator.</li>
-      <li data-i18n="v1_4"><a href="/sleep/">Sleep Calculator</a> &mdash; Plan optimal bedtimes and wake-up times based on 90-minute sleep cycles.</li>
-      <li data-i18n="v1_5"><a href="/reddit/">Reddit & Quora Hot Topic Explorer</a> &mdash; Search trending posts on Reddit by keyword or category. Find content ideas and audience questions in real time.</li>
-    </ul>
+
+    <div class="version">
+      <div class="version-header">
+        <span class="version-badge badge-tool" data-i18n="badge_tool">TOOLS</span>
+      </div>
+      <h3 data-i18n="d1_v1_title">3 New Tools</h3>
+      <ul class="change-list tool">
+        <li data-i18n="d1_v1_1"><a href="/password/">Password Generator</a> &mdash; Cryptographically secure random passwords with configurable length (4-128), character types, entropy meter, batch generation, and clipboard copy.</li>
+        <li data-i18n="d1_v1_2"><a href="/image/">Image Format Converter</a> &mdash; Drag-and-drop image conversion to PNG/JPG/WebP with quality slider, batch support, and ZIP download via JSZip.</li>
+        <li data-i18n="d1_v1_3"><a href="/palette/">Color Palette Extractor</a> &mdash; Upload any image to extract dominant colors using k-means clustering. Click to copy HEX, export as CSS custom properties.</li>
+      </ul>
+    </div>
+
+    <div class="version">
+      <div class="version-header">
+        <span class="version-badge badge-new" data-i18n="badge_new">NEW</span>
+      </div>
+      <h3 data-i18n="d1_v2_title">2 New Articles</h3>
+      <ul class="change-list new">
+        <li data-i18n="d1_v2_1"><a href="/blog/image-optimization-guide/">Image Optimization Guide: Format, Compression &amp; Core Web Vitals</a> &mdash; Format selection (WebP/AVIF), compression strategies, responsive images, lazy loading, and performance impact on LCP/CLS.</li>
+        <li data-i18n="d1_v2_2"><a href="/blog/secure-password-guide/">How to Create Secure Passwords &amp; Why Password Managers Matter</a> &mdash; Attack methods (dictionary, brute force, credential stuffing), password entropy, NIST guidelines, passphrases, and 2FA setup.</li>
+      </ul>
+    </div>
+
+    <div class="version">
+      <div class="version-header">
+        <span class="version-badge badge-improve" data-i18n="badge_improve">IMPROVE</span>
+      </div>
+      <h3 data-i18n="d1_v3_title">Homepage &amp; Site-Wide Updates</h3>
+      <ul class="change-list improve">
+        <li data-i18n="d1_v3_1"><strong>Homepage layout widened</strong> &mdash; Max-width increased from 720px to 960px. Title 36px, card gap 18px, enhanced hover shadows.</li>
+        <li data-i18n="d1_v3_2"><strong>New tool cards added</strong> &mdash; Password Generator (Developer Tools), Image Converter and Palette Extractor (Design &amp; Color). Category counts: Developer Tools 8, Design &amp; Color 6.</li>
+        <li data-i18n="d1_v3_3"><strong>New article cards added</strong> &mdash; Image Optimization Guide and Secure Password Guide in Guides &amp; Articles (now 12 articles).</li>
+      </ul>
+    </div>
+
+    <div class="version">
+      <div class="version-header">
+        <span class="version-badge badge-perf" data-i18n="badge_perf">PERF</span>
+      </div>
+      <h3 data-i18n="d1_v4_title">Performance Optimization</h3>
+      <ul class="change-list perf">
+        <li data-i18n="d1_v4_1"><strong>dns-prefetch + preconnect</strong> &mdash; Added to all 24 pages for Google Fonts and Freemaki domain. Pre-resolves DNS before the browser needs the resources.</li>
+        <li data-i18n="d1_v4_2"><strong>theme-color meta tag</strong> &mdash; Added `#2563eb` to all pages. Mobile browsers now match the address bar color to the brand.</li>
+      </ul>
+    </div>
+
+    <div class="version">
+      <div class="version-header">
+        <span class="version-badge badge-fix" data-i18n="badge_fix">FIX</span>
+      </div>
+      <h3 data-i18n="d1_v5_title">Bug Fix</h3>
+      <ul class="change-list fix">
+        <li data-i18n="d1_v5_1"><strong>Reddit Explorer sort dropdown</strong> &mdash; Sort selector (Top by Score / Most Comments / Newest) no longer visually resets after re-rendering results.</li>
+      </ul>
+    </div>
   </div>
 
-  <!-- Blog Articles -->
-  <div class="version">
-    <div class="version-header">
-      <span class="version-badge badge-new">New</span>
-      <span class="version-date">2026-05-13</span>
+  <!-- May 12 -->
+  <div class="date-group">
+    <div class="date-header">
+      <h2 data-i18n="d2_title">May 12</h2>
+      <span class="weekday">Monday</span>
     </div>
-    <h3 data-i18n="v2_title">AI Side Hustle Blog Series</h3>
-    <p data-i18n="v2_desc">We launched a 5-article series on AI-powered content entrepreneurship &mdash; from building tool sites to driving traffic and monetizing with ads.</p>
-    <ul class="change-list new">
-      <li data-i18n="v2_1"><a href="/blog/build-money-tool-site-30-days-ai/">How I Built a Money-Making Tool Site in 30 Days Using AI</a> &mdash; Complete walkthrough: ideation, coding with AI, deployment, SEO, and monetization.</li>
-      <li data-i18n="v2_2"><a href="/blog/google-discover-traffic-guide/">Google Discover Traffic: Complete Guide (2026)</a> &mdash; Algorithm preferences, cover image specs, technical optimization, and real traffic strategies.</li>
-      <li data-i18n="v2_3"><a href="/blog/reddit-traffic-0-to-1000/">Reddit Traffic: 0 to 1,000 Visitors in 7 Days</a> &mdash; How to drive organic traffic from Reddit without getting banned.</li>
-      <li data-i18n="v2_4"><a href="/blog/adsense-approval-5-tips/">AdSense Approval: 5 Tips to Pass on Your First Try</a> &mdash; The 5 hidden red flags that cause 90% of first-time rejections.</li>
-      <li data-i18n="v2_5"><a href="/blog/ai-writing-vs-human-seo-test/">AI Writing vs Human Writing: 90-Day SEO Test</a> &mdash; A controlled experiment with 40 articles tracked over 3 months.</li>
-    </ul>
-  </div>
 
-  <!-- Improvements -->
-  <div class="version">
-    <div class="version-header">
-      <span class="version-badge badge-improve">Improve</span>
-      <span class="version-date">2026-05-13</span>
+    <div class="version">
+      <div class="version-header">
+        <span class="version-badge badge-tool" data-i18n="badge_tool">TOOLS</span>
+      </div>
+      <h3 data-i18n="d2_v1_title">5 New Tools</h3>
+      <ul class="change-list tool">
+        <li data-i18n="d2_v1_1"><a href="/counter/">Character Counter</a> &mdash; Real-time word, character, sentence, and paragraph counting with readability metrics.</li>
+        <li data-i18n="d2_v1_2"><a href="/qrcode/">QR Code Generator</a> &mdash; Create customizable QR codes with color options, embedded logos, and instant PNG download.</li>
+        <li data-i18n="d2_v1_3"><a href="/bmi/">BMI Calculator</a> &mdash; Body Mass Index with WHO category classification and visual range indicator.</li>
+        <li data-i18n="d2_v1_4"><a href="/sleep/">Sleep Calculator</a> &mdash; Plan optimal bedtimes and wake-up times based on 90-minute sleep cycles.</li>
+        <li data-i18n="d2_v1_5"><a href="/reddit/">Reddit &amp; Quora Hot Topic Explorer</a> &mdash; Search trending posts on Reddit by keyword or category. Find content ideas in real time.</li>
+      </ul>
     </div>
-    <h3 data-i18n="v3_title">Homepage & Site-Wide Updates</h3>
-    <ul class="change-list improve">
-      <li data-i18n="v3_1"><strong>Homepage tagline updated</strong> &mdash; Removed hardcoded tool count ("21 free tools") to a future-proof tagline: "Free online tools & guides." As we add more tools and articles, the messaging stays accurate.</li>
-      <li data-i18n="v3_2"><strong>Guides & Articles section expanded</strong> &mdash; Homepage now showcases 10 articles (up from 4), organized with category tags for easy browsing.</li>
-      <li data-i18n="v3_3"><strong>SEO meta tags refreshed</strong> &mdash; Title, description, and OG tags updated to reflect the growing content library.</li>
-    </ul>
-  </div>
 
-  <!-- Bug Fixes -->
-  <div class="version">
-    <div class="version-header">
-      <span class="version-badge badge-fix">Fix</span>
-      <span class="version-date">2026-05-13</span>
+    <div class="version">
+      <div class="version-header">
+        <span class="version-badge badge-new" data-i18n="badge_new">NEW</span>
+      </div>
+      <h3 data-i18n="d2_v2_title">5 AI Side-Hustle Blog Articles</h3>
+      <p data-i18n="d2_v2_desc">Launched a 5-article series on AI-powered content entrepreneurship:</p>
+      <ul class="change-list new">
+        <li data-i18n="d2_v2_1"><a href="/blog/build-money-tool-site-30-days-ai/">How I Built a Money-Making Tool Site in 30 Days Using AI</a></li>
+        <li data-i18n="d2_v2_2"><a href="/blog/google-discover-traffic-guide/">Google Discover Traffic: Complete Guide (2026)</a></li>
+        <li data-i18n="d2_v2_3"><a href="/blog/reddit-traffic-0-to-1000/">Reddit Traffic: 0 to 1,000 Visitors in 7 Days</a></li>
+        <li data-i18n="d2_v2_4"><a href="/blog/adsense-approval-5-tips/">AdSense Approval: 5 Tips to Pass on Your First Try</a></li>
+        <li data-i18n="d2_v2_5"><a href="/blog/ai-writing-vs-human-seo-test/">AI Writing vs Human Writing: 90-Day SEO Test</a></li>
+      </ul>
     </div>
-    <h3 data-i18n="v4_title">Bug Fixes</h3>
-    <ul class="change-list fix">
-      <li data-i18n="v4_1"><strong>Reddit Explorer sort dropdown</strong> &mdash; Fixed an issue where the sort selector (Top by Score / Most Comments / Newest) would visually reset after re-rendering results. The selected option now persists correctly.</li>
-    </ul>
+
+    <div class="version">
+      <div class="version-header">
+        <span class="version-badge badge-improve" data-i18n="badge_improve">IMPROVE</span>
+      </div>
+      <h3 data-i18n="d2_v3_title">Homepage Updates</h3>
+      <ul class="change-list improve">
+        <li data-i18n="d2_v3_1"><strong>Tagline updated</strong> &mdash; Changed from hardcoded "21 free tools" to "Free online tools &amp; guides" for future-proof messaging.</li>
+        <li data-i18n="d2_v3_2"><strong>Guides section expanded</strong> &mdash; Homepage now showcases 10 articles (up from 4), with category tags for easy browsing.</li>
+        <li data-i18n="d2_v3_3"><strong>SEO meta tags refreshed</strong> &mdash; Title, description, and OG tags updated to reflect the growing content library.</li>
+      </ul>
+    </div>
   </div>
 
   <!-- Tech Stack -->
   <h2 data-i18n="tech_title">How We Build This</h2>
-  <p data-i18n="tech_p1">Freemaki is built as a static HTML site &mdash; no frameworks, no build steps. Every tool is a self-contained HTML file with embedded CSS and JavaScript. Here's why:</p>
+  <p data-i18n="tech_p1">Freemaki is a static HTML site &mdash; no frameworks, no build steps. Every tool is a self-contained HTML file with embedded CSS and JavaScript:</p>
   <ul>
-    <li data-i18n="tech_1"><strong>Instant loading</strong> &mdash; No JavaScript bundles to parse. Pages load in under 200ms.</li>
-    <li data-i18n="tech_2"><strong>Works offline</strong> &mdash; After the first visit, all tools are cached by the browser. No server needed.</li>
-    <li data-i18n="tech_3"><strong>SEO-friendly</strong> &mdash; Search engines can index every page. No client-side rendering delays.</li>
-    <li data-i18n="tech_4"><strong>Easy to maintain</strong> &mdash; Each tool is independent. No dependency conflicts, no version upgrades.</li>
-    <li data-i18n="tech_5"><strong>Bilingual</strong> &mdash; All content supports English and Chinese with a single click toggle.</li>
+    <li data-i18n="tech_1"><strong>Instant loading</strong> &mdash; No JS bundles to parse. Pages load in under 200ms.</li>
+    <li data-i18n="tech_2"><strong>Works offline</strong> &mdash; All tools are cached by the browser after the first visit.</li>
+    <li data-i18n="tech_3"><strong>SEO-friendly</strong> &mdash; Every page is directly indexable. No client-side rendering delays.</li>
+    <li data-i18n="tech_4"><strong>Easy to maintain</strong> &mdash; Each tool is independent. No dependency conflicts.</li>
+    <li data-i18n="tech_5"><strong>Bilingual</strong> &mdash; English and Chinese with a single click toggle.</li>
   </ul>
-  <p data-i18n="tech_p2">Hosting is on <a href="https://vercel.com" target="_blank" rel="noopener">Vercel</a> (free tier), deployed automatically from GitHub. The entire site is open source.</p>
+  <p data-i18n="tech_p2">Hosted on <a href="https://vercel.com" target="_blank" rel="noopener">Vercel</a> (free tier), auto-deployed from GitHub.</p>
 
   <div class="tip">
     <strong data-i18n="tip_strong">Want to build something similar?</strong>
-    <span data-i18n="tip_text">Read our step-by-step guide: <a href="/blog/build-money-tool-site-30-days-ai/">How I Built a Money-Making Tool Site in 30 Days Using AI</a></span>
+    <span data-i18n="tip_text"> Read our step-by-step guide: <a href="/blog/build-money-tool-site-30-days-ai/">How I Built a Money-Making Tool Site in 30 Days Using AI</a></span>
   </div>
 
   <!-- What's Next -->
   <h2 data-i18n="next_title">What's Next</h2>
-  <p data-i18n="next_p">We're working on more tools and content for June 2026. Here's what's on the roadmap:</p>
+  <p data-i18n="next_p">On the roadmap for the rest of May 2026:</p>
   <ul>
-    <li data-i18n="next_1">More utility tools &mdash; image format converter, password generator, color palette extractor</li>
-    <li data-i18n="next_2">More blog articles &mdash; practical tutorials, tool reviews, and case studies</li>
-    <li data-i18n="next_3">Performance improvements &mdash; image optimization, font loading, Core Web Vitals</li>
+    <li data-i18n="next_1">More design tools &mdash; image resizer, favicon generator</li>
+    <li data-i18n="next_2">More blog articles &mdash; practical tutorials and tool reviews</li>
+    <li data-i18n="next_3">Core Web Vitals &mdash; image optimization, font loading improvements</li>
   </ul>
 
   <p data-i18n="cta_text">Explore all tools on the <a href="/">Freemaki homepage</a>.</p>
@@ -200,85 +260,119 @@ let lang = 'en';
 const i18n = {
   en: {
     bc:'Blog', title:'Site Updates: May 2026 Changelog',
-    meta:'May 13, 2026 · 4 min read · Freemaki Team',
+    meta:'Updated daily · Freemaki Team',
     stat1:'New Tools', stat2:'New Articles', stat3:'Total Tools',
-    intro:'May 2026 was a big month for Freemaki. We added 5 new tools, published 5 in-depth blog articles on AI side hustles and content entrepreneurship, and shipped several quality-of-life improvements. Here\'s everything that changed.',
-    v1_title:'New Tools Added',
-    v1_1:'Character Counter — Real-time word, character, sentence, and paragraph counting with readability metrics.',
-    v1_2:'QR Code Generator — Create customizable QR codes with color options, embedded logos, and instant PNG download.',
-    v1_3:'BMI Calculator — Calculate Body Mass Index with WHO category classification and visual range indicator.',
-    v1_4:'Sleep Calculator — Plan optimal bedtimes and wake-up times based on 90-minute sleep cycles.',
-    v1_5:'Reddit & Quora Hot Topic Explorer — Search trending posts on Reddit by keyword or category. Find content ideas and audience questions in real time.',
-    v2_title:'AI Side Hustle Blog Series',
-    v2_desc:'We launched a 5-article series on AI-powered content entrepreneurship — from building tool sites to driving traffic and monetizing with ads.',
-    v2_1:'How I Built a Money-Making Tool Site in 30 Days Using AI — Complete walkthrough: ideation, coding with AI, deployment, SEO, and monetization.',
-    v2_2:'Google Discover Traffic: Complete Guide (2026) — Algorithm preferences, cover image specs, technical optimization, and real traffic strategies.',
-    v2_3:'Reddit Traffic: 0 to 1,000 Visitors in 7 Days — How to drive organic traffic from Reddit without getting banned.',
-    v2_4:'AdSense Approval: 5 Tips to Pass on Your First Try — The 5 hidden red flags that cause 90% of first-time rejections.',
-    v2_5:'AI Writing vs Human Writing: 90-Day SEO Test — A controlled experiment with 40 articles tracked over 3 months.',
-    v3_title:'Homepage & Site-Wide Updates',
-    v3_1:'Homepage tagline updated — Removed hardcoded tool count ("21 free tools") to a future-proof tagline: "Free online tools & guides." As we add more tools and articles, the messaging stays accurate.',
-    v3_2:'Guides & Articles section expanded — Homepage now showcases 10 articles (up from 4), organized with category tags for easy browsing.',
-    v3_3:'SEO meta tags refreshed — Title, description, and OG tags updated to reflect the growing content library.',
-    v4_title:'Bug Fixes',
-    v4_1:'Reddit Explorer sort dropdown — Fixed an issue where the sort selector (Top by Score / Most Comments / Newest) would visually reset after re-rendering results. The selected option now persists correctly.',
+    intro:'May 2026 is a busy month for Freemaki. We\'re shipping new tools, blog articles, and improvements almost daily. This changelog is updated in real time — bookmark it to follow along.',
+    badge_tool:'TOOLS', badge_new:'NEW', badge_improve:'IMPROVE', badge_fix:'FIX', badge_perf:'PERF',
+    d1_title:'May 13',
+    d1_v1_title:'3 New Tools',
+    d1_v1_1:'Password Generator — Cryptographically secure random passwords with configurable length (4-128), character types, entropy meter, batch generation, and clipboard copy.',
+    d1_v1_2:'Image Format Converter — Drag-and-drop image conversion to PNG/JPG/WebP with quality slider, batch support, and ZIP download via JSZip.',
+    d1_v1_3:'Color Palette Extractor — Upload any image to extract dominant colors using k-means clustering. Click to copy HEX, export as CSS custom properties.',
+    d1_v2_title:'2 New Articles',
+    d1_v2_1:'Image Optimization Guide: Format, Compression & Core Web Vitals — Format selection (WebP/AVIF), compression strategies, responsive images, lazy loading, and performance impact on LCP/CLS.',
+    d1_v2_2:'How to Create Secure Passwords & Why Password Managers Matter — Attack methods, password entropy, NIST guidelines, passphrases, and 2FA setup.',
+    d1_v3_title:'Homepage & Site-Wide Updates',
+    d1_v3_1:'Homepage layout widened — Max-width increased from 720px to 960px. Title 36px, card gap 18px, enhanced hover shadows.',
+    d1_v3_2:'New tool cards added — Password Generator (Developer Tools), Image Converter and Palette Extractor (Design & Color). Category counts: Developer Tools 8, Design & Color 6.',
+    d1_v3_3:'New article cards added — Image Optimization Guide and Secure Password Guide in Guides & Articles (now 12 articles).',
+    d1_v4_title:'Performance Optimization',
+    d1_v4_1:'dns-prefetch + preconnect — Added to all 24 pages for Google Fonts and Freemaki domain. Pre-resolves DNS before the browser needs the resources.',
+    d1_v4_2:'theme-color meta tag — Added #2563eb to all pages. Mobile browsers now match the address bar color to the brand.',
+    d1_v5_title:'Bug Fix',
+    d1_v5_1:'Reddit Explorer sort dropdown — Sort selector no longer visually resets after re-rendering results.',
+    d2_title:'May 12',
+    d2_v1_title:'5 New Tools',
+    d2_v1_1:'Character Counter — Real-time word, character, sentence, and paragraph counting with readability metrics.',
+    d2_v1_2:'QR Code Generator — Create customizable QR codes with color options, embedded logos, and instant PNG download.',
+    d2_v1_3:'BMI Calculator — Body Mass Index with WHO category classification and visual range indicator.',
+    d2_v1_4:'Sleep Calculator — Plan optimal bedtimes and wake-up times based on 90-minute sleep cycles.',
+    d2_v1_5:'Reddit & Quora Hot Topic Explorer — Search trending posts on Reddit by keyword or category. Find content ideas in real time.',
+    d2_v2_title:'5 AI Side-Hustle Blog Articles',
+    d2_v2_desc:'Launched a 5-article series on AI-powered content entrepreneurship:',
+    d2_v2_1:'How I Built a Money-Making Tool Site in 30 Days Using AI',
+    d2_v2_2:'Google Discover Traffic: Complete Guide (2026)',
+    d2_v2_3:'Reddit Traffic: 0 to 1,000 Visitors in 7 Days',
+    d2_v2_4:'AdSense Approval: 5 Tips to Pass on Your First Try',
+    d2_v2_5:'AI Writing vs Human Writing: 90-Day SEO Test',
+    d2_v3_title:'Homepage Updates',
+    d2_v3_1:'Tagline updated — Changed from hardcoded "21 free tools" to "Free online tools & guides" for future-proof messaging.',
+    d2_v3_2:'Guides section expanded — Homepage now showcases 10 articles (up from 4), with category tags for easy browsing.',
+    d2_v3_3:'SEO meta tags refreshed — Title, description, and OG tags updated to reflect the growing content library.',
     tech_title:'How We Build This',
-    tech_p1:'Freemaki is built as a static HTML site — no frameworks, no build steps. Every tool is a self-contained HTML file with embedded CSS and JavaScript. Here\'s why:',
-    tech_1:'Instant loading — No JavaScript bundles to parse. Pages load in under 200ms.',
-    tech_2:'Works offline — After the first visit, all tools are cached by the browser. No server needed.',
-    tech_3:'SEO-friendly — Search engines can index every page. No client-side rendering delays.',
-    tech_4:'Easy to maintain — Each tool is independent. No dependency conflicts, no version upgrades.',
-    tech_5:'Bilingual — All content supports English and Chinese with a single click toggle.',
-    tech_p2:'Hosting is on Vercel (free tier), deployed automatically from GitHub. The entire site is open source.',
+    tech_p1:'Freemaki is a static HTML site — no frameworks, no build steps. Every tool is a self-contained HTML file with embedded CSS and JavaScript:',
+    tech_1:'Instant loading — No JS bundles to parse. Pages load in under 200ms.',
+    tech_2:'Works offline — All tools are cached by the browser after the first visit.',
+    tech_3:'SEO-friendly — Every page is directly indexable. No client-side rendering delays.',
+    tech_4:'Easy to maintain — Each tool is independent. No dependency conflicts.',
+    tech_5:'Bilingual — English and Chinese with a single click toggle.',
+    tech_p2:'Hosted on Vercel (free tier), auto-deployed from GitHub.',
     tip_strong:'Want to build something similar?',
-    tip_text:'Read our step-by-step guide: How I Built a Money-Making Tool Site in 30 Days Using AI',
+    tip_text:' Read our step-by-step guide: How I Built a Money-Making Tool Site in 30 Days Using AI',
     next_title:'What\'s Next',
-    next_p:'We\'re working on more tools and content for June 2026. Here\'s what\'s on the roadmap:',
-    next_1:'More utility tools — image format converter, password generator, color palette extractor',
-    next_2:'More blog articles — practical tutorials, tool reviews, and case studies',
-    next_3:'Performance improvements — image optimization, font loading, Core Web Vitals',
+    next_p:'On the roadmap for the rest of May 2026:',
+    next_1:'More design tools — image resizer, favicon generator',
+    next_2:'More blog articles — practical tutorials and tool reviews',
+    next_3:'Core Web Vitals — image optimization, font loading improvements',
     cta_text:'Explore all tools on the Freemaki homepage.',
     f_privacy:'Privacy Policy', f_disclaimer:'Disclaimer', f_about:'About', f_contact:'Contact', f_rights:'All rights reserved'
   },
   zh: {
     bc:'博客', title:'站点更新：2026年5月更新日志',
-    meta:'2026年5月13日 · 4分钟阅读 · Freemaki 团队',
+    meta:'每日更新 · Freemaki 团队',
     stat1:'新工具', stat2:'新文章', stat3:'工具总数',
-    intro:'2026年5月对 Freemaki 来说是收获满满的一个月。我们新增了5个实用工具，发布了5篇关于AI副业和内容创业的深度文章，还做了多项体验优化。以下是所有更新内容。',
-    v1_title:'新增工具',
-    v1_1:'字符统计工具 — 实时统计字数、字符数、句子数和段落数，附可读性指标。',
-    v1_2:'二维码生成器 — 自定义颜色、嵌入Logo，即时生成PNG二维码。',
-    v1_3:'BMI 计算器 — 计算身体质量指数，WHO 分类标注，可视化范围指示。',
-    v1_4:'睡眠周期计算器 — 基于90分钟睡眠周期，规划最佳入睡和起床时间。',
-    v1_5:'Reddit & Quora 热点话题探索 — 按关键词或分类搜索 Reddit 热门帖子，实时发现内容选题。',
-    v2_title:'AI 副业实战博客系列',
-    v2_desc:'我们推出了一套5篇文章的系列，覆盖从建站到引流到变现的完整 AI 内容创业链路。',
-    v2_1:'如何用 AI 在30天内建立一个赚钱的工具站 — 完整复盘：选题、AI辅助编码、部署、SEO和变现。',
-    v2_2:'Google Discover 流量获取完全指南（2026版） — 算法偏好、封面图规范、技术优化和实操引流策略。',
-    v2_3:'Reddit 引流实战：从0到1000访客的7天计划 — 如何在不被封号的前提下从 Reddit 自然引流。',
-    v2_4:'广告联盟申请避坑指南：AdSense 一次过审的5个技巧 — 90%的人首次被拒的5个隐形红线。',
-    v2_5:'AI 写作 vs 人工写作：SEO 效果实测对比 — 40篇文章对照实验，持续90天追踪排名和流量。',
-    v3_title:'首页与全站更新',
-    v3_1:'首页标语更新 — 移除了固定工具数量（"21款免费工具"），改为面向未来的表述："免费在线工具与实战指南"。后续新增工具和文章时标语无需再改。',
-    v3_2:'指南与文章区扩容 — 首页展示文章数从4篇增至10篇，增加分类标签方便浏览。',
-    v3_3:'SEO 元标签刷新 — 标题、描述和 OG 标签全部更新，反映不断增长的内容库。',
-    v4_title:'Bug 修复',
-    v4_1:'Reddit 探索器排序下拉框 — 修复了切换排序方式后下拉框选项视觉不跟随的问题。现在选择"按评论数"或"按时间"后，选中状态会正确保持。',
+    intro:'2026年5月是 Freemaki 的密集更新月。我们几乎每天都在发布新工具、博客文章和体验优化。这份更新日志实时同步——收藏本页随时查看最新动态。',
+    badge_tool:'工具', badge_new:'新增', badge_improve:'优化', badge_fix:'修复', badge_perf:'性能',
+    d1_title:'5月13日',
+    d1_v1_title:'3 个新工具',
+    d1_v1_1:'密码生成器 — 基于密码学安全的随机密码生成，支持自定义长度(4-128)、字符类型、信息熵显示、批量生成和一键复制。',
+    d1_v1_2:'图片格式转换器 — 拖拽上传图片，转换为 PNG/JPG/WebP，支持质量调节、批量处理和 JSZip 打包下载。',
+    d1_v1_3:'调色板提取器 — 上传任意图片，通过 k-means 聚类算法提取主色调。点击复制 HEX，支持导出为 CSS 自定义属性。',
+    d1_v2_title:'2 篇新文章',
+    d1_v2_1:'图片优化指南：格式、压缩与 Core Web Vitals — WebP/AVIF 格式选择、压缩策略、响应式图片、懒加载及对 LCP/CLS 的影响。',
+    d1_v2_2:'如何创建安全密码 & 为什么密码管理器不可或缺 — 攻击方式、密码熵值、NIST 指南、密码短语和 2FA 设置。',
+    d1_v3_title:'首页与全站更新',
+    d1_v3_1:'首页布局加宽 — 最大宽度从 720px 增至 960px。标题 36px，卡片间距 18px，hover 阴影增强。',
+    d1_v3_2:'新增工具卡片 — 密码生成器（开发者工具）、图片转换器和调色板提取器（设计与颜色）。分类计数：开发者工具 8，设计与颜色 6。',
+    d1_v3_3:'新增文章卡片 — 图片优化指南和安全密码指南加入指南与文章区（现共 12 篇）。',
+    d1_v4_title:'性能优化',
+    d1_v4_1:'dns-prefetch + preconnect — 全站 24 个页面添加 Google Fonts 和 Freemaki 域名的 DNS 预解析，在浏览器请求资源前完成域名解析。',
+    d1_v4_2:'theme-color 元标签 — 全站添加 #2563eb，移动端浏览器地址栏颜色与品牌色匹配。',
+    d1_v5_title:'Bug 修复',
+    d1_v5_1:'Reddit 探索器排序下拉框 — 重新渲染结果后，排序选项不再视觉重置。',
+    d2_title:'5月12日',
+    d2_v1_title:'5 个新工具',
+    d2_v1_1:'字符统计工具 — 实时统计字数、字符数、句子数和段落数，附可读性指标。',
+    d2_v1_2:'二维码生成器 — 自定义颜色、嵌入Logo，即时生成PNG二维码。',
+    d2_v1_3:'BMI 计算器 — 计算身体质量指数，WHO 分类标注，可视化范围指示。',
+    d2_v1_4:'睡眠周期计算器 — 基于90分钟睡眠周期，规划最佳入睡和起床时间。',
+    d2_v1_5:'Reddit & Quora 热点话题探索 — 按关键词或分类搜索 Reddit 热门帖子，实时发现内容选题。',
+    d2_v2_title:'AI 副业实战博客系列（5篇）',
+    d2_v2_desc:'推出了一套5篇文章的系列，覆盖 AI 内容创业完整链路：',
+    d2_v2_1:'如何用 AI 在30天内建立一个赚钱的工具站',
+    d2_v2_2:'Google Discover 流量获取完全指南（2026版）',
+    d2_v2_3:'Reddit 引流实战：从0到1000访客的7天计划',
+    d2_v2_4:'广告联盟申请避坑指南：AdSense 一次过审的5个技巧',
+    d2_v2_5:'AI 写作 vs 人工写作：SEO 效果实测对比',
+    d2_v3_title:'首页更新',
+    d2_v3_1:'标语更新 — 从固定"21款免费工具"改为"免费在线工具与实战指南"，后续新增内容无需再改。',
+    d2_v3_2:'指南区扩容 — 首页展示文章从4篇增至10篇，增加分类标签方便浏览。',
+    d2_v3_3:'SEO 元标签刷新 — 标题、描述和 OG 标签全部更新。',
     tech_title:'技术架构',
-    tech_p1:'Freemaki 采用纯静态 HTML 构建 — 无框架、无构建步骤。每个工具都是独立的 HTML 文件，内嵌 CSS 和 JavaScript。这样做的好处：',
+    tech_p1:'Freemaki 采用纯静态 HTML 构建——无框架、无构建步骤。每个工具都是独立的 HTML 文件，内嵌 CSS 和 JavaScript：',
     tech_1:'极速加载 — 没有需要解析的 JS 打包文件，页面加载时间低于200ms。',
-    tech_2:'离线可用 — 首次访问后，所有工具都会被浏览器缓存，无需服务器。',
-    tech_3:'SEO 友好 — 搜索引擎可以直接索引每个页面，没有客户端渲染延迟。',
-    tech_4:'易于维护 — 每个工具独立运行，没有依赖冲突，没有版本升级问题。',
-    tech_5:'中英双语 — 所有内容一键切换，支持英文和中文。',
-    tech_p2:'托管在 Vercel 免费套餐上，通过 GitHub 自动部署。整个站点开源。',
+    tech_2:'离线可用 — 首次访问后所有工具都被浏览器缓存，无需服务器。',
+    tech_3:'SEO 友好 — 每个页面可直接被搜索引擎索引，没有客户端渲染延迟。',
+    tech_4:'易于维护 — 每个工具独立运行，没有依赖冲突。',
+    tech_5:'中英双语 — 一键切换英文和中文。',
+    tech_p2:'托管在 Vercel 免费套餐上，通过 GitHub 自动部署。',
     tip_strong:'想搭建类似的工具站？',
-    tip_text:'阅读我们的手把手教程：如何用 AI 在30天内建立一个赚钱的工具站',
+    tip_text:' 阅读我们的手把手教程：如何用 AI 在30天内建立一个赚钱的工具站',
     next_title:'下一步计划',
-    next_p:'我们正在为2026年6月准备更多工具和内容。路线图如下：',
-    next_1:'更多实用工具 — 图片格式转换器、密码生成器、调色板提取器',
-    next_2:'更多博客文章 — 实用教程、工具评测和案例分析',
-    next_3:'性能优化 — 图片优化、字体加载、Core Web Vitals 指标提升',
+    next_p:'2026年5月剩余时间的路线图：',
+    next_1:'更多设计工具 — 图片缩放器、Favicon 生成器',
+    next_2:'更多博客文章 — 实用教程和工具评测',
+    next_3:'Core Web Vitals — 图片优化、字体加载提升',
     cta_text:'回到 Freemaki 首页探索所有工具。',
     f_privacy:'隐私政策', f_disclaimer:'免责声明', f_about:'关于我们', f_contact:'联系我们', f_rights:'版权所有'
   }

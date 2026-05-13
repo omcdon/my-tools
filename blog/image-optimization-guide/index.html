@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin/>
+<link rel="dns-prefetch" href="https://www.freemaki.com"/>
+<meta name="theme-color" content="#2563eb"/>
+<title>Image Optimization for the Web: A Complete Guide (2026) | Freemaki Blog</title>
+<meta name="description" content="Learn how to optimize images for web performance. Covers format selection (WebP vs JPEG vs PNG), compression techniques, responsive images, and real-world speed improvements."/>
+<meta name="keywords" content="网页图片优化完整指南，格式选择WebP vs JPEG vs PNG、压缩技巧、响应式图片和实际性能提升"/>
+<meta name="robots" content="index, follow"/>
+<meta name="author" content="Freemaki"/>
+<link rel="canonical" href="https://www.freemaki.com/blog/image-optimization-guide/"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Image Optimization for the Web: Complete Guide (2026)"/>
+<meta property="og:description" content="Format selection, compression, responsive images, and real speed improvements. All you need to know."/>
+<meta property="og:url" content="https://www.freemaki.com/blog/image-optimization-guide/"/>
+<meta property="og:site_name" content="Freemaki"/>
+<meta name="twitter:card" content="summary"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f8f7f4; --surface: #ffffff; --surface2: #f2f0ec;
+    --border: rgba(0,0,0,0.10); --text: #1a1a18; --text2: #5f5e5a; --text3: #9e9c97;
+    --accent: #2563eb; --accent-bg: #eff6ff; --radius: 12px;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.8; min-height: 100vh; }
+  .page { max-width: 720px; margin: 0 auto; padding: 48px 16px 80px; }
+  .breadcrumb { font-size: 13px; color: var(--text3); margin-bottom: 24px; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
+  .meta { font-size: 13px; color: var(--text3); margin-bottom: 32px; }
+  h2 { font-size: 20px; font-weight: 700; margin: 36px 0 12px; }
+  h3 { font-size: 17px; font-weight: 600; margin: 24px 0 8px; }
+  p { margin-bottom: 14px; color: var(--text2); }
+  ul, ol { padding-left: 20px; margin-bottom: 14px; }
+  li { margin-bottom: 6px; color: var(--text2); }
+  code { background: var(--surface2); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+  pre { background: #1a1a2e; color: #e0e0ff; padding: 16px; border-radius: var(--radius); overflow-x: auto; margin: 14px 0; font-size: 13px; line-height: 1.6; }
+  pre code { background: none; padding: 0; color: inherit; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  blockquote { border-left: 3px solid var(--accent); padding-left: 16px; margin: 14px 0; color: var(--text3); font-style: italic; }
+  .tip { background: var(--accent-bg); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 0 var(--radius) var(--radius) 0; margin: 16px 0; font-size: 14px; }
+  .tip strong { color: var(--accent); }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  .compare-table th, .compare-table td { padding: 10px 12px; border: 0.5px solid var(--border); text-align: left; }
+  .compare-table th { background: var(--surface2); font-weight: 600; color: var(--text); }
+  .compare-table td { color: var(--text2); }
+  .compare-table tr:hover td { background: var(--accent-bg); }
+  .cta { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: var(--radius); display: inline-block; margin: 8px 4px; font-weight: 600; text-decoration: none; transition: opacity 0.15s; }
+  .cta:hover { opacity: 0.9; text-decoration: none; }
+  .lang-btn { position: fixed; top: 16px; right: 16px; padding: 6px 14px; border: 0.5px solid var(--border); border-radius: 20px; background: var(--surface); font-size: 13px; cursor: pointer; color: var(--text2); z-index: 100; }
+  .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+  footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
+</style>
+</head>
+<body>
+<button class="lang-btn" onclick="toggleLang()" id="langBtn">中文</button>
+<div class="page">
+  <div class="breadcrumb"><a href="/">Freemaki</a> &rsaquo; <span data-i18n="bc">Blog</span></div>
+  <h1 data-i18n="title">Image Optimization for the Web: Complete Guide (2026)</h1>
+  <p class="meta" data-i18n="meta">May 2026 &middot; 8 min read &middot; Web Performance</p>
+
+  <p data-i18n="intro">Images account for 50%+ of a typical web page's total weight. A single unoptimized hero image can add 3-5 seconds to load time on mobile. This guide covers everything you need to know about image optimization in 2026 &mdash; from format selection to serving strategies.</p>
+
+  <h2 data-i18n="s1_title">Why Image Optimization Matters</h2>
+  <p data-i18n="s1_p1">Google uses Core Web Vitals (LCP, CLS, INP) as ranking signals. Images directly impact two of these:</p>
+  <ul>
+    <li data-i18n="s1_1"><strong>LCP (Largest Contentful Paint)</strong> &mdash; Often an image. Slow-loading hero images tank your LCP score.</li>
+    <li data-i18n="s1_2"><strong>CLS (Cumulative Layout Shift)</strong> &mdash; Images without explicit dimensions cause layout shifts when they load.</li>
+    <li data-i18n="s1_3"><strong>INP (Interaction to Next Paint)</strong> &mdash; Heavy images compete for main thread bandwidth during decode.</li>
+  </ul>
+  <p data-i18n="s1_p2">Beyond SEO, faster pages have higher conversion rates. A 1-second delay in mobile load time can reduce conversions by up to 20%.</p>
+
+  <div class="tip">
+    <strong data-i18n="s1_tip_strong">Quick win:</strong>
+    <span data-i18n="s1_tip_text">Run your site through <a href="https://pagespeed.web.dev" target="_blank" rel="noopener">PageSpeed Insights</a> right now. If images are flagged, this guide will help you fix them.</span>
+  </div>
+
+  <h2 data-i18n="s2_title">Choosing the Right Format</h2>
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th data-i18n="t_format">Format</th>
+        <th data-i18n="t_best">Best For</th>
+        <th data-i18n="t_size">Typical Size</th>
+        <th data-i18n="t_support">Browser Support</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>WebP</strong></td>
+        <td data-i18n="t_webp_use">Photos, graphics with transparency</td>
+        <td data-i18n="t_webp_size">25-35% smaller than JPEG</td>
+        <td data-i18n="t_webp_support">97%+</td>
+      </tr>
+      <tr>
+        <td><strong>JPEG</strong></td>
+        <td data-i18n="t_jpg_use">Photographs, complex images</td>
+        <td data-i18n="t_jpg_size">Baseline</td>
+        <td data-i18n="t_jpg_support">100%</td>
+      </tr>
+      <tr>
+        <td><strong>PNG</strong></td>
+        <td data-i18n="t_png_use">Screenshots, line art, transparency</td>
+        <td data-i18n="t_png_size">Larger (lossless)</td>
+        <td data-i18n="t_png_support">100%</td>
+      </tr>
+      <tr>
+        <td><strong>AVIF</strong></td>
+        <td data-i18n="t_avif_use">Next-gen photos, high compression</td>
+        <td data-i18n="t_avif_size">50% smaller than JPEG</td>
+        <td data-i18n="t_avif_support">92%+</td>
+      </tr>
+      <tr>
+        <td><strong>SVG</strong></td>
+        <td data-i18n="t_svg_use">Icons, logos, simple graphics</td>
+        <td data-i18n="t_svg_size">Tiny (vector)</td>
+        <td data-i18n="t_svg_support">100%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p data-i18n="s2_p1"><strong>Recommendation:</strong> Use WebP as your default format for all raster images. Serve JPEG as fallback for older browsers. Use AVIF if you can generate it (another 20-30% smaller than WebP).</p>
+
+  <h3 data-i18n="s2_h3">When to Use Each Format</h3>
+  <ul>
+    <li data-i18n="s2_1"><strong>Photos</strong> &rarr; WebP (quality 75-80) or AVIF</li>
+    <li data-i18n="s2_2"><strong>Screenshots</strong> &rarr; PNG (crisp text) or WebP lossless</li>
+    <li data-i18n="s2_3"><strong>Icons/Logos</strong> &rarr; SVG (scalable, tiny)</li>
+    <li data-i18n="s2_4"><strong>Animated</strong> &rarr; WebP animated or MP4 video</li>
+    <li data-i18n="s2_5"><strong>Transparency needed</strong> &rarr; WebP with alpha or PNG</li>
+  </ul>
+
+  <h2 data-i18n="s3_title">Compression: Quality vs File Size</h2>
+  <p data-i18n="s3_p1">Most JPEGs and WebPs are saved at quality 85-95 by default. For web use, you can go much lower:</p>
+  <ul>
+    <li data-i18n="s3_1"><strong>Quality 80</strong>: Visually identical to original, 40-60% smaller</li>
+    <li data-i18n="s3_2"><strong>Quality 70</strong>: Slightly soft on close inspection, 50-70% smaller</li>
+    <li data-i18n="s3_3"><strong>Quality 60</strong>: Noticeable artifacts on complex photos, 60-80% smaller</li>
+  </ul>
+
+  <p data-i18n="s3_p2">For most websites, quality 75-80 for JPEG/WebP is the sweet spot. The visual difference from quality 90 is imperceptible to most users, but the file size difference is significant.</p>
+
+  <div class="tip">
+    <strong data-i18n="s3_tip_strong">Try it yourself:</strong>
+    <span data-i18n="s3_tip_text">Upload a photo to our <a href="/image/">Image Format Converter</a> and test different quality levels. Compare the file sizes &mdash; you might be surprised how small you can go without visible quality loss.</span>
+  </div>
+
+  <h2 data-i18n="s4_title">Responsive Images: One Source, Many Sizes</h2>
+  <p data-i18n="s4_p1">Serving the same 4000px hero image to a mobile phone is wasteful. Use the <code>&lt;picture&gt;</code> element and <code>srcset</code> attribute:</p>
+
+  <pre><code>&lt;picture&gt;
+  &lt;source srcset="hero.avif" type="image/avif"&gt;
+  &lt;source srcset="hero.webp" type="image/webp"&gt;
+  &lt;img src="hero.jpg"
+       srcset="hero-400.jpg 400w,
+               hero-800.jpg 800w,
+               hero-1200.jpg 1200w"
+       sizes="(max-width: 768px) 100vw, 1200px"
+       alt="Hero image"
+       width="1200" height="600"
+       loading="lazy"&gt;
+&lt;/picture&gt;</code></pre>
+
+  <p data-i18n="s4_p2">Key attributes to always include:</p>
+  <ul>
+    <li data-i18n="s4_1"><code>width</code> and <code>height</code> &mdash; Prevents CLS (layout shift)</li>
+    <li data-i18n="s4_2"><code>loading="lazy"</code> &mdash; Defers off-screen images</li>
+    <li data-i18n="s4_3"><code>decoding="async"</code> &mdash; Non-blocking decode for below-fold images</li>
+    <li data-i18n="s4_4"><code>fetchpriority="high"</code> &mdash; For LCP images only</li>
+  </ul>
+
+  <h2 data-i18n="s5_title">Color Palette Extraction for Design Consistency</h2>
+  <p data-i18n="s5_p1">When designing landing pages or selecting brand colors, extracting colors from existing images or mood boards can save time. Our <a href="/palette/">Color Palette Extractor</a> analyzes any image and returns the dominant colors with their HEX and RGB values.</p>
+  <p data-i18n="s5_p2">This is useful for:</p>
+  <ul>
+    <li data-i18n="s5_1">Creating cohesive color schemes from reference images</li>
+    <li data-i18n="s5_2">Matching overlay text colors to background photos</li>
+    <li data-i18n="s5_3">Building brand color palettes from mood boards</li>
+  </ul>
+
+  <h2 data-i18n="s6_title">Quick Optimization Checklist</h2>
+  <ol>
+    <li data-i18n="s6_1">Convert all JPEGs/PNGs to WebP (quality 75-80)</li>
+    <li data-i18n="s6_2">Add <code>width</code> and <code>height</code> to every <code>&lt;img&gt;</code> tag</li>
+    <li data-i18n="s6_3">Add <code>loading="lazy"</code> to below-fold images</li>
+    <li data-i18n="s6_4">Use <code>&lt;picture&gt;</code> for format fallback (AVIF &rarr; WebP &rarr; JPEG)</li>
+    <li data-i18n="s6_5">Use <code>srcset</code> for responsive sizing</li>
+    <li data-i18n="s6_6">Convert GIFs to WebP animated or MP4</li>
+    <li data-i18n="s6_7">Inline small SVGs (under 2KB) directly in HTML</li>
+    <li data-i18n="s6_8">Set <code>fetchpriority="high"</code> on your LCP image</li>
+  </ol>
+
+  <div class="tip">
+    <strong data-i18n="cta_strong">Tools to help:</strong>
+    <span data-i18n="cta_text"> <a href="/image/" class="cta">Image Converter</a> <a href="/palette/" class="cta">Color Palette Extractor</a></span>
+  </div>
+
+  <footer>
+    <p><a href="/privacy/" data-i18n="f_privacy">Privacy Policy</a> &middot; <a href="/disclaimer/" data-i18n="f_disclaimer">Disclaimer</a> &middot; <a href="/about/" data-i18n="f_about">About</a> &middot; <a href="/contact/" data-i18n="f_contact">Contact</a></p>
+    <p style="margin-top:8px">&copy; 2026 Freemaki &middot; <span data-i18n="f_rights">All rights reserved</span></p>
+  </footer>
+</div>
+
+<script>
+let lang = 'en';
+const i18n = {
+  en: {
+    bc:'Blog', title:'Image Optimization for the Web: Complete Guide (2026)',
+    meta:'May 2026 · 8 min read · Web Performance',
+    intro:'Images account for 50%+ of a typical web page\'s total weight. A single unoptimized hero image can add 3-5 seconds to load time on mobile. This guide covers everything you need to know about image optimization in 2026 — from format selection to serving strategies.',
+    s1_title:'Why Image Optimization Matters',
+    s1_p1:'Google uses Core Web Vitals (LCP, CLS, INP) as ranking signals. Images directly impact two of these:',
+    s1_1:'LCP (Largest Contentful Paint) — Often an image. Slow-loading hero images tank your LCP score.',
+    s1_2:'CLS (Cumulative Layout Shift) — Images without explicit dimensions cause layout shifts when they load.',
+    s1_3:'INP (Interaction to Next Paint) — Heavy images compete for main thread bandwidth during decode.',
+    s1_p2:'Beyond SEO, faster pages have higher conversion rates. A 1-second delay in mobile load time can reduce conversions by up to 20%.',
+    s1_tip_strong:'Quick win:', s1_tip_text:'Run your site through PageSpeed Insights right now. If images are flagged, this guide will help you fix them.',
+    s2_title:'Choosing the Right Format',
+    t_format:'Format', t_best:'Best For', t_size:'Typical Size', t_support:'Browser Support',
+    t_webp_use:'Photos, graphics with transparency', t_webp_size:'25-35% smaller than JPEG', t_webp_support:'97%+',
+    t_jpg_use:'Photographs, complex images', t_jpg_size:'Baseline', t_jpg_support:'100%',
+    t_png_use:'Screenshots, line art, transparency', t_png_size:'Larger (lossless)', t_png_support:'100%',
+    t_avif_use:'Next-gen photos, high compression', t_avif_size:'50% smaller than JPEG', t_avif_support:'92%+',
+    t_svg_use:'Icons, logos, simple graphics', t_svg_size:'Tiny (vector)', t_svg_support:'100%',
+    s2_p1:'Recommendation: Use WebP as your default format for all raster images. Serve JPEG as fallback for older browsers. Use AVIF if you can generate it (another 20-30% smaller than WebP).',
+    s2_h3:'When to Use Each Format',
+    s2_1:'Photos → WebP (quality 75-80) or AVIF',
+    s2_2:'Screenshots → PNG (crisp text) or WebP lossless',
+    s2_3:'Icons/Logos → SVG (scalable, tiny)',
+    s2_4:'Animated → WebP animated or MP4 video',
+    s2_5:'Transparency needed → WebP with alpha or PNG',
+    s3_title:'Compression: Quality vs File Size',
+    s3_p1:'Most JPEGs and WebPs are saved at quality 85-95 by default. For web use, you can go much lower:',
+    s3_1:'Quality 80: Visually identical to original, 40-60% smaller',
+    s3_2:'Quality 70: Slightly soft on close inspection, 50-70% smaller',
+    s3_3:'Quality 60: Noticeable artifacts on complex photos, 60-80% smaller',
+    s3_p2:'For most websites, quality 75-80 for JPEG/WebP is the sweet spot. The visual difference from quality 90 is imperceptible to most users, but the file size difference is significant.',
+    s3_tip_strong:'Try it yourself:', s3_tip_text:'Upload a photo to our Image Format Converter and test different quality levels. Compare the file sizes — you might be surprised how small you can go without visible quality loss.',
+    s4_title:'Responsive Images: One Source, Many Sizes',
+    s4_p1:'Serving the same 4000px hero image to a mobile phone is wasteful. Use the picture element and srcset attribute:',
+    s4_p2:'Key attributes to always include:',
+    s4_1:'width and height — Prevents CLS (layout shift)',
+    s4_2:'loading="lazy" — Defers off-screen images',
+    s4_3:'decoding="async" — Non-blocking decode for below-fold images',
+    s4_4:'fetchpriority="high" — For LCP images only',
+    s5_title:'Color Palette Extraction for Design Consistency',
+    s5_p1:'When designing landing pages or selecting brand colors, extracting colors from existing images or mood boards can save time. Our Color Palette Extractor analyzes any image and returns the dominant colors with their HEX and RGB values.',
+    s5_p2:'This is useful for:',
+    s5_1:'Creating cohesive color schemes from reference images',
+    s5_2:'Matching overlay text colors to background photos',
+    s5_3:'Building brand color palettes from mood boards',
+    s6_title:'Quick Optimization Checklist',
+    s6_1:'Convert all JPEGs/PNGs to WebP (quality 75-80)', s6_2:'Add width and height to every img tag',
+    s6_3:'Add loading="lazy" to below-fold images', s6_4:'Use picture for format fallback (AVIF → WebP → JPEG)',
+    s6_5:'Use srcset for responsive sizing', s6_6:'Convert GIFs to WebP animated or MP4',
+    s6_7:'Inline small SVGs (under 2KB) directly in HTML', s6_8:'Set fetchpriority="high" on your LCP image',
+    cta_strong:'Tools to help:', cta_text:' Image Converter Color Palette Extractor',
+    f_privacy:'Privacy Policy', f_disclaimer:'Disclaimer', f_about:'About', f_contact:'Contact', f_rights:'All rights reserved'
+  },
+  zh: {
+    bc:'博客', title:'网页图片优化完全指南（2026版）',
+    meta:'2026年5月 · 8分钟阅读 · Web 性能',
+    intro:'图片通常占网页总重量的50%以上。一张未优化的首屏大图可能让移动端加载时间增加3-5秒。本指南覆盖2026年图片优化所需的一切——从格式选择到加载策略。',
+    s1_title:'为什么图片优化很重要',
+    s1_p1:'Google 将核心网页指标（LCP、CLS、INP）作为排名信号。图片直接影响其中两个：',
+    s1_1:'LCP（最大内容绘制）——通常就是一张图。加载慢的首屏图会严重拉低 LCP 分数。',
+    s1_2:'CLS（累积布局偏移）——没有设置宽高的图片加载时会导致页面跳动。',
+    s1_3:'INP（交互到下次绘制）——大图片解码时占用主线程带宽。',
+    s1_p2:'除了 SEO，更快的页面转化率更高。移动端加载时间每增加1秒，转化率可能下降20%。',
+    s1_tip_strong:'快速检测：', s1_tip_text:'现在就用 PageSpeed Insights 测试你的网站。如果图片被标记为问题，这篇指南会帮你解决。',
+    s2_title:'选择正确的格式',
+    t_format:'格式', t_best:'适用场景', t_size:'典型体积', t_support:'浏览器支持',
+    t_webp_use:'照片、需要透明的图形', t_webp_size:'比 JPEG 小25-35%', t_webp_support:'97%+',
+    t_jpg_use:'照片、复杂图像', t_jpg_size:'基准', t_jpg_support:'100%',
+    t_png_use:'截图、线条图、透明图', t_png_size:'较大（无损）', t_png_support:'100%',
+    t_avif_use:'下一代照片格式、高压缩率', t_avif_size:'比 JPEG 小50%', t_avif_support:'92%+',
+    t_svg_use:'图标、Logo、简单图形', t_svg_size:'极小（矢量）', t_svg_support:'100%',
+    s2_p1:'建议：将 WebP 作为所有位图的默认格式。老浏览器用 JPEG 做回退。如果能生成 AVIF，还能再小 20-30%。',
+    s2_h3:'各种格式适用场景',
+    s2_1:'照片 → WebP（质量 75-80）或 AVIF',
+    s2_2:'截图 → PNG（文字清晰）或 WebP 无损',
+    s2_3:'图标/Logo → SVG（可缩放、体积极小）',
+    s2_4:'动画 → WebP 动画或 MP4 视频',
+    s2_5:'需要透明 → WebP 带 Alpha 或 PNG',
+    s3_title:'压缩：质量与文件体积的权衡',
+    s3_p1:'大多数 JPEG/WebP 默认保存为质量 85-95。Web 使用时可以大幅降低：',
+    s3_1:'质量 80：肉眼几乎看不出区别，体积缩小 40-60%',
+    s3_2:'质量 70：放大看稍微模糊，体积缩小 50-70%',
+    s3_3:'质量 60：复杂照片有明显伪影，体积缩小 60-80%',
+    s3_p2:'对于大多数网站，JPEG/WebP 质量 75-80 是最佳平衡点。和质量 90 的视觉差异几乎不可感知，但文件大小差异显著。',
+    s3_tip_strong:'亲自试试：', s3_tip_text:'用我们的图片格式转换器上传一张照片，测试不同质量级别。对比文件大小——你会惊讶于在肉眼无损的情况下能压到多小。',
+    s4_title:'响应式图片：一图多尺寸',
+    s4_p1:'给手机端用户发送 4000px 的首屏图纯属浪费。使用 picture 元素和 srcset 属性：',
+    s4_p2:'必须包含的关键属性：',
+    s4_1:'width 和 height —— 防止 CLS（布局偏移）',
+    s4_2:'loading="lazy" —— 延迟加载屏幕外的图片',
+    s4_3:'decoding="async" —— 非阻塞解码（适用于首屏以下的图片）',
+    s4_4:'fetchpriority="high" —— 仅用于 LCP 图片',
+    s5_title:'调色板提取助力设计一致性',
+    s5_p1:'设计落地页或选择品牌色时，从参考图片或情绪板中提取颜色可以节省大量时间。我们的调色板提取器可以分析任意图片，返回主色调及其 HEX 和 RGB 值。',
+    s5_p2:'适用于以下场景：',
+    s5_1:'从参考图创建统一的配色方案',
+    s5_2:'让叠加文字颜色与背景照片匹配',
+    s5_3:'从情绪板构建品牌调色板',
+    s6_title:'优化检查清单',
+    s6_1:'将所有 JPEG/PNG 转为 WebP（质量 75-80）', s6_2:'每个 img 标签都加上 width 和 height',
+    s6_3:'首屏以下的图片加上 loading="lazy"', s6_4:'用 picture 做格式回退（AVIF → WebP → JPEG）',
+    s6_5:'用 srcset 实现响应式尺寸', s6_6:'将 GIF 转为 WebP 动画或 MP4',
+    s6_7:'2KB 以内的小 SVG 直接内联到 HTML 中', s6_8:'LCP 图片设置 fetchpriority="high"',
+    cta_strong:'相关工具：', cta_text:' 图片格式转换器 调色板提取器',
+    f_privacy:'隐私政策', f_disclaimer:'免责声明', f_about:'关于我们', f_contact:'联系我们', f_rights:'版权所有'
+  }
+};
+
+function toggleLang() {
+  lang = lang === 'en' ? 'zh' : 'en';
+  document.getElementById('langBtn').textContent = lang === 'en' ? '中文' : 'EN';
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
+  });
+}
+</script>
+</body>
+</html>
