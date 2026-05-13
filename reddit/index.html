@@ -303,7 +303,7 @@ function timeAgo(ts) {
   return Math.floor(diff/604800) + 'd';
 }
 
-function renderResults(posts) {
+function renderResults(posts, selectedSort) {
   const container = document.getElementById('redditResults');
   if (!posts.length) {
     container.innerHTML = `<div class="empty-state"><div class="e-icon">😅</div><h3 data-i18n="no_results">No results found</h3><p data-i18n="no_results_desc">Try a different keyword or category.</p></div>`;
@@ -317,11 +317,12 @@ function renderResults(posts) {
     zh: { score: '赞', comments: '评论', ago: '前', view: '在 Reddit 查看', results: '条结果' }
   }[lang];
 
+  const sortSel = selectedSort || 'score';
   let html = `<div class="results-header"><span class="results-count">${posts.length} ${label.results}</span>
     <select class="sort-select" onchange="sortResults(this.value)">
-      <option value="score" data-i18n="sort_score">Top by Score</option>
-      <option value="comments" data-i18n="sort_comments">Most Comments</option>
-      <option value="new" data-i18n="sort_new">Newest</option>
+      <option value="score" ${sortSel === 'score' ? 'selected' : ''} data-i18n="sort_score">Top by Score</option>
+      <option value="comments" ${sortSel === 'comments' ? 'selected' : ''} data-i18n="sort_comments">Most Comments</option>
+      <option value="new" ${sortSel === 'new' ? 'selected' : ''} data-i18n="sort_new">Newest</option>
     </select></div>`;
 
   posts.forEach(p => {
@@ -349,7 +350,7 @@ function sortResults(by) {
   else if (by === 'comments') sorted.sort((a, b) => b.num_comments - a.num_comments);
   else if (by === 'new') sorted.sort((a, b) => b.created_utc - a.created_utc);
   currentResults = sorted;
-  renderResults(sorted);
+  renderResults(sorted, by);
 }
 
 function escapeHtml(s) {
@@ -408,7 +409,7 @@ function toggleLang() {
     const key = el.dataset.i18n;
     if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
   });
-  if (currentResults.length) renderResults(currentResults);
+  if (currentResults.length) renderResults(currentResults, document.querySelector('.sort-select')?.value || 'score');
 }
 </script>
 </body>
