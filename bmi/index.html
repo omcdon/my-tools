@@ -318,6 +318,9 @@
       </div>
 
       <div class="btn-row">
+      <button class="btn" onclick="copyBMI()" style="margin-left:8px;">
+      <span class="en">Copy Result</span><span class="zh">复制结果</span>
+    </button>
         <button class="btn primary" onclick="calculate()">
           <span class="en">Calculate</span>
           <span class="zh">计算</span>
@@ -468,6 +471,17 @@
     document.getElementById('heightFt').addEventListener('input', calculate);
     document.getElementById('heightIn').addEventListener('input', calculate);
     document.getElementById('weightLb').addEventListener('input', calculate);
+
+    function copyBMI() {
+      const bmi = document.getElementById('bmiValue');
+      if (!bmi || !bmi.textContent || bmi.textContent === '--') return;
+      const isZh = lang === 'zh';
+      const text = 'BMI: ' + bmi.textContent + ' | ' + document.getElementById('bmiCategory').textContent + (isZh ? '\n正常范围: 18.5 – 24.9' : '\nNormal: 18.5 – 24.9') + '\n' + (isZh ? '理想体重: ' : 'Ideal weight: ') + document.getElementById('idealWeight').textContent + '\n' + (isZh ? '每日维持热量: ' : 'Daily calories: ') + document.getElementById('dailyCal').textContent;
+      navigator.clipboard.writeText(text).then(function() {
+        const btn = document.querySelector('[onclick="copyBMI()"]');
+        if (btn) { const orig = btn.innerHTML; btn.innerHTML = '<span class="en">Copied!</span><span class="zh">已复制!</span>'; setTimeout(function() { btn.innerHTML = orig; }, 1500); }
+      });
+    }
   </script>
 
   <!-- How to Use & FAQ (auto-generated for SEO) -->

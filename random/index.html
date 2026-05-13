@@ -344,7 +344,15 @@
 
     [lang="en"] .zh { display: none; }
     [lang="zh"] .en { display: none; }
-  </style>
+  
+.related-section{margin-top:24px;}
+.related-section h3{font-size:15px;font-weight:600;margin-bottom:10px;color:#e0e0ff;}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;}
+.related-card{display:block;background:#1a1a2e;border:1px solid rgba(108,92,231,0.25);border-radius:10px;padding:12px;text-decoration:none;color:#e0e0ff;transition:border-color .2s,box-shadow .2s;}
+.related-card:hover{border-color:#a29bfe;box-shadow:0 2px 12px rgba(108,92,231,0.15);}
+.related-card h4{font-size:13px;font-weight:600;margin-bottom:3px;}
+.related-card p{font-size:12px;color:#8888bb;line-height:1.4;}
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -467,6 +475,9 @@
     <br>
     <button class="btn-secondary" onclick="clearAll()">
       <span class="zh">清空</span><span class="en">Clear All</span>
+    </button>
+    <button class="btn-secondary" onclick="copyRandomResult()">
+      <span class="zh">复制结果</span><span class="en">Copy Result</span>
     </button>
 
     <!-- Result -->
@@ -639,7 +650,45 @@
       updateCount();
       setMode(mode); // Refresh labels
     }
+
+    function copyRandomResult() {
+      const el = document.getElementById('resultArea');
+      if (!el || !el.textContent.trim()) return;
+      navigator.clipboard.writeText(el.textContent.trim()).then(function() {
+        const btn = document.querySelector('[onclick="copyRandomResult()"]');
+        if (btn) { const orig = btn.innerHTML; btn.innerHTML = '<span class="zh">已复制!</span><span class="en">Copied!</span>'; setTimeout(function() { btn.innerHTML = orig; }, 1500); }
+      });
+    }
   </script>
+
+  
+  <div class="seo-content" style="max-width:720px;margin:32px auto 0;padding:0 16px;">
+    <div style="border-top:0.5px solid rgba(108,92,231,0.25);padding-top:28px;">
+      <div class="related-section en">
+        <h3>Related Tools</h3>
+        <div class="related-grid">
+        <a href="/password/" class="related-card"><h4>Password Generator</h4><p>Generate strong random passwords.</p></a>
+        <a href="/qrcode/" class="related-card"><h4>QR Code Generator</h4><p>Create QR codes for any text.</p></a>
+        <a href="/counter/" class="related-card"><h4>Character Counter</h4><p>Count characters in real-time.</p></a>
+        <a href="/hash/" class="related-card"><h4>Hash Generator</h4><p>Generate random hash strings.</p></a>
+        
+        </div>
+      </div>
+      <div class="related-section zh" style="display:none">
+        <h3>Related Tools</h3>
+        <div class="related-grid">
+        <a href="/password/" class="related-card"><h4>密码生成器</h4><p>生成强随机密码。</p></a>
+        <a href="/qrcode/" class="related-card"><h4>二维码生成器</h4><p>为任意文本创建二维码。</p></a>
+        <a href="/counter/" class="related-card"><h4>字符统计工具</h4><p>实时统计字符数。</p></a>
+        <a href="/hash/" class="related-card"><h4>哈希生成器</h4><p>生成随机哈希字符串。</p></a>
+        
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;color:#9e9c97;font-size:12px;margin:16px 0 0;">
+      <a href="/" style="color:#2563eb;text-decoration:none;"><span class="en">Back to all tools</span><span class="zh">Back to all tools</span></a>
+    </p>
+  </div>
 
   <!-- How to Use & FAQ (auto-generated for SEO) -->
   <div class="seo-content" style="max-width:720px;margin:32px auto 0;padding:0 16px;">

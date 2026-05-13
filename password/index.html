@@ -340,7 +340,12 @@ function generate() {
   const lang = document.documentElement.lang;
   const labels = {
     en: { Weak:'Weak', Fair:'Fair', Strong:'Strong', 'Very Strong':'Very Strong', bits:'bits of entropy' },
-    zh: { Weak:'弱', Fair:'一般', Strong:'强', 'Very Strong':'非常强', bits:'位熵值' }
+    zh: { Weak:'弱', Fair:'一般', Strong:'强', 'Very Strong':'非常强', bits:'位熵值' ,
+    faq_title: "常见问题",
+    faq_0: "<strong>这些密码是真正随机的吗？</strong> — 是的。生成器使用 Web Crypto API（crypto.getRandomValues）提供密码学安全的随机数，与专业安全工具的随机性级别相同。",
+    faq_1: "<strong>密码应该多长？</strong> — 大多数账号建议至少 16 位。高安全账号（银行、邮箱）建议 20 位以上，包含所有字符类型。",
+    faq_2: "<strong>生成的密码会被存储吗？</strong> — 不会。密码完全在浏览器中生成，不会发送到任何服务器。离开页面后密码消失，除非你已经复制。",
+    faq_3: "<strong>什么样的密码才算强密码？</strong> — 强密码需要够长（16位以上）、混合字符类型（大写、小写、数字、符号），避免字典词或常见模式。"}
   }[lang] || { Weak:'Weak', Fair:'Fair', Strong:'Strong', 'Very Strong':'Very Strong', bits:'bits of entropy' };
 
   document.getElementById('strengthLabel').textContent = labels[label];
@@ -417,7 +422,12 @@ const i18n = {
     rel_jwt_t:'JWT Decoder', rel_jwt_d:'Decode and inspect JWT tokens.',
     learn_pw_t:'🔐 Secure Password Guide', learn_pw_d:'Learn how to create and manage strong passwords safely.'
   },
-  zh: {
+,
+    faq_title: "Frequently Asked Questions",
+    faq_0: "<strong>Are these passwords truly random?</strong> — Yes. The generator uses the Web Crypto API (crypto.getRandomValues) which provides cryptographically secure random numbers. This is the same randomness level used by professional security tools.",
+    faq_1: "<strong>How long should my password be?</strong> — For most accounts, 16 characters is a good minimum. For high-security accounts (banking, email), 20+ characters with all character types is recommended.",
+    faq_2: "<strong>Is my generated password stored anywhere?</strong> — No. Passwords are generated entirely in your browser and are never sent to any server. Once you navigate away, the password is gone unless you copied it.",
+    faq_3: "<strong>What makes a strong password?</strong> — A strong password is long (16+ chars), uses mixed character types (uppercase, lowercase, numbers, symbols), and avoids dictionary words or common patterns."  zh: {
     bc:'密码生成器', title:'密码生成器',
     subtitle:'生成安全的随机密码。所有处理都在浏览器本地完成。',
     copy:'复制', settings_title:'设置', length:'密码长度',
@@ -453,5 +463,17 @@ function toggleLang() {
   });
 }
 </script>
+
+    <div class="faq-section" style="border-top:0.5px solid rgba(0,0,0,0.10);padding-top:28px;margin-top:8px;">
+      <h2 style="font-size:18px;font-weight:600;margin-bottom:12px;" data-i18n="faq_title">Frequently Asked Questions</h2>
+      <ul style="list-style:none;padding:0;margin-bottom:16px;">
+      <li data-i18n="faq_0"><strong>Are these passwords truly random?</strong> — Yes. The generator uses the Web Crypto API (crypto.getRandomValues) which provides cryptographically secure random numbers. This is the same randomness level used by professional security tools.</li>
+      <li data-i18n="faq_1"><strong>How long should my password be?</strong> — For most accounts, 16 characters is a good minimum. For high-security accounts (banking, email), 20+ characters with all character types is recommended.</li>
+      <li data-i18n="faq_2"><strong>Is my generated password stored anywhere?</strong> — No. Passwords are generated entirely in your browser and are never sent to any server. Once you navigate away, the password is gone unless you copied it.</li>
+      <li data-i18n="faq_3"><strong>What makes a strong password?</strong> — A strong password is long (16+ chars), uses mixed character types (uppercase, lowercase, numbers, symbols), and avoids dictionary words or common patterns.</li>
+
+      </ul>
+    </div>
+
 </body>
 </html>

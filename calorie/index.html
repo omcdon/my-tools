@@ -269,6 +269,14 @@
     .header { flex-direction: column; }
     .result-main .value { font-size: 36px; }
   }
+
+.related-section{margin-top:24px;}
+.related-section h3{font-size:15px;font-weight:600;margin-bottom:10px;color:#1a1a18;}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;}
+.related-card{display:block;background:#fff;border:1px solid rgba(0,0,0,0.10);border-radius:10px;padding:12px;text-decoration:none;color:#1a1a18;transition:border-color .2s,box-shadow .2s;}
+.related-card:hover{border-color:#2563eb;box-shadow:0 2px 12px rgba(37,99,235,0.08);}
+.related-card h4{font-size:13px;font-weight:600;margin-bottom:3px;}
+.related-card p{font-size:12px;color:#5f5e5a;line-height:1.4;}
 </style>
 <script type="application/ld+json">
 {
@@ -407,7 +415,10 @@
       </div>
     </div>
 
-    <button class="calc-btn" onclick="calculate()" data-i18n="btn_calculate">Calculate My Calories</button>
+    <button class="calc-btn" id="calcBtn" onclick="calculate()" data-i18n="btn_calculate">Calculate My Calories</button>
+      <button class="btn" onclick="copyCalories()" style="margin-left:8px;">
+      <span class="en">Copy Result</span><span class="zh">复制结果</span>
+    </button>
   </div>
 
   <!-- Results -->
@@ -573,7 +584,21 @@ const i18n = {
     next_tool: 'Color Converter →',
     bmr_line: 'Basal Metabolic Rate (BMR): <strong>{{bmr}} kcal/day</strong> · Activity multiplier: ×{{factor}}'
   },
-  zh: {
+,
+    rt_title: "Related Tools",
+    rt_0_t: "BMI Calculator",
+    rt_0_d: "Calculate your Body Mass Index.",
+    rt_1_t: "Sleep Cycle Calculator",
+    rt_1_d: "Find optimal bedtimes.",
+    rt_2_t: "Pomodoro Timer",
+    rt_2_d: "Boost productivity with Pomodoro technique.",
+    rt_3_t: "Unit Converter",
+    rt_3_d: "Convert between metric and imperial units.",
+    faq_title: "Frequently Asked Questions",
+    faq_0: "<strong>How accurate is the Mifflin-St Jeor formula?</strong> — The Mifflin-St Jeor equation is considered the most accurate BMR formula for most people. It typically estimates within 10% of actual metabolic rate. For very muscular or obese individuals, the Katch-McArdle formula may be more accurate.",
+    faq_1: "<strong>What is the difference between BMR and TDEE?</strong> — BMR (Basal Metabolic Rate) is the calories your body burns at complete rest. TDEE (Total Daily Energy Expenditure) multiplies BMR by your activity level to estimate total daily calorie burn.",
+    faq_2: "<strong>Should I eat at a calorie deficit to lose weight?</strong> — A moderate deficit of 300-500 calories below your TDEE is generally recommended for sustainable weight loss. Larger deficits can lead to muscle loss and metabolic adaptation.",
+    faq_3: "<strong>Can I use this for keto or other specific diets?</strong> — This calculator provides total calorie estimates. For keto, you would adjust the macro ratios (higher fat, lower carb) while keeping total calories near your TDEE."  zh: {
     site_title: '卡路里计算器',
     site_desc: '计算你的基础代谢率（BMR）、每日总消耗（TDEE）与目标热量',
     section_info: '填写你的基本信息',
@@ -617,7 +642,21 @@ const i18n = {
     ad_placeholder: '广告位 – Google AdSense',
     next_tool: '颜色转换器 →',
     bmr_line: '基础代谢率（BMR）：<strong>{{bmr}} 千卡/天</strong> · 活动系数：×{{factor}}'
-  }
+  ,
+    rt_title: "相关工具",
+    rt_0_t: "BMI 计算器",
+    rt_0_d: "计算你的身体质量指数。",
+    rt_1_t: "睡眠周期计算器",
+    rt_1_d: "找到最佳入睡时间。",
+    rt_2_t: "番茄钟计时器",
+    rt_2_d: "用番茄工作法提升效率。",
+    rt_3_t: "单位换算器",
+    rt_3_d: "公制与英制单位互转。",
+    faq_title: "常见问题",
+    faq_0: "<strong>Mifflin-St Jeor 公式有多准确？</strong> — Mifflin-St Jeor 公式被公认为最适合大多数人的 BMR 计算公式，通常在 10% 误差范围内。对于肌肉量很高或严重肥胖的人，Katch-McArdle 公式可能更准确。",
+    faq_1: "<strong>BMR 和 TDEE 有什么区别？</strong> — BMR（基础代谢率）是身体完全休息时消耗的热量。TDEE（每日总消耗）将 BMR 乘以你的活动水平，估算每日总热量消耗。",
+    faq_2: "<strong>应该少吃多少来减肥？</strong> — 通常建议在 TDEE 基础上减少 300-500 千卡进行适度热量缺口，这样减肥更可持续。更大的缺口可能导致肌肉流失和代谢适应。",
+    faq_3: "<strong>生酮饮食可以用这个计算器吗？</strong> — 本计算器提供总热量估算。生酮饮食需要调整宏量营养素比例（高脂肪、低碳水），同时保持总热量接近 TDEE。"}
 };
 
 // ─── Language toggle ──────────────────────────────────────────────────────────
@@ -739,6 +778,56 @@ function calculate() {
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
 applyI18n();
+
+function copyCalories() {
+  const tdee = document.getElementById('tdeeValue');
+  if (!tdee || !tdee.textContent || tdee.textContent === '—') return;
+  const isZh = lang === 'zh';
+  const text = 'TDEE: ' + tdee.textContent + ' ' + (isZh ? '千卡/天' : 'kcal/day') + '\n' +
+    (isZh ? '减重' : 'Lose') + ': ' + document.getElementById('loseVal').textContent + ' kcal\n' +
+    (isZh ? '维持' : 'Maintain') + ': ' + document.getElementById('maintainVal').textContent + ' kcal\n' +
+    (isZh ? '增肌' : 'Gain') + ': ' + document.getElementById('gainVal').textContent + ' kcal';
+  navigator.clipboard.writeText(text).then(function() {
+    const btn = document.querySelector('[onclick="copyCalories()"]');
+    if (btn) { const orig = btn.innerHTML; btn.textContent = isZh ? '已复制!' : 'Copied!'; setTimeout(function() { btn.innerHTML = orig; }, 1500); }
+  });
+}
 </script>
+
+  <div class="related-section" style="max-width:720px;margin:32px auto 0;padding:0 16px;">
+    <h3 data-i18n="rt_title">Related Tools</h3>
+    <div class="related-grid">
+      <a href="/bmi/" class="related-card">
+        <h4 data-i18n="rt_0_t">BMI Calculator</h4>
+        <p data-i18n="rt_0_d">Calculate your Body Mass Index.</p>
+      </a>
+      <a href="/sleep/" class="related-card">
+        <h4 data-i18n="rt_1_t">Sleep Cycle Calculator</h4>
+        <p data-i18n="rt_1_d">Find optimal bedtimes.</p>
+      </a>
+      <a href="/pomodoro/" class="related-card">
+        <h4 data-i18n="rt_2_t">Pomodoro Timer</h4>
+        <p data-i18n="rt_2_d">Boost productivity with Pomodoro technique.</p>
+      </a>
+      <a href="/converter/" class="related-card">
+        <h4 data-i18n="rt_3_t">Unit Converter</h4>
+        <p data-i18n="rt_3_d">Convert between metric and imperial units.</p>
+      </a>
+
+    </div>
+  </div>
+
+
+    <div class="faq-section" style="border-top:0.5px solid rgba(0,0,0,0.10);padding-top:28px;margin-top:8px;">
+      <h2 style="font-size:18px;font-weight:600;margin-bottom:12px;" data-i18n="faq_title">Frequently Asked Questions</h2>
+      <ul style="list-style:none;padding:0;margin-bottom:16px;">
+      <li data-i18n="faq_0"><strong>How accurate is the Mifflin-St Jeor formula?</strong> — The Mifflin-St Jeor equation is considered the most accurate BMR formula for most people. It typically estimates within 10% of actual metabolic rate. For very muscular or obese individuals, the Katch-McArdle formula may be more accurate.</li>
+      <li data-i18n="faq_1"><strong>What is the difference between BMR and TDEE?</strong> — BMR (Basal Metabolic Rate) is the calories your body burns at complete rest. TDEE (Total Daily Energy Expenditure) multiplies BMR by your activity level to estimate total daily calorie burn.</li>
+      <li data-i18n="faq_2"><strong>Should I eat at a calorie deficit to lose weight?</strong> — A moderate deficit of 300-500 calories below your TDEE is generally recommended for sustainable weight loss. Larger deficits can lead to muscle loss and metabolic adaptation.</li>
+      <li data-i18n="faq_3"><strong>Can I use this for keto or other specific diets?</strong> — This calculator provides total calorie estimates. For keto, you would adjust the macro ratios (higher fat, lower carb) while keeping total calories near your TDEE.</li>
+
+      </ul>
+    </div>
+
 </body>
 </html>

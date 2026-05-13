@@ -124,6 +124,14 @@
   }
   .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
   footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
+
+.related-section{margin-top:24px;}
+.related-section h3{font-size:15px;font-weight:600;margin-bottom:10px;color:#1a1a18;}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;}
+.related-card{display:block;background:#fff;border:1px solid rgba(0,0,0,0.10);border-radius:10px;padding:12px;text-decoration:none;color:#1a1a18;transition:border-color .2s,box-shadow .2s;}
+.related-card:hover{border-color:#2563eb;box-shadow:0 2px 12px rgba(37,99,235,0.08);}
+.related-card h4{font-size:13px;font-weight:600;margin-bottom:3px;}
+.related-card p{font-size:12px;color:#5f5e5a;line-height:1.4;}
 </style>
 <script type="application/ld+json">
 {
@@ -394,7 +402,20 @@ function renderResults(url, checks) {
   const offset = circumference - (score / 100) * circumference;
   const labels = {
     en: { pass: 'Passed', warn: 'Warnings', fail: 'Failed', score_label: 'Discover Score' },
-    zh: { pass: '通过', warn: '警告', fail: '未通过', score_label: 'Discover 评分' }
+    zh: { pass: '通过', warn: '警告', fail: '未通过', score_label: 'Discover 评分' ,
+    rt_title: "相关工具",
+    rt_0_t: "Reddit 热点探索",
+    rt_0_d: "发现 Reddit 热门话题。",
+    rt_1_t: "字符统计工具",
+    rt_1_d: "优化 Discover 内容长度。",
+    rt_2_t: "图片格式转换器",
+    rt_2_d: "转换 Discover 图片格式。",
+    rt_3_t: "颜色转换器",
+    rt_3_d: "设计吸睛缩略图。",
+    faq_title: "常见问题",
+    faq_0: "<strong>什么是 Google Discover？</strong> — Google Discover 是 Google 基于用户兴趣和浏览历史推荐内容的资讯流，包括文章、视频等。它出现在 Google App 和移动版 Chrome 中。",
+    faq_1: "<strong>这个工具如何检测资格？</strong> — 工具分析页面 URL，检查 Google Discover 的关键要求：图片尺寸、meta 标签、内容质量信号和结构化数据，然后给出评分。",
+    faq_2: "<strong>需要向 Google Discover 提交网站吗？</strong> — 不需要。与 Google 搜索不同，Discover 不需要手动提交。Google 会自动收录符合条件的内容。但遵循最佳实践能提高收录概率。"}
   }[lang];
 
   document.getElementById('dashboard').innerHTML = `<div class="score-card">
@@ -468,7 +489,20 @@ const i18n = {
     loading:'Analyzing page...', scanned:'Scanned:',
     f_privacy:'Privacy Policy', f_disclaimer:'Disclaimer', f_about:'About', f_contact:'Contact', f_rights:'All rights reserved'
   },
-  zh: {
+,
+    rt_title: "Related Tools",
+    rt_0_t: "Reddit Explorer",
+    rt_0_d: "Find trending topics on Reddit.",
+    rt_1_t: "Character Counter",
+    rt_1_d: "Optimize Discover content length.",
+    rt_2_t: "Image Converter",
+    rt_2_d: "Convert images for Discover.",
+    rt_3_t: "Color Converter",
+    rt_3_d: "Design eye-catching thumbnails.",
+    faq_title: "Frequently Asked Questions",
+    faq_0: "<strong>What is Google Discover?</strong> — Google Discover is a content recommendation feed that shows articles, videos, and other content to users based on their interests and browsing history. It appears on the Google app and mobile Chrome.",
+    faq_1: "<strong>How does this tool check my eligibility?</strong> — The tool analyzes your page URL and checks for key Google Discover requirements: image size, meta tags, content quality signals, and structured data. It provides a score based on these factors.",
+    faq_2: "<strong>Do I need to submit my site to Google Discover?</strong> — No. Unlike Google Search, Discover does not require manual submission. Google automatically includes eligible content. However, following best practices increases your chances."  zh: {
     bc:'Discover 检测', title:'Google Discover 优化检测工具',
     subtitle:'检测您的页面是否符合 Google Discover 收录要求，获取可操作的优化建议。',
     url_ph:'输入 URL（如 https://example.com/article）', check_btn:'检测 URL',
@@ -488,5 +522,40 @@ function toggleLang() {
   });
 }
 </script>
+
+  <div class="related-section" style="max-width:720px;margin:32px auto 0;padding:0 16px;">
+    <h3 data-i18n="rt_title">Related Tools</h3>
+    <div class="related-grid">
+      <a href="/reddit/" class="related-card">
+        <h4 data-i18n="rt_0_t">Reddit Explorer</h4>
+        <p data-i18n="rt_0_d">Find trending topics on Reddit.</p>
+      </a>
+      <a href="/counter/" class="related-card">
+        <h4 data-i18n="rt_1_t">Character Counter</h4>
+        <p data-i18n="rt_1_d">Optimize Discover content length.</p>
+      </a>
+      <a href="/image/" class="related-card">
+        <h4 data-i18n="rt_2_t">Image Converter</h4>
+        <p data-i18n="rt_2_d">Convert images for Discover.</p>
+      </a>
+      <a href="/color/" class="related-card">
+        <h4 data-i18n="rt_3_t">Color Converter</h4>
+        <p data-i18n="rt_3_d">Design eye-catching thumbnails.</p>
+      </a>
+
+    </div>
+  </div>
+
+
+    <div class="faq-section" style="border-top:0.5px solid rgba(0,0,0,0.10);padding-top:28px;margin-top:8px;">
+      <h2 style="font-size:18px;font-weight:600;margin-bottom:12px;" data-i18n="faq_title">Frequently Asked Questions</h2>
+      <ul style="list-style:none;padding:0;margin-bottom:16px;">
+      <li data-i18n="faq_0"><strong>What is Google Discover?</strong> — Google Discover is a content recommendation feed that shows articles, videos, and other content to users based on their interests and browsing history. It appears on the Google app and mobile Chrome.</li>
+      <li data-i18n="faq_1"><strong>How does this tool check my eligibility?</strong> — The tool analyzes your page URL and checks for key Google Discover requirements: image size, meta tags, content quality signals, and structured data. It provides a score based on these factors.</li>
+      <li data-i18n="faq_2"><strong>Do I need to submit my site to Google Discover?</strong> — No. Unlike Google Search, Discover does not require manual submission. Google automatically includes eligible content. However, following best practices increases your chances.</li>
+
+      </ul>
+    </div>
+
 </body>
 </html>

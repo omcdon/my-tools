@@ -116,7 +116,15 @@
 
     [lang="en"] .zh { display: none; }
     [lang="zh"] .en { display: none; }
-  </style>
+  
+.related-section{margin-top:24px;}
+.related-section h3{font-size:15px;font-weight:600;margin-bottom:10px;color:#e0e0ff;}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;}
+.related-card{display:block;background:#1a1a2e;border:1px solid rgba(108,92,231,0.25);border-radius:10px;padding:12px;text-decoration:none;color:#e0e0ff;transition:border-color .2s,box-shadow .2s;}
+.related-card:hover{border-color:#a29bfe;box-shadow:0 2px 12px rgba(108,92,231,0.15);}
+.related-card h4{font-size:13px;font-weight:600;margin-bottom:3px;}
+.related-card p{font-size:12px;color:#8888bb;line-height:1.4;}
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -351,6 +359,35 @@
     buildStops();
     update();
   </script>
+
+  
+  <div class="seo-content" style="max-width:720px;margin:32px auto 0;padding:0 16px;">
+    <div style="border-top:0.5px solid rgba(108,92,231,0.25);padding-top:28px;">
+      <div class="related-section en">
+        <h3>Related Tools</h3>
+        <div class="related-grid">
+        <a href="/color/" class="related-card"><h4>Color Converter</h4><p>Convert gradient colors.</p></a>
+        <a href="/palette/" class="related-card"><h4>Palette Extractor</h4><p>Build palettes from gradients.</p></a>
+        <a href="/font/" class="related-card"><h4>Font Pairing</h4><p>Pair fonts with gradient backgrounds.</p></a>
+        <a href="/image/" class="related-card"><h4>Image Converter</h4><p>Export gradients as images.</p></a>
+        
+        </div>
+      </div>
+      <div class="related-section zh" style="display:none">
+        <h3>Related Tools</h3>
+        <div class="related-grid">
+        <a href="/color/" class="related-card"><h4>颜色转换器</h4><p>转换渐变颜色。</p></a>
+        <a href="/palette/" class="related-card"><h4>调色板提取器</h4><p>从渐变构建调色板。</p></a>
+        <a href="/font/" class="related-card"><h4>字体搭配工具</h4><p>将字体与渐变背景搭配。</p></a>
+        <a href="/image/" class="related-card"><h4>图片格式转换器</h4><p>将渐变导出为图片。</p></a>
+        
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;color:#9e9c97;font-size:12px;margin:16px 0 0;">
+      <a href="/" style="color:#2563eb;text-decoration:none;"><span class="en">Back to all tools</span><span class="zh">Back to all tools</span></a>
+    </p>
+  </div>
 
   <!-- How to Use & FAQ (auto-generated for SEO) -->
   <div class="seo-content" style="max-width:720px;margin:32px auto 0;padding:0 16px;">

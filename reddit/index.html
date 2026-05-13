@@ -137,6 +137,14 @@
   footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
+
+.related-section{margin-top:24px;}
+.related-section h3{font-size:15px;font-weight:600;margin-bottom:10px;color:#1a1a18;}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;}
+.related-card{display:block;background:#fff;border:1px solid rgba(0,0,0,0.10);border-radius:10px;padding:12px;text-decoration:none;color:#1a1a18;transition:border-color .2s,box-shadow .2s;}
+.related-card:hover{border-color:#2563eb;box-shadow:0 2px 12px rgba(37,99,235,0.08);}
+.related-card h4{font-size:13px;font-weight:600;margin-bottom:3px;}
+.related-card p{font-size:12px;color:#5f5e5a;line-height:1.4;}
 </style>
 <script type="application/ld+json">
 {
@@ -362,7 +370,20 @@ function renderResults(posts, selectedSort) {
   const lang = document.documentElement.lang === 'zh' ? 'zh' : 'en';
   const label = {
     en: { score: 'upvotes', comments: 'comments', ago: 'ago', view: 'View on Reddit', results: 'results' },
-    zh: { score: '赞', comments: '评论', ago: '前', view: '在 Reddit 查看', results: '条结果' }
+    zh: { score: '赞', comments: '评论', ago: '前', view: '在 Reddit 查看', results: '条结果' ,
+    rt_title: "相关工具",
+    rt_0_t: "Google Discover 检测",
+    rt_0_d: "检查 Discover 资格。",
+    rt_1_t: "字符统计工具",
+    rt_1_d: "优化 Reddit 帖子长度。",
+    rt_2_t: "密码生成器",
+    rt_2_d: "生成安全账号密码。",
+    rt_3_t: "图片格式转换器",
+    rt_3_d: "转换 Reddit 帖子图片。",
+    faq_title: "常见问题",
+    faq_0: "<strong>这个工具支持哪些子版块？</strong> — 可以获取任何公开子版块的热门帖子。在搜索框输入子版块名称（不带 r/）即可。",
+    faq_1: "<strong>数据多久更新一次？</strong> — 数据通过 Reddit 的公开 JSON API 实时获取。每次搜索都会发起新请求，获取最新帖子。",
+    faq_2: "<strong>这个工具和 Reddit 有关联吗？</strong> — 没有。本工具独立开发，使用 Reddit 公开 API 获取数据，与 Reddit, Inc. 无关。"}
   }[lang];
 
   const sortSel = selectedSort || 'score';
@@ -427,7 +448,20 @@ const i18n = {
     q_tip4:'Use Quora Spaces for niche topic discovery',
     f_privacy:'Privacy Policy', f_disclaimer:'Disclaimer', f_about:'About', f_contact:'Contact', f_rights:'All rights reserved'
   },
-  zh: {
+,
+    rt_title: "Related Tools",
+    rt_0_t: "Google Discover Checker",
+    rt_0_d: "Check your Discover eligibility.",
+    rt_1_t: "Character Counter",
+    rt_1_d: "Optimize Reddit post length.",
+    rt_2_t: "Password Generator",
+    rt_2_d: "Generate secure account passwords.",
+    rt_3_t: "Image Converter",
+    rt_3_d: "Convert images for Reddit posts.",
+    faq_title: "Frequently Asked Questions",
+    faq_0: "<strong>What subreddits does this tool support?</strong> — The tool can fetch hot posts from any public subreddit. Just enter the subreddit name (without r/) in the search box.",
+    faq_1: "<strong>How often is the data updated?</strong> — Data is fetched in real-time from Reddit's public JSON API. Each search triggers a fresh request, so you always get the latest posts.",
+    faq_2: "<strong>Is this tool affiliated with Reddit?</strong> — No. This tool is independently developed and uses Reddit's public API for data. It is not endorsed by or affiliated with Reddit, Inc."  zh: {
     bc:'热点话题探索', title:'Reddit & Quora 热点话题探索',
     subtitle:'发现热门讨论，挖掘内容选题和用户关注的问题。',
     search_ph:'输入关键词（如 AI、营销、React）...', search_btn:'搜索',
@@ -460,5 +494,40 @@ function toggleLang() {
   if (currentResults.length) renderResults(currentResults, document.querySelector('.sort-select')?.value || 'score');
 }
 </script>
+
+  <div class="related-section" style="max-width:720px;margin:32px auto 0;padding:0 16px;">
+    <h3 data-i18n="rt_title">Related Tools</h3>
+    <div class="related-grid">
+      <a href="/discover/" class="related-card">
+        <h4 data-i18n="rt_0_t">Google Discover Checker</h4>
+        <p data-i18n="rt_0_d">Check your Discover eligibility.</p>
+      </a>
+      <a href="/counter/" class="related-card">
+        <h4 data-i18n="rt_1_t">Character Counter</h4>
+        <p data-i18n="rt_1_d">Optimize Reddit post length.</p>
+      </a>
+      <a href="/password/" class="related-card">
+        <h4 data-i18n="rt_2_t">Password Generator</h4>
+        <p data-i18n="rt_2_d">Generate secure account passwords.</p>
+      </a>
+      <a href="/image/" class="related-card">
+        <h4 data-i18n="rt_3_t">Image Converter</h4>
+        <p data-i18n="rt_3_d">Convert images for Reddit posts.</p>
+      </a>
+
+    </div>
+  </div>
+
+
+    <div class="faq-section" style="border-top:0.5px solid rgba(0,0,0,0.10);padding-top:28px;margin-top:8px;">
+      <h2 style="font-size:18px;font-weight:600;margin-bottom:12px;" data-i18n="faq_title">Frequently Asked Questions</h2>
+      <ul style="list-style:none;padding:0;margin-bottom:16px;">
+      <li data-i18n="faq_0"><strong>What subreddits does this tool support?</strong> — The tool can fetch hot posts from any public subreddit. Just enter the subreddit name (without r/) in the search box.</li>
+      <li data-i18n="faq_1"><strong>How often is the data updated?</strong> — Data is fetched in real-time from Reddit's public JSON API. Each search triggers a fresh request, so you always get the latest posts.</li>
+      <li data-i18n="faq_2"><strong>Is this tool affiliated with Reddit?</strong> — No. This tool is independently developed and uses Reddit's public API for data. It is not endorsed by or affiliated with Reddit, Inc.</li>
+
+      </ul>
+    </div>
+
 </body>
 </html>

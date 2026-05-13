@@ -235,7 +235,15 @@
 
     [lang="en"] .zh { display: none; }
     [lang="zh"] .en { display: none; }
-  </style>
+  
+.related-section{margin-top:24px;}
+.related-section h3{font-size:15px;font-weight:600;margin-bottom:10px;color:#e0e0ff;}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;}
+.related-card{display:block;background:#1a1a2e;border:1px solid rgba(108,92,231,0.25);border-radius:10px;padding:12px;text-decoration:none;color:#e0e0ff;transition:border-color .2s,box-shadow .2s;}
+.related-card:hover{border-color:#a29bfe;box-shadow:0 2px 12px rgba(108,92,231,0.15);}
+.related-card h4{font-size:13px;font-weight:600;margin-bottom:3px;}
+.related-card p{font-size:12px;color:#8888bb;line-height:1.4;}
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -530,6 +538,35 @@
     // Init
     convertAll();
   </script>
+
+  
+  <div class="seo-content" style="max-width:720px;margin:32px auto 0;padding:0 16px;">
+    <div style="border-top:0.5px solid rgba(108,92,231,0.25);padding-top:28px;">
+      <div class="related-section en">
+        <h3>Related Tools</h3>
+        <div class="related-grid">
+        <a href="/json/" class="related-card"><h4>JSON Formatter</h4><p>Format and validate JSON data.</p></a>
+        <a href="/base64/" class="related-card"><h4>Base64 Encoder</h4><p>Encode strings to Base64.</p></a>
+        <a href="/regex/" class="related-card"><h4>Regex Tester</h4><p>Test text transformations with regex.</p></a>
+        <a href="/counter/" class="related-card"><h4>Character Counter</h4><p>Count characters before converting.</p></a>
+        
+        </div>
+      </div>
+      <div class="related-section zh" style="display:none">
+        <h3>Related Tools</h3>
+        <div class="related-grid">
+        <a href="/json/" class="related-card"><h4>JSON 格式化器</h4><p>格式化和校验 JSON 数据。</p></a>
+        <a href="/base64/" class="related-card"><h4>Base64 编解码器</h4><p>将字符串编码为 Base64。</p></a>
+        <a href="/regex/" class="related-card"><h4>正则表达式测试器</h4><p>用正则测试文本转换。</p></a>
+        <a href="/counter/" class="related-card"><h4>字符统计工具</h4><p>转换前统计字符。</p></a>
+        
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;color:#9e9c97;font-size:12px;margin:16px 0 0;">
+      <a href="/" style="color:#2563eb;text-decoration:none;"><span class="en">Back to all tools</span><span class="zh">Back to all tools</span></a>
+    </p>
+  </div>
 
   <!-- How to Use & FAQ (auto-generated for SEO) -->
   <div class="seo-content" style="max-width:720px;margin:32px auto 0;padding:0 16px;">
