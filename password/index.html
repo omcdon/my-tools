@@ -10,7 +10,7 @@
 <title>Password Generator – Secure Random Passwords | Freemaki</title>
 <meta name="description" content="Generate secure random passwords instantly. Customize length, character types, and strength. All processing done locally in your browser. No data sent to any server."/>
 <meta name="keywords" content="密码生成器，安全随机密码，自定义长度和字符类型，浏览器本地生成"/>
-<meta name="robots" content="index, follow"/>
+<meta name="robots" content="index, follow, max-image-preview:large"/>
 <link rel="canonical" href="https://www.freemaki.com/password/"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Password Generator – Secure Random Passwords"/>
@@ -91,7 +91,54 @@
   .lang-btn { position: fixed; top: 16px; right: 16px; padding: 6px 14px; border: 0.5px solid var(--border); border-radius: 20px; background: var(--surface); font-size: 13px; cursor: pointer; color: var(--text2); z-index: 100; }
   .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
   footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
+  .related-section { margin-top: 40px; }
+  .related-section h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text); }
+  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  .related-card { display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-decoration: none; color: var(--text); transition: border-color .2s, box-shadow .2s; }
+  .related-card:hover { border-color: var(--accent); box-shadow: 0 2px 12px rgba(37,99,235,0.08); }
+  .related-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .related-card p { font-size: 12px; color: var(--text2); line-height: 1.4; }
+  .learn-more { margin-top: 12px; }
+  .learn-card { border-color: #2563eb22; background: #f0f5ff; }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Free Secure Password Generator",
+  "url": "https://www.freemaki.com/password/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Generate cryptographically secure random passwords with customizable options. Free, no signup required.",
+  "browserRequirements": "Requires a modern web browser",
+  "softwareVersion": "1.0"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": "1",
+      "name": "Home",
+      "item": "https://www.freemaki.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": "2",
+      "name": "Secure Password Generator",
+      "item": "https://www.freemaki.com/password/"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <button class="lang-btn" onclick="toggleLang()" id="langBtn">中文</button>
@@ -178,6 +225,30 @@
       <li data-i18n="sec_2">No passwords are sent to any server. No network requests are made.</li>
       <li data-i18n="sec_3">History is stored in memory only and cleared when you close the tab.</li>
     </ul>
+  </div>
+
+  <div class="related-section">
+    <h3 data-i18n="rel_title">Related Tools</h3>
+    <div class="related-grid">
+      <a href="/hash/" class="related-card">
+        <h4 data-i18n="rel_hash_t">Hash Generator</h4>
+        <p data-i18n="rel_hash_d">Generate MD5, SHA-1, SHA-256 hashes instantly.</p>
+      </a>
+      <a href="/base64/" class="related-card">
+        <h4 data-i18n="rel_b64_t">Base64 Encoder</h4>
+        <p data-i18n="rel_b64_d">Encode and decode Base64 strings.</p>
+      </a>
+      <a href="/jwt/" class="related-card">
+        <h4 data-i18n="rel_jwt_t">JWT Decoder</h4>
+        <p data-i18n="rel_jwt_d">Decode and inspect JWT tokens.</p>
+      </a>
+    </div>
+    <div class="learn-more">
+      <a href="/blog/secure-password-guide/" class="related-card learn-card">
+        <h4 data-i18n="learn_pw_t">🔐 Secure Password Guide</h4>
+        <p data-i18n="learn_pw_d">Learn how to create and manage strong passwords safely.</p>
+      </a>
+    </div>
   </div>
 
   <footer>
@@ -333,7 +404,12 @@ const i18n = {
     sec_1:'All generation uses crypto.getRandomValues() — cryptographically secure.',
     sec_2:'No passwords are sent to any server. Zero network requests.',
     sec_3:'History is in-memory only and cleared when you close the tab.',
-    f_privacy:'Privacy Policy', f_disclaimer:'Disclaimer', f_about:'About', f_contact:'Contact', f_rights:'All rights reserved'
+    f_privacy:'Privacy Policy', f_disclaimer:'Disclaimer', f_about:'About', f_contact:'Contact', f_rights:'All rights reserved',
+    rel_title:'Related Tools',
+    rel_hash_t:'Hash Generator', rel_hash_d:'Generate MD5, SHA-1, SHA-256 hashes instantly.',
+    rel_b64_t:'Base64 Encoder', rel_b64_d:'Encode and decode Base64 strings.',
+    rel_jwt_t:'JWT Decoder', rel_jwt_d:'Decode and inspect JWT tokens.',
+    learn_pw_t:'🔐 Secure Password Guide', learn_pw_d:'Learn how to create and manage strong passwords safely.'
   },
   zh: {
     bc:'密码生成器', title:'密码生成器',
@@ -351,7 +427,12 @@ const i18n = {
     sec_1:'使用 crypto.getRandomValues() 生成——密码学安全。',
     sec_2:'密码不会发送到任何服务器。零网络请求。',
     sec_3:'历史记录仅存在内存中，关闭标签页即清除。',
-    f_privacy:'隐私政策', f_disclaimer:'免责声明', f_about:'关于我们', f_contact:'联系我们', f_rights:'版权所有'
+    f_privacy:'隐私政策', f_disclaimer:'免责声明', f_about:'关于我们', f_contact:'联系我们', f_rights:'版权所有',
+    rel_title:'相关工具',
+    rel_hash_t:'哈希生成器', rel_hash_d:'即时生成 MD5、SHA-1、SHA-256 哈希值。',
+    rel_b64_t:'Base64 编解码器', rel_b64_d:'编码和解码 Base64 字符串。',
+    rel_jwt_t:'JWT 解码器', rel_jwt_d:'解码和检查 JWT 令牌。',
+    learn_pw_t:'🔐 安全密码指南', learn_pw_d:'了解如何安全地创建和管理强密码。'
   }
 };
 

@@ -143,7 +143,54 @@
       font-family: var(--font); }
     .gender-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
     .gender-btn:hover:not(.active) { border-color: var(--accent2); color: var(--text); }
+    .related-section { margin-top: 24px; }
+    .related-section h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+    .related-card { display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-decoration: none; color: var(--text); transition: border-color .2s, box-shadow .2s; }
+    .related-card:hover { border-color: var(--accent); box-shadow: 0 2px 12px rgba(37,99,235,0.08); }
+    .related-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+    .related-card p { font-size: 12px; color: var(--text2); line-height: 1.4; }
+    .learn-more { margin-top: 10px; }
+    .learn-card { border-color: #2563eb22; background: #f0f5ff; }
   </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Free BMI Calculator",
+  "url": "https://www.freemaki.com/bmi/",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Calculate your Body Mass Index with instant health category classification. Free, no signup required.",
+  "browserRequirements": "Requires a modern web browser",
+  "softwareVersion": "1.0"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": "1",
+      "name": "Home",
+      "item": "https://www.freemaki.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": "2",
+      "name": "BMI Calculator",
+      "item": "https://www.freemaki.com/bmi/"
+    }
+  ]
+}
+</script>
 </head>
 <body lang="zh">
   <div class="lang-toggle">
@@ -278,6 +325,29 @@
 
     <p class="disclaimer en">BMI is a general indicator and does not account for muscle mass, bone density, age, or gender. Consult a healthcare professional for personalized advice.</p>
     <p class="disclaimer zh">BMI 是通用指标，不能反映肌肉量、骨密度、年龄和性别差异。如需个性化建议，请咨询医疗专业人士。</p>
+  </div>
+
+  <div class="related-section en">
+    <h3>Related Tools</h3>
+    <div class="related-grid">
+      <a href="/calorie/" class="related-card"><h4>Calorie Calculator</h4><p>Calculate your daily calorie needs (BMR & TDEE).</p></a>
+      <a href="/sleep/" class="related-card"><h4>Sleep Calculator</h4><p>Find optimal bedtime based on sleep cycles.</p></a>
+      <a href="/aspect/" class="related-card"><h4>Aspect Ratio Calculator</h4><p>Calculate dimensions for any aspect ratio.</p></a>
+    </div>
+    <div class="learn-more">
+      <a href="/blog/calorie-bmi-health-guide/" class="related-card learn-card"><h4>💪 BMR, TDEE & BMI Guide</h4><p>A complete guide to understanding your body metrics and health goals.</p></a>
+    </div>
+  </div>
+  <div class="related-section zh" style="display:none">
+    <h3>相关工具</h3>
+    <div class="related-grid">
+      <a href="/calorie/" class="related-card"><h4>卡路里计算器</h4><p>计算每日卡路里需求（BMR 和 TDEE）。</p></a>
+      <a href="/sleep/" class="related-card"><h4>睡眠周期计算器</h4><p>根据睡眠周期计算最佳入睡时间。</p></a>
+      <a href="/aspect/" class="related-card"><h4>比例计算器</h4><p>计算任意长宽比的尺寸。</p></a>
+    </div>
+    <div class="learn-more">
+      <a href="/blog/calorie-bmi-health-guide/" class="related-card learn-card"><h4>💪 BMR/TDEE/BMI 完全指南</h4><p>全面了解身体指标与健康目标的完整指南。</p></a>
+    </div>
   </div>
 
   <div class="footer">

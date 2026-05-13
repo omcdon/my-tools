@@ -10,7 +10,7 @@
 <title>Image Format Converter – PNG, JPG, WebP | Freemaki</title>
 <meta name="description" content="Convert images between PNG, JPG, and WebP formats instantly. Adjust quality, resize, batch convert. All processing done locally in your browser — no upload needed."/>
 <meta name="keywords" content="图片格式转换器，PNG转JPG，JPG转WebP，批量转换，在线本地处理"/>
-<meta name="robots" content="index, follow"/>
+<meta name="robots" content="index, follow, max-image-preview:large"/>
 <link rel="canonical" href="https://www.freemaki.com/image/"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Image Format Converter – PNG, JPG, WebP"/>
@@ -87,6 +87,44 @@
   .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
   footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Free Image Format Converter",
+  "url": "https://www.freemaki.com/image/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Convert images between PNG, JPG, WebP, BMP, and GIF formats. Free, no signup required.",
+  "browserRequirements": "Requires a modern web browser",
+  "softwareVersion": "1.0"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": "1",
+      "name": "Home",
+      "item": "https://www.freemaki.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": "2",
+      "name": "Image Format Converter",
+      "item": "https://www.freemaki.com/image/"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <button class="lang-btn" onclick="toggleLang()" id="langBtn">中文</button>
@@ -131,6 +169,54 @@
 
   <div id="results"></div>
   <div id="summary" class="summary" style="display:none"></div>
+
+  <!-- How to Use & FAQ -->
+  <div class="card howto" style="margin-top:20px;">
+    <h3 data-i18n="howto_title">How to Use</h3>
+    <ul>
+      <li data-i18n="howto_1">Drag and drop images into the drop zone, or click to browse your files.</li>
+      <li data-i18n="howto_2">Select your target format: WebP (smallest file size, recommended for web), JPG (universal compatibility), or PNG (lossless quality).</li>
+      <li data-i18n="howto_3">Adjust the quality slider (1–100%). Higher quality means larger files. 80% is a good balance for web images.</li>
+      <li data-i18n="howto_4">Click "Convert All" to process all uploaded images at once.</li>
+      <li data-i18n="howto_5">Download individual files or click "Download All (ZIP)" to get everything as a ZIP archive.</li>
+    </ul>
+    <h3 data-i18n="faq_title">Frequently Asked Questions</h3>
+    <ul>
+      <li data-i18n="faq_1"><strong>Is my data uploaded to a server?</strong> No. All image conversion happens locally in your browser using the Canvas API. Your images never leave your device.</li>
+      <li data-i18n="faq_2"><strong>What is WebP and why should I use it?</strong> WebP is a modern image format developed by Google. It typically produces files 25–35% smaller than JPEG at equivalent quality, making it ideal for websites.</li>
+      <li data-i18n="faq_3"><strong>What's the maximum file size?</strong> Each file can be up to 50MB. For batch processing, we recommend converting 10–20 images at a time for best performance.</li>
+      <li data-i18n="faq_4"><strong>Will converting to JPG lose quality?</strong> Yes, JPG is a lossy format. If you need pixel-perfect quality, choose PNG. For web use, JPG or WebP at 80% quality is usually sufficient.</li>
+      <li data-i18n="faq_5"><strong>Does this tool support batch conversion?</strong> Yes. Drop or select multiple images and they will all be converted at once. You can download them individually or as a ZIP.</li>
+    </ul>
+  </div>
+
+  <!-- Related Tools -->
+  <div class="card" style="margin-top:16px;">
+    <div class="card-title" data-i18n="related_title">Related Tools</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <a href="/color/" style="flex:1;min-width:140px;padding:12px;background:var(--surface2);border-radius:var(--radius-sm);text-decoration:none;color:var(--text);">
+        <div style="font-weight:600;font-size:14px;" data-i18n="rel_color">Color Converter</div>
+        <div style="font-size:12px;color:var(--text3);" data-i18n="rel_color_d">HEX, RGB, HSL, CMYK</div>
+      </a>
+      <a href="/palette/" style="flex:1;min-width:140px;padding:12px;background:var(--surface2);border-radius:var(--radius-sm);text-decoration:none;color:var(--text);">
+        <div style="font-weight:600;font-size:14px;" data-i18n="rel_palette">Palette Extractor</div>
+        <div style="font-size:12px;color:var(--text3);" data-i18n="rel_palette_d">Extract colors from images</div>
+      </a>
+      <a href="/counter/" style="flex:1;min-width:140px;padding:12px;background:var(--surface2);border-radius:var(--radius-sm);text-decoration:none;color:var(--text);">
+        <div style="font-weight:600;font-size:14px;" data-i18n="rel_counter">Character Counter</div>
+        <div style="font-size:12px;color:var(--text3);" data-i18n="rel_counter_d">Count words & characters</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Learn More -->
+  <div class="card" style="margin-top:16px;">
+    <div class="card-title" data-i18n="learn_title">Learn More</div>
+    <a href="/blog/image-optimization-guide/" style="display:block;padding:12px;background:var(--accent-bg);border-radius:var(--radius-sm);text-decoration:none;color:var(--accent);">
+      <div style="font-weight:600;font-size:14px;" data-i18n="learn_img">Web Image Optimization Guide</div>
+      <div style="font-size:12px;color:var(--text3);" data-i18n="learn_img_d">Faster pages, better rankings — a complete guide</div>
+    </a>
+  </div>
 
   <footer>
     <p><a href="/privacy/" data-i18n="f_privacy">Privacy Policy</a> · <a href="/disclaimer/" data-i18n="f_disclaimer">Disclaimer</a> · <a href="/about/" data-i18n="f_about">About</a> · <a href="/contact/" data-i18n="f_contact">Contact</a></p>
@@ -309,6 +395,24 @@ const i18n = {
     dz_hint:'Supports PNG, JPG, WebP, BMP, GIF · Max 50MB per file',
     fmt_webp:'Smallest size', fmt_jpg:'Universal', fmt_png:'Lossless',
     quality:'Quality', convert_btn:'Convert All', download_all_btn:'Download All (ZIP)', clear_btn:'Clear',
+    howto_title:'How to Use',
+    howto_1:'Drag and drop images into the drop zone, or click to browse your files.',
+    howto_2:'Select your target format: WebP (smallest file size, recommended for web), JPG (universal compatibility), or PNG (lossless quality).',
+    howto_3:'Adjust the quality slider (1–100%). Higher quality means larger files. 80% is a good balance for web images.',
+    howto_4:'Click "Convert All" to process all uploaded images at once.',
+    howto_5:'Download individual files or click "Download All (ZIP)" to get everything as a ZIP archive.',
+    faq_title:'Frequently Asked Questions',
+    faq_1:'<strong>Is my data uploaded to a server?</strong> No. All image conversion happens locally in your browser using the Canvas API. Your images never leave your device.',
+    faq_2:'<strong>What is WebP and why should I use it?</strong> WebP is a modern image format developed by Google. It typically produces files 25–35% smaller than JPEG at equivalent quality, making it ideal for websites.',
+    faq_3:"<strong>What's the maximum file size?</strong> Each file can be up to 50MB. For batch processing, we recommend converting 10–20 images at a time for best performance.",
+    faq_4:'<strong>Will converting to JPG lose quality?</strong> Yes, JPG is a lossy format. If you need pixel-perfect quality, choose PNG. For web use, JPG or WebP at 80% quality is usually sufficient.',
+    faq_5:'<strong>Does this tool support batch conversion?</strong> Yes. Drop or select multiple images and they will all be converted at once. You can download them individually or as a ZIP.',
+    related_title:'Related Tools',
+    rel_color:'Color Converter', rel_color_d:'HEX, RGB, HSL, CMYK',
+    rel_palette:'Palette Extractor', rel_palette_d:'Extract colors from images',
+    rel_counter:'Character Counter', rel_counter_d:'Count words & characters',
+    learn_title:'Learn More',
+    learn_img:'Web Image Optimization Guide', learn_img_d:'Faster pages, better rankings — a complete guide',
     f_privacy:'Privacy Policy', f_disclaimer:'Disclaimer', f_about:'About', f_contact:'Contact', f_rights:'All rights reserved'
   },
   zh: {
@@ -318,6 +422,24 @@ const i18n = {
     dz_hint:'支持 PNG、JPG、WebP、BMP、GIF · 单文件最大 50MB',
     fmt_webp:'体积最小', fmt_jpg:'通用格式', fmt_png:'无损',
     quality:'质量', convert_btn:'全部转换', download_all_btn:'打包下载 (ZIP)', clear_btn:'清空',
+    howto_title:'使用方法',
+    howto_1:'将图片拖拽到上传区域，或点击选择文件。',
+    howto_2:'选择目标格式：WebP（体积最小，推荐网页使用）、JPG（通用兼容性）或 PNG（无损质量）。',
+    howto_3:'调整质量滑块（1-100%）。质量越高文件越大。网页图片推荐 80%。',
+    howto_4:'点击"全部转换"一次性处理所有已上传的图片。',
+    howto_5:'单独下载或点击"打包下载 (ZIP)"将所有图片下载为 ZIP 压缩包。',
+    faq_title:'常见问题',
+    faq_1:'<strong>我的图片会上传到服务器吗？</strong> 不会。所有图片转换都在浏览器中通过 Canvas API 本地完成，图片不会离开您的设备。',
+    faq_2:'<strong>什么是 WebP，为什么要用它？</strong> WebP 是 Google 开发的现代图片格式。在同等质量下，文件通常比 JPEG 小 25-35%，非常适合网页使用。',
+    faq_3:'<strong>最大文件大小是多少？</strong> 单个文件最大 50MB。批量转换建议一次处理 10-20 张图片以获得最佳性能。',
+    faq_4:'<strong>转 JPG 会损失质量吗？</strong> 会，JPG 是有损格式。如需像素级精确质量，请选择 PNG。网页使用 JPG 或 WebP 80% 质量通常足够。',
+    faq_5:'<strong>支持批量转换吗？</strong> 支持。拖拽或选择多张图片会一次性全部转换，可单独下载或打包下载。',
+    related_title:'相关工具',
+    rel_color:'颜色转换器', rel_color_d:'HEX、RGB、HSL、CMYK',
+    rel_palette:'调色板提取器', rel_palette_d:'从图片中提取配色',
+    rel_counter:'字符统计工具', rel_counter_d:'统计字数和字符数',
+    learn_title:'了解更多',
+    learn_img:'网页图片优化指南', learn_img_d:'更快的页面，更好的排名——完全指南',
     f_privacy:'隐私政策', f_disclaimer:'免责声明', f_about:'关于我们', f_contact:'联系我们', f_rights:'版权所有'
   }
 };

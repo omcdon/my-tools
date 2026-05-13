@@ -10,7 +10,7 @@
 <title>Freemaki – Free Online Tools & Guides</title>
 <meta name="description" content="Free online tools & guides: calculators, converters, generators, timers, SEO utilities, and practical articles. No signup, works offline."/>
 <meta name="keywords" content="free online tools, calorie calculator, color converter, gradient generator, font pairing, aspect ratio calculator, character counter, QR code generator, BMI calculator, sleep calculator, pomodoro timer, unit converter, random picker, case converter, JSON formatter, regex tester, timestamp, Base64, JWT, hash generator, free tools, developer tools, Reddit trending, Google Discover checker, SEO tools"/>
-<meta name="robots" content="index, follow"/>
+<meta name="robots" content="index, follow, max-image-preview:large"/>
 <meta name="author" content="Freemaki"/>
 <link rel="canonical" href="https://freemaki.com/"/>
 <meta property="og:type" content="website"/>
@@ -230,6 +230,20 @@
   }
   .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Freemaki",
+  "url": "https://www.freemaki.com",
+  "description": "Free online tools for developers, designers, and everyday users. JSON formatter, color converter, password generator, and more.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.freemaki.com/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
 </head>
 <body>
 <button class="lang-btn" onclick="toggleLang()" id="langBtn">中文</button>
