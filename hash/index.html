@@ -85,10 +85,10 @@
   </style>
 </head>
 <body lang="zh">
-  <button class="lang-toggle">
+  <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('zh')">中文</button>
     <button class="lang-btn" onclick="setLang('en')">EN</button>
-  </button>
+</div>
 
   <nav class="breadcrumb">
     <a href="../">Freemaki</a>
@@ -122,22 +122,22 @@
       <div class="hash-item" id="hash-md5">
         <span class="hash-label">MD5</span>
         <span class="hash-value" id="val-md5"><span style="color:var(--text-dim)">—</span></span>
-        <button class="copy-btn" onclick="copy('md5')"><span class="zh">复制</span><span class="en">Copy</span></button>
+        <button class="copy-btn" onclick="copy('md5', this)"><span class="zh">复制</span><span class="en">Copy</span></button>
       </div>
       <div class="hash-item" id="hash-sha1">
         <span class="hash-label">SHA-1</span>
         <span class="hash-value" id="val-sha1"><span style="color:var(--text-dim)">—</span></span>
-        <button class="copy-btn" onclick="copy('sha1')"><span class="zh">复制</span><span class="en">Copy</span></button>
+        <button class="copy-btn" onclick="copy('sha1', this)"><span class="zh">复制</span><span class="en">Copy</span></button>
       </div>
       <div class="hash-item" id="hash-sha256">
         <span class="hash-label">SHA-256</span>
         <span class="hash-value" id="val-sha256"><span style="color:var(--text-dim)">—</span></span>
-        <button class="copy-btn" onclick="copy('sha256')"><span class="zh">复制</span><span class="en">Copy</span></button>
+        <button class="copy-btn" onclick="copy('sha256', this)"><span class="zh">复制</span><span class="en">Copy</span></button>
       </div>
       <div class="hash-item" id="hash-sha512">
         <span class="hash-label">SHA-512</span>
         <span class="hash-value" id="val-sha512"><span style="color:var(--text-dim)">—</span></span>
-        <button class="copy-btn" onclick="copy('sha512')"><span class="zh">复制</span><span class="en">Copy</span></button>
+        <button class="copy-btn" onclick="copy('sha512', this)"><span class="zh">复制</span><span class="en">Copy</span></button>
       </div>
     </div>
 
@@ -166,6 +166,100 @@
   </footer>
 
   <script>
+    function md5(text) {
+      function rotateLeft(value, shift) {
+        return (value << shift) | (value >>> (32 - shift));
+      }
+
+      function addUnsigned(x, y) {
+        return (x + y) >>> 0;
+      }
+
+      function cmn(q, a, b, x, s, t) {
+        return addUnsigned(rotateLeft(addUnsigned(addUnsigned(a, q), addUnsigned(x, t)), s), b);
+      }
+
+      function ff(a, b, c, d, x, s, t) {
+        return cmn((b & c) | ((~b) & d), a, b, x, s, t);
+      }
+
+      function gg(a, b, c, d, x, s, t) {
+        return cmn((b & d) | (c & (~d)), a, b, x, s, t);
+      }
+
+      function hh(a, b, c, d, x, s, t) {
+        return cmn(b ^ c ^ d, a, b, x, s, t);
+      }
+
+      function ii(a, b, c, d, x, s, t) {
+        return cmn(c ^ (b | (~d)), a, b, x, s, t);
+      }
+
+      function toWordArray(str) {
+        const bytes = new TextEncoder().encode(str);
+        const length = bytes.length;
+        const words = [];
+        for (let i = 0; i < length; i++) {
+          words[i >> 2] = words[i >> 2] || 0;
+          words[i >> 2] |= bytes[i] << ((i % 4) * 8);
+        }
+        words[length >> 2] = words[length >> 2] || 0;
+        words[length >> 2] |= 0x80 << ((length % 4) * 8);
+        const bitLength = length * 8;
+        words[(((length + 8) >> 6) + 1) * 16 - 2] = bitLength & 0xffffffff;
+        words[(((length + 8) >> 6) + 1) * 16 - 1] = (bitLength / 0x100000000) | 0;
+        return words;
+      }
+
+      function wordToHex(value) {
+        let hex = '';
+        for (let i = 0; i < 4; i++) {
+          hex += ((value >>> (i * 8)) & 255).toString(16).padStart(2, '0');
+        }
+        return hex;
+      }
+
+      const x = toWordArray(text);
+      let a = 0x67452301;
+      let b = 0xefcdab89;
+      let c = 0x98badcfe;
+      let d = 0x10325476;
+
+      for (let k = 0; k < x.length; k += 16) {
+        const aa = a;
+        const bb = b;
+        const cc = c;
+        const dd = d;
+
+        a = ff(a, b, c, d, x[k + 0] || 0, 7, 0xd76aa478); d = ff(d, a, b, c, x[k + 1] || 0, 12, 0xe8c7b756); c = ff(c, d, a, b, x[k + 2] || 0, 17, 0x242070db); b = ff(b, c, d, a, x[k + 3] || 0, 22, 0xc1bdceee);
+        a = ff(a, b, c, d, x[k + 4] || 0, 7, 0xf57c0faf); d = ff(d, a, b, c, x[k + 5] || 0, 12, 0x4787c62a); c = ff(c, d, a, b, x[k + 6] || 0, 17, 0xa8304613); b = ff(b, c, d, a, x[k + 7] || 0, 22, 0xfd469501);
+        a = ff(a, b, c, d, x[k + 8] || 0, 7, 0x698098d8); d = ff(d, a, b, c, x[k + 9] || 0, 12, 0x8b44f7af); c = ff(c, d, a, b, x[k + 10] || 0, 17, 0xffff5bb1); b = ff(b, c, d, a, x[k + 11] || 0, 22, 0x895cd7be);
+        a = ff(a, b, c, d, x[k + 12] || 0, 7, 0x6b901122); d = ff(d, a, b, c, x[k + 13] || 0, 12, 0xfd987193); c = ff(c, d, a, b, x[k + 14] || 0, 17, 0xa679438e); b = ff(b, c, d, a, x[k + 15] || 0, 22, 0x49b40821);
+
+        a = gg(a, b, c, d, x[k + 1] || 0, 5, 0xf61e2562); d = gg(d, a, b, c, x[k + 6] || 0, 9, 0xc040b340); c = gg(c, d, a, b, x[k + 11] || 0, 14, 0x265e5a51); b = gg(b, c, d, a, x[k + 0] || 0, 20, 0xe9b6c7aa);
+        a = gg(a, b, c, d, x[k + 5] || 0, 5, 0xd62f105d); d = gg(d, a, b, c, x[k + 10] || 0, 9, 0x02441453); c = gg(c, d, a, b, x[k + 15] || 0, 14, 0xd8a1e681); b = gg(b, c, d, a, x[k + 4] || 0, 20, 0xe7d3fbc8);
+        a = gg(a, b, c, d, x[k + 9] || 0, 5, 0x21e1cde6); d = gg(d, a, b, c, x[k + 14] || 0, 9, 0xc33707d6); c = gg(c, d, a, b, x[k + 3] || 0, 14, 0xf4d50d87); b = gg(b, c, d, a, x[k + 8] || 0, 20, 0x455a14ed);
+        a = gg(a, b, c, d, x[k + 13] || 0, 5, 0xa9e3e905); d = gg(d, a, b, c, x[k + 2] || 0, 9, 0xfcefa3f8); c = gg(c, d, a, b, x[k + 7] || 0, 14, 0x676f02d9); b = gg(b, c, d, a, x[k + 12] || 0, 20, 0x8d2a4c8a);
+
+        a = hh(a, b, c, d, x[k + 5] || 0, 4, 0xfffa3942); d = hh(d, a, b, c, x[k + 8] || 0, 11, 0x8771f681); c = hh(c, d, a, b, x[k + 11] || 0, 16, 0x6d9d6122); b = hh(b, c, d, a, x[k + 14] || 0, 23, 0xfde5380c);
+        a = hh(a, b, c, d, x[k + 1] || 0, 4, 0xa4beea44); d = hh(d, a, b, c, x[k + 4] || 0, 11, 0x4bdecfa9); c = hh(c, d, a, b, x[k + 7] || 0, 16, 0xf6bb4b60); b = hh(b, c, d, a, x[k + 10] || 0, 23, 0xbebfbc70);
+        a = hh(a, b, c, d, x[k + 13] || 0, 4, 0x289b7ec6); d = hh(d, a, b, c, x[k + 0] || 0, 11, 0xeaa127fa); c = hh(c, d, a, b, x[k + 3] || 0, 16, 0xd4ef3085); b = hh(b, c, d, a, x[k + 6] || 0, 23, 0x04881d05);
+        a = hh(a, b, c, d, x[k + 9] || 0, 4, 0xd9d4d039); d = hh(d, a, b, c, x[k + 12] || 0, 11, 0xe6db99e5); c = hh(c, d, a, b, x[k + 15] || 0, 16, 0x1fa27cf8); b = hh(b, c, d, a, x[k + 2] || 0, 23, 0xc4ac5665);
+
+        a = ii(a, b, c, d, x[k + 0] || 0, 6, 0xf4292244); d = ii(d, a, b, c, x[k + 7] || 0, 10, 0x432aff97); c = ii(c, d, a, b, x[k + 14] || 0, 15, 0xab9423a7); b = ii(b, c, d, a, x[k + 5] || 0, 21, 0xfc93a039);
+        a = ii(a, b, c, d, x[k + 12] || 0, 6, 0x655b59c3); d = ii(d, a, b, c, x[k + 3] || 0, 10, 0x8f0ccc92); c = ii(c, d, a, b, x[k + 10] || 0, 15, 0xffeff47d); b = ii(b, c, d, a, x[k + 1] || 0, 21, 0x85845dd1);
+        a = ii(a, b, c, d, x[k + 8] || 0, 6, 0x6fa87e4f); d = ii(d, a, b, c, x[k + 15] || 0, 10, 0xfe2ce6e0); c = ii(c, d, a, b, x[k + 6] || 0, 15, 0xa3014314); b = ii(b, c, d, a, x[k + 13] || 0, 21, 0x4e0811a1);
+        a = ii(a, b, c, d, x[k + 4] || 0, 6, 0xf7537e82); d = ii(d, a, b, c, x[k + 11] || 0, 10, 0xbd3af235); c = ii(c, d, a, b, x[k + 2] || 0, 15, 0x2ad7d2bb); b = ii(b, c, d, a, x[k + 9] || 0, 21, 0xeb86d391);
+
+        a = addUnsigned(a, aa);
+        b = addUnsigned(b, bb);
+        c = addUnsigned(c, cc);
+        d = addUnsigned(d, dd);
+      }
+
+      return (wordToHex(a) + wordToHex(b) + wordToHex(c) + wordToHex(d)).toLowerCase();
+    }
+
     async function shaHash(text, alg) {
       const encoder = new TextEncoder();
       const data = encoder.encode(text);
@@ -176,38 +270,38 @@
 
     async function generateAll() {
       const text = document.getElementById('inputText').value;
-      const algs = {
-        'md5': 'MD5',
-        'sha1': 'SHA-1',
-        'sha256': 'SHA-256',
-        'sha512': 'SHA-512',
-      };
+      const keys = ['md5', 'sha1', 'sha256', 'sha512'];
 
       if (!text) {
-        Object.keys(algs).forEach(key => {
+        keys.forEach(key => {
           document.getElementById('val-' + key).innerHTML = '<span style="color:var(--text-dim)">—</span>';
         });
         return;
       }
 
-      const results = await Promise.all([
-        shaHash(text, 'MD5'),
-        shaHash(text, 'SHA-1'),
-        shaHash(text, 'SHA-256'),
-        shaHash(text, 'SHA-512'),
-      ]);
+      try {
+        const results = await Promise.all([
+          Promise.resolve(md5(text)),
+          shaHash(text, 'SHA-1'),
+          shaHash(text, 'SHA-256'),
+          shaHash(text, 'SHA-512'),
+        ]);
 
-      document.getElementById('val-md5').textContent = results[0];
-      document.getElementById('val-sha1').textContent = results[1];
-      document.getElementById('val-sha256').textContent = results[2];
-      document.getElementById('val-sha512').textContent = results[3];
+        document.getElementById('val-md5').textContent = results[0];
+        document.getElementById('val-sha1').textContent = results[1];
+        document.getElementById('val-sha256').textContent = results[2];
+        document.getElementById('val-sha512').textContent = results[3];
+      } catch (err) {
+        keys.forEach(key => {
+          document.getElementById('val-' + key).innerHTML = '<span style="color:var(--red)">Hash failed</span>';
+        });
+      }
     }
 
-    function copy(key) {
+    function copy(key, btn) {
       const val = document.getElementById('val-' + key).textContent;
-      if (!val || val === '—') return;
+      if (!val || val === '—' || val === 'Hash failed') return;
       navigator.clipboard.writeText(val).then(() => {
-        const btn = event.currentTarget;
         const isZh = document.body.lang === 'zh';
         btn.innerHTML = isZh ? '✓ 已复制' : '✓ Copied';
         btn.classList.add('copied');

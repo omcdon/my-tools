@@ -59,9 +59,12 @@
   /* Tools Grid */
   .tools-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     margin-bottom: 32px;
+  }
+  @media (max-width: 900px) {
+    .tools-grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 560px) {
     .tools-grid { grid-template-columns: 1fr; }
@@ -205,7 +208,7 @@
   <div class="ad-slot" data-i18n="adPlaceholder">Advertisement Space</div>
 
   <!-- Tools Grid -->
-  <div class="tools-grid" style="grid-template-columns: repeat(3, 1fr);">
+  <div class="tools-grid">
     <!-- Calorie Calculator -->
     <a href="./calorie/" class="tool-card">
       <div class="tool-icon">🔥</div>
