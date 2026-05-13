@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Reddit &amp; Quora Hot Topic Explorer – Freemaki</title>
+<meta name="description" content="Discover trending topics on Reddit and Quora. Search hot posts by keyword, browse by category. Free content research tool for creators and marketers."/>
+<meta name="keywords" content="Reddit trending, Quora questions, hot topics, content research, topic explorer, social media trends, content ideas"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.freemaki.com/reddit/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Reddit & Quora Hot Topic Explorer – Freemaki"/>
+<meta property="og:description" content="Discover trending topics on Reddit and Quora. Free content research tool."/>
+<meta property="og:url" content="https://www.freemaki.com/reddit/"/>
+<meta property="og:site_name" content="Freemaki"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Reddit & Quora Hot Topic Explorer – Freemaki"/>
+<meta name="twitter:description" content="Discover trending topics on Reddit and Quora. Free content research tool."/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f8f7f4; --surface: #ffffff; --surface2: #f2f0ec;
+    --border: rgba(0,0,0,0.10); --border2: rgba(0,0,0,0.18); --text: #1a1a18; --text2: #5f5e5a; --text3: #9e9c97;
+    --accent: #2563eb; --accent-bg: #eff6ff; --radius: 12px; --radius-sm: 8px;
+    --reddit: #FF4500; --quora: #B92B27; --green: #16a34a; --orange: #ea580c;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+    background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; min-height: 100vh;
+  }
+  .page { max-width: 780px; margin: 0 auto; padding: 48px 16px 80px; }
+  .breadcrumb { font-size: 13px; color: var(--text3); margin-bottom: 24px; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .subtitle { font-size: 16px; color: var(--text2); margin-bottom: 32px; }
+
+  /* Search */
+  .search-box { display: flex; gap: 10px; margin-bottom: 16px; }
+  .search-box input {
+    flex: 1; padding: 12px 16px; border: 0.5px solid var(--border); border-radius: var(--radius-sm);
+    font-size: 15px; font-family: inherit; background: var(--surface); color: var(--text); transition: border-color 0.15s;
+  }
+  .search-box input:focus { outline: none; border-color: var(--accent); }
+  .search-box input::placeholder { color: var(--text3); }
+  .search-btn {
+    padding: 12px 24px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm);
+    font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity 0.15s; white-space: nowrap;
+  }
+  .search-btn:hover { opacity: 0.9; }
+  .search-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Category Tabs */
+  .categories { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .cat-btn {
+    padding: 6px 14px; border: 0.5px solid var(--border); border-radius: 20px;
+    background: var(--surface); font-size: 13px; cursor: pointer; color: var(--text2); transition: all 0.15s;
+  }
+  .cat-btn:hover, .cat-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+
+  /* Platform Tabs */
+  .platform-tabs { display: flex; gap: 0; margin-bottom: 20px; border: 0.5px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+  .platform-tab {
+    flex: 1; padding: 10px; text-align: center; font-size: 14px; font-weight: 600; cursor: pointer;
+    background: var(--surface); color: var(--text2); border: none; transition: all 0.15s;
+  }
+  .platform-tab.active-reddit { background: #fff5f0; color: var(--reddit); }
+  .platform-tab.active-quora { background: #fdf2f2; color: var(--quora); }
+  .platform-tab + .platform-tab { border-left: 0.5px solid var(--border); }
+
+  /* Loading */
+  .loading { text-align: center; padding: 40px; color: var(--text3); font-size: 14px; }
+  .spinner { display: inline-block; width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 12px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Results */
+  .results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .results-count { font-size: 13px; color: var(--text3); }
+  .sort-select { padding: 6px 10px; border: 0.5px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; background: var(--surface); color: var(--text2); }
+  .post-card {
+    background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius);
+    padding: 20px; margin-bottom: 12px; transition: all 0.2s;
+  }
+  .post-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(37,99,235,0.08); }
+  .post-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; line-height: 1.5; }
+  .post-title a { color: var(--text); text-decoration: none; }
+  .post-title a:hover { color: var(--accent); }
+  .post-meta { display: flex; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--text3); margin-bottom: 10px; }
+  .post-meta .score { color: var(--orange); font-weight: 600; }
+  .post-meta .subreddit { color: var(--reddit); font-weight: 500; }
+  .post-link {
+    display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px;
+    border: 0.5px solid var(--border); border-radius: 16px; font-size: 12px;
+    color: var(--text2); text-decoration: none; transition: all 0.15s;
+  }
+  .post-link:hover { border-color: var(--accent); color: var(--accent); }
+  .post-link.reddit { color: var(--reddit); }
+  .post-link.reddit:hover { border-color: var(--reddit); }
+
+  /* Quora */
+  .quora-hint {
+    background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius);
+    padding: 32px; text-align: center; color: var(--text2);
+  }
+  .quora-hint .q-icon { font-size: 48px; margin-bottom: 12px; }
+  .quora-hint h3 { font-size: 18px; margin-bottom: 8px; color: var(--text); }
+  .quora-btn {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: 16px;
+    padding: 10px 24px; background: var(--quora); color: #fff; border: none; border-radius: var(--radius-sm);
+    font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; transition: opacity 0.15s;
+  }
+  .quora-btn:hover { opacity: 0.9; text-decoration: none; color: #fff; }
+  .quora-tips { text-align: left; margin-top: 20px; padding-top: 16px; border-top: 0.5px solid var(--border); }
+  .quora-tips h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+  .quora-tips ul { list-style: none; padding: 0; }
+  .quora-tips li { font-size: 13px; color: var(--text2); padding: 4px 0; padding-left: 16px; position: relative; }
+  .quora-tips li::before { content: '•'; position: absolute; left: 0; color: var(--quora); }
+
+  /* Empty */
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--text3); }
+  .empty-state .e-icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-state h3 { font-size: 16px; color: var(--text); margin-bottom: 8px; }
+
+  /* Error */
+  .error-msg { background: #fef2f2; border: 0.5px solid #fecaca; border-radius: var(--radius-sm); padding: 16px; color: #991b1b; font-size: 14px; margin-bottom: 16px; }
+
+  .lang-btn {
+    position: fixed; top: 16px; right: 16px; padding: 6px 14px;
+    border: 0.5px solid var(--border); border-radius: 20px; background: var(--surface);
+    font-size: 13px; cursor: pointer; color: var(--text2); transition: all 0.15s; z-index: 100;
+  }
+  .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+  footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<button class="lang-btn" onclick="toggleLang()" id="langBtn">中文</button>
+<div class="page">
+  <div class="breadcrumb"><a href="/">Freemaki</a> &rsaquo; <span data-i18n="bc">Hot Topic Explorer</span></div>
+  <h1 data-i18n="title">Reddit & Quora Hot Topic Explorer</h1>
+  <p class="subtitle" data-i18n="subtitle">Discover trending discussions. Find content ideas and audience questions.</p>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" data-i18n-placeholder="search_ph" placeholder="Enter keyword (e.g. AI, marketing, React)..." />
+    <button class="search-btn" id="searchBtn" onclick="doSearch()" data-i18n="search_btn">Search</button>
+  </div>
+
+  <div class="categories" id="categories">
+    <button class="cat-btn" onclick="searchCategory('tech')" data-i18n="cat_tech">Technology</button>
+    <button class="cat-btn" onclick="searchCategory('programming')" data-i18n="cat_programming">Programming</button>
+    <button class="cat-btn" onclick="searchCategory('marketing')" data-i18n="cat_marketing">Marketing</button>
+    <button class="cat-btn" onclick="searchCategory('health')" data-i18n="cat_health">Health</button>
+    <button class="cat-btn" onclick="searchCategory('finance')" data-i18n="cat_finance">Finance</button>
+    <button class="cat-btn" onclick="searchCategory('ai')" data-i18n="cat_ai">AI & ML</button>
+  </div>
+
+  <div class="platform-tabs">
+    <button class="platform-tab active-reddit" id="tabReddit" onclick="switchTab('reddit')">
+      🔴 <span data-i18n="tab_reddit">Reddit</span>
+    </button>
+    <button class="platform-tab" id="tabQuora" onclick="switchTab('quora')">
+      🔵 <span data-i18n="tab_quora">Quora</span>
+    </button>
+  </div>
+
+  <div id="redditPanel">
+    <div class="empty-state" id="redditEmpty">
+      <div class="e-icon">🔍</div>
+      <h3 data-i18n="empty_title">Enter a keyword or pick a category</h3>
+      <p data-i18n="empty_desc">Search Reddit for trending posts, or click a category above to get started.</p>
+    </div>
+    <div class="loading" id="redditLoading" style="display:none"><div class="spinner"></div><p data-i18n="loading">Searching Reddit...</p></div>
+    <div id="redditError" style="display:none"></div>
+    <div id="redditResults" style="display:none"></div>
+  </div>
+
+  <div id="quoraPanel" style="display:none">
+    <div class="quora-hint" id="quoraHint">
+      <div class="q-icon">❓</div>
+      <h3 data-i18n="q_title">Search Quora for Questions</h3>
+      <p data-i18n="q_desc">Enter a keyword above, then click the button below to search Quora.</p>
+      <a class="quora-btn" id="quoraLink" href="https://www.quora.com/" target="_blank" rel="noopener">
+        🔍 <span data-i18n="q_btn">Open Quora Search</span>
+      </a>
+      <div class="quora-tips">
+        <h4 data-i18n="q_tips_title">Tips for finding great content ideas on Quora</h4>
+        <ul>
+          <li data-i18n="q_tip1">Sort by "Most Views" to find questions with high demand</li>
+          <li data-i18n="q_tip2">Look for questions with few answers but many followers</li>
+          <li data-i18n="q_tip3">Check "Related Questions" for topic clusters</li>
+          <li data-i18n="q_tip4">Use Quora Spaces for niche topic discovery</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p><a href="/privacy/" data-i18n="f_privacy">Privacy Policy</a> · <a href="/disclaimer/" data-i18n="f_disclaimer">Disclaimer</a> · <a href="/about/" data-i18n="f_about">About</a> · <a href="/contact/" data-i18n="f_contact">Contact</a></p>
+    <p style="margin-top:8px">© 2026 Freemaki · <span data-i18n="f_rights">All rights reserved</span></p>
+  </footer>
+</div>
+
+<script>
+const SUBREDDITS = {
+  tech: ['technology','tech','gadgets','futurology'],
+  programming: ['programming','webdev','javascript','python','cpp','java'],
+  marketing: ['marketing','SEO','digital_marketing','socialmedia','advertising'],
+  health: ['health','fitness','nutrition','mentalhealth','loseit'],
+  finance: ['personalfinance','investing','stocks','cryptocurrency','economy'],
+  ai: ['machinelearning','artificial','ChatGPT','LocalLLaMA','openai']
+};
+const KEYWORD_MAP = {
+  tech:'technology+OR+tech+OR+innovation', programming:'programming+OR+coding+OR+developer',
+  marketing:'marketing+OR+SEO+OR+content+OR+growth', health:'health+OR+fitness+OR+wellness',
+  finance:'finance+OR+investing+OR+money', ai:'AI+OR+machine+learning+OR+LLM+OR+GPT'
+};
+
+let currentPlatform = 'reddit';
+let currentResults = [];
+
+function switchTab(tab) {
+  currentPlatform = tab;
+  document.getElementById('redditPanel').style.display = tab === 'reddit' ? 'block' : 'none';
+  document.getElementById('quoraPanel').style.display = tab === 'quora' ? 'block' : 'none';
+  const tR = document.getElementById('tabReddit');
+  const tQ = document.getElementById('tabQuora');
+  tR.className = 'platform-tab' + (tab === 'reddit' ? ' active-reddit' : '');
+  tQ.className = 'platform-tab' + (tab === 'quora' ? ' active-quora' : '');
+  if (tab === 'quora') updateQuoraLink();
+}
+
+function updateQuoraLink() {
+  const q = document.getElementById('searchInput').value.trim();
+  const url = q ? 'https://www.quora.com/search?q=' + encodeURIComponent(q) : 'https://www.quora.com/';
+  document.getElementById('quoraLink').href = url;
+}
+
+function searchCategory(cat) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  const subs = SUBREDDITS[cat] || SUBREDDITS.tech;
+  const kw = KEYWORD_MAP[cat] || cat;
+  document.getElementById('searchInput').value = cat.charAt(0).toUpperCase() + cat.slice(1);
+  switchTab('reddit');
+  fetchReddit(subs, kw);
+}
+
+function doSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  if (!q) return;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  switchTab('reddit');
+  fetchReddit(['all'], q);
+  updateQuoraLink();
+}
+
+document.getElementById('searchInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
+
+async function fetchReddit(subreddits, keyword) {
+  const loading = document.getElementById('redditLoading');
+  const empty = document.getElementById('redditEmpty');
+  const error = document.getElementById('redditError');
+  const results = document.getElementById('redditResults');
+  empty.style.display = 'none';
+  error.style.display = 'none';
+  results.style.display = 'none';
+  loading.style.display = 'block';
+  document.getElementById('searchBtn').disabled = true;
+
+  try {
+    const subs = subreddits.join('+');
+    const url = `https://www.reddit.com/r/${subs}/search.json?q=${encodeURIComponent(keyword)}&sort=top&t=week&limit=25&restrict_sr=on`;
+    const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    if (!res.ok) throw new Error('Reddit API error: ' + res.status);
+    const data = await res.json();
+    const posts = (data.data?.children || []).map(c => c.data).filter(p => !p.stickied && !p.over_18);
+    currentResults = posts;
+    renderResults(posts);
+  } catch(err) {
+    error.style.display = 'block';
+    error.innerHTML = `<div class="error-msg"><strong>Error:</strong> ${err.message}<br><span data-i18n="err_hint" style="font-size:12px">Reddit may block requests from browsers. Try again or use a VPN.</span></div>`;
+  } finally {
+    loading.style.display = 'none';
+    document.getElementById('searchBtn').disabled = false;
+  }
+}
+
+function formatNum(n) {
+  if (n >= 10000) return (n/1000).toFixed(1) + 'k';
+  if (n >= 1000) return (n/1000).toFixed(1) + 'k';
+  return n;
+}
+
+function timeAgo(ts) {
+  const diff = Date.now()/1000 - ts;
+  if (diff < 3600) return Math.floor(diff/60) + 'h';
+  if (diff < 86400) return Math.floor(diff/3600) + 'h';
+  if (diff < 604800) return Math.floor(diff/86400) + 'd';
+  return Math.floor(diff/604800) + 'd';
+}
+
+function renderResults(posts) {
+  const container = document.getElementById('redditResults');
+  if (!posts.length) {
+    container.innerHTML = `<div class="empty-state"><div class="e-icon">😅</div><h3 data-i18n="no_results">No results found</h3><p data-i18n="no_results_desc">Try a different keyword or category.</p></div>`;
+    container.style.display = 'block';
+    return;
+  }
+
+  const lang = document.documentElement.lang === 'zh' ? 'zh' : 'en';
+  const label = {
+    en: { score: 'upvotes', comments: 'comments', ago: 'ago', view: 'View on Reddit', results: 'results' },
+    zh: { score: '赞', comments: '评论', ago: '前', view: '在 Reddit 查看', results: '条结果' }
+  }[lang];
+
+  let html = `<div class="results-header"><span class="results-count">${posts.length} ${label.results}</span>
+    <select class="sort-select" onchange="sortResults(this.value)">
+      <option value="score" data-i18n="sort_score">Top by Score</option>
+      <option value="comments" data-i18n="sort_comments">Most Comments</option>
+      <option value="new" data-i18n="sort_new">Newest</option>
+    </select></div>`;
+
+  posts.forEach(p => {
+    const hasLink = p.url && !p.url.includes('reddit.com/');
+    html += `<div class="post-card">
+      <div class="post-title"><a href="https://www.reddit.com${p.permalink}" target="_blank" rel="noopener">${escapeHtml(p.title)}</a></div>
+      <div class="post-meta">
+        <span class="subreddit">r/${p.subreddit}</span>
+        <span class="score">▲ ${formatNum(p.score)}</span>
+        <span>💬 ${formatNum(p.num_comments)} ${label.comments}</span>
+        <span>⏰ ${timeAgo(p.created_utc)} ${label.ago}</span>
+      </div>
+      ${hasLink ? `<a class="post-link" href="${escapeHtml(p.url)}" target="_blank" rel="noopener">🔗 ${escapeHtml(new URL(p.url).hostname)}</a>` : ''}
+      <a class="post-link reddit" href="https://www.reddit.com${p.permalink}" target="_blank" rel="noopener">🔴 ${label.view}</a>
+    </div>`;
+  });
+
+  container.innerHTML = html;
+  container.style.display = 'block';
+}
+
+function sortResults(by) {
+  let sorted = [...currentResults];
+  if (by === 'score') sorted.sort((a, b) => b.score - a.score);
+  else if (by === 'comments') sorted.sort((a, b) => b.num_comments - a.num_comments);
+  else if (by === 'new') sorted.sort((a, b) => b.created_utc - a.created_utc);
+  currentResults = sorted;
+  renderResults(sorted);
+}
+
+function escapeHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+const i18n = {
+  en: {
+    bc:'Hot Topic Explorer', title:'Reddit & Quora Hot Topic Explorer',
+    subtitle:'Discover trending discussions. Find content ideas and audience questions.',
+    search_ph:'Enter keyword (e.g. AI, marketing, React)...', search_btn:'Search',
+    cat_tech:'Technology', cat_programming:'Programming', cat_marketing:'Marketing', cat_health:'Health', cat_finance:'Finance', cat_ai:'AI & ML',
+    tab_reddit:'Reddit', tab_quora:'Quora',
+    empty_title:'Enter a keyword or pick a category', empty_desc:'Search Reddit for trending posts, or click a category above to get started.',
+    loading:'Searching Reddit...', err_hint:'Reddit may block requests from browsers. Try again or use a VPN.',
+    no_results:'No results found', no_results_desc:'Try a different keyword or category.',
+    sort_score:'Top by Score', sort_comments:'Most Comments', sort_new:'Newest',
+    q_title:'Search Quora for Questions', q_desc:'Enter a keyword above, then click the button below to search Quora.',
+    q_btn:'Open Quora Search',
+    q_tips_title:'Tips for finding great content ideas on Quora',
+    q_tip1:'Sort by "Most Views" to find questions with high demand',
+    q_tip2:'Look for questions with few answers but many followers',
+    q_tip3:'Check "Related Questions" for topic clusters',
+    q_tip4:'Use Quora Spaces for niche topic discovery',
+    f_privacy:'Privacy Policy', f_disclaimer:'Disclaimer', f_about:'About', f_contact:'Contact', f_rights:'All rights reserved'
+  },
+  zh: {
+    bc:'热点话题探索', title:'Reddit & Quora 热点话题探索',
+    subtitle:'发现热门讨论，挖掘内容选题和用户关注的问题。',
+    search_ph:'输入关键词（如 AI、营销、React）...', search_btn:'搜索',
+    cat_tech:'科技', cat_programming:'编程', cat_marketing:'营销', cat_health:'健康', cat_finance:'财经', cat_ai:'AI & 机器学习',
+    tab_reddit:'Reddit', tab_quora:'Quora',
+    empty_title:'输入关键词或选择一个分类', empty_desc:'搜索 Reddit 上的热门帖子，或点击上方分类快速开始。',
+    loading:'正在搜索 Reddit...', err_hint:'Reddit 可能会阻止浏览器请求，请重试或使用 VPN。',
+    no_results:'未找到结果', no_results_desc:'试试其他关键词或分类。',
+    sort_score:'按热度排序', sort_comments:'按评论数排序', sort_new:'按时间排序',
+    q_title:'在 Quora 搜索相关问题', q_desc:'在上方输入关键词，然后点击下方按钮搜索 Quora。',
+    q_btn:'打开 Quora 搜索',
+    q_tips_title:'在 Quora 上发现优质内容选题的技巧',
+    q_tip1:'按"最多浏览"排序，找到高需求问题',
+    q_tip2:'关注回答少但关注者多的问题',
+    q_tip3:'查看"相关问题"发现话题集群',
+    q_tip4:'利用 Quora Spaces 发掘小众话题',
+    f_privacy:'隐私政策', f_disclaimer:'免责声明', f_about:'关于我们', f_contact:'联系我们', f_rights:'版权所有'
+  }
+};
+
+let lang = 'en';
+function toggleLang() {
+  lang = lang === 'en' ? 'zh' : 'en';
+  document.getElementById('langBtn').textContent = lang === 'en' ? '中文' : 'EN';
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
+  });
+  if (currentResults.length) renderResults(currentResults);
+}
+</script>
+</body>
+</html>

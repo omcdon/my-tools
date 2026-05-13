@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Google Discover Optimization Checker – Freemaki</title>
+<meta name="description" content="Check if your page meets Google Discover requirements. Analyze meta tags, images, structured data, and more. Free SEO optimization tool."/>
+<meta name="keywords" content="Google Discover checker, Discover optimization, SEO audit, meta tag checker, og:image checker, Google News optimization"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://www.freemaki.com/discover/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Google Discover Optimization Checker – Freemaki"/>
+<meta property="og:description" content="Check if your page meets Google Discover requirements. Free SEO tool."/>
+<meta property="og:url" content="https://www.freemaki.com/discover/"/>
+<meta property="og:site_name" content="Freemaki"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Google Discover Optimization Checker – Freemaki"/>
+<meta name="twitter:description" content="Check if your page meets Google Discover requirements. Free SEO tool."/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f8f7f4; --surface: #ffffff; --surface2: #f2f0ec;
+    --border: rgba(0,0,0,0.10); --border2: rgba(0,0,0,0.18); --text: #1a1a18; --text2: #5f5e5a; --text3: #9e9c97;
+    --accent: #2563eb; --accent-bg: #eff6ff; --radius: 12px; --radius-sm: 8px;
+    --green: #16a34a; --green-bg: #f0fdf4; --red: #dc2626; --red-bg: #fef2f2; --orange: #ea580c; --orange-bg: #fff7ed;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+    background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; min-height: 100vh;
+  }
+  .page { max-width: 780px; margin: 0 auto; padding: 48px 16px 80px; }
+  .breadcrumb { font-size: 13px; color: var(--text3); margin-bottom: 24px; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .subtitle { font-size: 16px; color: var(--text2); margin-bottom: 32px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Search */
+  .search-box { display: flex; gap: 10px; margin-bottom: 24px; }
+  .search-box input {
+    flex: 1; padding: 12px 16px; border: 0.5px solid var(--border); border-radius: var(--radius-sm);
+    font-size: 15px; font-family: inherit; background: var(--surface); color: var(--text); transition: border-color 0.15s;
+  }
+  .search-box input:focus { outline: none; border-color: var(--accent); }
+  .search-box input::placeholder { color: var(--text3); }
+  .check-btn {
+    padding: 12px 24px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm);
+    font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity 0.15s; white-space: nowrap;
+  }
+  .check-btn:hover { opacity: 0.9; }
+  .check-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Loading */
+  .loading { text-align: center; padding: 40px; color: var(--text3); font-size: 14px; }
+  .spinner { display: inline-block; width: 28px; height: 28px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 12px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Score Dashboard */
+  .dashboard { display: none; margin-bottom: 32px; }
+  .score-card {
+    background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius);
+    padding: 32px; text-align: center;
+  }
+  .score-ring { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
+  .score-ring svg { transform: rotate(-90deg); }
+  .score-ring .bg { fill: none; stroke: var(--surface2); stroke-width: 10; }
+  .score-ring .fg { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 1s ease, stroke 0.5s; }
+  .score-ring .value {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-size: 36px; font-weight: 700;
+  }
+  .score-label { font-size: 14px; color: var(--text2); }
+  .score-summary { display: flex; justify-content: center; gap: 24px; margin-top: 20px; }
+  .summary-item { text-align: center; }
+  .summary-item .s-num { font-size: 24px; font-weight: 700; }
+  .summary-item .s-label { font-size: 12px; color: var(--text3); }
+  .s-pass { color: var(--green); }
+  .s-warn { color: var(--orange); }
+  .s-fail { color: var(--red); }
+
+  /* Checks */
+  .checks-list { display: none; }
+  .check-group { margin-bottom: 24px; }
+  .check-group h3 { font-size: 15px; font-weight: 600; margin-bottom: 12px; color: var(--text2); }
+  .check-item {
+    display: flex; align-items: flex-start; gap: 12px; background: var(--surface);
+    border: 0.5px solid var(--border); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 8px;
+  }
+  .check-item.pass { border-left: 3px solid var(--green); }
+  .check-item.warn { border-left: 3px solid var(--orange); }
+  .check-item.fail { border-left: 3px solid var(--red); }
+  .check-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .check-info { flex: 1; }
+  .check-info .c-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .check-info .c-value { font-size: 13px; color: var(--text3); word-break: break-all; }
+  .check-info .c-tip { font-size: 12px; color: var(--text2); margin-top: 6px; padding: 8px 12px; background: var(--surface2); border-radius: 6px; }
+  .check-info .c-tip strong { color: var(--text); }
+  .check-badge {
+    flex-shrink: 0; padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;
+  }
+  .badge-pass { background: var(--green-bg); color: var(--green); }
+  .badge-warn { background: var(--orange-bg); color: var(--orange); }
+  .badge-fail { background: var(--red-bg); color: var(--red); }
+
+  /* URL Info */
+  .url-info {
+    display: none; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-sm);
+    padding: 16px; margin-bottom: 24px; font-size: 13px; color: var(--text2);
+  }
+  .url-info strong { color: var(--text); }
+
+  .error-msg { display: none; background: #fef2f2; border: 0.5px solid #fecaca; border-radius: var(--radius-sm); padding: 16px; color: #991b1b; font-size: 14px; margin-bottom: 16px; }
+
+  .lang-btn {
+    position: fixed; top: 16px; right: 16px; padding: 6px 14px;
+    border: 0.5px solid var(--border); border-radius: 20px; background: var(--surface);
+    font-size: 13px; cursor: pointer; color: var(--text2); transition: all 0.15s; z-index: 100;
+  }
+  .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+  footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
+</style>
+</head>
+<body>
+<button class="lang-btn" onclick="toggleLang()" id="langBtn">中文</button>
+<div class="page">
+  <div class="breadcrumb"><a href="/">Freemaki</a> &rsaquo; <span data-i18n="bc">Discover Checker</span></div>
+  <h1 data-i18n="title">Google Discover Optimization Checker</h1>
+  <p class="subtitle" data-i18n="subtitle">Check if your page meets Google Discover requirements. Get actionable optimization tips.</p>
+
+  <div class="search-box">
+    <input type="url" id="urlInput" data-i18n-placeholder="url_ph" placeholder="Enter URL (e.g. https://example.com/article)" />
+    <button class="check-btn" id="checkBtn" onclick="runCheck()" data-i18n="check_btn">Check URL</button>
+  </div>
+
+  <div class="error-msg" id="errorMsg"></div>
+  <div class="loading" id="loading" style="display:none"><div class="spinner"></div><p data-i18n="loading">Analyzing page...</p></div>
+
+  <div class="url-info" id="urlInfo"></div>
+  <div class="dashboard" id="dashboard"></div>
+  <div class="checks-list" id="checksList"></div>
+
+  <footer>
+    <p><a href="/privacy/" data-i18n="f_privacy">Privacy Policy</a> · <a href="/disclaimer/" data-i18n="f_disclaimer">Disclaimer</a> · <a href="/about/" data-i18n="f_about">About</a> · <a href="/contact/" data-i18n="f_contact">Contact</a></p>
+    <p style="margin-top:8px">© 2026 Freemaki · <span data-i18n="f_rights">All rights reserved</span></p>
+  </footer>
+</div>
+
+<script>
+document.getElementById('urlInput').addEventListener('keydown', function(e) { if (e.key === 'Enter') runCheck(); });
+
+const PROXY = 'https://api.allorigins.win/raw?url=';
+
+async function runCheck() {
+  let url = document.getElementById('urlInput').value.trim();
+  if (!url) return;
+  if (!url.startsWith('http')) url = 'https://' + url;
+  document.getElementById('urlInput').value = url;
+
+  const loading = document.getElementById('loading');
+  const error = document.getElementById('errorMsg');
+  const dashboard = document.getElementById('dashboard');
+  const checks = document.getElementById('checksList');
+  const urlInfo = document.getElementById('urlInfo');
+  error.style.display = 'none';
+  loading.style.display = 'block';
+  dashboard.style.display = 'none';
+  checks.style.display = 'none';
+  urlInfo.style.display = 'none';
+  document.getElementById('checkBtn').disabled = true;
+
+  try {
+    const res = await fetch(PROXY + encodeURIComponent(url));
+    if (!res.ok) throw new Error('Failed to fetch page (HTTP ' + res.status + ')');
+    const html = await res.text();
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const meta = (name) => {
+      const el = doc.querySelector(`meta[name="${name}"]`) || doc.querySelector(`meta[property="${name}"]`);
+      return el ? (el.getAttribute('content') || '') : '';
+    };
+    const checks_data = [];
+
+    // 1. HTTPS
+    const isHttps = url.startsWith('https');
+    checks_data.push({
+      group: 'i18n_group_basic', title_en: 'HTTPS Protocol', title_zh: 'HTTPS 协议',
+      status: isHttps ? 'pass' : 'fail',
+      value: isHttps ? url : url,
+      tip_en: 'Google Discover requires HTTPS.',
+      tip_zh: 'Google Discover 要求使用 HTTPS 协议。'
+    });
+
+    // 2. Title
+    const title = doc.title || '';
+    const titleLen = title.length;
+    const titleOk = titleLen >= 10 && titleLen <= 70;
+    checks_data.push({
+      group: 'i18n_group_meta', title_en: 'Page Title', title_zh: '页面标题',
+      status: title ? (titleOk ? 'pass' : 'warn') : 'fail',
+      value: title || '(empty)',
+      tip_en: title ? (titleOk ? 'Title length is optimal (10-70 chars).' : 'Title should be 10-70 characters. Current: ' + titleLen + '.') : 'Missing page title. Add a <title> tag.',
+      tip_zh: title ? (titleOk ? '标题长度合适（10-70 字符）。' : '标题建议 10-70 字符。当前：' + titleLen + ' 字符。') : '缺少页面标题，请添加 <title> 标签。'
+    });
+
+    // 3. Meta Description
+    const desc = meta('description');
+    const descLen = desc.length;
+    const descOk = descLen >= 50 && descLen <= 160;
+    checks_data.push({
+      group: 'i18n_group_meta', title_en: 'Meta Description', title_zh: 'Meta 描述',
+      status: desc ? (descOk ? 'pass' : 'warn') : 'fail',
+      value: desc || '(empty)',
+      tip_en: desc ? (descOk ? 'Description length is optimal (50-160 chars).' : 'Description should be 50-160 characters. Current: ' + descLen + '.') : 'Missing meta description. Add one for better Discover visibility.',
+      tip_zh: desc ? (descOk ? '描述长度合适（50-160 字符）。' : '描述建议 50-160 字符。当前：' + descLen + ' 字符。') : '缺少 meta description，建议添加以提升 Discover 展示效果。'
+    });
+
+    // 4. og:title
+    const ogTitle = meta('og:title');
+    checks_data.push({
+      group: 'i18n_group_og', title_en: 'og:title', title_zh: 'og:title',
+      status: ogTitle ? 'pass' : 'warn',
+      value: ogTitle || '(empty)',
+      tip_en: ogTitle ? 'Open Graph title found.' : 'Missing og:title. Add <meta property="og:title" content="..."> for better social/Discover display.',
+      tip_zh: ogTitle ? '已设置 Open Graph 标题。' : '缺少 og:title，建议添加 <meta property="og:title" content="..."> 以优化展示效果。'
+    });
+
+    // 5. og:description
+    const ogDesc = meta('og:description');
+    checks_data.push({
+      group: 'i18n_group_og', title_en: 'og:description', title_zh: 'og:description',
+      status: ogDesc ? 'pass' : 'warn',
+      value: ogDesc || '(empty)',
+      tip_en: ogDesc ? 'Open Graph description found.' : 'Missing og:description. Add <meta property="og:description" content="...">.',
+      tip_zh: ogDesc ? '已设置 Open Graph 描述。' : '缺少 og:description，建议添加。'
+    });
+
+    // 6. og:image
+    const ogImg = meta('og:image');
+    checks_data.push({
+      group: 'i18n_group_og', title_en: 'og:image', title_zh: 'og:image',
+      status: ogImg ? 'pass' : 'fail',
+      value: ogImg ? ogImg.substring(0, 80) + (ogImg.length > 80 ? '...' : '') : '(empty)',
+      tip_en: ogImg ? 'og:image found. Discover requires a high-quality image.' : 'Missing og:image. Google Discover requires at least one large image (min 1200px wide).',
+      tip_zh: ogImg ? '已设置 og:image。Discover 需要高质量图片。' : '缺少 og:image。Google Discover 要求至少一张大图（最小宽度 1200px）。'
+    });
+
+    // 7. Image dimension check
+    if (ogImg) {
+      const imgDim = await checkImageDimensions(ogImg);
+      checks_data.push({
+        group: 'i18n_group_img', title_en: 'Image Dimensions', title_zh: '图片尺寸',
+        status: imgDim ? (imgDim.width >= 1200 ? 'pass' : 'warn') : 'warn',
+        value: imgDim ? imgDim.width + ' × ' + imgDim.height : 'Could not load image',
+        tip_en: imgDim ? (imgDim.width >= 1200 ? 'Image meets the 1200px minimum width requirement.' : 'Image width is ' + imgDim.width + 'px. Google recommends min 1200px wide for Discover.') : 'Could not verify image dimensions. It may be blocked by CORS. Please verify manually.',
+        tip_zh: imgDim ? (imgDim.width >= 1200 ? '图片宽度满足 1200px 最低要求。' : '图片宽度为 ' + imgDim.width + 'px，Google 建议最小 1200px。') : '无法验证图片尺寸（可能被 CORS 阻止），请手动检查。'
+      });
+    } else {
+      checks_data.push({
+        group: 'i18n_group_img', title_en: 'Image Dimensions', title_zh: '图片尺寸',
+        status: 'fail', value: 'N/A',
+        tip_en: 'No og:image to check.', tip_zh: '没有 og:image 可检查。'
+      });
+    }
+
+    // 8. article:published_time
+    const pubTime = meta('article:published_time') || meta('datePublished');
+    checks_data.push({
+      group: 'i18n_group_structured', title_en: 'Published Time', title_zh: '发布时间',
+      status: pubTime ? 'pass' : 'warn',
+      value: pubTime || '(empty)',
+      tip_en: pubTime ? 'Published time found: ' + pubTime : 'Missing article:published_time. Add <meta property="article:published_time" content="ISO-date">.',
+      tip_zh: pubTime ? '已设置发布时间：' + pubTime : '缺少 article:published_time，建议添加以帮助 Google 判断内容时效性。'
+    });
+
+    // 9. robots meta
+    const robots = meta('robots');
+    const noindex = robots && robots.toLowerCase().includes('noindex');
+    checks_data.push({
+      group: 'i18n_group_basic', title_en: 'Robots Meta', title_zh: 'Robots Meta',
+      status: noindex ? 'fail' : 'pass',
+      value: robots || '(not set = index allowed)',
+      tip_en: noindex ? 'Page has noindex! Google Discover will NOT index this page.' : 'Page is indexable. No noindex directive found.',
+      tip_zh: noindex ? '页面设置了 noindex！Google Discover 不会索引此页面。' : '页面可被索引，未发现 noindex 指令。'
+    });
+
+    // 10. Max Image Preview
+    const maxImg = robots && robots.toLowerCase().includes('max-image-preview');
+    const maxImgLarge = robots && robots.toLowerCase().includes('max-image-preview:large');
+    checks_data.push({
+      group: 'i18n_group_basic', title_en: 'Max Image Preview', title_zh: '最大图片预览',
+      status: maxImgLarge ? 'pass' : (maxImg ? 'warn' : 'warn'),
+      value: maxImgLarge ? 'max-image-preview:large' : (maxImg ? 'set (not large)' : '(not set)'),
+      tip_en: maxImgLarge ? 'Large image preview is enabled.' : 'Add max-image-preview:large to robots meta for Discover large image display.',
+      tip_zh: maxImgLarge ? '已启用大图预览。' : '建议在 robots meta 中添加 max-image-preview:large 以启用 Discover 大图展示。'
+    });
+
+    // Render
+    renderResults(url, checks_data);
+  } catch(err) {
+    error.style.display = 'block';
+    error.textContent = 'Error: ' + err.message;
+  } finally {
+    loading.style.display = 'none';
+    document.getElementById('checkBtn').disabled = false;
+  }
+}
+
+function checkImageDimensions(src) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => resolve({ width: img.naturalWidth, height: img.naturalHeight });
+    img.onerror = () => resolve(null);
+    setTimeout(() => resolve(null), 5000);
+    img.src = src;
+  });
+}
+
+function renderResults(url, checks) {
+  const lang = document.documentElement.lang === 'zh' ? 'zh' : 'en';
+  const passCount = checks.filter(c => c.status === 'pass').length;
+  const warnCount = checks.filter(c => c.status === 'warn').length;
+  const failCount = checks.filter(c => c.status === 'fail').length;
+  const total = checks.length;
+  const score = Math.round(((passCount * 10 + warnCount * 5) / (total * 10)) * 100);
+  const color = score >= 80 ? 'var(--green)' : score >= 50 ? 'var(--orange)' : 'var(--red)';
+
+  // Dashboard
+  const circumference = 2 * Math.PI * 58;
+  const offset = circumference - (score / 100) * circumference;
+  const labels = {
+    en: { pass: 'Passed', warn: 'Warnings', fail: 'Failed', score_label: 'Discover Score' },
+    zh: { pass: '通过', warn: '警告', fail: '未通过', score_label: 'Discover 评分' }
+  }[lang];
+
+  document.getElementById('dashboard').innerHTML = `<div class="score-card">
+    <div class="score-ring">
+      <svg width="140" height="140" viewBox="0 0 140 140">
+        <circle class="bg" cx="70" cy="70" r="58"/>
+        <circle class="fg" cx="70" cy="70" r="58" stroke="${color}"
+          stroke-dasharray="${circumference}" stroke-dashoffset="${offset}"/>
+      </svg>
+      <div class="value" style="color:${color}">${score}</div>
+    </div>
+    <div class="score-label">${labels.score_label}</div>
+    <div class="score-summary">
+      <div class="summary-item"><div class="s-num s-pass">${passCount}</div><div class="s-label">${labels.pass}</div></div>
+      <div class="summary-item"><div class="s-num s-warn">${warnCount}</div><div class="s-label">${labels.warn}</div></div>
+      <div class="summary-item"><div class="s-num s-fail">${failCount}</div><div class="s-label">${labels.failed || 'Failed'}</div></div>
+    </div>
+  </div>`;
+  document.getElementById('dashboard').style.display = 'block';
+
+  // URL Info
+  document.getElementById('urlInfo').innerHTML = `<strong data-i18n="scanned">Scanned:</strong> ${url}`;
+  document.getElementById('urlInfo').style.display = 'block';
+
+  // Group checks
+  const groups = {};
+  checks.forEach(c => {
+    const g = c.group;
+    if (!groups[g]) groups[g] = [];
+    groups[g].push(c);
+  });
+
+  const groupLabels = {
+    i18n_group_basic: { en: 'Basic Requirements', zh: '基本要求' },
+    i18n_group_meta: { en: 'Meta Tags', zh: 'Meta 标签' },
+    i18n_group_og: { en: 'Open Graph Tags', zh: 'Open Graph 标签' },
+    i18n_group_img: { en: 'Image Requirements', zh: '图片要求' },
+    i18n_group_structured: { en: 'Structured Data', zh: '结构化数据' }
+  };
+
+  const badgeLabels = { en: { pass: 'Pass', warn: 'Warning', fail: 'Fail' }, zh: { pass: '通过', warn: '警告', fail: '未通过' } };
+
+  let html = '';
+  for (const [gid, items] of Object.entries(groups)) {
+    const gl = groupLabels[gid] || { en: gid, zh: gid };
+    html += `<div class="check-group"><h3>${gl[lang]}</h3>`;
+    items.forEach(c => {
+      const statusLabel = badgeLabels[lang][c.status];
+      html += `<div class="check-item ${c.status}">
+        <span class="check-icon">${c.status === 'pass' ? '✅' : c.status === 'warn' ? '⚠️' : '❌'}</span>
+        <div class="check-info">
+          <div class="c-title">${c['title_' + lang]}</div>
+          <div class="c-value">${c.value}</div>
+          ${c.status !== 'pass' ? `<div class="c-tip"><strong>${lang === 'zh' ? '建议：' : 'Tip:'}</strong> ${c['tip_' + lang]}</div>` : ''}
+        </div>
+        <span class="check-badge badge-${c.status}">${statusLabel}</span>
+      </div>`;
+    });
+    html += '</div>';
+  }
+
+  document.getElementById('checksList').innerHTML = html;
+  document.getElementById('checksList').style.display = 'block';
+}
+
+const i18n = {
+  en: {
+    bc:'Discover Checker', title:'Google Discover Optimization Checker',
+    subtitle:'Check if your page meets Google Discover requirements. Get actionable optimization tips.',
+    url_ph:'Enter URL (e.g. https://example.com/article)', check_btn:'Check URL',
+    loading:'Analyzing page...', scanned:'Scanned:',
+    f_privacy:'Privacy Policy', f_disclaimer:'Disclaimer', f_about:'About', f_contact:'Contact', f_rights:'All rights reserved'
+  },
+  zh: {
+    bc:'Discover 检测', title:'Google Discover 优化检测工具',
+    subtitle:'检测您的页面是否符合 Google Discover 收录要求，获取可操作的优化建议。',
+    url_ph:'输入 URL（如 https://example.com/article）', check_btn:'检测 URL',
+    loading:'正在分析页面...', scanned:'已扫描：',
+    f_privacy:'隐私政策', f_disclaimer:'免责声明', f_about:'关于我们', f_contact:'联系我们', f_rights:'版权所有'
+  }
+};
+
+let lang = 'en';
+function toggleLang() {
+  lang = lang === 'en' ? 'zh' : 'en';
+  document.getElementById('langBtn').textContent = lang === 'en' ? '中文' : 'EN';
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
+  });
+}
+</script>
+</body>
+</html>

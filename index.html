@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Freemaki – Free Online Tools (19 Free Tools)</title>
-<meta name="description" content="19 free online tools: calorie calculator, color converter, gradient generator, font pairing, aspect ratio, character counter, QR code generator, BMI calculator, sleep calculator, pomodoro timer, unit converter, random picker, case converter, JSON formatter, regex tester, timestamp converter, Base64, JWT decoder, hash generator. No signup. Works offline."/>
-<meta name="keywords" content="free online tools, calorie calculator, color converter, gradient generator, font pairing, aspect ratio calculator, character counter, QR code generator, BMI calculator, sleep calculator, pomodoro timer, unit converter, random picker, case converter, JSON formatter, regex tester, timestamp, Base64, JWT, hash generator, free tools, developer tools"/>
+<title>Freemaki – Free Online Tools (21 Free Tools)</title>
+<meta name="description" content="21 free online tools: calorie calculator, color converter, gradient generator, font pairing, aspect ratio, character counter, QR code generator, BMI calculator, sleep calculator, pomodoro timer, unit converter, random picker, case converter, JSON formatter, regex tester, timestamp converter, Base64, JWT decoder, hash generator, Reddit explorer, Discover checker. No signup. Works offline."/>
+<meta name="keywords" content="free online tools, calorie calculator, color converter, gradient generator, font pairing, aspect ratio calculator, character counter, QR code generator, BMI calculator, sleep calculator, pomodoro timer, unit converter, random picker, case converter, JSON formatter, regex tester, timestamp, Base64, JWT, hash generator, free tools, developer tools, Reddit trending, Google Discover checker, SEO tools"/>
 <meta name="robots" content="index, follow"/>
 <meta name="author" content="Freemaki"/>
 <link rel="canonical" href="https://freemaki.com/"/>
@@ -600,13 +600,56 @@
     </div>
   </div>
 
+  <!-- Category 5: SEO & Marketing -->
+  <div class="category">
+    <div class="category-header">
+      <span class="category-icon">🔍</span>
+      <span class="category-title" data-i18n="cat5_title">SEO & Marketing</span>
+      <div class="category-divider"></div>
+      <span class="category-count" data-i18n="cat5_count">2 tools</span>
+    </div>
+    <div class="tools-grid">
+
+      <a href="./reddit/" class="tool-card">
+        <div class="tool-icon">🔥</div>
+        <h2 data-i18n="tool20_name">Reddit & Quora Explorer</h2>
+        <p data-i18n="tool20_desc">Discover trending topics on Reddit and Quora. Search hot posts by keyword, browse by category for content ideas.</p>
+        <div class="tool-tags">
+          <span class="tag">Reddit</span>
+          <span class="tag">Quora</span>
+          <span class="tag" data-i18n="tag_trending">Trending</span>
+        </div>
+        <div class="arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
+
+      <a href="./discover/" class="tool-card">
+        <div class="tool-icon">📊</div>
+        <h2 data-i18n="tool21_name">Discover Checker</h2>
+        <p data-i18n="tool21_desc">Check if your page meets Google Discover requirements. Analyze meta tags, images, structured data, and get a score.</p>
+        <div class="tool-tags">
+          <span class="tag">SEO</span>
+          <span class="tag">Discover</span>
+          <span class="tag" data-i18n="tag_audit">Audit</span>
+        </div>
+        <div class="arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
   <!-- Guides & Articles -->
   <div class="category">
     <div class="category-header">
       <span class="category-icon">📝</span>
-      <span class="category-title" data-i18n="cat5_title">Guides & Articles</span>
+      <span class="category-title" data-i18n="cat6_title">Guides & Articles</span>
       <div class="category-divider"></div>
-      <span class="category-count" data-i18n="cat5_count">4 posts</span>
+      <span class="category-count" data-i18n="cat6_count">4 posts</span>
     </div>
     <div class="tools-grid">
 
@@ -701,7 +744,7 @@
   const i18n = {
     en: {
       site_title: 'Free Online Tools',
-      site_desc: '19 free tools · No signup · No ads on tools · Works offline after first load',
+      site_desc: '21 free tools · No signup · No ads on tools · Works offline after first load',
       cat1_title: 'Developer Tools',
       cat1_count: '7 tools',
       cat2_title: 'Design & Color',
@@ -710,8 +753,10 @@
       cat3_count: '4 tools',
       cat4_title: 'Health & Lifestyle',
       cat4_count: '4 tools',
-      cat5_title: 'Guides & Articles',
-      cat5_count: '4 posts',
+      cat5_title: 'SEO & Marketing',
+      cat5_count: '2 tools',
+      cat6_title: 'Guides & Articles',
+      cat6_count: '4 posts',
       guide1_name: 'Essential Developer Tools',
       guide1_desc: 'A comprehensive guide to JSON formatting, regex testing, timestamp conversion, Base64 encoding, JWT decoding, and hash generation.',
       guide2_name: 'Calorie, BMI & Health Guide',
@@ -722,6 +767,12 @@
       guide4_desc: 'Get the most out of unit converters, random pickers, character counters, QR code generators, and pomodoro timers.',
       read_article: 'Read article',
       tag_guide: 'Guide',
+      tag_trending: 'Trending',
+      tag_audit: 'Audit',
+      tool20_name: 'Reddit & Quora Explorer',
+      tool20_desc: 'Discover trending topics on Reddit and Quora. Search hot posts by keyword, browse by category for content ideas.',
+      tool21_name: 'Discover Checker',
+      tool21_desc: 'Check if your page meets Google Discover requirements. Analyze meta tags, images, structured data, and get a score.',
       tool1_name: 'Calorie Calculator',
       tool1_desc: 'Calculate your BMR, TDEE and daily calorie targets for weight loss, maintenance or muscle gain.',
       tool2_name: 'Color Converter',
@@ -772,7 +823,7 @@
     },
     zh: {
       site_title: '免费在线工具',
-      site_desc: '19款免费工具 · 无需注册 · 工具内无广告 · 首次加载后离线可用',
+      site_desc: '21款免费工具 · 无需注册 · 工具内无广告 · 首次加载后离线可用',
       cat1_title: '开发者工具',
       cat1_count: '7个工具',
       cat2_title: '设计与颜色',
@@ -781,8 +832,10 @@
       cat3_count: '4个工具',
       cat4_title: '健康生活',
       cat4_count: '4个工具',
-      cat5_title: '指南与文章',
-      cat5_count: '4篇文章',
+      cat5_title: 'SEO 与营销',
+      cat5_count: '2个工具',
+      cat6_title: '指南与文章',
+      cat6_count: '4篇文章',
       guide1_name: '开发者必备工具指南',
       guide1_desc: 'JSON 格式化、正则测试、时间戳转换、Base64 编解码、JWT 解析、哈希生成——一文掌握所有开发者工具的使用方法。',
       guide2_name: '卡路里、BMI 与健康指南',
@@ -793,6 +846,12 @@
       guide4_desc: '充分发挥单位换算、随机抽签、字符统计、二维码生成和番茄钟的实用技巧。',
       read_article: '阅读文章',
       tag_guide: '指南',
+      tag_trending: '热点',
+      tag_audit: '检测',
+      tool20_name: 'Reddit & Quora 热点探索',
+      tool20_desc: '发现 Reddit 和 Quora 上的热门话题，按关键词搜索热帖、按分类浏览，助力内容选题。',
+      tool21_name: 'Discover 优化检测',
+      tool21_desc: '检测页面是否符合 Google Discover 收录要求，分析 Meta 标签、图片、结构化数据并评分。',
       tool1_name: '卡路里计算器',
       tool1_desc: '计算你的基础代谢率(BMR)、每日总消耗(TDEE)和目标热量，支持减脂、维持、增肌三种方案。',
       tool2_name: '颜色转换器',
