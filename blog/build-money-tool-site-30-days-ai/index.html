@@ -52,6 +52,14 @@
   .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
   footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
 
+.related-section{margin-top:32px;padding-top:20px;border-top:0.5px solid rgba(0,0,0,0.10);}
+.related-section h3{font-size:15px;font-weight:600;margin-bottom:10px;color:#1a1a18;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+@media(max-width:560px){.related-grid{grid-template-columns:1fr;}}
+.related-card{display:block;background:#fff;border:1px solid rgba(0,0,0,0.10);border-radius:10px;padding:12px 14px;text-decoration:none;color:#1a1a18;transition:border-color .2s,box-shadow .2s;}
+.related-card:hover{border-color:#2563eb;box-shadow:0 2px 12px rgba(37,99,235,0.08);}
+.related-card h4{font-size:13px;font-weight:600;margin-bottom:2px;}
+.related-card p{font-size:11px;color:#5f5e5a;line-height:1.4;}
 </style>
 <script type="application/ld+json">
 {
@@ -177,6 +185,24 @@
     <a href="/discover/" class="cta" data-i18n="cta3">Discover Checker &rarr;</a>
   </p>
 
+
+  <div class="related-section">
+    <h3 data-i18n="rt_title">Related Tools</h3>
+    <div class="related-grid">
+      <a href="/discover/" class="related-card">
+        <h4 data-i18n="rt_discover_t">Discover Checker</h4>
+        <p data-i18n="rt_discover_d">Check if your page meets Google Discover requirements.</p>
+      </a>
+      <a href="/reddit/" class="related-card">
+        <h4 data-i18n="rt_reddit_t">Reddit Explorer</h4>
+        <p data-i18n="rt_reddit_d">Discover trending topics on Reddit and Quora.</p>
+      </a>
+      <a href="/counter/" class="related-card">
+        <h4 data-i18n="rt_counter_t">Character Counter</h4>
+        <p data-i18n="rt_counter_d">Count characters, words, sentences in real-time.</p>
+      </a>
+    </div>
+  </div>
   <footer>
     <p><a href="/privacy/">Privacy Policy</a> &middot; <a href="/disclaimer/">Disclaimer</a> &middot; <a href="/about/">About</a> &middot; <a href="/contact/">Contact</a></p>
     <p style="margin-top:8px">&copy; 2026 Freemaki &middot; All rights reserved</p>
@@ -235,6 +261,8 @@ const i18n={
     cta1:'JSON Formatter &rarr;',
     cta2:'Calorie Calculator &rarr;',
     cta3:'Discover Checker &rarr;'
+  ,
+      rt_title:'Related Tools', rt_discover_t:'Discover Checker', rt_discover_d:'Check if your page meets Google Discover requirements.', rt_reddit_t:'Reddit Explorer', rt_reddit_d:'Discover trending topics on Reddit and Quora.', rt_counter_t:'Character Counter', rt_counter_d:'Count characters, words, sentences in real-time.'
   },
   zh:{
     bc:'博客', title:'30天用AI打造一个赚钱的工具网站',
@@ -286,6 +314,8 @@ const i18n={
     cta1:'JSON \u683c\u5f0f\u5316\u5668 &rarr;',
     cta2:'\u5361\u8def\u91cc\u8ba1\u7b97\u5668 &rarr;',
     cta3:'Discover \u68c0\u6d4b\u5668 &rarr;'
+  ,
+      rt_title:'相关工具', rt_discover_t:'Discover 优化检测', rt_discover_d:'检测页面是否符合 Google Discover 要求。', rt_reddit_t:'Reddit 热点探索', rt_reddit_d:'发现 Reddit 和 Quora 热门话题。', rt_counter_t:'字符统计工具', rt_counter_d:'实时统计字符、单词、句子数。'
   }
 };
 let lang='en';

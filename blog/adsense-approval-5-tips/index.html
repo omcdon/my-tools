@@ -52,6 +52,14 @@
   .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
   footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
 
+.related-section{margin-top:32px;padding-top:20px;border-top:0.5px solid rgba(0,0,0,0.10);}
+.related-section h3{font-size:15px;font-weight:600;margin-bottom:10px;color:#1a1a18;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+@media(max-width:560px){.related-grid{grid-template-columns:1fr;}}
+.related-card{display:block;background:#fff;border:1px solid rgba(0,0,0,0.10);border-radius:10px;padding:12px 14px;text-decoration:none;color:#1a1a18;transition:border-color .2s,box-shadow .2s;}
+.related-card:hover{border-color:#2563eb;box-shadow:0 2px 12px rgba(37,99,235,0.08);}
+.related-card h4{font-size:13px;font-weight:600;margin-bottom:2px;}
+.related-card p{font-size:11px;color:#5f5e5a;line-height:1.4;}
 </style>
 <script type="application/ld+json">
 {
@@ -167,6 +175,24 @@
   </ul>
   <p data-i18n="s6_p2">Most successful publishers were rejected at least once. Treat it as feedback, not failure.</p>
 
+
+  <div class="related-section">
+    <h3 data-i18n="rt_title">Related Tools</h3>
+    <div class="related-grid">
+      <a href="/discover/" class="related-card">
+        <h4 data-i18n="rt_discover_t">Discover Checker</h4>
+        <p data-i18n="rt_discover_d">Check if your page meets Google Discover requirements.</p>
+      </a>
+      <a href="/reddit/" class="related-card">
+        <h4 data-i18n="rt_reddit_t">Reddit Explorer</h4>
+        <p data-i18n="rt_reddit_d">Discover trending topics on Reddit and Quora.</p>
+      </a>
+      <a href="/password/" class="related-card">
+        <h4 data-i18n="rt_password_t">Password Generator</h4>
+        <p data-i18n="rt_password_d">Generate secure random passwords.</p>
+      </a>
+    </div>
+  </div>
   <footer>
     <p><a href="/privacy/">Privacy Policy</a> &middot; <a href="/disclaimer/">Disclaimer</a> &middot; <a href="/about/">About</a> &middot; <a href="/contact/">Contact</a></p>
     <p style="margin-top:8px">&copy; 2026 Freemaki &middot; All rights reserved</p>
@@ -214,6 +240,8 @@ const i18n={
     s6_l2:'<strong>"Difficult navigation"</strong> &mdash; Improve structure',
     s6_l3:'<strong>"Valuable inventory"</strong> &mdash; Remove scraped content',
     s6_p2:'Most publishers were rejected at least once. It\'s feedback, not failure.'
+  ,
+      rt_title:'Related Tools', rt_discover_t:'Discover Checker', rt_discover_d:'Check if your page meets Google Discover requirements.', rt_reddit_t:'Reddit Explorer', rt_reddit_d:'Discover trending topics on Reddit and Quora.', rt_password_t:'Password Generator', rt_password_d:'Generate secure random passwords.'
   },
   zh:{
     bc:'博客', title:'首次申请 Google AdSense 通过的5个技巧',
@@ -254,6 +282,8 @@ const i18n={
     s6_l2:'<strong>\u201c\u5bfc\u822a\u56f0\u96be\u201d</strong> \u2014 \u6539\u5584\u7ed3\u6784',
     s6_l3:'<strong>\u201c\u5e93\u5b58\u201d</strong> \u2014 \u79fb\u9664\u6284\u88ad\u5185\u5bb9',
     s6_p2:'\u5927\u591a\u6570\u6210\u529f\u53d1\u884c\u5546\u81f3\u5c11\u88ab\u62d2\u7edd\u8fc7\u4e00\u6b21\u3002'
+  ,
+      rt_title:'相关工具', rt_discover_t:'Discover 优化检测', rt_discover_d:'检测页面是否符合 Google Discover 要求。', rt_reddit_t:'Reddit 热点探索', rt_reddit_d:'发现 Reddit 和 Quora 热门话题。', rt_password_t:'密码生成器', rt_password_d:'生成安全的随机密码。'
   }
 };
 let lang='en';

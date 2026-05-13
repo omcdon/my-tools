@@ -52,6 +52,14 @@
   .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
   footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
 
+.related-section{margin-top:32px;padding-top:20px;border-top:0.5px solid rgba(0,0,0,0.10);}
+.related-section h3{font-size:15px;font-weight:600;margin-bottom:10px;color:#1a1a18;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+@media(max-width:560px){.related-grid{grid-template-columns:1fr;}}
+.related-card{display:block;background:#fff;border:1px solid rgba(0,0,0,0.10);border-radius:10px;padding:12px 14px;text-decoration:none;color:#1a1a18;transition:border-color .2s,box-shadow .2s;}
+.related-card:hover{border-color:#2563eb;box-shadow:0 2px 12px rgba(37,99,235,0.08);}
+.related-card h4{font-size:13px;font-weight:600;margin-bottom:2px;}
+.related-card p{font-size:11px;color:#5f5e5a;line-height:1.4;}
 </style>
 <script type="application/ld+json">
 {
@@ -165,6 +173,24 @@
     <a href="/discover/" class="cta" data-i18n="cta1">Check Your Pages &rarr;</a>
   </p>
 
+
+  <div class="related-section">
+    <h3 data-i18n="rt_title">Related Tools</h3>
+    <div class="related-grid">
+      <a href="/discover/" class="related-card">
+        <h4 data-i18n="rt_discover_t">Discover Checker</h4>
+        <p data-i18n="rt_discover_d">Check if your page meets Google Discover requirements.</p>
+      </a>
+      <a href="/image/" class="related-card">
+        <h4 data-i18n="rt_image_t">Image Converter</h4>
+        <p data-i18n="rt_image_d">Convert images between PNG, JPG, WebP.</p>
+      </a>
+      <a href="/reddit/" class="related-card">
+        <h4 data-i18n="rt_reddit_t">Reddit Explorer</h4>
+        <p data-i18n="rt_reddit_d">Discover trending topics on Reddit and Quora.</p>
+      </a>
+    </div>
+  </div>
   <footer>
     <p><a href="/privacy/">Privacy Policy</a> &middot; <a href="/disclaimer/">Disclaimer</a> &middot; <a href="/about/">About</a> &middot; <a href="/contact/">Contact</a></p>
     <p style="margin-top:8px">&copy; 2026 Freemaki &middot; All rights reserved</p>
@@ -211,6 +237,8 @@ const i18n={
     s6_tip_label:'Important:',
     s6_tip:'Diversify traffic sources. Organic search should be primary.',
     cta1:'Check Your Pages &rarr;'
+  ,
+      rt_title:'Related Tools', rt_discover_t:'Discover Checker', rt_discover_d:'Check if your page meets Google Discover requirements.', rt_image_t:'Image Converter', rt_image_d:'Convert images between PNG, JPG, WebP.', rt_reddit_t:'Reddit Explorer', rt_reddit_d:'Discover trending topics on Reddit and Quora.'
   },
   zh:{
     bc:'博客', title:'Google Discover 流量获取完全指南',
@@ -250,6 +278,8 @@ const i18n={
     s6_tip_label:'\u91cd\u8981\uff1a',
     s6_tip:'\u591a\u5143\u5316\u6d41\u91cf\u6765\u6e90\uff0c\u81ea\u7136\u641c\u7d22\u4e3a\u4e3b\u3002',
     cta1:'\u68c0\u6d4b\u4f60\u7684\u9875\u9762 &rarr;'
+  ,
+      rt_title:'相关工具', rt_discover_t:'Discover 优化检测', rt_discover_d:'检测页面是否符合 Google Discover 要求。', rt_image_t:'图片格式转换器', rt_image_d:'PNG、JPG、WebP 图片格式互转。', rt_reddit_t:'Reddit 热点探索', rt_reddit_d:'发现 Reddit 和 Quora 热门话题。'
   }
 };
 let lang='en';

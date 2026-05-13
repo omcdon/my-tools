@@ -35,7 +35,7 @@
     --text3: #9e9c97;
     --accent: #2563eb;
     --accent-bg: #eff6ff;
-    --radius: 12px;
+    --radius: 14px;
     --radius-sm: 8px;
   }
 
@@ -51,41 +51,32 @@
   .page { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
 
   /* Header */
-  .site-header { text-align: center; margin-bottom: 56px; }
+  .site-header { text-align: center; margin-bottom: 48px; }
   .site-header h1 {
-    font-size: 36px;
+    font-size: 38px;
     font-weight: 700;
     letter-spacing: -0.5px;
     margin-bottom: 8px;
   }
   .site-header p { font-size: 17px; color: var(--text2); }
 
-  /* Category Section */
-  .category {
-    margin-bottom: 48px;
-  }
-  .category:last-child { margin-bottom: 32px; }
-  .category-header {
+  /* Section Divider */
+  .section { margin-bottom: 48px; }
+  .section:last-of-type { margin-bottom: 32px; }
+  .section-header {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
-  .category-icon {
-    font-size: 22px;
-    line-height: 1;
-  }
-  .category-title {
-    font-size: 17px;
+  .section-icon { font-size: 22px; line-height: 1; }
+  .section-title {
+    font-size: 18px;
     font-weight: 700;
     color: var(--text);
   }
-  .category-divider {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-  .category-count {
+  .section-divider { flex: 1; height: 1px; background: var(--border); }
+  .section-count {
     font-size: 12px;
     color: var(--text3);
     background: var(--surface2);
@@ -93,66 +84,43 @@
     padding: 2px 10px;
   }
 
-  /* Tools Grid */
-  .tools-grid {
+  /* Hot Tools — 6 large cards */
+  .hot-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+    gap: 16px;
   }
-  @media (max-width: 900px) {
-    .tools-grid { grid-template-columns: repeat(2, 1fr); }
-  }
+  @media (max-width: 900px) { .hot-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 560px) {
-    .tools-grid { grid-template-columns: 1fr; }
+    .hot-grid { grid-template-columns: 1fr; }
+    .articles-grid { grid-template-columns: 1fr !important; }
+    .all-tools-grid { grid-template-columns: 1fr !important; }
     .page { max-width: 100%; padding: 32px 16px 60px; }
     .site-header h1 { font-size: 28px; }
   }
 
-  .tool-card {
+  .hot-card {
     background: var(--surface);
     border: 0.5px solid var(--border);
     border-radius: var(--radius);
-    padding: 24px 22px;
+    padding: 28px 24px;
     text-decoration: none;
     color: var(--text);
     transition: all 0.2s;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    position: relative;
   }
-  .tool-card:hover {
+  .hot-card:hover {
     border-color: var(--accent);
-    box-shadow: 0 6px 24px rgba(37,99,235,0.10);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(37,99,235,0.12);
+    transform: translateY(-3px);
   }
-  .tool-card .tool-icon {
-    font-size: 34px;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .tool-card h2 {
-    font-size: 17px;
-    font-weight: 600;
-  }
-  .tool-card p {
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.5;
-  }
-  .tool-card .tool-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 4px;
-  }
-  .tool-card .tag {
-    font-size: 11px;
-    padding: 2px 8px;
-    background: var(--surface2);
-    border-radius: 10px;
-    color: var(--text2);
-  }
-  .tool-card .arrow {
+  .hot-card .hot-icon { font-size: 40px; line-height: 1; margin-bottom: 4px; }
+  .hot-card h2 { font-size: 18px; font-weight: 600; }
+  .hot-card p { font-size: 13px; color: var(--text2); line-height: 1.5; }
+  .hot-card .hot-arrow {
     margin-top: auto;
     padding-top: 12px;
     font-size: 13px;
@@ -161,6 +129,74 @@
     display: flex;
     align-items: center;
     gap: 4px;
+  }
+
+  /* All Tools — compact grid */
+  .all-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 900px) { .all-tools-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 680px) { .all-tools-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .tool-chip {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .tool-chip:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 10px rgba(37,99,235,0.08);
+    transform: translateY(-1px);
+  }
+  .tool-chip .chip-icon { font-size: 16px; line-height: 1; flex-shrink: 0; }
+
+  /* Articles Grid */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 900px) { .articles-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .article-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 18px 16px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .article-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 16px rgba(37,99,235,0.08);
+    transform: translateY(-1px);
+  }
+  .article-card .ac-icon { font-size: 20px; line-height: 1; }
+  .article-card h3 { font-size: 14px; font-weight: 600; line-height: 1.4; }
+  .article-card p { font-size: 12px; color: var(--text2); line-height: 1.4; }
+  .article-card .ac-tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 1px 7px;
+    background: var(--surface2);
+    border-radius: 8px;
+    color: var(--text3);
+    width: fit-content;
   }
 
   /* Features */
@@ -178,9 +214,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
   }
-  @media (max-width: 560px) {
-    .features-grid { grid-template-columns: repeat(2, 1fr); }
-  }
+  @media (max-width: 560px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
   .feature-item {
     background: var(--surface);
     border: 0.5px solid var(--border);
@@ -259,407 +293,70 @@
   <!-- Ad: Top Banner -->
   <div class="ad-slot" data-i18n="adPlaceholder">Advertisement Space</div>
 
-  <!-- Category 1: Developer Tools -->
-  <div class="category">
-    <div class="category-header">
-      <span class="category-icon">💻</span>
-      <span class="category-title" data-i18n="cat1_title">Developer Tools</span>
-      <div class="category-divider"></div>
-      <span class="category-count" data-i18n="cat1_count">8 tools</span>
+  <!-- Section 1: Popular Tools (6 hot tools) -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">⭐</span>
+      <span class="section-title" data-i18n="hot_title">Popular Tools</span>
+      <div class="section-divider"></div>
     </div>
-    <div class="tools-grid">
+    <div class="hot-grid">
 
-      <!-- JSON Formatter -->
-      <a href="./json/" class="tool-card">
-        <div class="tool-icon">{ }</div>
-        <h2 data-i18n="tool7_name">JSON Formatter</h2>
-        <p data-i18n="tool7_desc">Format, minify, and validate JSON data instantly. Real-time syntax checking and character count.</p>
-        <div class="tool-tags">
-          <span class="tag">JSON</span>
-          <span class="tag">Validate</span>
-          <span class="tag">Prettify</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- Regex Tester -->
-      <a href="./regex/" class="tool-card">
-        <div class="tool-icon">.*</div>
-        <h2 data-i18n="tool8_name">Regex Tester</h2>
-        <p data-i18n="tool8_desc">Test regular expressions in real-time with match highlighting, groups, and flags support.</p>
-        <div class="tool-tags">
-          <span class="tag">Regex</span>
-          <span class="tag">Match</span>
-          <span class="tag">Groups</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- Timestamp Converter -->
-      <a href="./timestamp/" class="tool-card">
-        <div class="tool-icon">⏱</div>
-        <h2 data-i18n="tool9_name">Timestamp Converter</h2>
-        <p data-i18n="tool9_desc">Convert between Unix timestamp and human-readable date. Supports seconds, milliseconds, and current time.</p>
-        <div class="tool-tags">
-          <span class="tag">Unix</span>
-          <span class="tag">Epoch</span>
-          <span class="tag">ISO 8601</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- Base64 -->
-      <a href="./base64/" class="tool-card">
-        <div class="tool-icon">🔐</div>
-        <h2 data-i18n="tool10_name">Base64 Encoder</h2>
-        <p data-i18n="tool10_desc">Encode and decode Base64 strings instantly. All processing done locally in your browser.</p>
-        <div class="tool-tags">
-          <span class="tag">Base64</span>
-          <span class="tag">Encode</span>
-          <span class="tag">Decode</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- JWT Decoder -->
-      <a href="./jwt/" class="tool-card">
-        <div class="tool-icon">🎫</div>
-        <h2 data-i18n="tool11_name">JWT Decoder</h2>
-        <p data-i18n="tool11_desc">Decode and inspect JSON Web Tokens. View header, payload, and claims with expiration status.</p>
-        <div class="tool-tags">
-          <span class="tag">JWT</span>
-          <span class="tag">Token</span>
-          <span class="tag">Decode</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- Hash Generator -->
-      <a href="./hash/" class="tool-card">
-        <div class="tool-icon">#</div>
-        <h2 data-i18n="tool12_name">Hash Generator</h2>
-        <p data-i18n="tool12_desc">Generate MD5, SHA-1, SHA-256, SHA-512 hashes instantly. All computed locally in your browser.</p>
-        <div class="tool-tags">
-          <span class="tag">MD5</span>
-          <span class="tag">SHA-256</span>
-          <span class="tag">SHA-512</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- Case Converter -->
-      <a href="./case/" class="tool-card">
-        <div class="tool-icon">🔤</div>
-        <h2 data-i18n="tool6_name">Case Converter</h2>
-        <p data-i18n="tool6_desc">Convert text to camelCase, PascalCase, snake_case, kebab-case and more instantly.</p>
-        <div class="tool-tags">
-          <span class="tag">camelCase</span>
-          <span class="tag">snake_case</span>
-          <span class="tag">kebab-case</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- Password Generator -->
-      <a href="./password/" class="tool-card">
-        <div class="tool-icon">🔐</div>
+      <a href="./password/" class="hot-card">
+        <div class="hot-icon">🔐</div>
         <h2 data-i18n="tool24_name">Password Generator</h2>
         <p data-i18n="tool24_desc">Generate secure random passwords with custom length, character types, and strength meter.</p>
-        <div class="tool-tags">
-          <span class="tag">Secure</span>
-          <span class="tag">Random</span>
-          <span class="tag">Batch</span>
-        </div>
-        <div class="arrow">
+        <div class="hot-arrow">
           <span data-i18n="open_tool">Open tool</span>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </div>
       </a>
 
-    </div>
-  </div>
+      <a href="./json/" class="hot-card">
+        <div class="hot-icon">{ }</div>
+        <h2 data-i18n="tool7_name">JSON Formatter</h2>
+        <p data-i18n="tool7_desc">Format, minify, and validate JSON data instantly. Real-time syntax checking and character count.</p>
+        <div class="hot-arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
 
-  <!-- Category 2: Design & Color -->
-  <div class="category">
-    <div class="category-header">
-      <span class="category-icon">🎨</span>
-      <span class="category-title" data-i18n="cat2_title">Design & Color</span>
-      <div class="category-divider"></div>
-      <span class="category-count" data-i18n="cat2_count">6 tools</span>
-    </div>
-    <div class="tools-grid">
-
-      <!-- Color Converter -->
-      <a href="./color/" class="tool-card">
-        <div class="tool-icon">🎨</div>
+      <a href="./color/" class="hot-card">
+        <div class="hot-icon">🎨</div>
         <h2 data-i18n="tool2_name">Color Converter</h2>
         <p data-i18n="tool2_desc">Convert between HEX, RGB, HSL, CMYK formats with live preview and WCAG contrast checker.</p>
-        <div class="tool-tags">
-          <span class="tag">HEX</span>
-          <span class="tag">RGB / HSL</span>
-          <span class="tag">CMYK</span>
-          <span class="tag" data-i18n="tag_contrast">Contrast Check</span>
-        </div>
-        <div class="arrow">
+        <div class="hot-arrow">
           <span data-i18n="open_tool">Open tool</span>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </div>
       </a>
 
-      <!-- Gradient Generator -->
-      <a href="./gradient/" class="tool-card">
-        <div class="tool-icon">🌈</div>
-        <h2 data-i18n="tool13_name">CSS Gradient Generator</h2>
-        <p data-i18n="tool13_desc">Create linear, radial and conic gradients with live preview. Export clean CSS code instantly.</p>
-        <div class="tool-tags">
-          <span class="tag">Linear</span>
-          <span class="tag">Radial</span>
-          <span class="tag">Conic</span>
-          <span class="tag">CSS</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- Font Pairing -->
-      <a href="./font/" class="tool-card">
-        <div class="tool-icon">🔤</div>
-        <h2 data-i18n="tool14_name">Font Pairing</h2>
-        <p data-i18n="tool14_desc">Preview Google Fonts combinations with live text. Copy CSS @import code instantly.</p>
-        <div class="tool-tags">
-          <span class="tag">Google Fonts</span>
-          <span class="tag">Typography</span>
-          <span class="tag">CSS</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- Aspect Ratio Calculator -->
-      <a href="./aspect/" class="tool-card">
-        <div class="tool-icon">📐</div>
-        <h2 data-i18n="tool15_name">Aspect Ratio Calculator</h2>
-        <p data-i18n="tool15_desc">Convert width and height for 16:9, 4:3, 1:1, 21:9 and more. Shows common resolutions instantly.</p>
-        <div class="tool-tags">
-          <span class="tag">16:9</span>
-          <span class="tag">4:3</span>
-          <span class="tag">1:1</span>
-          <span class="tag">Resolution</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- Color Palette Extractor -->
-      <a href="./palette/" class="tool-card">
-        <div class="tool-icon">🖼</div>
-        <h2 data-i18n="tool22_name">Color Palette Extractor</h2>
-        <p data-i18n="tool22_desc">Upload any image and extract dominant colors with HEX and RGB values. Export palettes as CSS.</p>
-        <div class="tool-tags">
-          <span class="tag">HEX</span>
-          <span class="tag">RGB</span>
-          <span class="tag">Palette</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- Image Format Converter -->
-      <a href="./image/" class="tool-card">
-        <div class="tool-icon">🔄</div>
+      <a href="./image/" class="hot-card">
+        <div class="hot-icon">🔄</div>
         <h2 data-i18n="tool23_name">Image Converter</h2>
         <p data-i18n="tool23_desc">Convert images between PNG, JPG, and WebP. Adjust quality, batch convert, download as ZIP.</p>
-        <div class="tool-tags">
-          <span class="tag">PNG</span>
-          <span class="tag">JPG</span>
-          <span class="tag">WebP</span>
-        </div>
-        <div class="arrow">
+        <div class="hot-arrow">
           <span data-i18n="open_tool">Open tool</span>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </div>
       </a>
 
-    </div>
-  </div>
-
-  <!-- Category 3: Productivity -->
-  <div class="category">
-    <div class="category-header">
-      <span class="category-icon">⚡</span>
-      <span class="category-title" data-i18n="cat3_title">Productivity</span>
-      <div class="category-divider"></div>
-      <span class="category-count" data-i18n="cat3_count">4 tools</span>
-    </div>
-    <div class="tools-grid">
-
-      <!-- Unit Converter -->
-      <a href="./converter/" class="tool-card">
-        <div class="tool-icon">📏</div>
-        <h2 data-i18n="tool4_name">Unit Converter</h2>
-        <p data-i18n="tool4_desc">Convert length, weight, temperature and area units instantly with real-time results.</p>
-        <div class="tool-tags">
-          <span class="tag">Length</span>
-          <span class="tag">Weight</span>
-          <span class="tag">Temperature</span>
-          <span class="tag">Area</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- Random Picker -->
-      <a href="./random/" class="tool-card">
-        <div class="tool-icon">🎲</div>
-        <h2 data-i18n="tool5_name">Random Picker</h2>
-        <p data-i18n="tool5_desc">Draw one from a list, or split a group into teams. Perfect for lucky draws, raffles and random selection.</p>
-        <div class="tool-tags">
-          <span class="tag">Lucky Draw</span>
-          <span class="tag">Team Generator</span>
-          <span class="tag">Randomizer</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- Character Counter -->
-      <a href="./counter/" class="tool-card">
-        <div class="tool-icon">🔢</div>
-        <h2 data-i18n="tool16_name">Character Counter</h2>
-        <p data-i18n="tool16_desc">Count characters, words, sentences and paragraphs in real-time. Supports mixed Chinese and English text.</p>
-        <div class="tool-tags">
-          <span class="tag">Text</span>
-          <span class="tag">Count</span>
-          <span class="tag">EN/ZH</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- QR Code Generator -->
-      <a href="./qrcode/" class="tool-card">
-        <div class="tool-icon">📱</div>
-        <h2 data-i18n="tool17_name">QR Code Generator</h2>
-        <p data-i18n="tool17_desc">Generate QR codes from text or URL instantly. Download as PNG image. Runs locally in your browser.</p>
-        <div class="tool-tags">
-          <span class="tag">QR Code</span>
-          <span class="tag">URL</span>
-          <span class="tag">PNG</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-    </div>
-  </div>
-
-  <!-- Category 4: Health & Lifestyle -->
-  <div class="category">
-    <div class="category-header">
-      <span class="category-icon">🍎</span>
-      <span class="category-title" data-i18n="cat4_title">Health & Lifestyle</span>
-      <div class="category-divider"></div>
-      <span class="category-count" data-i18n="cat4_count">4 tools</span>
-    </div>
-    <div class="tools-grid">
-
-      <!-- Calorie Calculator -->
-      <a href="./calorie/" class="tool-card">
-        <div class="tool-icon">🔥</div>
+      <a href="./calorie/" class="hot-card">
+        <div class="hot-icon">🔥</div>
         <h2 data-i18n="tool1_name">Calorie Calculator</h2>
         <p data-i18n="tool1_desc">Calculate your BMR, TDEE and daily calorie targets for weight loss, maintenance or muscle gain.</p>
-        <div class="tool-tags">
-          <span class="tag">BMR</span>
-          <span class="tag">TDEE</span>
-          <span class="tag">Macros</span>
-          <span class="tag" data-i18n="tag_metric">Metric/Imperial</span>
-        </div>
-        <div class="arrow">
+        <div class="hot-arrow">
           <span data-i18n="open_tool">Open tool</span>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </div>
       </a>
 
-      <!-- Pomodoro Timer -->
-      <a href="./pomodoro/" class="tool-card">
-        <div class="tool-icon">🍅</div>
-        <h2 data-i18n="tool3_name">Pomodoro Timer</h2>
-        <p data-i18n="tool3_desc">25-minute focus sessions with 5-minute breaks. Track your productivity and stay in the zone.</p>
-        <div class="tool-tags">
-          <span class="tag">Focus</span>
-          <span class="tag">Productivity</span>
-          <span class="tag">Timer</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- BMI Calculator -->
-      <a href="./bmi/" class="tool-card">
-        <div class="tool-icon">⚖️</div>
-        <h2 data-i18n="tool18_name">BMI Calculator</h2>
-        <p data-i18n="tool18_desc">Calculate your Body Mass Index from height and weight. Supports metric and imperial units. Links to calorie calculator.</p>
-        <div class="tool-tags">
-          <span class="tag">BMI</span>
-          <span class="tag">Health</span>
-          <span class="tag" data-i18n="tag_metric">Metric/Imperial</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <!-- Sleep Calculator -->
-      <a href="./sleep/" class="tool-card">
-        <div class="tool-icon">🛏️</div>
-        <h2 data-i18n="tool19_name">Sleep Calculator</h2>
-        <p data-i18n="tool19_desc">Find the best time to sleep or wake up based on 90-minute sleep cycles. 5-6 complete cycles for optimal rest.</p>
-        <div class="tool-tags">
-          <span class="tag">Sleep</span>
-          <span class="tag">90min Cycles</span>
-          <span class="tag">Health</span>
-        </div>
-        <div class="arrow">
+      <a href="./qrcode/" class="hot-card">
+        <div class="hot-icon">📱</div>
+        <h2 data-i18n="tool17_name">QR Code Generator</h2>
+        <p data-i18n="tool17_desc">Generate QR codes from text or URL instantly. Download as PNG image. Runs locally in your browser.</p>
+        <div class="hot-arrow">
           <span data-i18n="open_tool">Open tool</span>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </div>
@@ -668,222 +365,136 @@
     </div>
   </div>
 
-  <!-- Category 5: SEO & Marketing -->
-  <div class="category">
-    <div class="category-header">
-      <span class="category-icon">🔍</span>
-      <span class="category-title" data-i18n="cat5_title">SEO & Marketing</span>
-      <div class="category-divider"></div>
-      <span class="category-count" data-i18n="cat5_count">2 tools</span>
+  <!-- Section 2: All Tools (compact chips) -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🧰</span>
+      <span class="section-title" data-i18n="all_title">All Tools</span>
+      <div class="section-divider"></div>
+      <span class="section-count" data-i18n="all_count">24 tools</span>
     </div>
-    <div class="tools-grid">
+    <div class="all-tools-grid">
 
-      <a href="./reddit/" class="tool-card">
-        <div class="tool-icon">🔥</div>
-        <h2 data-i18n="tool20_name">Reddit & Quora Explorer</h2>
-        <p data-i18n="tool20_desc">Discover trending topics on Reddit and Quora. Search hot posts by keyword, browse by category for content ideas.</p>
-        <div class="tool-tags">
-          <span class="tag">Reddit</span>
-          <span class="tag">Quora</span>
-          <span class="tag" data-i18n="tag_trending">Trending</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./discover/" class="tool-card">
-        <div class="tool-icon">📊</div>
-        <h2 data-i18n="tool21_name">Discover Checker</h2>
-        <p data-i18n="tool21_desc">Check if your page meets Google Discover requirements. Analyze meta tags, images, structured data, and get a score.</p>
-        <div class="tool-tags">
-          <span class="tag">SEO</span>
-          <span class="tag">Discover</span>
-          <span class="tag" data-i18n="tag_audit">Audit</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
+      <a href="./json/" class="tool-chip"><span class="chip-icon">{ }</span><span data-i18n="tool7_name">JSON Formatter</span></a>
+      <a href="./regex/" class="tool-chip"><span class="chip-icon">.*</span><span data-i18n="tool8_name">Regex Tester</span></a>
+      <a href="./timestamp/" class="tool-chip"><span class="chip-icon">⏱</span><span data-i18n="tool9_name">Timestamp Converter</span></a>
+      <a href="./base64/" class="tool-chip"><span class="chip-icon">🔐</span><span data-i18n="tool10_name">Base64 Encoder</span></a>
+      <a href="./jwt/" class="tool-chip"><span class="chip-icon">🎫</span><span data-i18n="tool11_name">JWT Decoder</span></a>
+      <a href="./hash/" class="tool-chip"><span class="chip-icon">#</span><span data-i18n="tool12_name">Hash Generator</span></a>
+      <a href="./case/" class="tool-chip"><span class="chip-icon">🔤</span><span data-i18n="tool6_name">Case Converter</span></a>
+      <a href="./password/" class="tool-chip"><span class="chip-icon">🔑</span><span data-i18n="tool24_name">Password Generator</span></a>
+      <a href="./color/" class="tool-chip"><span class="chip-icon">🎨</span><span data-i18n="tool2_name">Color Converter</span></a>
+      <a href="./gradient/" class="tool-chip"><span class="chip-icon">🌈</span><span data-i18n="tool13_name">CSS Gradient Generator</span></a>
+      <a href="./font/" class="tool-chip"><span class="chip-icon">🔤</span><span data-i18n="tool14_name">Font Pairing</span></a>
+      <a href="./aspect/" class="tool-chip"><span class="chip-icon">📐</span><span data-i18n="tool15_name">Aspect Ratio Calculator</span></a>
+      <a href="./palette/" class="tool-chip"><span class="chip-icon">🖼</span><span data-i18n="tool22_name">Color Palette Extractor</span></a>
+      <a href="./image/" class="tool-chip"><span class="chip-icon">🔄</span><span data-i18n="tool23_name">Image Converter</span></a>
+      <a href="./converter/" class="tool-chip"><span class="chip-icon">📏</span><span data-i18n="tool4_name">Unit Converter</span></a>
+      <a href="./random/" class="tool-chip"><span class="chip-icon">🎲</span><span data-i18n="tool5_name">Random Picker</span></a>
+      <a href="./counter/" class="tool-chip"><span class="chip-icon">🔢</span><span data-i18n="tool16_name">Character Counter</span></a>
+      <a href="./qrcode/" class="tool-chip"><span class="chip-icon">📱</span><span data-i18n="tool17_name">QR Code Generator</span></a>
+      <a href="./calorie/" class="tool-chip"><span class="chip-icon">🔥</span><span data-i18n="tool1_name">Calorie Calculator</span></a>
+      <a href="./pomodoro/" class="tool-chip"><span class="chip-icon">🍅</span><span data-i18n="tool3_name">Pomodoro Timer</span></a>
+      <a href="./bmi/" class="tool-chip"><span class="chip-icon">⚖️</span><span data-i18n="tool18_name">BMI Calculator</span></a>
+      <a href="./sleep/" class="tool-chip"><span class="chip-icon">🛏️</span><span data-i18n="tool19_name">Sleep Calculator</span></a>
+      <a href="./reddit/" class="tool-chip"><span class="chip-icon">🔥</span><span data-i18n="tool20_name">Reddit & Quora Explorer</span></a>
+      <a href="./discover/" class="tool-chip"><span class="chip-icon">📊</span><span data-i18n="tool21_name">Discover Checker</span></a>
 
     </div>
   </div>
 
-  <!-- Guides & Articles -->
-  <div class="category">
-    <div class="category-header">
-      <span class="category-icon">📝</span>
-      <span class="category-title" data-i18n="cat6_title">Guides & Articles</span>
-      <div class="category-divider"></div>
-      <span class="category-count" data-i18n="cat6_count">12 posts</span>
+  <!-- Section 3: Latest Articles -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">📝</span>
+      <span class="section-title" data-i18n="articles_title">Latest Articles</span>
+      <div class="section-divider"></div>
+      <span class="section-count" data-i18n="articles_count">12 posts</span>
     </div>
-    <div class="tools-grid">
+    <div class="articles-grid">
 
-      <a href="./blog/developer-tools-guide/" class="tool-card">
-        <div class="tool-icon">💻</div>
-        <h2 data-i18n="guide1_name">Essential Developer Tools</h2>
-        <p data-i18n="guide1_desc">A comprehensive guide to JSON formatting, regex testing, timestamp conversion, Base64 encoding, JWT decoding, and hash generation.</p>
-        <div class="tool-tags">
-          <span class="tag" data-i18n="tag_guide">Guide</span>
-          <span class="tag">Developer</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="read_article">Read article</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./blog/calorie-bmi-health-guide/" class="tool-card">
-        <div class="tool-icon">🍎</div>
-        <h2 data-i18n="guide2_name">Calorie, BMI & Health Guide</h2>
-        <p data-i18n="guide2_desc">Understand BMR, TDEE, BMI, weight management strategies, and sleep optimization — all explained with practical formulas.</p>
-        <div class="tool-tags">
-          <span class="tag" data-i18n="tag_guide">Guide</span>
-          <span class="tag">Health</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="read_article">Read article</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./blog/color-guide-for-designers/" class="tool-card">
-        <div class="tool-icon">🎨</div>
-        <h2 data-i18n="guide3_name">Color Guide for Designers</h2>
-        <p data-i18n="guide3_desc">Master HEX, RGB, HSL, CMYK color formats, WCAG contrast ratios, and practical color management with CSS custom properties.</p>
-        <div class="tool-tags">
-          <span class="tag" data-i18n="tag_guide">Guide</span>
-          <span class="tag">Design</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="read_article">Read article</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./blog/productivity-tools-guide/" class="tool-card">
-        <div class="tool-icon">⚡</div>
-        <h2 data-i18n="guide4_name">Productivity Tools Guide</h2>
-        <p data-i18n="guide4_desc">Get the most out of unit converters, random pickers, character counters, QR code generators, and pomodoro timers.</p>
-        <div class="tool-tags">
-          <span class="tag" data-i18n="tag_guide">Guide</span>
-          <span class="tag">Productivity</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="read_article">Read article</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./blog/build-money-tool-site-30-days-ai/" class="tool-card">
-        <div class="tool-icon">🔧</div>
-        <h2 data-i18n="guide5_name">Build a Tool Site in 30 Days with AI</h2>
-        <p data-i18n="guide5_desc">Step-by-step guide to building a profitable online tool website using AI assistance — from planning to AdSense monetization.</p>
-        <div class="tool-tags">
-          <span class="tag" data-i18n="tag_article">Article</span>
-          <span class="tag">AI Tools</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="read_article">Read article</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./blog/google-discover-traffic-guide/" class="tool-card">
-        <div class="tool-icon">🔍</div>
-        <h2 data-i18n="guide6_name">Google Discover Traffic Guide</h2>
-        <p data-i18n="guide6_desc">Complete guide to getting your content featured on Google Discover — technical requirements, content policies, and monetization.</p>
-        <div class="tool-tags">
-          <span class="tag" data-i18n="tag_article">Article</span>
-          <span class="tag">SEO</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="read_article">Read article</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./blog/reddit-traffic-0-to-1000/" class="tool-card">
-        <div class="tool-icon">🔥</div>
-        <h2 data-i18n="guide7_name">Reddit Traffic: 0 to 1,000 Daily</h2>
-        <p data-i18n="guide7_desc">Practical guide to driving website traffic from Reddit — finding subreddits, crafting viral posts, and converting visitors.</p>
-        <div class="tool-tags">
-          <span class="tag" data-i18n="tag_article">Article</span>
-          <span class="tag">Marketing</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="read_article">Read article</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./blog/adsense-approval-5-tips/" class="tool-card">
-        <div class="tool-icon">💰</div>
-        <h2 data-i18n="guide8_name">AdSense Approval: 5 Tips</h2>
-        <p data-i18n="guide8_desc">Get Google AdSense approved on your first try — content requirements, legal pages, mobile design, and traffic strategies.</p>
-        <div class="tool-tags">
-          <span class="tag" data-i18n="tag_article">Article</span>
-          <span class="tag">Monetization</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="read_article">Read article</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./blog/ai-writing-vs-human-seo-test/" class="tool-card">
-        <div class="tool-icon">🤖</div>
-        <h2 data-i18n="guide9_name">AI vs Human Writing: 90-Day SEO Test</h2>
-        <p data-i18n="guide9_desc">20 AI-written vs 20 human-written articles tracked for 90 days — rankings, traffic, and engagement compared.</p>
-        <div class="tool-tags">
-          <span class="tag" data-i18n="tag_article">Article</span>
-          <span class="tag">AI</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="read_article">Read article</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-      <a href="./blog/changelog-may-2026/" class="tool-card">
-        <div class="tool-icon">📋</div>
-        <h2 data-i18n="guide10_name">May 2026 Changelog</h2>
-        <p data-i18n="guide10_desc">5 new tools, 5 blog articles, homepage redesign, and bug fixes. Everything that changed this month.</p>
-        <div class="tool-tags">
-          <span class="tag" data-i18n="tag_article">Article</span>
-          <span class="tag">Update</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="read_article">Read article</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-      <a href="./blog/image-optimization-guide/" class="tool-card">
-        <div class="tool-icon">📸</div>
-        <h2 data-i18n="guide11_name">Image Optimization Guide (2026)</h2>
-        <p data-i18n="guide11_desc">Format selection, compression, responsive images, and Core Web Vitals optimization for web performance.</p>
-        <div class="tool-tags">
-          <span class="tag" data-i18n="tag_article">Article</span>
-          <span class="tag">Performance</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="read_article">Read article</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-      <a href="./blog/secure-password-guide/" class="tool-card">
-        <div class="tool-icon">🔐</div>
-        <h2 data-i18n="guide12_name">Secure Password Guide</h2>
+      <a href="./blog/secure-password-guide/" class="article-card">
+        <div class="ac-icon">🔐</div>
+        <h3 data-i18n="guide12_name">Secure Password Guide</h3>
         <p data-i18n="guide12_desc">How to create strong passwords, understand attack methods, and why password managers matter in 2026.</p>
-        <div class="tool-tags">
-          <span class="tag" data-i18n="tag_article">Article</span>
-          <span class="tag">Security</span>
-        </div>
-        <div class="arrow">
-          <span data-i18n="read_article">Read article</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
+        <span class="ac-tag" data-i18n="tag_security">Security</span>
+      </a>
+
+      <a href="./blog/image-optimization-guide/" class="article-card">
+        <div class="ac-icon">📸</div>
+        <h3 data-i18n="guide11_name">Image Optimization Guide (2026)</h3>
+        <p data-i18n="guide11_desc">Format selection, compression, responsive images, and Core Web Vitals optimization for web performance.</p>
+        <span class="ac-tag" data-i18n="tag_performance">Performance</span>
+      </a>
+
+      <a href="./blog/changelog-may-2026/" class="article-card">
+        <div class="ac-icon">📋</div>
+        <h3 data-i18n="guide10_name">May 2026 Changelog</h3>
+        <p data-i18n="guide10_desc">5 new tools, 5 blog articles, homepage redesign, and bug fixes. Everything that changed this month.</p>
+        <span class="ac-tag" data-i18n="tag_update">Update</span>
+      </a>
+
+      <a href="./blog/ai-writing-vs-human-seo-test/" class="article-card">
+        <div class="ac-icon">🤖</div>
+        <h3 data-i18n="guide9_name">AI vs Human Writing: 90-Day SEO Test</h3>
+        <p data-i18n="guide9_desc">20 AI-written vs 20 human-written articles tracked for 90 days — rankings, traffic, and engagement compared.</p>
+        <span class="ac-tag" data-i18n="tag_article">Article</span>
+      </a>
+
+      <a href="./blog/adsense-approval-5-tips/" class="article-card">
+        <div class="ac-icon">💰</div>
+        <h3 data-i18n="guide8_name">AdSense Approval: 5 Tips</h3>
+        <p data-i18n="guide8_desc">Get Google AdSense approved on your first try — content requirements, legal pages, mobile design, and traffic strategies.</p>
+        <span class="ac-tag" data-i18n="tag_monetization">Monetization</span>
+      </a>
+
+      <a href="./blog/reddit-traffic-0-to-1000/" class="article-card">
+        <div class="ac-icon">🔥</div>
+        <h3 data-i18n="guide7_name">Reddit Traffic: 0 to 1,000 Daily</h3>
+        <p data-i18n="guide7_desc">Practical guide to driving website traffic from Reddit — finding subreddits, crafting viral posts, and converting visitors.</p>
+        <span class="ac-tag" data-i18n="tag_marketing">Marketing</span>
+      </a>
+
+      <a href="./blog/google-discover-traffic-guide/" class="article-card">
+        <div class="ac-icon">🔍</div>
+        <h3 data-i18n="guide6_name">Google Discover Traffic Guide</h3>
+        <p data-i18n="guide6_desc">Complete guide to getting your content featured on Google Discover — technical requirements, content policies, and monetization.</p>
+        <span class="ac-tag" data-i18n="tag_seo">SEO</span>
+      </a>
+
+      <a href="./blog/build-money-tool-site-30-days-ai/" class="article-card">
+        <div class="ac-icon">🔧</div>
+        <h3 data-i18n="guide5_name">Build a Tool Site in 30 Days with AI</h3>
+        <p data-i18n="guide5_desc">Step-by-step guide to building a profitable online tool website using AI assistance — from planning to AdSense monetization.</p>
+        <span class="ac-tag" data-i18n="tag_article">Article</span>
+      </a>
+
+      <a href="./blog/productivity-tools-guide/" class="article-card">
+        <div class="ac-icon">⚡</div>
+        <h3 data-i18n="guide4_name">Productivity Tools Guide</h3>
+        <p data-i18n="guide4_desc">Get the most out of unit converters, random pickers, character counters, QR code generators, and pomodoro timers.</p>
+        <span class="ac-tag" data-i18n="tag_guide">Guide</span>
+      </a>
+
+      <a href="./blog/color-guide-for-designers/" class="article-card">
+        <div class="ac-icon">🎨</div>
+        <h3 data-i18n="guide3_name">Color Guide for Designers</h3>
+        <p data-i18n="guide3_desc">Master HEX, RGB, HSL, CMYK color formats, WCAG contrast ratios, and practical color management with CSS custom properties.</p>
+        <span class="ac-tag" data-i18n="tag_guide">Guide</span>
+      </a>
+
+      <a href="./blog/calorie-bmi-health-guide/" class="article-card">
+        <div class="ac-icon">🍎</div>
+        <h3 data-i18n="guide2_name">Calorie, BMI & Health Guide</h3>
+        <p data-i18n="guide2_desc">Understand BMR, TDEE, BMI, weight management strategies, and sleep optimization — all explained with practical formulas.</p>
+        <span class="ac-tag" data-i18n="tag_guide">Guide</span>
+      </a>
+
+      <a href="./blog/developer-tools-guide/" class="article-card">
+        <div class="ac-icon">💻</div>
+        <h3 data-i18n="guide1_name">Essential Developer Tools</h3>
+        <p data-i18n="guide1_desc">A comprehensive guide to JSON formatting, regex testing, timestamp conversion, Base64 encoding, JWT decoding, and hash generation.</p>
+        <span class="ac-tag" data-i18n="tag_guide">Guide</span>
       </a>
 
     </div>
@@ -922,18 +533,42 @@
     en: {
       site_title: 'Free Online Tools',
       site_desc: 'Free online tools & guides · No signup · No ads on tools · Works offline after first load',
-      cat1_title: 'Developer Tools',
-      cat1_count: '8 tools',
-      cat2_title: 'Design & Color',
-      cat2_count: '6 tools',
-      cat3_title: 'Productivity',
-      cat3_count: '4 tools',
-      cat4_title: 'Health & Lifestyle',
-      cat4_count: '4 tools',
-      cat5_title: 'SEO & Marketing',
-      cat5_count: '2 tools',
-      cat6_title: 'Guides & Articles',
-      cat6_count: '12 posts',
+      hot_title: 'Popular Tools',
+      all_title: 'All Tools',
+      all_count: '24 tools',
+      articles_title: 'Latest Articles',
+      articles_count: '12 posts',
+      open_tool: 'Open tool',
+      tool1_name: 'Calorie Calculator',
+      tool2_name: 'Color Converter',
+      tool3_name: 'Pomodoro Timer',
+      tool4_name: 'Unit Converter',
+      tool5_name: 'Random Picker',
+      tool6_name: 'Case Converter',
+      tool7_name: 'JSON Formatter',
+      tool8_name: 'Regex Tester',
+      tool9_name: 'Timestamp Converter',
+      tool10_name: 'Base64 Encoder',
+      tool11_name: 'JWT Decoder',
+      tool12_name: 'Hash Generator',
+      tool13_name: 'CSS Gradient Generator',
+      tool14_name: 'Font Pairing',
+      tool15_name: 'Aspect Ratio Calculator',
+      tool16_name: 'Character Counter',
+      tool17_name: 'QR Code Generator',
+      tool18_name: 'BMI Calculator',
+      tool19_name: 'Sleep Calculator',
+      tool20_name: 'Reddit & Quora Explorer',
+      tool21_name: 'Discover Checker',
+      tool22_name: 'Color Palette Extractor',
+      tool23_name: 'Image Converter',
+      tool24_name: 'Password Generator',
+      tool1_desc: 'Calculate your BMR, TDEE and daily calorie targets for weight loss, maintenance or muscle gain.',
+      tool2_desc: 'Convert between HEX, RGB, HSL, CMYK formats with live preview and WCAG contrast checker.',
+      tool7_desc: 'Format, minify, and validate JSON data instantly. Real-time syntax checking and character count.',
+      tool17_desc: 'Generate QR codes from text or URL instantly. Download as PNG image. Runs locally in your browser.',
+      tool23_desc: 'Convert images between PNG, JPG, and WebP. Adjust quality, batch convert, download as ZIP.',
+      tool24_desc: 'Generate secure random passwords with custom length, character types, and strength meter.',
       guide1_name: 'Essential Developer Tools',
       guide1_desc: 'A comprehensive guide to JSON formatting, regex testing, timestamp conversion, Base64 encoding, JWT decoding, and hash generation.',
       guide2_name: 'Calorie, BMI & Health Guide',
@@ -942,7 +577,6 @@
       guide3_desc: 'Master HEX, RGB, HSL, CMYK color formats, WCAG contrast ratios, and practical color management with CSS custom properties.',
       guide4_name: 'Productivity Tools Guide',
       guide4_desc: 'Get the most out of unit converters, random pickers, character counters, QR code generators, and pomodoro timers.',
-      tag_article: 'Article',
       guide5_name: 'Build a Tool Site in 30 Days with AI',
       guide5_desc: 'Step-by-step guide to building a profitable online tool website using AI assistance — from planning to AdSense monetization.',
       guide6_name: 'Google Discover Traffic Guide',
@@ -951,69 +585,22 @@
       guide7_desc: 'Practical guide to driving website traffic from Reddit — finding subreddits, crafting viral posts, and converting visitors.',
       guide8_name: 'AdSense Approval: 5 Tips',
       guide8_desc: 'Get Google AdSense approved on your first try — content requirements, legal pages, mobile design, and traffic strategies.',
-    guide9_name: 'AI vs Human Writing: 90-Day SEO Test',
-    guide9_desc: '20 AI-written vs 20 human-written articles tracked for 90 days — rankings, traffic, and engagement compared.',
-    guide10_name: 'May 2026 Changelog',
-    guide10_desc: '5 new tools, 5 blog articles, homepage redesign, and bug fixes. Everything that changed this month.',
-    tool22_name: 'Color Palette Extractor',
-    tool22_desc: 'Upload any image and extract dominant colors with HEX and RGB values. Export palettes as CSS.',
-    tool23_name: 'Image Converter',
-    tool23_desc: 'Convert images between PNG, JPG, and WebP. Adjust quality, batch convert, download as ZIP.',
-    tool24_name: 'Password Generator',
-    tool24_desc: 'Generate secure random passwords with custom length, character types, and strength meter.',
-    guide11_name: 'Image Optimization Guide (2026)',
-    guide11_desc: 'Format selection, compression, responsive images, and Core Web Vitals optimization for web performance.',
-    guide12_name: 'Secure Password Guide',
-    guide12_desc: 'How to create strong passwords, understand attack methods, and why password managers matter in 2026.',
-      read_article: 'Read article',
+      guide9_name: 'AI vs Human Writing: 90-Day SEO Test',
+      guide9_desc: '20 AI-written vs 20 human-written articles tracked for 90 days — rankings, traffic, and engagement compared.',
+      guide10_name: 'May 2026 Changelog',
+      guide10_desc: '5 new tools, 5 blog articles, homepage redesign, and bug fixes. Everything that changed this month.',
+      guide11_name: 'Image Optimization Guide (2026)',
+      guide11_desc: 'Format selection, compression, responsive images, and Core Web Vitals optimization for web performance.',
+      guide12_name: 'Secure Password Guide',
+      guide12_desc: 'How to create strong passwords, understand attack methods, and why password managers matter in 2026.',
       tag_guide: 'Guide',
-      tag_trending: 'Trending',
-      tag_audit: 'Audit',
-      tool20_name: 'Reddit & Quora Explorer',
-      tool20_desc: 'Discover trending topics on Reddit and Quora. Search hot posts by keyword, browse by category for content ideas.',
-      tool21_name: 'Discover Checker',
-      tool21_desc: 'Check if your page meets Google Discover requirements. Analyze meta tags, images, structured data, and get a score.',
-      tool1_name: 'Calorie Calculator',
-      tool1_desc: 'Calculate your BMR, TDEE and daily calorie targets for weight loss, maintenance or muscle gain.',
-      tool2_name: 'Color Converter',
-      tool2_desc: 'Convert between HEX, RGB, HSL, CMYK formats with live preview and WCAG contrast checker.',
-      tool3_name: 'Pomodoro Timer',
-      tool3_desc: '25-minute focus sessions with 5-minute breaks. Track your productivity and stay in the zone.',
-      tool4_name: 'Unit Converter',
-      tool4_desc: 'Convert length, weight, temperature and area units instantly with real-time results.',
-      tool5_name: 'Random Picker',
-      tool5_desc: 'Draw one from a list, or split a group into teams. Perfect for lucky draws, raffles and random selection.',
-      tool6_name: 'Case Converter',
-      tool6_desc: 'Convert text to camelCase, PascalCase, snake_case, kebab-case and more instantly.',
-      tool7_name: 'JSON Formatter',
-      tool7_desc: 'Format, minify, and validate JSON data instantly. Real-time syntax checking and character count.',
-      tool8_name: 'Regex Tester',
-      tool8_desc: 'Test regular expressions in real-time with match highlighting, groups, and flags support.',
-      tool9_name: 'Timestamp Converter',
-      tool9_desc: 'Convert between Unix timestamp and human-readable date. Supports seconds, milliseconds, and current time.',
-      tool10_name: 'Base64 Encoder',
-      tool10_desc: 'Encode and decode Base64 strings instantly. All processing done locally in your browser.',
-      tool11_name: 'JWT Decoder',
-      tool11_desc: 'Decode and inspect JSON Web Tokens. View header, payload, and claims with expiration status.',
-      tool12_name: 'Hash Generator',
-      tool12_desc: 'Generate MD5, SHA-1, SHA-256, SHA-512 hashes instantly. All computed locally in your browser.',
-      open_tool: 'Open tool',
-      tag_metric: 'Metric/Imperial',
-      tag_contrast: 'Contrast Check',
-      tool13_name: 'CSS Gradient Generator',
-      tool13_desc: 'Create linear, radial and conic gradients with live preview. Export clean CSS code instantly.',
-      tool14_name: 'Font Pairing',
-      tool14_desc: 'Preview Google Fonts combinations with live text. Copy CSS @import code instantly.',
-      tool15_name: 'Aspect Ratio Calculator',
-      tool15_desc: 'Convert width and height for 16:9, 4:3, 1:1, 21:9 and more. Shows common resolutions instantly.',
-      tool16_name: 'Character Counter',
-      tool16_desc: 'Count characters, words, sentences and paragraphs in real-time. Supports mixed Chinese and English text.',
-      tool17_name: 'QR Code Generator',
-      tool17_desc: 'Generate QR codes from text or URL instantly. Download as PNG image. Runs locally in your browser.',
-      tool18_name: 'BMI Calculator',
-      tool18_desc: 'Calculate your Body Mass Index from height and weight. Supports metric and imperial units. Links to calorie calculator.',
-      tool19_name: 'Sleep Calculator',
-      tool19_desc: 'Find the best time to sleep or wake up based on 90-minute sleep cycles. 5-6 complete cycles for optimal rest.',
+      tag_article: 'Article',
+      tag_security: 'Security',
+      tag_performance: 'Performance',
+      tag_update: 'Update',
+      tag_monetization: 'Monetization',
+      tag_marketing: 'Marketing',
+      tag_seo: 'SEO',
       features_title: 'All tools include',
       feat_bilingual: 'Bilingual EN / ZH',
       feat_mobile: 'Mobile Friendly',
@@ -1024,18 +611,42 @@
     zh: {
       site_title: '免费在线工具',
       site_desc: '免费在线工具与实战指南 · 无需注册 · 工具内无广告 · 首次加载后离线可用',
-      cat1_title: '开发者工具',
-      cat1_count: '8个工具',
-      cat2_title: '设计与颜色',
-      cat2_count: '6个工具',
-      cat3_title: '效率工具',
-      cat3_count: '4个工具',
-      cat4_title: '健康生活',
-      cat4_count: '4个工具',
-      cat5_title: 'SEO 与营销',
-      cat5_count: '2个工具',
-      cat6_title: '指南与文章',
-      cat6_count: '12篇文章',
+      hot_title: '热门工具',
+      all_title: '全部工具',
+      all_count: '24个工具',
+      articles_title: '最新文章',
+      articles_count: '12篇文章',
+      open_tool: '打开工具',
+      tool1_name: '卡路里计算器',
+      tool2_name: '颜色转换器',
+      tool3_name: '番茄钟计时器',
+      tool4_name: '单位换算器',
+      tool5_name: '随机抽签与分组',
+      tool6_name: '驼峰下划线命名转换',
+      tool7_name: 'JSON 格式化器',
+      tool8_name: '正则表达式测试器',
+      tool9_name: 'Unix 时间戳转换器',
+      tool10_name: 'Base64 编解码器',
+      tool11_name: 'JWT 解码器',
+      tool12_name: '哈希生成器',
+      tool13_name: 'CSS 渐变生成器',
+      tool14_name: '字体搭配生成器',
+      tool15_name: '比例计算器',
+      tool16_name: '字符统计工具',
+      tool17_name: '二维码生成器',
+      tool18_name: 'BMI 计算器',
+      tool19_name: '睡眠周期计算器',
+      tool20_name: 'Reddit & Quora 热点探索',
+      tool21_name: 'Discover 优化检测',
+      tool22_name: '调色板提取器',
+      tool23_name: '图片格式转换器',
+      tool24_name: '密码生成器',
+      tool1_desc: '计算你的基础代谢率(BMR)、每日总消耗(TDEE)和目标热量，支持减脂、维持、增肌三种方案。',
+      tool2_desc: 'HEX、RGB、HSL、CMYK 格式实时互转，支持颜色预览和 WCAG 对比度检查。',
+      tool7_desc: '实时格式化、美化、校验 JSON 数据，支持语法检查和字符统计。',
+      tool17_desc: '输入文本或网址，即时生成二维码，支持下载为 PNG 图片，纯本地计算。',
+      tool23_desc: 'PNG、JPG、WebP 互转，支持质量调节、批量转换、ZIP 打包下载。',
+      tool24_desc: '生成安全随机密码，自定义长度、字符类型，含强度检测和批量生成。',
       guide1_name: '开发者必备工具指南',
       guide1_desc: 'JSON 格式化、正则测试、时间戳转换、Base64 编解码、JWT 解析、哈希生成——一文掌握所有开发者工具的使用方法。',
       guide2_name: '卡路里、BMI 与健康指南',
@@ -1044,7 +655,6 @@
       guide3_desc: '精通 HEX、RGB、HSL、CMYK 颜色格式、WCAG 对比度标准，以及 CSS 自定义属性的实际应用。',
       guide4_name: '效率工具使用指南',
       guide4_desc: '充分发挥单位换算、随机抽签、字符统计、二维码生成和番茄钟的实用技巧。',
-      tag_article: '文章',
       guide5_name: '30天用AI打造赚钱工具站',
       guide5_desc: '从零开始用AI建工具站的完整教程——规划、开发、SEO优化到AdSense变现。',
       guide6_name: 'Google Discover 流量指南',
@@ -1055,67 +665,20 @@
       guide8_desc: '首次申请Google AdSense就通过——内容要求、法律页面、移动适配和流量策略。',
       guide9_name: 'AI写作vs人工：90天SEO实验',
       guide9_desc: '20篇AI vs 20篇人工文章的90天对比——排名、流量和参与度全面比较。',
-    guide10_name: '2026年5月更新日志',
-    guide10_desc: '5个新工具、5篇博客、首页改版和Bug修复。本月所有更新一览。',
-    tool22_name: '调色板提取器',
-    tool22_desc: '上传任意图片提取主色调，显示 HEX 和 RGB 值，支持导出 CSS 变量。',
-    tool23_name: '图片格式转换器',
-    tool23_desc: 'PNG、JPG、WebP 互转，支持质量调节、批量转换、ZIP 打包下载。',
-    tool24_name: '密码生成器',
-    tool24_desc: '生成安全随机密码，自定义长度、字符类型，含强度检测和批量生成。',
-    guide11_name: '网页图片优化指南（2026版）',
-    guide11_desc: '格式选择、压缩技巧、响应式图片和核心网页指标优化，提升网站性能。',
-    guide12_name: '安全密码指南',
-    guide12_desc: '如何创建强密码、了解攻击方式和为什么密码管理器不可或缺。',
-      read_article: '阅读文章',
+      guide10_name: '2026年5月更新日志',
+      guide10_desc: '5个新工具、5篇博客、首页改版和Bug修复。本月所有更新一览。',
+      guide11_name: '网页图片优化指南（2026版）',
+      guide11_desc: '格式选择、压缩技巧、响应式图片和核心网页指标优化，提升网站性能。',
+      guide12_name: '安全密码指南',
+      guide12_desc: '如何创建强密码、了解攻击方式和为什么密码管理器不可或缺。',
       tag_guide: '指南',
-      tag_trending: '热点',
-      tag_audit: '检测',
-      tool20_name: 'Reddit & Quora 热点探索',
-      tool20_desc: '发现 Reddit 和 Quora 上的热门话题，按关键词搜索热帖、按分类浏览，助力内容选题。',
-      tool21_name: 'Discover 优化检测',
-      tool21_desc: '检测页面是否符合 Google Discover 收录要求，分析 Meta 标签、图片、结构化数据并评分。',
-      tool1_name: '卡路里计算器',
-      tool1_desc: '计算你的基础代谢率(BMR)、每日总消耗(TDEE)和目标热量，支持减脂、维持、增肌三种方案。',
-      tool2_name: '颜色转换器',
-      tool2_desc: 'HEX、RGB、HSL、CMYK 格式实时互转，支持颜色预览和 WCAG 对比度检查。',
-      tool3_name: '番茄钟计时器',
-      tool3_desc: '25分钟专注、5分钟休息，自动循环。追踪专注轮次，保持高效节奏。',
-      tool4_name: '单位换算器',
-      tool4_desc: '长度、重量、温度、面积实时换算，输入即得结果。',
-      tool5_name: '随机抽签与分组',
-      tool5_desc: '从名单中随机抽取一人或自动分成若干小组，适用于抽签、摇号、随机分组等场景。',
-      tool6_name: '驼峰下划线命名转换',
-      tool6_desc: '输入文字，实时转换为驼峰、帕斯卡、下划线、短横线等6种编程命名格式。',
-      tool7_name: 'JSON 格式化器',
-      tool7_desc: '实时格式化、美化、校验 JSON 数据，支持语法检查和字符统计。',
-      tool8_name: '正则表达式测试器',
-      tool8_desc: '实时测试正则表达式，支持匹配分组高亮和标志位切换。',
-      tool9_name: 'Unix 时间戳转换器',
-      tool9_desc: '时间戳与可读日期互转，支持秒/毫秒，自动显示当前时间。',
-      tool10_name: 'Base64 编解码器',
-      tool10_desc: '文本与 Base64 格式实时互转，全部在浏览器本地完成。',
-      tool11_name: 'JWT 解码器',
-      tool11_desc: '解析 JSON Web Token，查看 Header、Payload 和 Claims 及过期状态。',
-      tool12_name: '哈希生成器',
-      tool12_desc: '生成 MD5、SHA-1、SHA-256、SHA-512 哈希值，全部在浏览器本地计算。',
-      open_tool: '打开工具',
-      tag_metric: '公制/英制',
-      tag_contrast: '对比度检查',
-      tool13_name: 'CSS 渐变生成器',
-      tool13_desc: '创建线性、径向、圆锥渐变，实时预览，一键复制 CSS 代码。',
-      tool14_name: '字体搭配生成器',
-      tool14_desc: '预览 Google Fonts 字体组合，实时文字效果，一键复制 CSS 代码。',
-      tool15_name: '比例计算器',
-      tool15_desc: '宽高比换算，支持 16:9、4:3、1:1、21:9 等常见比例，实时显示对应分辨率。',
-      tool16_name: '字符统计工具',
-      tool16_desc: '实时统计字符、单词、句子、段落数量，支持中英文混合文本。',
-      tool17_name: '二维码生成器',
-      tool17_desc: '输入文本或网址，即时生成二维码，支持下载为 PNG 图片，纯本地计算。',
-      tool18_name: 'BMI 计算器',
-      tool18_desc: '根据身高体重计算体质指数(BMI)，支持公制和英制单位，可跳转卡路里计算器。',
-      tool19_name: '睡眠周期计算器',
-      tool19_desc: '基于 90 分钟睡眠周期，推荐最佳入睡和起床时间，5-6 个完整周期 = 高质量睡眠。',
+      tag_article: '文章',
+      tag_security: '安全',
+      tag_performance: '性能',
+      tag_update: '更新',
+      tag_monetization: '变现',
+      tag_marketing: '营销',
+      tag_seo: 'SEO',
       features_title: '所有工具均包含',
       feat_bilingual: '中英文双语',
       feat_mobile: '移动端适配',

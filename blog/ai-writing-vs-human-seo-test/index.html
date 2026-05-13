@@ -52,6 +52,14 @@
   .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
   footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
 
+.related-section{margin-top:32px;padding-top:20px;border-top:0.5px solid rgba(0,0,0,0.10);}
+.related-section h3{font-size:15px;font-weight:600;margin-bottom:10px;color:#1a1a18;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+@media(max-width:560px){.related-grid{grid-template-columns:1fr;}}
+.related-card{display:block;background:#fff;border:1px solid rgba(0,0,0,0.10);border-radius:10px;padding:12px 14px;text-decoration:none;color:#1a1a18;transition:border-color .2s,box-shadow .2s;}
+.related-card:hover{border-color:#2563eb;box-shadow:0 2px 12px rgba(37,99,235,0.08);}
+.related-card h4{font-size:13px;font-weight:600;margin-bottom:2px;}
+.related-card p{font-size:11px;color:#5f5e5a;line-height:1.4;}
 </style>
 <script type="application/ld+json">
 {
@@ -161,6 +169,24 @@
     <li data-i18n="s6_l4"><strong>Content quality > Author identity</strong> &mdash; focus on helpfulness, not who wrote it</li>
   </ul>
 
+
+  <div class="related-section">
+    <h3 data-i18n="rt_title">Related Tools</h3>
+    <div class="related-grid">
+      <a href="/counter/" class="related-card">
+        <h4 data-i18n="rt_counter_t">Character Counter</h4>
+        <p data-i18n="rt_counter_d">Count characters, words, sentences in real-time.</p>
+      </a>
+      <a href="/color/" class="related-card">
+        <h4 data-i18n="rt_color_t">Color Converter</h4>
+        <p data-i18n="rt_color_d">Convert HEX, RGB, HSL, CMYK formats.</p>
+      </a>
+      <a href="/image/" class="related-card">
+        <h4 data-i18n="rt_image_t">Image Converter</h4>
+        <p data-i18n="rt_image_d">Convert images between PNG, JPG, WebP.</p>
+      </a>
+    </div>
+  </div>
   <footer>
     <p><a href="/privacy/">Privacy Policy</a> &middot; <a href="/disclaimer/">Disclaimer</a> &middot; <a href="/about/">About</a> &middot; <a href="/contact/">Contact</a></p>
     <p style="margin-top:8px">&copy; 2026 Freemaki &middot; All rights reserved</p>
@@ -206,6 +232,8 @@ const i18n={
     s6_l2:'<strong>Human touch reduces bounce rate.</strong>',
     s6_l3:'<strong>Hybrid = best ROI.</strong>',
     s6_l4:'<strong>Quality > author identity.</strong>'
+  ,
+      rt_title:'Related Tools', rt_counter_t:'Character Counter', rt_counter_d:'Count characters, words, sentences in real-time.', rt_color_t:'Color Converter', rt_color_d:'Convert HEX, RGB, HSL, CMYK formats.', rt_image_t:'Image Converter', rt_image_d:'Convert images between PNG, JPG, WebP.'
   },
   zh:{
     bc:'博客', title:'AI 写作 vs 人工写作：一场 90 天的 SEO 实验',
@@ -244,6 +272,8 @@ const i18n={
     s6_l2:'<strong>\u4eba\u5de5\u89e6\u611f\u964d\u4f4e\u8df3\u51fa\u7387\u3002</strong>',
     s6_l3:'<strong>\u6df7\u5408 = \u6700\u4f73 ROI\u3002</strong>',
     s6_l4:'<strong>\u8d28\u91cf > \u4f5c\u8005\u8eab\u4efd\u3002</strong>'
+  ,
+      rt_title:'相关工具', rt_counter_t:'字符统计工具', rt_counter_d:'实时统计字符、单词、句子数。', rt_color_t:'颜色转换器', rt_color_d:'HEX、RGB、HSL、CMYK 格式互转。', rt_image_t:'图片格式转换器', rt_image_d:'PNG、JPG、WebP 图片格式互转。'
   }
 };
 let lang='en';
