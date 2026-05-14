@@ -51,7 +51,7 @@
   .page { max-width: 960px; margin: 0 auto; padding: 48px 24px 80px; }
 
   /* Header */
-  .site-header { text-align: center; margin-bottom: 48px; }
+  .site-header { text-align: center; margin-bottom: 12px; }
   .site-header h1 {
     font-size: 38px;
     font-weight: 700;
@@ -59,6 +59,29 @@
     margin-bottom: 8px;
   }
   .site-header p { font-size: 17px; color: var(--text2); }
+
+  /* Stats Bar */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin: 24px 0 40px;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text2);
+  }
+  .stat-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .stat-item strong { color: var(--text); font-weight: 600; }
 
   /* Section Divider */
   .section { margin-bottom: 48px; }
@@ -94,7 +117,7 @@
   @media (max-width: 560px) {
     .hot-grid { grid-template-columns: 1fr; }
     .articles-grid { grid-template-columns: 1fr !important; }
-    .all-tools-grid { grid-template-columns: 1fr !important; }
+    .cat-tools-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .page { max-width: 100%; padding: 32px 16px 60px; }
     .site-header h1 { font-size: 28px; }
   }
@@ -131,14 +154,44 @@
     gap: 4px;
   }
 
-  /* All Tools — compact grid */
-  .all-tools-grid {
+  /* NEW Badge */
+  .new-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: #16a34a;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* Category Group */
+  .cat-group { margin-bottom: 20px; }
+  .cat-group:last-child { margin-bottom: 0; }
+  .cat-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* All Tools — compact grid by category */
+  .cat-tools-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
   }
-  @media (max-width: 900px) { .all-tools-grid { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 680px) { .all-tools-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 900px) { .cat-tools-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 680px) { .cat-tools-grid { grid-template-columns: repeat(2, 1fr); } }
 
   .tool-chip {
     background: var(--surface);
@@ -160,6 +213,23 @@
     transform: translateY(-1px);
   }
   .tool-chip .chip-icon { font-size: 16px; line-height: 1; flex-shrink: 0; }
+
+  /* View All Link */
+  .view-all {
+    text-align: center;
+    margin-top: 16px;
+  }
+  .view-all a {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.15s;
+  }
+  .view-all a:hover { gap: 8px; }
 
   /* Articles Grid */
   .articles-grid {
@@ -288,7 +358,14 @@
   <!-- Site Header -->
   <div class="site-header">
     <h1 data-i18n="site_title">Free Online Tools</h1>
-    <p data-i18n="site_desc">No signup · No ads on tools · Works offline after first load</p>
+    <p data-i18n="site_desc">No signup &middot; No ads on tools &middot; Works offline after first load</p>
+  </div>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item"><span class="stat-dot"></span><strong>33</strong> <span data-i18n="stat_tools">tools</span></div>
+    <div class="stat-item"><span class="stat-dot" style="background:#16a34a"></span><strong>15</strong> <span data-i18n="stat_guides">guides</span></div>
+    <div class="stat-item"><span class="stat-dot" style="background:#7c3aed"></span><span data-i18n="stat_free">100% free, forever</span></div>
   </div>
 
   <!-- Ad: Top Banner -->
@@ -302,6 +379,39 @@
       <div class="section-divider"></div>
     </div>
     <div class="hot-grid">
+
+      <a href="./tax-1099/" class="hot-card">
+        <span class="new-badge">NEW</span>
+        <div class="hot-icon">💵</div>
+        <h2 data-i18n="tool33_name">1099 Tax Calculator</h2>
+        <p data-i18n="tool33_desc">Calculate your freelancer taxes: federal, self-employment (15.3%), and state tax in one click.</p>
+        <div class="hot-arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
+
+      <a href="./baby-name-initials/" class="hot-card">
+        <span class="new-badge">NEW</span>
+        <div class="hot-icon">👶</div>
+        <h2 data-i18n="tool32_name">Baby Name Initials Checker</h2>
+        <p data-i18n="tool32_desc">Check if your baby's initials spell something embarrassing before it's too late.</p>
+        <div class="hot-arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
+
+      <a href="./meeting-cost/" class="hot-card">
+        <span class="new-badge">NEW</span>
+        <div class="hot-icon">🔥</div>
+        <h2 data-i18n="tool31_name">Meeting Cost Calculator</h2>
+        <p data-i18n="tool31_desc">See how much your meetings really cost &mdash; in dollars, coffee, and sanity.</p>
+        <div class="hot-arrow">
+          <span data-i18n="open_tool">Open tool</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+      </a>
 
       <a href="./password/" class="hot-card">
         <div class="hot-icon">🔐</div>
@@ -333,80 +443,10 @@
         </div>
       </a>
 
-      <a href="./image/" class="hot-card">
-        <div class="hot-icon">🔄</div>
-        <h2 data-i18n="tool23_name">Image Converter</h2>
-        <p data-i18n="tool23_desc">Convert images between PNG, JPG, and WebP. Adjust quality, batch convert, download as ZIP.</p>
-        <div class="hot-arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./calorie/" class="hot-card">
-        <div class="hot-icon">🔥</div>
-        <h2 data-i18n="tool1_name">Calorie Calculator</h2>
-        <p data-i18n="tool1_desc">Calculate your BMR, TDEE and daily calorie targets for weight loss, maintenance or muscle gain.</p>
-        <div class="hot-arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./qrcode/" class="hot-card">
-        <div class="hot-icon">📱</div>
-        <h2 data-i18n="tool17_name">QR Code Generator</h2>
-        <p data-i18n="tool17_desc">Generate QR codes from text or URL instantly. Download as PNG image. Runs locally in your browser.</p>
-        <div class="hot-arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./middle-class/" class="hot-card">
-        <div class="hot-icon">💰</div>
-        <h2 data-i18n="tool30_name">Middle Class Calculator</h2>
-        <p data-i18n="tool30_desc">Find out if you're lower, middle, or upper class based on your income, state, and household size.</p>
-        <div class="hot-arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./meeting-cost/" class="hot-card">
-        <div class="hot-icon">🔥</div>
-        <h2 data-i18n="tool31_name">Meeting Cost Calculator</h2>
-        <p data-i18n="tool31_desc">See how much your meetings really cost — in dollars, coffee, and sanity.</p>
-        <div class="hot-arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./baby-name-initials/" class="hot-card">
-        <div class="hot-icon">👶</div>
-        <h2 data-i18n="tool32_name">Baby Name Initials Checker</h2>
-        <p data-i18n="tool32_desc">Check if your baby's initials spell something embarrassing before it's too late.</p>
-        <div class="hot-arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
-      <a href="./tax-1099/" class="hot-card">
-        <div class="hot-icon">💵</div>
-        <h2 data-i18n="tool33_name">1099 Tax Calculator</h2>
-        <p data-i18n="tool33_desc">Calculate your freelancer taxes: federal, self-employment (15.3%), and state tax in one click.</p>
-        <div class="hot-arrow">
-          <span data-i18n="open_tool">Open tool</span>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
-      </a>
-
     </div>
   </div>
 
-  <!-- Section 2: All Tools (compact chips) -->
+  <!-- Section 2: All Tools (by category) -->
   <div class="section">
     <div class="section-header">
       <span class="section-icon">🧰</span>
@@ -414,43 +454,82 @@
       <div class="section-divider"></div>
       <span class="section-count" data-i18n="all_count">33 tools</span>
     </div>
-    <div class="all-tools-grid">
 
-      <a href="./meeting-cost/" class="tool-chip"><span class="chip-icon">🔥</span><span data-i18n="tool31_name">Meeting Cost Calculator</span></a>
-      <a href="./tax-1099/" class="tool-chip"><span class="chip-icon">💵</span><span data-i18n="tool33_name">1099 Tax Calculator</span></a>
-      <a href="./baby-name-initials/" class="tool-chip"><span class="chip-icon">👶</span><span data-i18n="tool32_name">Baby Name Initials Checker</span></a>
-      <a href="./middle-class/" class="tool-chip"><span class="chip-icon">💰</span><span data-i18n="tool30_name">Middle Class Calculator</span></a>
-      <a href="./json/" class="tool-chip"><span class="chip-icon">{ }</span><span data-i18n="tool7_name">JSON Formatter</span></a>
-      <a href="./regex/" class="tool-chip"><span class="chip-icon">.*</span><span data-i18n="tool8_name">Regex Tester</span></a>
-      <a href="./timestamp/" class="tool-chip"><span class="chip-icon">⏱</span><span data-i18n="tool9_name">Timestamp Converter</span></a>
-      <a href="./base64/" class="tool-chip"><span class="chip-icon">🔐</span><span data-i18n="tool10_name">Base64 Encoder</span></a>
-      <a href="./jwt/" class="tool-chip"><span class="chip-icon">🎫</span><span data-i18n="tool11_name">JWT Decoder</span></a>
-      <a href="./hash/" class="tool-chip"><span class="chip-icon">#</span><span data-i18n="tool12_name">Hash Generator</span></a>
-      <a href="./case/" class="tool-chip"><span class="chip-icon">🔤</span><span data-i18n="tool6_name">Case Converter</span></a>
-      <a href="./password/" class="tool-chip"><span class="chip-icon">🔑</span><span data-i18n="tool24_name">Password Generator</span></a>
-      <a href="./color/" class="tool-chip"><span class="chip-icon">🎨</span><span data-i18n="tool2_name">Color Converter</span></a>
-      <a href="./gradient/" class="tool-chip"><span class="chip-icon">🌈</span><span data-i18n="tool13_name">CSS Gradient Generator</span></a>
-      <a href="./font/" class="tool-chip"><span class="chip-icon">🔤</span><span data-i18n="tool14_name">Font Pairing</span></a>
-      <a href="./aspect/" class="tool-chip"><span class="chip-icon">📐</span><span data-i18n="tool15_name">Aspect Ratio Calculator</span></a>
-      <a href="./palette/" class="tool-chip"><span class="chip-icon">🖼</span><span data-i18n="tool22_name">Color Palette Extractor</span></a>
-      <a href="./image/" class="tool-chip"><span class="chip-icon">🔄</span><span data-i18n="tool23_name">Image Converter</span></a>
-      <a href="./converter/" class="tool-chip"><span class="chip-icon">📏</span><span data-i18n="tool4_name">Unit Converter</span></a>
-      <a href="./random/" class="tool-chip"><span class="chip-icon">🎲</span><span data-i18n="tool5_name">Random Picker</span></a>
-      <a href="./counter/" class="tool-chip"><span class="chip-icon">🔢</span><span data-i18n="tool16_name">Character Counter</span></a>
-      <a href="./qrcode/" class="tool-chip"><span class="chip-icon">📱</span><span data-i18n="tool17_name">QR Code Generator</span></a>
-      <a href="./calorie/" class="tool-chip"><span class="chip-icon">🔥</span><span data-i18n="tool1_name">Calorie Calculator</span></a>
-      <a href="./pomodoro/" class="tool-chip"><span class="chip-icon">🍅</span><span data-i18n="tool3_name">Pomodoro Timer</span></a>
-      <a href="./bmi/" class="tool-chip"><span class="chip-icon">⚖️</span><span data-i18n="tool18_name">BMI Calculator</span></a>
-      <a href="./sleep/" class="tool-chip"><span class="chip-icon">🛏️</span><span data-i18n="tool19_name">Sleep Calculator</span></a>
-      <a href="./reddit/" class="tool-chip"><span class="chip-icon">🔥</span><span data-i18n="tool20_name">Reddit & Quora Explorer</span></a>
-      <a href="./discovery/" class="tool-chip"><span class="chip-icon">📊</span><span data-i18n="tool21_name">Discover Checker</span></a>
-      <a href="./markdown/" class="tool-chip"><span class="chip-icon">📝</span><span data-i18n="tool25_name">Markdown Editor</span></a>
-      <a href="./lorem-ipsum/" class="tool-chip"><span class="chip-icon">📄</span><span data-i18n="tool26_name">Lorem Ipsum Generator</span></a>
-      <a href="./css-minify/" class="tool-chip"><span class="chip-icon">💅</span><span data-i18n="tool27_name">CSS Minifier</span></a>
-      <a href="./ip-lookup/" class="tool-chip"><span class="chip-icon">🌐</span><span data-i18n="tool28_name">IP Address Lookup</span></a>
-      <a href="./browser-info/" class="tool-chip"><span class="chip-icon">🔍</span><span data-i18n="tool29_name">Browser Info</span></a>
-
+    <!-- Developer Tools -->
+    <div class="cat-group">
+      <div class="cat-label" data-i18n="cat_dev">Developer Tools</div>
+      <div class="cat-tools-grid">
+        <a href="./json/" class="tool-chip"><span class="chip-icon">{ }</span><span data-i18n="tool7_name">JSON Formatter</span></a>
+        <a href="./regex/" class="tool-chip"><span class="chip-icon">.*</span><span data-i18n="tool8_name">Regex Tester</span></a>
+        <a href="./timestamp/" class="tool-chip"><span class="chip-icon">⏱</span><span data-i18n="tool9_name">Timestamp Converter</span></a>
+        <a href="./base64/" class="tool-chip"><span class="chip-icon">🔐</span><span data-i18n="tool10_name">Base64 Encoder</span></a>
+        <a href="./jwt/" class="tool-chip"><span class="chip-icon">🎫</span><span data-i18n="tool11_name">JWT Decoder</span></a>
+        <a href="./hash/" class="tool-chip"><span class="chip-icon">#</span><span data-i18n="tool12_name">Hash Generator</span></a>
+        <a href="./case/" class="tool-chip"><span class="chip-icon">🔤</span><span data-i18n="tool6_name">Case Converter</span></a>
+        <a href="./markdown/" class="tool-chip"><span class="chip-icon">📝</span><span data-i18n="tool25_name">Markdown Editor</span></a>
+        <a href="./lorem-ipsum/" class="tool-chip"><span class="chip-icon">📄</span><span data-i18n="tool26_name">Lorem Ipsum Generator</span></a>
+        <a href="./css-minify/" class="tool-chip"><span class="chip-icon">💅</span><span data-i18n="tool27_name">CSS Minifier</span></a>
+      </div>
     </div>
+
+    <!-- Design & Media -->
+    <div class="cat-group">
+      <div class="cat-label" data-i18n="cat_design">Design & Media</div>
+      <div class="cat-tools-grid">
+        <a href="./color/" class="tool-chip"><span class="chip-icon">🎨</span><span data-i18n="tool2_name">Color Converter</span></a>
+        <a href="./gradient/" class="tool-chip"><span class="chip-icon">🌈</span><span data-i18n="tool13_name">CSS Gradient Generator</span></a>
+        <a href="./font/" class="tool-chip"><span class="chip-icon">🔤</span><span data-i18n="tool14_name">Font Pairing</span></a>
+        <a href="./aspect/" class="tool-chip"><span class="chip-icon">📐</span><span data-i18n="tool15_name">Aspect Ratio Calculator</span></a>
+        <a href="./palette/" class="tool-chip"><span class="chip-icon">🖼</span><span data-i18n="tool22_name">Color Palette Extractor</span></a>
+        <a href="./image/" class="tool-chip"><span class="chip-icon">🔄</span><span data-i18n="tool23_name">Image Converter</span></a>
+      </div>
+    </div>
+
+    <!-- Productivity -->
+    <div class="cat-group">
+      <div class="cat-label" data-i18n="cat_prod">Productivity</div>
+      <div class="cat-tools-grid">
+        <a href="./converter/" class="tool-chip"><span class="chip-icon">📏</span><span data-i18n="tool4_name">Unit Converter</span></a>
+        <a href="./random/" class="tool-chip"><span class="chip-icon">🎲</span><span data-i18n="tool5_name">Random Picker</span></a>
+        <a href="./counter/" class="tool-chip"><span class="chip-icon">🔢</span><span data-i18n="tool16_name">Character Counter</span></a>
+        <a href="./qrcode/" class="tool-chip"><span class="chip-icon">📱</span><span data-i18n="tool17_name">QR Code Generator</span></a>
+      </div>
+    </div>
+
+    <!-- Health & Lifestyle -->
+    <div class="cat-group">
+      <div class="cat-label" data-i18n="cat_health">Health & Lifestyle</div>
+      <div class="cat-tools-grid">
+        <a href="./calorie/" class="tool-chip"><span class="chip-icon">🔥</span><span data-i18n="tool1_name">Calorie Calculator</span></a>
+        <a href="./pomodoro/" class="tool-chip"><span class="chip-icon">🍅</span><span data-i18n="tool3_name">Pomodoro Timer</span></a>
+        <a href="./bmi/" class="tool-chip"><span class="chip-icon">⚖️</span><span data-i18n="tool18_name">BMI Calculator</span></a>
+        <a href="./sleep/" class="tool-chip"><span class="chip-icon">🛏️</span><span data-i18n="tool19_name">Sleep Calculator</span></a>
+        <a href="./baby-name-initials/" class="tool-chip"><span class="chip-icon">👶</span><span data-i18n="tool32_name">Baby Name Initials Checker</span></a>
+      </div>
+    </div>
+
+    <!-- Finance & Tax -->
+    <div class="cat-group">
+      <div class="cat-label" data-i18n="cat_finance">Finance & Tax</div>
+      <div class="cat-tools-grid">
+        <a href="./tax-1099/" class="tool-chip"><span class="chip-icon">💵</span><span data-i18n="tool33_name">1099 Tax Calculator</span></a>
+        <a href="./middle-class/" class="tool-chip"><span class="chip-icon">💰</span><span data-i18n="tool30_name">Middle Class Calculator</span></a>
+        <a href="./meeting-cost/" class="tool-chip"><span class="chip-icon">🔥</span><span data-i18n="tool31_name">Meeting Cost Calculator</span></a>
+      </div>
+    </div>
+
+    <!-- SEO & Utilities -->
+    <div class="cat-group">
+      <div class="cat-label" data-i18n="cat_seo">SEO & Utilities</div>
+      <div class="cat-tools-grid">
+        <a href="./password/" class="tool-chip"><span class="chip-icon">🔑</span><span data-i18n="tool24_name">Password Generator</span></a>
+        <a href="./ip-lookup/" class="tool-chip"><span class="chip-icon">🌐</span><span data-i18n="tool28_name">IP Address Lookup</span></a>
+        <a href="./browser-info/" class="tool-chip"><span class="chip-icon">🔍</span><span data-i18n="tool29_name">Browser Info</span></a>
+        <a href="./reddit/" class="tool-chip"><span class="chip-icon">🔥</span><span data-i18n="tool20_name">Reddit & Quora Explorer</span></a>
+        <a href="./discovery/" class="tool-chip"><span class="chip-icon">📊</span><span data-i18n="tool21_name">Discover Checker</span></a>
+      </div>
+    </div>
+
   </div>
 
   <!-- Section 3: Latest Articles -->
@@ -459,7 +538,7 @@
       <span class="section-icon">📝</span>
       <span class="section-title" data-i18n="articles_title">Latest Articles</span>
       <div class="section-divider"></div>
-      <span class="section-count" data-i18n="articles_count">12 posts</span>
+      <span class="section-count" data-i18n="articles_count">15 posts</span>
     </div>
     <div class="articles-grid">
 
@@ -477,11 +556,11 @@
         <span class="ac-tag" data-i18n="tag_performance">Performance</span>
       </a>
 
-      <a href="./blog/changelog-may-2026/" class="article-card">
-        <div class="ac-icon">📋</div>
-        <h3 data-i18n="guide10_name">May 2026 Changelog</h3>
-        <p data-i18n="guide10_desc">5 new tools, 5 blog articles, homepage redesign, and bug fixes. Everything that changed this month.</p>
-        <span class="ac-tag" data-i18n="tag_update">Update</span>
+      <a href="./blog/css-minification-guide/" class="article-card">
+        <div class="ac-icon">💅</div>
+        <h3 data-i18n="guide15_name">CSS Minification Guide</h3>
+        <p data-i18n="guide15_desc">Reduce CSS file size by 40%. Minification techniques, tools, build integration, and Core Web Vitals impact.</p>
+        <span class="ac-tag" data-i18n="tag_guide">Guide</span>
       </a>
 
       <a href="./blog/markdown-editor-guide/" class="article-card">
@@ -498,13 +577,24 @@
         <span class="ac-tag" data-i18n="tag_guide">Guide</span>
       </a>
 
-      <a href="./blog/css-minification-guide/" class="article-card">
-        <div class="ac-icon">💅</div>
-        <h3 data-i18n="guide15_name">CSS Minification Guide</h3>
-        <p data-i18n="guide15_desc">Reduce CSS file size by 40%. Minification techniques, tools, build integration, and Core Web Vitals impact.</p>
-        <span class="ac-tag" data-i18n="tag_guide">Guide</span>
+      <a href="./blog/changelog-may-2026/" class="article-card">
+        <div class="ac-icon">📋</div>
+        <h3 data-i18n="guide10_name">May 2026 Changelog</h3>
+        <p data-i18n="guide10_desc">New tools, blog articles, homepage redesign, and bug fixes. Everything that changed this month.</p>
+        <span class="ac-tag" data-i18n="tag_update">Update</span>
       </a>
 
+    </div>
+    <div class="view-all">
+      <a href="#articles-all" data-i18n="view_all">View all 15 articles
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Section 4: More Articles (hidden by default, toggled by "View all") -->
+  <div class="section" id="articles-all" style="display:none">
+    <div class="articles-grid">
       <a href="./blog/ai-writing-vs-human-seo-test/" class="article-card">
         <div class="ac-icon">🤖</div>
         <h3 data-i18n="guide9_name">AI vs Human Writing: 90-Day SEO Test</h3>
@@ -567,7 +657,6 @@
         <p data-i18n="guide1_desc">A comprehensive guide to JSON formatting, regex testing, timestamp conversion, Base64 encoding, JWT decoding, and hash generation.</p>
         <span class="ac-tag" data-i18n="tag_guide">Guide</span>
       </a>
-
     </div>
   </div>
 
@@ -603,13 +692,23 @@
   const i18n = {
     en: {
       site_title: 'Free Online Tools',
-      site_desc: 'Free online tools & guides · No signup · No ads on tools · Works offline after first load',
+      site_desc: 'No signup · No ads on tools · Works offline after first load',
+      stat_tools: 'tools',
+      stat_guides: 'guides',
+      stat_free: '100% free, forever',
       hot_title: 'Popular Tools',
       all_title: 'All Tools',
-      all_count: '32 tools',
+      all_count: '33 tools',
       articles_title: 'Latest Articles',
       articles_count: '15 posts',
+      view_all: 'View all 15 articles',
       open_tool: 'Open tool',
+      cat_dev: 'Developer Tools',
+      cat_design: 'Design & Media',
+      cat_prod: 'Productivity',
+      cat_health: 'Health & Lifestyle',
+      cat_finance: 'Finance & Tax',
+      cat_seo: 'SEO & Utilities',
       tool1_name: 'Calorie Calculator',
       tool2_name: 'Color Converter',
       tool3_name: 'Pomodoro Timer',
@@ -640,13 +739,13 @@
       tool28_name: 'IP Address Lookup',
       tool29_name: 'Browser Info',
       tool30_name: 'Middle Class Calculator',
-      tool30_desc: 'Find out if you\'re lower, middle, or upper class based on your income, state, and household size.',
       tool31_name: 'Meeting Cost Calculator',
-      tool31_desc: 'See how much your meetings really cost — in dollars, coffee, and sanity.',
       tool32_name: 'Baby Name Initials Checker',
-      tool32_desc: 'Check if your baby\'s initials spell something embarrassing before it\'s too late.',
       tool33_name: '1099 Tax Calculator',
       tool33_desc: 'Calculate your freelancer taxes: federal, self-employment (15.3%), and state tax in one click.',
+      tool32_desc: 'Check if your baby\'s initials spell something embarrassing before it\'s too late.',
+      tool31_desc: 'See how much your meetings really cost — in dollars, coffee, and sanity.',
+      tool30_desc: 'Find out if you\'re lower, middle, or upper class based on your income, state, and household size.',
       tool1_desc: 'Calculate your BMR, TDEE and daily calorie targets for weight loss, maintenance or muscle gain.',
       tool2_desc: 'Convert between HEX, RGB, HSL, CMYK formats with live preview and WCAG contrast checker.',
       tool7_desc: 'Format, minify, and validate JSON data instantly. Real-time syntax checking and character count.',
@@ -654,31 +753,31 @@
       tool23_desc: 'Convert images between PNG, JPG, and WebP. Adjust quality, batch convert, download as ZIP.',
       tool24_desc: 'Generate secure random passwords with custom length, character types, and strength meter.',
       guide1_name: 'Essential Developer Tools',
-      guide1_desc: 'A comprehensive guide to JSON formatting, regex testing, timestamp conversion, Base64 encoding, JWT decoding, and hash generation.',
       guide2_name: 'Calorie, BMI & Health Guide',
-      guide2_desc: 'Understand BMR, TDEE, BMI, weight management strategies, and sleep optimization — all explained with practical formulas.',
       guide3_name: 'Color Guide for Designers',
-      guide3_desc: 'Master HEX, RGB, HSL, CMYK color formats, WCAG contrast ratios, and practical color management with CSS custom properties.',
       guide4_name: 'Productivity Tools Guide',
-      guide4_desc: 'Get the most out of unit converters, random pickers, character counters, QR code generators, and pomodoro timers.',
       guide5_name: 'Build a Tool Site in 30 Days with AI',
-      guide5_desc: 'Step-by-step guide to building a profitable online tool website using AI assistance — from planning to AdSense monetization.',
       guide6_name: 'Google Discover Traffic Guide',
-      guide6_desc: 'Complete guide to getting your content featured on Google Discover — technical requirements, content policies, and monetization.',
       guide7_name: 'Reddit Traffic: 0 to 1,000 Daily',
-      guide7_desc: 'Practical guide to driving website traffic from Reddit — finding subreddits, crafting viral posts, and converting visitors.',
       guide8_name: 'AdSense Approval: 5 Tips',
-      guide8_desc: 'Get Google AdSense approved on your first try — content requirements, legal pages, mobile design, and traffic strategies.',
       guide9_name: 'AI vs Human Writing: 90-Day SEO Test',
-      guide9_desc: '20 AI-written vs 20 human-written articles tracked for 90 days — rankings, traffic, and engagement compared.',
       guide10_name: 'May 2026 Changelog',
-      guide10_desc: '5 new tools, 5 blog articles, homepage redesign, and bug fixes. Everything that changed this month.',
       guide11_name: 'Image Optimization Guide (2026)',
-      guide11_desc: 'Format selection, compression, responsive images, and Core Web Vitals optimization for web performance.',
       guide12_name: 'Secure Password Guide',
       guide13_name: 'Markdown Editor Comparison 2026',
       guide14_name: 'Fake Data Generator Guide',
       guide15_name: 'CSS Minification Guide',
+      guide1_desc: 'A comprehensive guide to JSON formatting, regex testing, timestamp conversion, Base64 encoding, JWT decoding, and hash generation.',
+      guide2_desc: 'Understand BMR, TDEE, BMI, weight management strategies, and sleep optimization — all explained with practical formulas.',
+      guide3_desc: 'Master HEX, RGB, HSL, CMYK color formats, WCAG contrast ratios, and practical color management with CSS custom properties.',
+      guide4_desc: 'Get the most out of unit converters, random pickers, character counters, QR code generators, and pomodoro timers.',
+      guide5_desc: 'Step-by-step guide to building a profitable online tool website using AI assistance — from planning to AdSense monetization.',
+      guide6_desc: 'Complete guide to getting your content featured on Google Discover — technical requirements, content policies, and monetization.',
+      guide7_desc: 'Practical guide to driving website traffic from Reddit — finding subreddits, crafting viral posts, and converting visitors.',
+      guide8_desc: 'Get Google AdSense approved on your first try — content requirements, legal pages, mobile design, and traffic strategies.',
+      guide9_desc: '20 AI-written vs 20 human-written articles tracked for 90 days — rankings, traffic, and engagement compared.',
+      guide10_desc: 'New tools, blog articles, homepage redesign, and bug fixes. Everything that changed this month.',
+      guide11_desc: 'Format selection, compression, responsive images, and Core Web Vitals optimization for web performance.',
       guide12_desc: 'How to create strong passwords, understand attack methods, and why password managers matter in 2026.',
       guide13_desc: 'Compare the best online Markdown editors. GFM support, live preview, privacy features, and use cases.',
       guide14_desc: 'How to generate realistic test data. Privacy-compliant practices for names, addresses, and emails.',
@@ -700,13 +799,23 @@
     },
     zh: {
       site_title: '免费在线工具',
-      site_desc: '免费在线工具与实战指南 · 无需注册 · 工具内无广告 · 首次加载后离线可用',
+      site_desc: '无需注册 · 工具内无广告 · 首次加载后离线可用',
+      stat_tools: '个工具',
+      stat_guides: '篇指南',
+      stat_free: '永久免费',
       hot_title: '热门工具',
       all_title: '全部工具',
       all_count: '33个工具',
       articles_title: '最新文章',
       articles_count: '15篇文章',
+      view_all: '查看全部 15 篇文章',
       open_tool: '打开工具',
+      cat_dev: '开发者工具',
+      cat_design: '设计与媒体',
+      cat_prod: '效率工具',
+      cat_health: '健康生活',
+      cat_finance: '财务税务',
+      cat_seo: 'SEO 与实用工具',
       tool1_name: '卡路里计算器',
       tool2_name: '颜色转换器',
       tool3_name: '番茄钟计时器',
@@ -737,13 +846,13 @@
       tool28_name: 'IP 地址查询',
       tool29_name: '浏览器信息检测',
       tool30_name: '中产阶层计算器',
-      tool30_desc: '输入你的收入、所在州和家庭人数，查看你在美国的收入阶层——下层、中产还是上层。',
       tool31_name: '会议成本计算器',
-      tool31_desc: '算算你的会议到底烧了多少钱——用美元、咖啡和理智来衡量。',
       tool32_name: '宝宝名字缩写检测器',
-      tool32_desc: '给宝宝取名字前，检查首字母缩写会不会拼出尴尬单词。',
       tool33_name: '1099 自由职业者税务计算器',
       tool33_desc: '一键计算联邦税、自雇税(15.3%)和州税，查看季度预缴金额。',
+      tool32_desc: '给宝宝取名字前，检查首字母缩写会不会拼出尴尬单词。',
+      tool31_desc: '算算你的会议到底烧了多少钱——用美元、咖啡和理智来衡量。',
+      tool30_desc: '输入你的收入、所在州和家庭人数，查看你在美国的收入阶层——下层、中产还是上层。',
       tool1_desc: '计算你的基础代谢率(BMR)、每日总消耗(TDEE)和目标热量，支持减脂、维持、增肌三种方案。',
       tool2_desc: 'HEX、RGB、HSL、CMYK 格式实时互转，支持颜色预览和 WCAG 对比度检查。',
       tool7_desc: '实时格式化、美化、校验 JSON 数据，支持语法检查和字符统计。',
@@ -751,31 +860,31 @@
       tool23_desc: 'PNG、JPG、WebP 互转，支持质量调节、批量转换、ZIP 打包下载。',
       tool24_desc: '生成安全随机密码，自定义长度、字符类型，含强度检测和批量生成。',
       guide1_name: '开发者必备工具指南',
-      guide1_desc: 'JSON 格式化、正则测试、时间戳转换、Base64 编解码、JWT 解析、哈希生成——一文掌握所有开发者工具的使用方法。',
       guide2_name: '卡路里、BMI 与健康指南',
-      guide2_desc: '深入了解基础代谢率(BMR)、每日总消耗(TDEE)、BMI、体重管理策略和睡眠优化，附实用公式。',
       guide3_name: '设计师配色指南',
-      guide3_desc: '精通 HEX、RGB、HSL、CMYK 颜色格式、WCAG 对比度标准，以及 CSS 自定义属性的实际应用。',
       guide4_name: '效率工具使用指南',
-      guide4_desc: '充分发挥单位换算、随机抽签、字符统计、二维码生成和番茄钟的实用技巧。',
       guide5_name: '30天用AI打造赚钱工具站',
-      guide5_desc: '从零开始用AI建工具站的完整教程——规划、开发、SEO优化到AdSense变现。',
       guide6_name: 'Google Discover 流量指南',
-      guide6_desc: '让你的内容被Google Discover收录的完全指南——技术要求、内容政策和变现策略。',
       guide7_name: 'Reddit流量：从0到日访1000',
-      guide7_desc: '从Reddit获取网站流量的实战指南——选subreddit、写高赞帖子和转化访客。',
       guide8_name: 'AdSense审批5个技巧',
-      guide8_desc: '首次申请Google AdSense就通过——内容要求、法律页面、移动适配和流量策略。',
       guide9_name: 'AI写作vs人工：90天SEO实验',
-      guide9_desc: '20篇AI vs 20篇人工文章的90天对比——排名、流量和参与度全面比较。',
       guide10_name: '2026年5月更新日志',
-      guide10_desc: '5个新工具、5篇博客、首页改版和Bug修复。本月所有更新一览。',
       guide11_name: '网页图片优化指南（2026版）',
-      guide11_desc: '格式选择、压缩技巧、响应式图片和核心网页指标优化，提升网站性能。',
       guide12_name: '安全密码指南',
       guide13_name: 'Markdown 编辑器对比 2026',
       guide14_name: '假数据生成器指南',
       guide15_name: 'CSS 压缩指南',
+      guide1_desc: 'JSON 格式化、正则测试、时间戳转换、Base64 编解码、JWT 解析、哈希生成——一文掌握所有开发者工具的使用方法。',
+      guide2_desc: '深入了解基础代谢率(BMR)、每日总消耗(TDEE)、BMI、体重管理策略和睡眠优化，附实用公式。',
+      guide3_desc: '精通 HEX、RGB、HSL、CMYK 颜色格式、WCAG 对比度标准，以及 CSS 自定义属性的实际应用。',
+      guide4_desc: '充分发挥单位换算、随机抽签、字符统计、二维码生成和番茄钟的实用技巧。',
+      guide5_desc: '从零开始用AI建工具站的完整教程——规划、开发、SEO优化到AdSense变现。',
+      guide6_desc: '让你的内容被Google Discover收录的完全指南——技术要求、内容政策和变现策略。',
+      guide7_desc: '从Reddit获取网站流量的实战指南——选subreddit、写高赞帖子和转化访客。',
+      guide8_desc: '首次申请Google AdSense就通过——内容要求、法律页面、移动适配和流量策略。',
+      guide9_desc: '20篇AI vs 20篇人工文章的90天对比——排名、流量和参与度全面比较。',
+      guide10_desc: '新增工具、博客文章、首页改版和Bug修复。本月所有更新一览。',
+      guide11_desc: '格式选择、压缩技巧、响应式图片和核心网页指标优化，提升网站性能。',
       guide12_desc: '如何创建强密码、了解攻击方式和为什么密码管理器不可或缺。',
       guide13_desc: '对比最佳在线 Markdown 编辑器。GFM 支持、实时预览、隐私特性。',
       guide14_desc: '如何生成逼真的测试数据。姓名、地址和邮箱的隐私合规实践。',
@@ -808,6 +917,22 @@
       if (i18n[lang][key]) el.textContent = i18n[lang][key];
     });
   }
+
+  // "View all articles" toggle
+  document.addEventListener('DOMContentLoaded', function() {
+    const viewAllLinks = document.querySelectorAll('.view-all a');
+    const moreSection = document.getElementById('articles-all');
+    if (moreSection) {
+      viewAllLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          moreSection.style.display = '';
+          this.closest('.view-all').style.display = 'none';
+          moreSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    }
+  });
 </script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <link rel="dns-prefetch" href="https://www.freemaki.com"/>
 <meta name="theme-color" content="#2563eb"/>
 <title>Site Updates: May 2026 Changelog | Freemaki Blog</title>
-<meta name="description" content="What's new on Freemaki in May 2026: 8 new tools, 7 new articles, homepage redesign, and performance optimization. Daily changelog."/>
+<meta name="description" content="What's new on Freemaki in May 2026: 11 new tools, 15 articles, homepage redesign, and performance optimization. Daily changelog."/>
 <meta name="keywords" content="Freemaki更新日志，2026年5月：新增工具、博客文章、首页改版、性能优化"/>
 <meta name="robots" content="index, follow, max-image-preview:large"/>
 <meta name="author" content="Freemaki"/>
@@ -107,7 +107,7 @@
   "@type": "Article",
   "headline": "Freemaki Changelog — May 2026",
   "datePublished": "2026-05-13",
-  "dateModified": "2026-05-13",
+  "dateModified": "2026-05-14",
   "author": {
     "@type": "Person",
     "name": "McDon"
@@ -121,7 +121,7 @@
       "url": "https://www.freemaki.com/favicon.ico"
     }
   },
-  "description": "What's new on Freemaki in May 2026: 8 new tools, 7 new articles, homepage redesign, and performance optimization. Daily changelog.",
+  "description": "What's new on Freemaki in May 2026: 11 new tools, 15 articles, homepage redesign, and performance optimization. Daily changelog.",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://www.freemaki.com/blog/changelog-may-2026/"
@@ -165,20 +165,53 @@
 
   <div class="stat-grid">
     <div class="stat-card">
-      <div class="stat-num">8</div>
+      <div class="stat-num">11</div>
       <div class="stat-label" data-i18n="stat1">New Tools</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num">7</div>
-      <div class="stat-label" data-i18n="stat2">New Articles</div>
+      <div class="stat-num">15</div>
+      <div class="stat-label" data-i18n="stat2">Total Articles</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num">24</div>
+      <div class="stat-num">33</div>
       <div class="stat-label" data-i18n="stat3">Total Tools</div>
     </div>
   </div>
 
   <p data-i18n="intro">May 2026 is a busy month for Freemaki. We're shipping new tools, blog articles, and improvements almost daily. This changelog is updated in real time &mdash; bookmark it to follow along.</p>
+
+  <!-- May 14 -->
+  <div class="date-group">
+    <div class="date-header">
+      <h2 data-i18n="d0_title">May 14</h2>
+      <span class="weekday">Wednesday</span>
+    </div>
+
+    <div class="version">
+      <div class="version-header">
+        <span class="version-badge badge-tool" data-i18n="badge_tool">TOOLS</span>
+      </div>
+      <h3 data-i18n="d0_v1_title">2 New Tools</h3>
+      <ul class="change-list tool">
+        <li data-i18n="d0_v1_1"><a href="/tax-1099/">1099 Freelance Tax Calculator</a> &mdash; Next.js 14 + shadcn/ui + Framer Motion. Calculates federal income tax, self-employment tax (15.3%), state tax, quarterly estimated payments, and fun conversions. Covers all 50 states + DC with 2026 estimated brackets.</li>
+        <li data-i18n="d0_v1_2"><a href="/baby-name-initials/">Baby Name Initials Checker</a> &mdash; Pure JS tool with 50+ embarrassing initials dictionary. Supports first, middle, and last name combinations with 4 severity levels and Web Share API.</li>
+      </ul>
+    </div>
+
+    <div class="version">
+      <div class="version-header">
+        <span class="version-badge badge-improve" data-i18n="badge_improve">IMPROVE</span>
+      </div>
+      <h3 data-i18n="d0_v2_title">Homepage Redesign v2</h3>
+      <ul class="change-list improve">
+        <li data-i18n="d0_v2_1"><strong>Category-based tool organization</strong> &mdash; All Tools section reorganized into 6 labeled categories (Developer Tools, Design &amp; Media, Productivity, Health &amp; Lifestyle, Finance &amp; Tax, SEO &amp; Utilities) replacing the flat chip grid.</li>
+        <li data-i18n="d0_v2_2"><strong>NEW badges on Popular Tools</strong> &mdash; 3 latest tools (1099 Tax, Baby Name Initials, Meeting Cost) now show green "NEW" badges.</li>
+        <li data-i18n="d0_v2_3"><strong>Articles section trimmed</strong> &mdash; Shows 6 latest articles with "View all 15" expand toggle instead of 15 cards at once.</li>
+        <li data-i18n="d0_v2_4"><strong>Stats bar added</strong> &mdash; Header now includes "33 tools &middot; 15 guides &middot; 100% free, forever" visual indicator.</li>
+        <li data-i18n="d0_v2_5"><strong>Total tools: 33</strong> &mdash; Site now has 33 tools and 15 guide articles.</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- May 13 -->
   <div class="date-group">
@@ -316,7 +349,7 @@
   <ul>
     <li data-i18n="next_1">More design tools &mdash; image resizer, favicon generator</li>
     <li data-i18n="next_2">More blog articles &mdash; practical tutorials and tool reviews</li>
-    <li data-i18n="next_3">Core Web Vitals &mdash; image optimization, font loading improvements</li>
+    <li data-i18n="next_3">Dark mode support for tool pages</li>
   </ul>
 
   <p data-i18n="cta_text">Explore all tools on the <a href="/">Freemaki homepage</a>.</p>
@@ -351,9 +384,19 @@ const i18n = {
   en: {
     bc:'Blog', title:'Site Updates: May 2026 Changelog',
     meta:'Updated daily · Freemaki Team',
-    stat1:'New Tools', stat2:'New Articles', stat3:'Total Tools',
+    stat1:'New Tools', stat2:'Total Articles', stat3:'Total Tools',
     intro:'May 2026 is a busy month for Freemaki. We\'re shipping new tools, blog articles, and improvements almost daily. This changelog is updated in real time — bookmark it to follow along.',
     badge_tool:'TOOLS', badge_new:'NEW', badge_improve:'IMPROVE', badge_fix:'FIX', badge_perf:'PERF',
+    d0_title:'May 14',
+    d0_v1_title:'2 New Tools',
+    d0_v1_1:'1099 Freelance Tax Calculator — Next.js 14 + shadcn/ui + Framer Motion. Calculates federal income tax, self-employment tax (15.3%), state tax, quarterly estimated payments, and fun conversions. Covers all 50 states + DC with 2026 estimated brackets.',
+    d0_v1_2:'Baby Name Initials Checker — Pure JS tool with 50+ embarrassing initials dictionary. Supports first, middle, and last name combinations with 4 severity levels and Web Share API.',
+    d0_v2_title:'Homepage Redesign v2',
+    d0_v2_1:'Category-based tool organization — All Tools section reorganized into 6 labeled categories replacing the flat chip grid.',
+    d0_v2_2:'NEW badges on Popular Tools — 3 latest tools now show green "NEW" badges.',
+    d0_v2_3:'Articles section trimmed — Shows 6 latest with "View all 15" expand toggle.',
+    d0_v2_4:'Stats bar added — Header includes "33 tools · 15 guides · 100% free, forever".',
+    d0_v2_5:'Total tools: 33 — Site now has 33 tools and 15 guide articles.',
     d1_title:'May 13',
     d1_v1_title:'3 New Tools',
     d1_v1_1:'Password Generator — Cryptographically secure random passwords with configurable length (4-128), character types, entropy meter, batch generation, and clipboard copy.',
@@ -412,9 +455,19 @@ const i18n = {
   zh: {
     bc:'博客', title:'站点更新：2026年5月更新日志',
     meta:'每日更新 · Freemaki 团队',
-    stat1:'新工具', stat2:'新文章', stat3:'工具总数',
+    stat1:'新工具', stat2:'文章总数', stat3:'工具总数',
     intro:'2026年5月是 Freemaki 的密集更新月。我们几乎每天都在发布新工具、博客文章和体验优化。这份更新日志实时同步——收藏本页随时查看最新动态。',
     badge_tool:'工具', badge_new:'新增', badge_improve:'优化', badge_fix:'修复', badge_perf:'性能',
+    d0_title:'5月14日',
+    d0_v1_title:'2 个新工具',
+    d0_v1_1:'1099 自由职业者税务计算器 — Next.js 14 + shadcn/ui + Framer Motion。计算联邦税、自雇税(15.3%)、州税、季度预缴和趣味换算。覆盖全美50州+DC，使用2026年估算税率。',
+    d0_v1_2:'宝宝名字缩写检测器 — 纯JS工具，内置50+个尴尬缩写词典。支持名、中间名、姓组合，4个严重等级，Web Share API分享。',
+    d0_v2_title:'首页改版 v2',
+    d0_v2_1:'工具按分类组织 — 全部工具区改为6个标签分类（开发者工具、设计与媒体、效率工具、健康生活、财务税务、SEO与实用），替代扁平布局。',
+    d0_v2_2:'热门工具新增标签 — 3个最新工具显示绿色 NEW 徽章。',
+    d0_v2_3:'文章区精简 — 默认展示6篇最新文章，点击"查看全部15篇"展开。',
+    d0_v2_4:'统计栏新增 — 头部添加"33个工具 · 15篇指南 · 永久免费"可视化指示。',
+    d0_v2_5:'工具总数：33 — 网站现有33个工具和15篇指南文章。',
     d1_title:'5月13日',
     d1_v1_title:'3 个新工具',
     d1_v1_1:'密码生成器 — 基于密码学安全的随机密码生成，支持自定义长度(4-128)、字符类型、信息熵显示、批量生成和一键复制。',
@@ -464,7 +517,7 @@ const i18n = {
     next_p:'2026年5月剩余时间的路线图：',
     next_1:'更多设计工具 — 图片缩放器、Favicon 生成器',
     next_2:'更多博客文章 — 实用教程和工具评测',
-    next_3:'Core Web Vitals — 图片优化、字体加载提升',
+    next_3:'工具页面深色模式支持',
     cta_text:'回到 Freemaki 首页探索所有工具。',
     f_privacy:'隐私政策', f_disclaimer:'免责声明', f_about:'关于我们', f_contact:'联系我们', f_rights:'版权所有'
   ,
