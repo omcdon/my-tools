@@ -41,19 +41,6 @@
       padding: 40px 20px;
     }
 
-    .lang-toggle {
-      position: fixed; top: 20px; right: 20px;
-      background: var(--surface2); border: 1px solid var(--border);
-      border-radius: 8px; display: flex; overflow: hidden; z-index: 100;
-    }
-    .lang-btn {
-      padding: 6px 14px; background: none; border: none;
-      color: var(--text-dim); font-size: 13px; cursor: pointer;
-      transition: all 0.2s; font-family: var(--font);
-    }
-    .lang-btn.active { background: var(--accent); color: #fff; }
-    .lang-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
-
     .breadcrumb {
       width: 100%; max-width: 700px; margin-bottom: 40px;
       display: flex; gap: 8px; align-items: center; font-size: 14px; color: var(--text-dim);
@@ -100,12 +87,8 @@
     .check-btn:hover { background: #d35400; transform: translateY(-1px); box-shadow: 0 4px 20px var(--accent-glow); }
     .check-btn:active { transform: translateY(0); }
 
-    .examples {
-      margin-top: 20px; text-align: left;
-    }
-    .examples-title {
-      font-size: 13px; color: var(--text-dim); font-weight: 600; margin-bottom: 10px;
-    }
+    .examples { margin-top: 20px; text-align: left; }
+    .examples-title { font-size: 13px; color: var(--text-dim); font-weight: 600; margin-bottom: 10px; }
     .example-chips { display: flex; flex-wrap: wrap; gap: 6px; }
     .example-chip {
       background: var(--surface2); border: 1px solid var(--border);
@@ -114,29 +97,20 @@
     }
     .example-chip:hover { border-color: var(--accent2); color: var(--text); }
 
-    /* Result Section */
     .result-section { margin-top: 28px; display: none; }
     .result-section.visible { display: block; }
 
-    .initials-display {
-      display: flex; justify-content: center; gap: 8px; margin-bottom: 20px;
-    }
+    .initials-display { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
     .initial-letter {
       width: 60px; height: 60px; border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       font-size: 28px; font-weight: 800; color: #fff;
       background: var(--surface2); border: 2px solid var(--border);
     }
-    .initial-dot {
-      display: flex; align-items: center; font-size: 24px;
-      color: var(--text-dim); font-weight: 300;
-    }
+    .initial-dot { display: flex; align-items: center; font-size: 24px; color: var(--text-dim); font-weight: 300; }
     .initial-letter.highlight { border-color: var(--red); background: rgba(231,76,60,0.15); }
 
-    .result-card {
-      border-radius: 12px; padding: 20px 24px;
-      margin-bottom: 12px; text-align: left;
-    }
+    .result-card { border-radius: 12px; padding: 20px 24px; margin-bottom: 12px; text-align: left; }
     .result-card.safe { background: rgba(46,204,113,0.08); border: 1px solid rgba(46,204,113,0.25); }
     .result-card.warning { background: rgba(243,156,18,0.08); border: 1px solid rgba(243,156,18,0.25); }
     .result-card.danger { background: rgba(231,76,60,0.08); border: 1px solid rgba(231,76,60,0.25); }
@@ -153,10 +127,7 @@
       padding: 8px 12px; background: var(--bg); border-radius: 8px;
       margin-bottom: 6px; font-size: 14px;
     }
-    .match-initials {
-      font-weight: 800; font-size: 16px; letter-spacing: 2px;
-      color: var(--red); min-width: 60px;
-    }
+    .match-initials { font-weight: 800; font-size: 16px; letter-spacing: 2px; color: var(--red); min-width: 60px; }
     .match-meaning { color: var(--text-dim); font-size: 13px; }
     .match-level {
       font-size: 10px; font-weight: 700; padding: 2px 8px;
@@ -182,10 +153,7 @@
     }
     .tips-title { font-weight: 600; color: var(--accent2); margin-bottom: 6px; }
 
-    .footer {
-      margin-top: 32px; font-size: 12px; color: var(--text-dim);
-      display: flex; gap: 20px;
-    }
+    .footer { margin-top: 32px; font-size: 12px; color: var(--text-dim); display: flex; gap: 20px; }
     .footer a { color: var(--accent2); text-decoration: none; }
     .footer a:hover { color: #fff; }
 
@@ -223,31 +191,24 @@
 </head>
 <body>
 
-  <div class="lang-toggle">
-    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
-    <button class="lang-btn" onclick="setLang('en')">EN</button>
-  </div>
-
   <nav class="breadcrumb">
     <a href="../">Freemaki</a>
     <span>/</span>
-    <span class="zh">宝宝名字缩写检测</span><span class="en">Baby Name Initials</span>
+    <span>Baby Name Initials</span>
   </nav>
 
   <div class="card">
-    <h1 class="zh">宝宝名字缩写检测器</h1>
-    <h1 class="en">Baby Name Initials Checker</h1>
-    <p class="subtitle zh">输入宝宝的名字组合，检查首字母缩写会不会拼出尴尬单词。<br>别让 P.O.O. 这种缩写毁了孩子的一生。</p>
-    <p class="subtitle en">Check if your baby's name initials spell something embarrassing.<br>Don't let a bad monogram haunt your child forever.</p>
+    <h1>Baby Name Initials Checker</h1>
+    <p class="subtitle">Check if your baby's name initials spell something embarrassing.<br>Don't let a bad monogram haunt your child forever.</p>
 
     <div class="name-inputs">
       <div class="input-row">
         <div class="input-group">
-          <div class="input-label"><span class="zh">名 (First Name)</span><span class="en">First Name</span></div>
+          <div class="input-label">First Name</div>
           <input type="text" id="firstName" placeholder="e.g. Benjamin" autocomplete="off">
         </div>
         <div class="input-group">
-          <div class="input-label"><span class="zh">姓 (Last Name)</span><span class="en">Last Name</span></div>
+          <div class="input-label">Last Name</div>
           <input type="text" id="lastName" placeholder="e.g. Owen" autocomplete="off">
         </div>
       </div>
@@ -255,26 +216,24 @@
       <div id="middleNames">
         <div class="input-row">
           <div class="input-group">
-            <div class="input-label"><span class="zh">中间名 1</span><span class="en">Middle Name 1</span></div>
+            <div class="input-label">Middle Name</div>
             <input type="text" id="middleName0" placeholder="e.g. Oliver" autocomplete="off">
           </div>
         </div>
       </div>
 
       <button class="add-middle-btn" onclick="addMiddleName()" id="addMiddleBtn">
-        <span class="zh">+ 添加更多中间名</span><span class="en">+ Add another middle name</span>
+        + Add another middle name
       </button>
 
       <button class="check-btn" onclick="checkInitials()">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <span class="zh">检查缩写</span><span class="en">Check Initials</span>
+        Check Initials
       </button>
     </div>
 
     <div class="examples">
-      <div class="examples-title">
-        <span class="zh">试试这些经典反面教材</span><span class="en">Try these classic fails</span>
-      </div>
+      <div class="examples-title">Try these classic fails</div>
       <div class="example-chips">
         <button class="example-chip" onclick="setExample('Benjamin','Oliver','Owen')">B.O.O.</button>
         <button class="example-chip" onclick="setExample('Ashley','Susan','Smith')">A.S.S.</button>
@@ -293,26 +252,25 @@
       <div class="share-section">
         <button class="share-btn" onclick="shareResult()">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-          <span class="zh">分享结果</span><span class="en">Share Result</span>
+          Share Result
         </button>
       </div>
     </div>
 
     <div class="tips">
-      <div class="tips-title"><span class="zh">💡 使用小贴士</span><span class="en">💡 Tips</span></div>
-      <span class="zh">欧美文化中，名字缩写（monogram）会被广泛使用——从行李牌、校服到 wedding invitations。一个尴尬的缩写可能会让孩子在成长过程中被嘲笑。建议检查所有可能的排列组合！</span>
-      <span class="en">In Western culture, name initials (monograms) appear everywhere — luggage tags, uniforms, wedding invitations. An embarrassing monogram can haunt your child for life. We recommend checking all possible combinations!</span>
+      <div class="tips-title">&#128161; Why does this matter?</div>
+      In Western culture, name initials (monograms) appear everywhere — luggage tags, uniforms, wedding invitations, stationery. An embarrassing monogram can haunt your child for life. We recommend checking all possible combinations!
     </div>
   </div>
 
   <footer class="footer">
-    <a href="../case/"><span class="zh">命名转换</span><span class="en">Case Converter</span></a>
-    <a href="../random/"><span class="zh">随机抽签</span><span class="en">Random Picker</span></a>
+    <a href="../case/">Case Converter</a>
+    <a href="../random/">Random Picker</a>
   </footer>
 
-  <div class="seo-content" style="max-width:720px;margin:32px auto 0;padding:0 16px;">
+  <div style="max-width:720px;margin:32px auto 0;padding:0 16px;">
     <div style="border-top:0.5px solid rgba(230,126,34,0.2);padding-top:28px;">
-      <div class="related-section en">
+      <div class="related-section">
         <h3>Related Tools</h3>
         <div class="related-grid">
           <a href="/random/" class="related-card"><h4>Random Picker</h4><p>Can't decide? Let randomness choose a name.</p></a>
@@ -321,183 +279,139 @@
           <a href="/markdown/" class="related-card"><h4>Markdown Editor</h4><p>Write and format name lists.</p></a>
         </div>
       </div>
-      <div class="related-section zh" style="display:none">
-        <h3>Related Tools</h3>
-        <div class="related-grid">
-          <a href="/random/" class="related-card"><h4>随机抽签</h4><p>纠结选哪个名字？让随机来决定。</p></a>
-          <a href="/case/" class="related-card"><h4>命名转换</h4><p>在不同命名风格之间转换。</p></a>
-          <a href="/counter/" class="related-card"><h4>字符统计</h4><p>统计名字的字符数。</p></a>
-          <a href="/markdown/" class="related-card"><h4>Markdown 编辑器</h4><p>整理你的备选名字清单。</p></a>
-        </div>
-      </div>
     </div>
-    <div style="border-top:0.5px solid rgba(0,0,0,0.10);padding-top:28px;margin-top:8px;">
-      <h2 style="font-size:18px;font-weight:600;margin-bottom:12px;">
-        <span class="en">How to Use This Tool</span>
-        <span class="zh">使用说明</span>
-      </h2>
-      <ol class="en" style="padding-left:20px;margin-bottom:16px;color:#5f5e5a;line-height:1.8;font-size:14px;">
+    <div style="border-top:0.5px solid rgba(230,126,34,0.2);padding-top:28px;margin-top:8px;">
+      <h2 style="font-size:18px;font-weight:600;margin-bottom:12px;color:#e0e0ff;">How to Use This Tool</h2>
+      <ol style="padding-left:20px;margin-bottom:16px;color:#8888bb;line-height:1.8;font-size:14px;">
         <li>Enter the first name, middle name(s), and last name you're considering for your baby.</li>
         <li>Click "Check Initials" to analyze all possible monogram combinations.</li>
-        <li>The tool checks against a dictionary of embarrassing, inappropriate, and funny words.</li>
+        <li>The tool checks against a dictionary of 100+ embarrassing, inappropriate, and funny words.</li>
         <li>Results are categorized by severity: safe, mild, or problematic.</li>
         <li>Share the result with your partner or friends for a good laugh!</li>
       </ol>
-      <ol class="zh" style="display:none;padding-left:20px;margin-bottom:16px;color:#5f5e5a;line-height:1.8;font-size:14px;">
-        <li>输入你考虑给宝宝取的名、中间名和姓。</li>
-        <li>点击"检查缩写"分析所有可能的字母组合。</li>
-        <li>工具会对照内置的尴尬缩写词典进行检查。</li>
-        <li>结果按严重程度分类：安全、轻微、有问题。</li>
-        <li>把结果分享给你的伴侣或朋友，一起笑笑！</li>
-      </ol>
     </div>
-    <div style="border-top:0.5px solid rgba(0,0,0,0.10);padding-top:28px;margin-top:8px;">
-      <h2 style="font-size:18px;font-weight:600;margin-bottom:12px;">
-        <span class="en">Frequently Asked Questions</span>
-        <span class="zh">常见问题</span>
-      </h2>
-      <ul class="en" style="list-style:none;padding:0;margin-bottom:16px;">
-        <li style="margin-bottom:10px"><strong>Why do name initials matter?</strong> — Monograms appear on luggage, clothing, stationery, and formal documents. An unfortunate initial set can lead to teasing, especially for children.</li>
-        <li style="margin-bottom:10px"><strong>Does this cover all bad combinations?</strong> — We check a comprehensive dictionary of English words and slang. However, language evolves and context matters — always double-check!</li>
-        <li style="margin-bottom:10px"><strong>What if I have multiple middle names?</strong> — Click "+ Add another middle name" to add more. We check all permutations of the initials.</li>
-      </ul>
-      <ul class="zh" style="display:none;list-style:none;padding:0;margin-bottom:16px;">
-        <li style="margin-bottom:10px"><strong>为什么名字缩写很重要？</strong> — 缩写会出现在行李牌、衣物、文具和正式文件上。不幸的缩写组合可能导致嘲笑，尤其是对孩子来说。</li>
-        <li style="margin-bottom:10px"><strong>这能覆盖所有不好的组合吗？</strong> — 我们检查了全面的英语单词和俚语词典。但语言在不断发展，建议再自行确认一下！</li>
-        <li style="margin-bottom:10px"><strong>如果有多个中间名怎么办？</strong> — 点击"+ 添加更多中间名"即可。我们会检查所有字母排列组合。</li>
+    <div style="border-top:0.5px solid rgba(230,126,34,0.2);padding-top:28px;margin-top:8px;">
+      <h2 style="font-size:18px;font-weight:600;margin-bottom:12px;color:#e0e0ff;">Frequently Asked Questions</h2>
+      <ul style="list-style:none;padding:0;margin-bottom:16px;">
+        <li style="margin-bottom:10px;color:#8888bb;font-size:14px;"><strong style="color:#e0e0ff;">Why do name initials matter?</strong> — Monograms appear on luggage, clothing, stationery, and formal documents. An unfortunate initial set can lead to teasing, especially for children.</li>
+        <li style="margin-bottom:10px;color:#8888bb;font-size:14px;"><strong style="color:#e0e0ff;">Does this cover all bad combinations?</strong> — We check a comprehensive dictionary of English words and slang. However, language evolves and context matters — always double-check!</li>
+        <li style="margin-bottom:10px;color:#8888bb;font-size:14px;"><strong style="color:#e0e0ff;">What if I have multiple middle names?</strong> — Click "+ Add another middle name" to add more. We check all consecutive 2-letter and 3-letter combinations.</li>
+        <li style="margin-bottom:10px;color:#8888bb;font-size:14px;"><strong style="color:#e0e0ff;">What are the severity levels?</strong> — HIGH means profanity or body parts that will definitely get noticed. MID means mildly awkward words. LOW means giggle-worthy but mostly harmless.</li>
       </ul>
     </div>
-    <p style="text-align:center;color:#9e9c97;font-size:12px;margin:16px 0 0;">
-      <a href="/" style="color:#2563eb;text-decoration:none;"><span class="en">← Back to all tools</span><span class="zh">← 返回所有工具</span></a>
+    <p style="text-align:center;color:#8888bb;font-size:12px;margin:16px 0 0;">
+      <a href="/" style="color:#f39c12;text-decoration:none;">&#8592; Back to all tools</a>
     </p>
   </div>
 
 <script>
-// ── Embarrassing Initials Dictionary ─────────────────────────
-// Format: "ABC" → { word, meaning, level }
-// level: 3 = high (profanity/body), 2 = mid (mildly awkward), 1 = low (giggle-worthy)
 const DICT = {
-  "ASS":  { word: "ASS",    meaning: {en:"Buttocks — the #1 classic",    zh:"屁股——第一名经典案例"}, level: 3 },
-  "BAD":  { word: "BAD",    meaning: {en:"Not ideal for a kid",         zh:"对孩子来说不太理想"}, level: 1 },
-  "BAG":  { word: "BAG",    meaning: {en:"Ugly old person (UK slang)",  zh:"丑老太婆（英式俚语）"}, level: 2 },
-  "BAR":  { word: "BAR",    meaning: {en:"Nothing wrong, but... boring",zh:"倒也没什么，但...无聊"}, level: 1 },
-  "BAT":  { word: "BAT",    meaning: {en:"Crazy or ugly (informal)",     zh:"疯狂或丑陋（非正式）"}, level: 1 },
-  "BUM":  { word: "BUM",    meaning: {en:"Homeless person / buttocks",   zh:"流浪汉 / 屁股"}, level: 2 },
-  "BUN":  { word: "BUN",    meaning: {en:"Silly, but cute enough",       zh:"有点傻，但还算可爱"}, level: 1 },
-  "BUT":  { word: "BUT",    meaning: {en:"The conjunction of doom",      zh:"命运连词"}, level: 1 },
-  "COW":  { word: "COW",    meaning: {en:"Overweight insult",            zh:"肥胖侮辱"}, level: 2 },
-  "CRP":  { word: "CRP",    meaning: {en:"Close to something worse...",   zh:"离更糟的词只差一步..."}, level: 2 },
-  "CUM":  { word: "CUM",    meaning: {en:"Semen — yeah, avoid this one", zh:"精液——对，避开这个"}, level: 3 },
-  "DAM":  { word: "DAM",    meaning: {en:"Mild swear word",              zh:"轻微脏话"}, level: 1 },
-  "DAM":  { word: "DAM",    meaning: {en:"Mild swear word",              zh:"轻微脏话"}, level: 1 },
-  "DIE":  { word: "DIE",    meaning: {en:"The opposite of living",       zh:"活着的反义词"}, level: 2 },
-  "DIG":  { word: "DIG",    meaning: {en:"To mock / insult",             zh:"嘲笑 / 侮辱"}, level: 1 },
-  "DUD":  { word: "DUD",    meaning: {en:"A failure, a loser",           zh:"失败者，废材"}, level: 2 },
-  "DUM":  { word: "DUM",    meaning: {en:"Dumb... missing a B",          zh:"笨...少了 B"}, level: 2 },
-  "DUN":  { word: "DUN",    meaning: {en:"Dunce — stupid person",        zh:"笨蛋"}, level: 2 },
-  "FAG":  { word: "FAG",    meaning: {en:"Homophobic slur (UK: cigarette)", zh:" homophobic slur（英：香烟）"}, level: 3 },
-  "FAN":  { word: "FAN",    meaning: {en:"Fine, but Fan Wang?",          zh:"还好，但如果是 Fan Wang？"}, level: 1 },
-  "FAR":  { word: "FAR",    meaning: {en:"Fart without the T",           zh:"少了 T 的 fart"}, level: 2 },
-  "FAT":  { word: "FAT",    meaning: {en:"Weight insult — avoid",        zh:"体重侮辱——避开"}, level: 2 },
-  "FED":  { word: "FED",    meaning: {en:"Federal agent? Suspicious",    zh:"联邦特工？有点可疑"}, level: 1 },
-  "FEE":  { word: "FEE",    meaning: {en:"You owe money",               zh:"你欠钱了"}, level: 1 },
-  "FUK":  { word: "FUK",    meaning: {en:"You know what this is",        zh:"你懂的"}, level: 3 },
-  "FUN":  { word: "FUN",    meaning: {en:"Actually this one is great!",  zh:"这个其实很好！"}, level: 0 },
-  "GAS":  { word: "GAS",    meaning: {en:"Flatulence humor",             zh:"放屁幽默"}, level: 1 },
-  "GAY":  { word: "GAY",    meaning: {en:"Could lead to teasing",        zh:"可能导致嘲笑"}, level: 2 },
-  "GEE":  { word: "GEE",    meaning: {en:"Geek without the K",           zh:"少了 K 的 geek"}, level: 1 },
-  "GUT":  { word: "GUT",    meaning: {en:"Belly / cowardice",            zh:"肚子 / 懦弱"}, level: 1 },
-  "GYP":  { word: "GYP",    meaning: {en:"To cheat / swindle",           zh:"欺骗 / 诈骗"}, level: 2 },
-  "HAG":  { word: "HAG",    meaning: {en:"Ugly old woman",               zh:"丑老太婆"}, level: 2 },
-  "HOE":  { word: "HOE",    meaning: {en:"Garden tool... or worse",      zh:"园艺工具...或者更糟"}, level: 3 },
-  "HOT":  { word: "HOT",    meaning: {en:"Sexy baby? Awkward",           zh:"性感宝宝？尴尬"}, level: 1 },
-  "HUG":  { word: "HUG",    meaning: {en:"Actually wholesome!",           zh:"其实很温馨！"}, level: 0 },
-  "HUM":  { word: "HUM",    meaning: {en:"Mildly silly sounding",        zh:"听起来有点傻"}, level: 1 },
-  "JAP":  { word: "JAP",    meaning: {en:"Ethnic slur",                   zh:"种族歧视用语"}, level: 3 },
-  "JAW":  { word: "JAW",    meaning: {en:"Talking too much?",             zh:"话太多？"}, level: 1 },
-  "JER":  { word: "JER",    meaning: {en:"Jerk... missing a K",           zh:"混蛋...少了 K"}, level: 2 },
-  "JEW":  { word: "JEW",    meaning: {en:"Could be weaponized by bullies", zh:"可能被霸凌者利用"}, level: 2 },
-  "JOB":  { word: "JOB",    meaning: {en:"A blow job (slang)",            zh:"口交（俚语）"}, level: 3 },
-  "KAK":  { word: "KAK",    meaning: {en:"Crap (South African slang)",    zh:"屎（南非俚语）"}, level: 2 },
-  "KIK":  { word: "KIK",    meaning: {en:"Drug slang",                    zh:"毒品俚语"}, level: 2 },
-  "KOO":  { word: "KOO",    meaning: {en:"Crazy (Caribbean slang)",       zh:"疯狂（加勒比俚语）"}, level: 1 },
-  "LAD":  { word: "LAD",    meaning: {en:"Fine actually, very British",   zh:"其实还好，很英式"}, level: 0 },
-  "LAG":  { word: "LAG",    meaning: {en:"Slow, behind",                   zh:"慢，落后"}, level: 1 },
-  "LAP":  { word: "LAP",    meaning: {en:"Lap dance vibes",               zh:"脱衣舞俱乐部的感觉"}, level: 2 },
-  "LAW":  { word: "LAW",    meaning: {en:"Fine, sounds professional",     zh:"还好，听起来很专业"}, level: 0 },
-  "LAY":  { word: "LAY",    meaning: {en:"Sexual connotation",             zh:"性暗示"}, level: 3 },
-  "LEZ":  { word: "LEZ",    meaning: {en:"Lesbian slur",                   zh:"女同性恋蔑称"}, level: 3 },
-  "LIE":  { word: "LIE",    meaning: {en:"Nobody likes a liar",           zh:"没人喜欢骗子"}, level: 2 },
-  "LOL":  { word: "LOL",    meaning: {en:"Laughing out loud — actually fun!", zh:"大笑——其实挺有趣！"}, level: 0 },
-  "LOT":  { word: "LOT",    meaning: {en:"A parking lot? Meh",             zh:"停车场？一般"}, level: 1 },
-  "MAD":  { word: "MAD",    meaning: {en:"Angry — not great",             zh:"生气——不太好"}, level: 1 },
-  "MAM":  { word: "MAM",    meaning: {en:"Breast (informal)",             zh:"乳房（非正式）"}, level: 2 },
-  "MOM":  { word: "MOM",    meaning: {en:"Fine unless the last name is...",zh:"除非姓氏是...否则还好"}, level: 0 },
-  "MOO":  { word: "MOO",    meaning: {en:"Cow sound — kids will mock",    zh:"牛叫声——孩子会嘲笑"}, level: 2 },
-  "MUD":  { word: "MUD",    meaning: {en:"Dirty, messy",                   zh:"脏，混乱"}, level: 1 },
-  "MUG":  { word: "MUG",    meaning: {en:"Ugly face",                      zh:"丑脸"}, level: 2 },
-  "NUT":  { word: "NUT",    meaning: {en:"Crazy person / testicle",        zh:"疯子 / 睾丸"}, level: 2 },
-  "OLD":  { word: "OLD",    meaning: {en:"Already aged at birth?",         zh:"一出生就老了？"}, level: 1 },
-  "OMG":  { word: "OMG",    meaning: {en:"Dramatic! But fun",             zh:"太戏剧化！但有趣"}, level: 0 },
-  "PAP":  { word: "PAP",    meaning: {en:"Nipple (slang) / soft food",    zh:"乳头（俚语）/ 软食"}, level: 2 },
-  "PEE":  { word: "PEE",    meaning: {en:"Urinate — kids will love this",  zh:"尿尿——孩子们会爱死这个"}, level: 2 },
-  "PIG":  { word: "PIG",    meaning: {en:"Greedy / dirty / fat insult",   zh:"贪吃 / 脏 / 胖的侮辱"}, level: 2 },
-  "POO":  { word: "POO",    meaning: {en:"Poop — classic baby humor",     zh:"便便——经典婴儿幽默"}, level: 2 },
-  "PUB":  { word: "PUB",    meaning: {en:"Drinking establishment",        zh:"酒吧"}, level: 1 },
-  "PUG":  { word: "PUG",    meaning: {en:"Ugly face (slang)",             zh:"丑脸（俚语）"}, level: 1 },
-  "PUN":  { word: "PUN",    meaning: {en:"Dad joke energy",               zh:"爸爸笑话风格"}, level: 1 },
-  "RAT":  { word: "RAT",    meaning: {en:"Traitor / disgusting animal",   zh:"叛徒 / 恶心动物"}, level: 2 },
-  "RAW":  { word: "RAW",    meaning: {en:"Uncooked / unfiltered",         zh:"生的 / 未过滤的"}, level: 1 },
-  "SAD":  { word: "SAD",    meaning: {en:"Depressing name vibes",         zh:"令人抑郁的名字氛围"}, level: 1 },
-  "SAP":  { word: "SAP",    meaning: {en:"Weakling / fool",               zh:"弱者 / 傻瓜"}, level: 1 },
-  "SAT":  { word: "SAT",    meaning: {en:"The devil (anagram)",           zh:"撒旦（易位词）"}, level: 1 },
-  "SAY":  { word: "SAY",    meaning: {en:"Fine, very neutral",            zh:"还好，很中性"}, level: 0 },
-  "SEX":  { word: "SEX",    meaning: {en:"Self-explanatory. Avoid.",       zh:"不言而喻。避开。"}, level: 3 },
-  "SIT":  { word: "SIT",    meaning: {en:"Dog command vibes",             zh:"给狗下命令的感觉"}, level: 1 },
-  "SNO":  { word: "SNO",    meaning: {en:"Snot without the T",            zh:"少了 T 的 snot（鼻涕）"}, level: 2 },
-  "SOB":  { word: "SOB",    meaning: {en:"Son of a b*tch",                zh:"狗娘养的"}, level: 3 },
-  "SPA":  { word: "SPA",    meaning: {en:"Luxury! This is fine",          zh:"奢华！这个没问题"}, level: 0 },
-  "SPY":  { word: "SPY",    meaning: {en:"Secret agent — kinda cool",     zh:"特工——有点酷"}, level: 0 },
-  "SUCK": { word: "SUCK",   meaning: {en:"You know exactly what",          zh:"你完全懂这是什么"}, level: 3 },
-  "SUN":  { word: "SUN",    meaning: {en:"Beautiful! Positive vibes",     zh:"漂亮！正能量"}, level: 0 },
-  "TAG":  { word: "TAG",    meaning: {en:"Graffiti or childish",          zh:"涂鸦或幼稚"}, level: 1 },
-  "TAR":  { word: "TAR",    meaning: {en:"Sticky black substance",        zh:"粘稠黑色物质"}, level: 1 },
-  "TIT":  { word: "TIT",    meaning: {en:"Breast — kids will snicker",    zh:"乳房——孩子们会偷笑"}, level: 3 },
-  "TOO":  { word: "TOO",    meaning: {en:"TOO much?",                     zh:"太多了？"}, level: 1 },
-  "TOY":  { word: "TOY",    meaning: {en:"Plaything",                     zh:"玩具"}, level: 1 },
-  "TUB":  { word: "TUB",    meaning: {en:"Fat person (slang)",            zh:"胖子（俚语）"}, level: 2 },
-  "TUR":  { word: "TUR",    meaning: {en:"Turkey? Meh",                   zh:"火鸡？一般"}, level: 1 },
-  "UDD":  { word: "UDD",    meaning: {en:"Udder without the ER",          zh:"少了 ER 的 udder（牛乳房）"}, level: 1 },
-  "UGH":  { word: "UGH",    meaning: {en:"Expression of disgust",         zh:"表达厌恶"}, level: 1 },
-  "VAG":  { word: "VAG",    meaning: {en:"Short for vagina",              zh:"阴道的缩写"}, level: 3 },
-  "WAD":  { word: "WAD",    meaning: {en:"Bundle of cash / tampon",       zh:"一捆现金 / 卫生棉条"}, level: 2 },
-  "WAG":  { word: "WAG",    meaning: {en:"Joke (British)",                zh:"笑话（英式）"}, level: 1 },
-  "WAM":  { word: "WAM",    meaning: {en:"Hit sound effect",              zh:"打击音效"}, level: 1 },
-  "WET":  { word: "WET",    meaning: {en:"Slightly suggestive",           zh:"略微暗示性的"}, level: 2 },
-  "WOP":  { word: "WOP",    meaning: {en:"Ethnic slur (Italian)",         zh:"种族歧视用语（意大利人）"}, level: 3 },
-  "WOW":  { word: "WOW",    meaning: {en:"Amazing! Positive",             zh:"惊艳！正面积极"}, level: 0 },
-  "YAK":  { word: "YAK",    meaning: {en:"Talk too much / an animal",     zh:"话太多 / 一种动物"}, level: 1 },
-  "YUK":  { word: "YUK",    meaning: {en:"Expression of disgust",         zh:"表达厌恶"}, level: 1 },
-  "ZAP":  { word: "ZAP",    meaning: {en:"Comic book energy",             zh:"漫画书风格"}, level: 1 },
+  "ASS":  { word: "ASS",    meaning: "Buttocks — the #1 classic",         level: 3 },
+  "BAD":  { word: "BAD",    meaning: "Not ideal for a kid",              level: 1 },
+  "BAG":  { word: "BAG",    meaning: "Ugly old person (UK slang)",        level: 2 },
+  "BAR":  { word: "BAR",    meaning: "Nothing wrong, but... boring",      level: 1 },
+  "BAT":  { word: "BAT",    meaning: "Crazy or ugly (informal)",          level: 1 },
+  "BUM":  { word: "BUM",    meaning: "Homeless person / buttocks",        level: 2 },
+  "BUN":  { word: "BUN",    meaning: "Silly, but cute enough",            level: 1 },
+  "BUT":  { word: "BUT",    meaning: "The conjunction of doom",           level: 1 },
+  "COW":  { word: "COW",    meaning: "Overweight insult",                 level: 2 },
+  "CRP":  { word: "CRP",    meaning: "Close to something worse...",       level: 2 },
+  "CUM":  { word: "CUM",    meaning: "Yeah, avoid this one",              level: 3 },
+  "DAM":  { word: "DAM",    meaning: "Mild swear word",                   level: 1 },
+  "DIE":  { word: "DIE",    meaning: "The opposite of living",            level: 2 },
+  "DIG":  { word: "DIG",    meaning: "To mock / insult",                  level: 1 },
+  "DUD":  { word: "DUD",    meaning: "A failure, a loser",                level: 2 },
+  "DUM":  { word: "DUM",    meaning: "Dumb... missing a B",               level: 2 },
+  "DUN":  { word: "DUN",    meaning: "Dunce — stupid person",             level: 2 },
+  "FAG":  { word: "FAG",    meaning: "Slur (UK: also means cigarette)",   level: 3 },
+  "FAN":  { word: "FAN",    meaning: "Fine, but Fan Wang?",               level: 1 },
+  "FAR":  { word: "FAR",    meaning: "Fart without the T",                level: 2 },
+  "FAT":  { word: "FAT",    meaning: "Weight insult — avoid",             level: 2 },
+  "FED":  { word: "FED",    meaning: "Federal agent? Suspicious",         level: 1 },
+  "FEE":  { word: "FEE",    meaning: "You owe money",                    level: 1 },
+  "FUK":  { word: "FUK",    meaning: "You know what this is",             level: 3 },
+  "FUN":  { word: "FUN",    meaning: "Actually this one is great!",       level: 0 },
+  "GAS":  { word: "GAS",    meaning: "Flatulence humor",                  level: 1 },
+  "GAY":  { word: "GAY",    meaning: "Could lead to teasing",             level: 2 },
+  "GEE":  { word: "GEE",    meaning: "Geek without the K",                level: 1 },
+  "GUT":  { word: "GUT",    meaning: "Belly / cowardice",                 level: 1 },
+  "GYP":  { word: "GYP",    meaning: "To cheat / swindle",                level: 2 },
+  "HAG":  { word: "HAG",    meaning: "Ugly old woman",                    level: 2 },
+  "HOE":  { word: "HOE",    meaning: "Garden tool... or worse",           level: 3 },
+  "HOT":  { word: "HOT",    meaning: "Sexy baby? Awkward",                level: 1 },
+  "HUG":  { word: "HUG",    meaning: "Actually wholesome!",                level: 0 },
+  "HUM":  { word: "HUM",    meaning: "Mildly silly sounding",             level: 1 },
+  "JAP":  { word: "JAP",    meaning: "Ethnic slur",                       level: 3 },
+  "JAW":  { word: "JAW",    meaning: "Talking too much?",                  level: 1 },
+  "JER":  { word: "JER",    meaning: "Jerk... missing a K",                level: 2 },
+  "JEW":  { word: "JEW",    meaning: "Could be weaponized by bullies",     level: 2 },
+  "JOB":  { word: "JOB",    meaning: "Blow job (slang)",                  level: 3 },
+  "KAK":  { word: "KAK",    meaning: "Crap (South African slang)",         level: 2 },
+  "KIK":  { word: "KIK",    meaning: "Drug slang",                        level: 2 },
+  "KOO":  { word: "KOO",    meaning: "Crazy (Caribbean slang)",            level: 1 },
+  "LAD":  { word: "LAD",    meaning: "Fine actually, very British",        level: 0 },
+  "LAG":  { word: "LAG",    meaning: "Slow, behind",                      level: 1 },
+  "LAP":  { word: "LAP",    meaning: "Lap dance vibes",                   level: 2 },
+  "LAW":  { word: "LAW",    meaning: "Fine, sounds professional",          level: 0 },
+  "LAY":  { word: "LAY",    meaning: "Sexual connotation",                 level: 3 },
+  "LEZ":  { word: "LEZ",    meaning: "Lesbian slur",                      level: 3 },
+  "LIE":  { word: "LIE",    meaning: "Nobody likes a liar",                level: 2 },
+  "LOL":  { word: "LOL",    meaning: "Laughing out loud — actually fun!",  level: 0 },
+  "LOT":  { word: "LOT",    meaning: "A parking lot? Meh",                 level: 1 },
+  "MAD":  { word: "MAD",    meaning: "Angry — not great",                  level: 1 },
+  "MAM":  { word: "MAM",    meaning: "Breast (informal)",                  level: 2 },
+  "MOM":  { word: "MOM",    meaning: "Fine unless the last name is...",    level: 0 },
+  "MOO":  { word: "MOO",    meaning: "Cow sound — kids will mock",        level: 2 },
+  "MUD":  { word: "MUD",    meaning: "Dirty, messy",                      level: 1 },
+  "MUG":  { word: "MUG",    meaning: "Ugly face",                         level: 2 },
+  "NUT":  { word: "NUT",    meaning: "Crazy person / testicle",            level: 2 },
+  "OLD":  { word: "OLD",    meaning: "Already aged at birth?",             level: 1 },
+  "OMG":  { word: "OMG",    meaning: "Dramatic! But fun",                 level: 0 },
+  "PAP":  { word: "PAP",    meaning: "Nipple (slang) / soft food",         level: 2 },
+  "PEE":  { word: "PEE",    meaning: "Urinate — kids will love this",      level: 2 },
+  "PIG":  { word: "PIG",    meaning: "Greedy / dirty / fat insult",        level: 2 },
+  "POO":  { word: "POO",    meaning: "Poop — classic baby humor",          level: 2 },
+  "PUB":  { word: "PUB",    meaning: "Drinking establishment",             level: 1 },
+  "PUG":  { word: "PUG",    meaning: "Ugly face (slang)",                  level: 1 },
+  "PUN":  { word: "PUN",    meaning: "Dad joke energy",                    level: 1 },
+  "RAT":  { word: "RAT",    meaning: "Traitor / disgusting animal",        level: 2 },
+  "RAW":  { word: "RAW",    meaning: "Uncooked / unfiltered",              level: 1 },
+  "SAD":  { word: "SAD",    meaning: "Depressing name vibes",              level: 1 },
+  "SAP":  { word: "SAP",    meaning: "Weakling / fool",                    level: 1 },
+  "SAT":  { word: "SAT",    meaning: "The devil (anagram)",                level: 1 },
+  "SAY":  { word: "SAY",    meaning: "Fine, very neutral",                 level: 0 },
+  "SEX":  { word: "SEX",    meaning: "Self-explanatory. Avoid.",            level: 3 },
+  "SIT":  { word: "SIT",    meaning: "Dog command vibes",                  level: 1 },
+  "SNO":  { word: "SNO",    meaning: "Snot without the T",                 level: 2 },
+  "SOB":  { word: "SOB",    meaning: "Son of a b*tch",                     level: 3 },
+  "SPA":  { word: "SPA",    meaning: "Luxury! This is fine",               level: 0 },
+  "SPY":  { word: "SPY",    meaning: "Secret agent — kinda cool",          level: 0 },
+  "SUCK": { word: "SUCK",   meaning: "You know exactly what",              level: 3 },
+  "SUN":  { word: "SUN",    meaning: "Beautiful! Positive vibes",          level: 0 },
+  "TAG":  { word: "TAG",    meaning: "Graffiti or childish",               level: 1 },
+  "TAR":  { word: "TAR",    meaning: "Sticky black substance",             level: 1 },
+  "TIT":  { word: "TIT",    meaning: "Breast — kids will snicker",         level: 3 },
+  "TOO":  { word: "TOO",    meaning: "TOO much?",                          level: 1 },
+  "TOY":  { word: "TOY",    meaning: "Plaything",                          level: 1 },
+  "TUB":  { word: "TUB",    meaning: "Fat person (slang)",                 level: 2 },
+  "TUR":  { word: "TUR",    meaning: "Turkey? Meh",                        level: 1 },
+  "UDD":  { word: "UDD",    meaning: "Udder without the ER",               level: 1 },
+  "UGH":  { word: "UGH",    meaning: "Expression of disgust",              level: 1 },
+  "VAG":  { word: "VAG",    meaning: "Short for vagina",                   level: 3 },
+  "WAD":  { word: "WAD",    meaning: "Bundle of cash / tampon",            level: 2 },
+  "WAG":  { word: "WAG",    meaning: "Joke (British)",                     level: 1 },
+  "WAM":  { word: "WAM",    meaning: "Hit sound effect",                   level: 1 },
+  "WET":  { word: "WET",    meaning: "Slightly suggestive",                level: 2 },
+  "WOP":  { word: "WOP",    meaning: "Ethnic slur (Italian)",              level: 3 },
+  "WOW":  { word: "WOW",    meaning: "Amazing! Positive",                  level: 0 },
+  "YAK":  { word: "YAK",    meaning: "Talk too much / an animal",          level: 1 },
+  "YUK":  { word: "YUK",    meaning: "Expression of disgust",              level: 1 },
+  "ZAP":  { word: "ZAP",    meaning: "Comic book energy",                  level: 1 },
 };
 
 let middleNameCount = 1;
 let lastResult = null;
-let currentLang = 'zh';
 
-// ── Language ─────────────────────────────────────────────
-function setLang(lang) {
-  currentLang = lang;
-  document.body.lang = lang;
-  document.querySelectorAll('.lang-btn').forEach(b => {
-    b.classList.toggle('active', b.textContent.includes(lang === 'zh' ? '中文' : 'EN'));
-  });
-  document.querySelector('.related-section.en').style.display = lang === 'en' ? '' : 'none';
-  document.querySelector('.related-section.zh').style.display = lang === 'zh' ? '' : 'none';
-  if (lastResult) showResult(lastResult);
-}
-
-// ── Add Middle Name ──────────────────────────────────────
 function addMiddleName() {
   if (middleNameCount >= 5) return;
   const container = document.getElementById('middleNames');
@@ -506,7 +420,7 @@ function addMiddleName() {
   div.id = `middleRow${middleNameCount}`;
   div.innerHTML = `
     <div class="input-group">
-      <div class="input-label"><span class="zh">中间名 ${middleNameCount + 1}</span><span class="en">Middle Name ${middleNameCount + 1}</span></div>
+      <div class="input-label">Middle Name ${middleNameCount + 1}</div>
       <input type="text" id="middleName${middleNameCount}" placeholder="e.g. Marie" autocomplete="off">
     </div>
   `;
@@ -517,12 +431,10 @@ function addMiddleName() {
   }
 }
 
-// ── Set Example ──────────────────────────────────────────
 function setExample(first, middle, last) {
   document.getElementById('firstName').value = first;
   document.getElementById('middleName0').value = middle;
   document.getElementById('lastName').value = last;
-  // Remove extra middle names
   const container = document.getElementById('middleNames');
   while (container.children.length > 1) {
     container.removeChild(container.lastChild);
@@ -532,33 +444,15 @@ function setExample(first, middle, last) {
   checkInitials();
 }
 
-// ── Get Initials ─────────────────────────────────────────
 function getInitials(names) {
   return names.map(n => n.charAt(0).toUpperCase()).filter(c => /[A-Z]/.test(c));
 }
 
-// ── Permutations (for 3-letter combinations from a set of initials) ──
-function getPermutations(arr, len) {
-  if (len === 0) return [[]];
-  if (arr.length < len) return [];
-  const result = [];
-  for (let i = 0; i <= arr.length - len; i++) {
-    const rest = arr.slice(i + 1);
-    const suffixes = getPermutations(rest, len - 1);
-    for (const suffix of suffixes) {
-      result.push([arr[i], ...suffix]);
-    }
-  }
-  return result;
-}
-
-// ── Check Initials ───────────────────────────────────────
 function checkInitials() {
   const firstName = document.getElementById('firstName').value.trim();
   const lastName = document.getElementById('lastName').value.trim();
   if (!firstName || !lastName) return;
 
-  // Collect all middle names
   const middleNames = [];
   for (let i = 0; i < middleNameCount; i++) {
     const el = document.getElementById(`middleName${i}`);
@@ -571,25 +465,17 @@ function checkInitials() {
   const initials = getInitials(allParts);
   if (initials.length < 2) return;
 
-  // Collect all unique 2-letter and 3-letter combos (consecutive)
   const allCombos = [];
-
-  // Consecutive pairs
   for (let i = 0; i < initials.length - 1; i++) {
     allCombos.push(initials.slice(i, i + 2).join(''));
   }
-
-  // Consecutive triples
   for (let i = 0; i < initials.length - 2; i++) {
     allCombos.push(initials.slice(i, i + 3).join(''));
   }
-
-  // Full initials
   if (initials.length >= 3) {
     allCombos.push(initials.join(''));
   }
 
-  // Check unique combos against dictionary
   const matches = [];
   const seen = new Set();
   for (const combo of allCombos) {
@@ -599,31 +485,18 @@ function checkInitials() {
       matches.push({ initials: combo, ...DICT[combo] });
     }
   }
-
-  // Sort by level (highest first)
   matches.sort((a, b) => b.level - a.level);
 
-  lastResult = {
-    initials,
-    allParts,
-    firstName,
-    lastName,
-    middleNames,
-    matches
-  };
-
+  lastResult = { initials, allParts, firstName, lastName, middleNames, matches };
   showResult(lastResult);
 }
 
-// ── Show Result ──────────────────────────────────────────
 function showResult(data) {
   const section = document.getElementById('resultSection');
   const display = document.getElementById('initialsDisplay');
   const content = document.getElementById('resultContent');
-
   section.classList.add('visible');
 
-  // Build initials display
   display.innerHTML = data.initials.map((letter, i) => {
     const isHighlight = data.matches.some(m => m.initials.includes(letter));
     let html = `<div class="initial-letter${isHighlight ? ' highlight' : ''}">${letter}</div>`;
@@ -633,77 +506,56 @@ function showResult(data) {
     return html;
   }).join('');
 
-  const lang = currentLang;
-
   if (data.matches.length === 0 || data.matches.every(m => m.level === 0)) {
-    // Safe!
     content.innerHTML = `
       <div class="result-card safe">
         <div class="result-icon">&#10003;</div>
-        <div class="result-title">${lang === 'zh' ? '看起来安全！' : 'Looks Safe!'}</div>
-        <div class="result-desc">${lang === 'zh'
-          ? `<strong>${data.initials.join('.')}</strong> 没有匹配到明显的尴尬缩写。当然，孩子总会找到嘲笑彼此的方式，但至少不是缩写的锅。`
-          : `<strong>${data.initials.join('.')}</strong> doesn't match any obvious embarrassing words. Kids will always find ways to mock each other, but at least it won't be the initials' fault.`
-        }</div>
+        <div class="result-title">Looks Safe!</div>
+        <div class="result-desc"><strong>${data.initials.join('.')}</strong> doesn't match any obvious embarrassing words. Kids will always find ways to mock each other, but at least it won't be the initials' fault.</div>
       </div>
     `;
   } else {
     const badMatches = data.matches.filter(m => m.level > 0);
     const goodMatches = data.matches.filter(m => m.level === 0);
-
     const worstLevel = Math.max(...badMatches.map(m => m.level));
-    const cardClass = worstLevel >= 3 ? 'danger' : worstLevel >= 2 ? 'warning' : 'warning';
+    const cardClass = worstLevel >= 3 ? 'danger' : 'warning';
 
-    let title = '';
-    if (worstLevel >= 3) {
-      title = lang === 'zh' ? '危险！强烈建议换名字' : 'Danger! Strongly Consider Alternatives';
-    } else if (worstLevel >= 2) {
-      title = lang === 'zh' ? '警告！可能被嘲笑' : 'Warning! Could Get Teased';
-    } else {
-      title = lang === 'zh' ? '有点尴尬...' : 'Slightly Awkward...';
-    }
+    let title = worstLevel >= 3
+      ? 'Danger! Strongly Consider Alternatives'
+      : worstLevel >= 2
+        ? 'Warning! Could Get Teased'
+        : 'Slightly Awkward...';
 
     let matchHTML = '';
     for (const m of badMatches) {
-      const levelLabel = m.level >= 3
-        ? (lang === 'zh' ? '高危' : 'HIGH')
-        : m.level >= 2
-          ? (lang === 'zh' ? '中等' : 'MID')
-          : (lang === 'zh' ? '轻微' : 'LOW');
+      const levelLabel = m.level >= 3 ? 'HIGH' : m.level >= 2 ? 'MID' : 'LOW';
       const levelClass = m.level >= 3 ? 'high' : m.level >= 2 ? 'mid' : 'low';
       matchHTML += `
         <div class="match-item">
           <span class="match-initials">${m.initials}</span>
-          <span class="match-meaning">${m.meaning[lang] || m.meaning.en}</span>
+          <span class="match-meaning">${m.meaning}</span>
           <span class="match-level ${levelClass}">${levelLabel}</span>
         </div>
       `;
     }
 
     if (goodMatches.length > 0) {
-      matchHTML += `<div style="margin-top:8px;font-size:13px;color:var(--green);">${lang === 'zh' ? '也匹配到了一些正面的：' : 'Also matched some positive ones: '}
-        ${goodMatches.map(m => m.initials).join(', ')}
-      </div>`;
+      matchHTML += `<div style="margin-top:8px;font-size:13px;color:var(--green);">Also matched some positive ones: ${goodMatches.map(m => m.initials).join(', ')}</div>`;
     }
 
     content.innerHTML = `
       <div class="result-card ${cardClass}">
         <div class="result-icon">${worstLevel >= 3 ? '&#128680;' : '&#9888;'}</div>
         <div class="result-title">${title}</div>
-        <div class="result-desc">${lang === 'zh'
-          ? `你的名字组合 <strong>${data.initials.join('.')}</strong> 匹配到了 ${badMatches.length} 个潜在尴尬缩写。建议考虑更换其中一个名字或添加一个中间名来避免。`
-          : `Your name combo <strong>${data.initials.join('.')}</strong> matched ${badMatches.length} potentially embarrassing monograms. Consider changing one of the names or adding a middle name.`
-        }</div>
+        <div class="result-desc">Your name combo <strong>${data.initials.join('.')}</strong> matched ${badMatches.length} potentially embarrassing monogram${badMatches.length > 1 ? 's' : ''}. Consider changing one of the names or adding a middle name to break the pattern.</div>
         <div class="match-list">${matchHTML}</div>
       </div>
     `;
   }
 
-  // Scroll to result
   section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-// ── Share ────────────────────────────────────────────────
 function shareResult() {
   if (!lastResult) return;
   const i = lastResult.initials.join('.');
@@ -718,13 +570,12 @@ function shareResult() {
     navigator.clipboard.writeText(text).then(() => {
       const btn = document.querySelector('.share-btn');
       const orig = btn.innerHTML;
-      btn.innerHTML = currentLang === 'zh' ? '&#10003; 已复制!' : '&#10003; Copied!';
+      btn.innerHTML = '&#10003; Copied!';
       setTimeout(() => { btn.innerHTML = orig; }, 2000);
     });
   }
 }
 
-// ── Enter key support ────────────────────────────────────
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter') checkInitials();
 });
