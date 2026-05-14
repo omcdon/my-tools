@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Am I Middle Class? Calculator – Check Your Income Tier | Freemaki</title>
+<meta name="description" content="Free middle class calculator. Enter your household income and state to find out if you're lower, middle, or upper class. Compare against state and national averages.">
+<meta name="keywords" content="middle class calculator, am i middle class, income class calculator, social class calculator, income percentile, household income by state">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.freemaki.com/middle-class/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Am I Middle Class? Calculator | Freemaki">
+<meta property="og:description" content="Find out where your household income places you — lower class, middle class, or upper class. Free calculator with state-by-state comparisons.">
+<meta property="og:url" content="https://www.freemaki.com/middle-class/">
+<meta property="og:site_name" content="Freemaki">
+<meta name="twitter:card" content="summary">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2720354590115044" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f8f7f4;
+  --surface: #ffffff;
+  --surface2: #f2f0ec;
+  --border: rgba(0,0,0,0.10);
+  --border2: rgba(0,0,0,0.18);
+  --text: #1a1a18;
+  --text2: #5f5e5a;
+  --text3: #9e9c97;
+  --accent: #2563eb;
+  --accent-bg: #eff6ff;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --tier-lower: #ef4444;
+  --tier-lower-mid: #f97316;
+  --tier-mid: #16a34a;
+  --tier-upper-mid: #2563eb;
+  --tier-upper: #7c3aed;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;}
+
+/* Disclaimer Banner */
+.disclaimer-banner{background:#fef3c7;border-bottom:1px solid #fbbf24;padding:12px 20px;text-align:center;font-size:13px;color:#92400e;line-height:1.5;}
+.disclaimer-banner strong{font-weight:700;}
+
+/* Container */
+.container{max-width:720px;margin:0 auto;padding:0 20px;}
+
+/* Breadcrumb */
+.breadcrumb{padding:16px 0 0;font-size:13px;color:var(--text3);}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb a:hover{text-decoration:underline;}
+
+/* Hero */
+.hero{text-align:center;padding:40px 0 32px;}
+.hero h1{font-size:32px;font-weight:800;line-height:1.2;margin-bottom:12px;letter-spacing:-0.02em;}
+.hero h1 .hl{color:var(--accent);}
+.hero p{font-size:16px;color:var(--text2);max-width:540px;margin:0 auto;line-height:1.7;}
+
+/* Calculator Card */
+.calc-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:32px;box-shadow:0 1px 3px rgba(0,0,0,0.04);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{margin-bottom:20px;}
+.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--text);}
+.input-wrapper{position:relative;}
+.input-wrapper .prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;font-weight:600;color:var(--text2);pointer-events:none;}
+.input-wrapper input{width:100%;padding:12px 14px 12px 32px;font-size:16px;font-family:inherit;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;}
+.input-wrapper input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.1);}
+select{width:100%;padding:12px 36px 12px 14px;font-size:16px;font-family:inherit;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235f5e5a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;}
+select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.1);}
+.btn-calc{width:100%;padding:14px;font-size:16px;font-weight:600;font-family:inherit;color:#fff;background:var(--accent);border:none;border-radius:var(--radius-sm);cursor:pointer;transition:background .2s,transform .1s;margin-top:4px;}
+.btn-calc:hover{background:#1d4ed8;}
+.btn-calc:active{transform:scale(.99);}
+
+/* Results */
+.results{display:none;margin-top:24px;animation:slideUp .5s ease;}
+@keyframes slideUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes popIn{from{opacity:0;transform:scale(.85);}to{opacity:1;transform:scale(1);}}
+
+/* Tier Badge */
+.tier-badge{text-align:center;padding:32px 20px;border-radius:var(--radius);margin-bottom:24px;animation:popIn .5s ease .1s both;}
+.tier-badge .tier-icon{font-size:52px;margin-bottom:8px;}
+.tier-badge .tier-label{font-size:28px;font-weight:800;letter-spacing:-0.02em;}
+.tier-badge .tier-desc{font-size:14px;margin-top:8px;opacity:.85;line-height:1.5;}
+
+/* Percentile Row */
+.pct-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;animation:fadeIn .5s ease .2s both;}
+.pct-card{background:var(--surface2);border-radius:var(--radius-sm);padding:20px;text-align:center;}
+.pct-card .pct-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px;}
+.pct-card .pct-num{font-size:36px;font-weight:800;color:var(--accent);line-height:1.1;}
+.pct-card .pct-note{font-size:12px;color:var(--text3);margin-top:4px;}
+
+/* Tier Bar */
+.tier-bar-wrap{margin-bottom:28px;animation:fadeIn .5s ease .3s both;}
+.tier-bar-title{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:10px;}
+.tier-bar{display:flex;height:44px;border-radius:22px;overflow:hidden;position:relative;box-shadow:0 2px 10px rgba(0,0,0,.1);}
+.tier-bar>div{display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35);overflow:hidden;white-space:nowrap;transition:opacity .3s;}
+.tier-bar>div.dim{opacity:.5;}
+.tier-bar .marker{position:absolute;top:-8px;bottom:-8px;width:3px;background:var(--text);border-radius:2px;z-index:2;transition:left .9s cubic-bezier(.34,1.56,.64,1);}
+.tier-bar .marker::before{content:'';position:absolute;top:-3px;left:50%;transform:translateX(-50%);width:11px;height:11px;background:var(--text);border-radius:50%;border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.25);}
+
+/* Comparison Cards */
+.comps{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;animation:fadeIn .5s ease .4s both;}
+.comp-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;text-align:center;}
+.comp-card .comp-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;}
+.comp-card .comp-median{font-size:13px;color:var(--text2);margin:4px 0;}
+.comp-card .comp-val{font-size:20px;font-weight:700;}
+.comp-card .comp-diff{font-size:13px;margin-top:2px;}
+.pos{color:#16a34a;} .neg{color:#dc2626;} .eq{color:var(--text3);}
+
+/* Breakdown Table */
+.breakdown{margin-bottom:28px;animation:fadeIn .5s ease .5s both;}
+.breakdown h3{font-size:15px;font-weight:600;margin-bottom:12px;color:var(--text);}
+.breakdown table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface);border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);}
+.breakdown th,.breakdown td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.breakdown th:last-child,.breakdown td:last-child{text-align:right;}
+.breakdown th{font-weight:600;color:var(--text3);font-size:11px;text-transform:uppercase;letter-spacing:.5px;background:var(--surface2);}
+.breakdown tr.active{background:var(--accent-bg);font-weight:600;}
+.breakdown .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:middle;}
+
+/* Share */
+.share-section{background:var(--surface2);border-radius:var(--radius-sm);padding:20px;animation:fadeIn .5s ease .6s both;}
+.share-section h3{font-size:14px;font-weight:600;margin-bottom:10px;}
+.share-text{font-size:13px;color:var(--text2);background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:12px;white-space:pre-wrap;line-height:1.6;font-family:inherit;}
+.share-btns{display:flex;gap:8px;flex-wrap:wrap;}
+.share-btn{padding:8px 16px;font-size:13px;font-weight:500;font-family:inherit;border:1px solid var(--border2);border-radius:6px;background:var(--surface);color:var(--text);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px;}
+.share-btn:hover{background:var(--surface2);}
+.share-btn.copied{background:#dcfce7;color:#16a34a;border-color:#86efac;}
+
+/* How It Works */
+.how-section{margin-top:56px;}
+.how-section h2{font-size:24px;font-weight:800;text-align:center;margin-bottom:28px;letter-spacing:-0.01em;}
+.step{display:flex;gap:16px;margin-bottom:28px;}
+.step-num{flex-shrink:0;width:36px;height:36px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+.step-body h3{font-size:15px;font-weight:600;margin-bottom:3px;}
+.step-body p{font-size:14px;color:var(--text2);line-height:1.65;}
+
+/* FAQ */
+.faq{margin-top:48px;}
+.faq h2{font-size:24px;font-weight:800;text-align:center;margin-bottom:24px;letter-spacing:-0.01em;}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;margin-bottom:12px;}
+.faq-item h3{font-size:15px;font-weight:600;margin-bottom:6px;}
+.faq-item p{font-size:14px;color:var(--text2);line-height:1.65;}
+
+/* Data Sources */
+.sources{margin-top:40px;padding:20px;background:var(--surface);border-radius:var(--radius-sm);border:1px solid var(--border);font-size:13px;color:var(--text3);line-height:1.8;}
+.sources h3{font-size:14px;font-weight:600;color:var(--text2);margin-bottom:8px;}
+
+/* Footer */
+footer{text-align:center;padding:40px 0 32px;font-size:13px;color:var(--text3);}
+footer a{color:var(--accent);text-decoration:none;}
+footer a:hover{text-decoration:underline;}
+
+/* Mobile */
+@media(max-width:600px){
+  .hero h1{font-size:24px;}
+  .hero p{font-size:14px;}
+  .calc-card{padding:20px;}
+  .form-row{grid-template-columns:1fr;}
+  .tier-badge .tier-label{font-size:22px;}
+  .pct-row{grid-template-columns:1fr;}
+  .pct-card .pct-num{font-size:28px;}
+  .comps{grid-template-columns:1fr;}
+  .tier-bar{height:36px;border-radius:18px;}
+  .tier-bar>div{font-size:0;letter-spacing:0;}
+}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Am I Middle Class? Calculator",
+  "description": "Free calculator to determine if your household income places you in the lower, middle, or upper class, with state-by-state comparisons.",
+  "url": "https://www.freemaki.com/middle-class/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "creator": { "@type": "Organization", "name": "Freemaki", "url": "https://www.freemaki.com/" }
+}
+</script>
+</head>
+<body>
+
+<!-- Disclaimer -->
+<div class="disclaimer-banner">
+  ⚠️ <strong>For educational purposes only.</strong> Estimates based on publicly available data. Not financial or tax advice. Consult a qualified professional for personalized guidance.
+</div>
+
+<div class="container">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="/">Freemaki</a> &rsaquo; <span>Am I Middle Class?</span>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Am I <span class="hl">Middle Class</span>?</h1>
+    <p>Enter your household income and state to see where you stand. Instantly compare against your state and national averages.</p>
+  </div>
+
+  <!-- Calculator -->
+  <div class="calc-card">
+    <div class="form-group">
+      <label>Annual Household Income (Before Taxes)</label>
+      <div class="input-wrapper">
+        <span class="prefix">$</span>
+        <input type="number" id="income" placeholder="e.g., 85,000" min="0" max="10000000" step="1000" autofocus>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>State</label>
+        <select id="state">
+          <option value="">Select state…</option>
+          <option value="AL">Alabama</option><option value="AK">Alaska</option>
+          <option value="AZ">Arizona</option><option value="AR">Arkansas</option>
+          <option value="CA">California</option><option value="CO">Colorado</option>
+          <option value="CT">Connecticut</option><option value="DE">Delaware</option>
+          <option value="DC">District of Columbia</option><option value="FL">Florida</option>
+          <option value="GA">Georgia</option><option value="HI">Hawaii</option>
+          <option value="ID">Idaho</option><option value="IL">Illinois</option>
+          <option value="IN">Indiana</option><option value="IA">Iowa</option>
+          <option value="KS">Kansas</option><option value="KY">Kentucky</option>
+          <option value="LA">Louisiana</option><option value="ME">Maine</option>
+          <option value="MD">Maryland</option><option value="MA">Massachusetts</option>
+          <option value="MI">Michigan</option><option value="MN">Minnesota</option>
+          <option value="MS">Mississippi</option><option value="MO">Missouri</option>
+          <option value="MT">Montana</option><option value="NE">Nebraska</option>
+          <option value="NV">Nevada</option><option value="NH">New Hampshire</option>
+          <option value="NJ">New Jersey</option><option value="NM">New Mexico</option>
+          <option value="NY">New York</option><option value="NC">North Carolina</option>
+          <option value="ND">North Dakota</option><option value="OH">Ohio</option>
+          <option value="OK">Oklahoma</option><option value="OR">Oregon</option>
+          <option value="PA">Pennsylvania</option><option value="RI">Rhode Island</option>
+          <option value="SC">South Carolina</option><option value="SD">South Dakota</option>
+          <option value="TN">Tennessee</option><option value="TX">Texas</option>
+          <option value="UT">Utah</option><option value="VT">Vermont</option>
+          <option value="VA">Virginia</option><option value="WA">Washington</option>
+          <option value="WV">West Virginia</option><option value="WI">Wisconsin</option>
+          <option value="WY">Wyoming</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Household Size</label>
+        <select id="household">
+          <option value="1">1 person</option>
+          <option value="2">2 people</option>
+          <option value="3">3 people</option>
+          <option value="4" selected>4 people</option>
+          <option value="5">5 people</option>
+          <option value="6">6+ people</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn-calc" onclick="calculate()">Calculate My Class</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results"></div>
+
+  <!-- How It Works -->
+  <div class="how-section">
+    <h2>How It Works</h2>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Enter Your Income</h3>
+        <p>Your annual household income before taxes — this includes wages, salaries, tips, investment income, and any other earnings for everyone in your household.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Select Your State</h3>
+        <p>Cost of living varies dramatically across states. We compare your income to your state's median household income from the U.S. Census Bureau's American Community Survey.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Adjust for Household Size</h3>
+        <p>A $100k income means very different things for a single person vs. a family of six. We use OECD equivalence scales to make fair comparisons across household sizes.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>See Your Class Tier</h3>
+        <p>Based on the Pew Research Center's methodology, we classify your adjusted income into one of five tiers relative to your area's median.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>What defines "middle class"?</h3>
+      <p>The Pew Research Center defines middle class as households earning between two-thirds (67%) and double (200%) of the median household income. We expand this into five tiers for more nuanced results.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Why does household size matter?</h3>
+      <p>Income needs scale with household size — a family of four needs roughly twice the income of a single person to maintain the same standard of living. We use OECD equivalence scales to adjust for this.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How accurate is the percentile estimate?</h3>
+      <p>Our percentile is an approximation based on a log-normal distribution model fitted to U.S. household income data. It's useful for general understanding but should not be treated as exact.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What data year is this based on?</h3>
+      <p>State median household incomes are based on 2023-2024 estimates from the U.S. Census Bureau's American Community Survey (ACS). Actual figures may vary slightly from the latest data release.</p>
+    </div>
+  </div>
+
+  <!-- Data Sources -->
+  <div class="sources">
+    <h3>Data Sources & Methodology</h3>
+    • Median household income: U.S. Census Bureau, American Community Survey (ACS), 2023-2024 estimates<br>
+    • Class tier methodology: Based on Pew Research Center income classification framework<br>
+    • Percentile model: Log-normal distribution approximation (&sigma; &asymp; 0.85)<br>
+    • Household adjustment: OECD-modified equivalence scale
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p><a href="/privacy/">Privacy Policy</a> · <a href="/disclaimer/">Disclaimer</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a></p>
+    <p style="margin-top:8px">&copy; 2026 Freemaki &middot; All rights reserved</p>
+  </footer>
+
+</div>
+
+<script>
+// ── State median household income (2023-2024 ACS estimates) ──
+const stateData = {
+  AL:59600,AK:84500,AZ:78800,AR:55200,CA:96300,CO:92900,
+  CT:93500,DE:79800,DC:104200,FL:67000,GA:74800,HI:94600,
+  ID:71500,IL:81700,IN:68500,IA:74000,KS:72900,KY:58700,
+  LA:55500,ME:68300,MD:100600,MA:104800,MI:68800,MN:87200,
+  MS:52900,MO:67500,MT:72400,NE:75500,NV:73400,NH:96300,
+  NJ:100600,NM:58600,NY:82600,NC:69800,ND:74500,OH:65500,
+  OK:59700,OR:75600,PA:76500,RI:81300,SC:64700,SD:69000,
+  TN:63500,TX:76700,UT:84700,VT:78100,VA:88400,WA:97000,
+  WV:55800,WI:74400,WY:74900
+};
+const NATIONAL_MEDIAN = 80610;
+const SIGMA = 0.85;
+
+// OECD-modified equivalence scales
+const eqScales = {1:1.0, 2:1.4, 3:1.7, 4:2.0, 5:2.2, 6:2.4};
+
+// State full names
+const stateNames = {
+  AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',
+  CO:'Colorado',CT:'Connecticut',DE:'Delaware',DC:'District of Columbia',
+  FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',
+  IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',
+  ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',
+  MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',
+  NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',
+  NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',
+  OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',
+  SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',
+  VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming'
+};
+
+const tiers = [
+  {name:'Lower Income',      min:0,    max:0.67, color:'#ef4444', icon:'📉',
+   desc:'Earning less than two-thirds of your area median. Many households in this tier spend over 50% of income on basic necessities.'},
+  {name:'Lower-Middle Class', min:0.67, max:1.0,  color:'#f97316', icon:'📊',
+   desc:'Earning between two-thirds and the area median. A solid working-class income, though budget flexibility is limited.'},
+  {name:'Middle Class',       min:1.0,  max:1.5,  color:'#16a34a', icon:'🏠',
+   desc:'Earning at or above the area median. This is the economic mainstream — comfortable but not luxurious.'},
+  {name:'Upper-Middle Class', min:1.5,  max:2.0,  color:'#2563eb', icon:'📈',
+   desc:'Earning 1.5 to 2 times the area median. Significant disposable income and financial security.'},
+  {name:'Upper Class',        min:2.0,  max:Infinity, color:'#7c3aed', icon:'💎',
+   desc:'Earning more than double the area median. Top earners with substantial wealth-building capacity.'}
+];
+
+// ── Normal CDF (Abramowitz & Stegun) ──
+function normalCDF(x){
+  const a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=0.3275911;
+  const sign=x<0?-1:1;
+  x=Math.abs(x)/Math.SQRT2;
+  const t=1/(1+p*x);
+  const y=1-(((((a5*t+a4)*t)+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
+  return 0.5*(1+sign*y);
+}
+
+function formatMoney(n){return '$'+Math.round(n).toLocaleString('en-US');}
+function getTier(ratio){return tiers.find(t=>ratio>=t.min&&ratio<Math.min(t.max,Infinity))||tiers[4];}
+
+function getMarkerPos(ratio){
+  const bounds=[0,0.67,1.0,1.5,2.0];
+  const pos=[0,20,40,60,80];
+  for(let i=bounds.length-1;i>=0;i--){
+    if(ratio>=bounds[i]){
+      if(i===bounds.length-1) return Math.min(ratio/3*100,100);
+      const t=(ratio-bounds[i])/(bounds[i+1]-bounds[i]);
+      return Math.min(pos[i]+t*(pos[i+1]-pos[i]),100);
+    }
+  }
+  return 0;
+}
+
+function animateCounter(el,target,duration=800){
+  const start=performance.now();
+  const from=parseFloat(el.textContent)||0;
+  function tick(now){
+    const p=Math.min((now-start)/duration,1);
+    const ease=1-Math.pow(1-p,3);
+    el.textContent=Math.round(from+(target-from)*ease);
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function calculate(){
+  const income=parseFloat(document.getElementById('income').value);
+  const stateCode=document.getElementById('state').value;
+  const hhSize=parseInt(document.getElementById('household').value);
+
+  // Validate
+  if(!income||income<=0){alert('Please enter a valid annual household income.');return;}
+  if(!stateCode){alert('Please select your state.');return;}
+
+  const stateMedian=stateData[stateCode];
+  const stateName=stateNames[stateCode];
+  const scale=eqScales[hhSize]||2.4;
+  const adjustedIncome=income/scale;
+
+  const stateRatio=adjustedIncome/stateMedian;
+  const nationalRatio=adjustedIncome/NATIONAL_MEDIAN;
+
+  const tier=getTier(stateRatio);
+
+  // Percentiles (log-normal)
+  const statePct=(1-normalCDF((Math.log(adjustedIncome)-Math.log(stateMedian))/SIGMA))*100;
+  const nationalPct=(1-normalCDF((Math.log(adjustedIncome)-Math.log(NATIONAL_MEDIAN))/SIGMA))*100;
+
+  // Difference vs medians
+  const stateDiff=((income-stateMedian)/stateMedian*100).toFixed(1);
+  const natDiff=((income-NATIONAL_MEDIAN)/NATIONAL_MEDIAN*100).toFixed(1);
+
+  // Build results
+  const el=document.getElementById('results');
+
+  // Tier bar segments
+  const barSegs=tiers.map((t,i)=>{
+    const active=t===tier;
+    const pct=i<4?20:20;
+    return `<div style="width:${pct}%;background:${t.color};${active?'':'opacity:0.6;'}">${active?t.name:''}</div>`;
+  }).join('');
+  const markerLeft=getMarkerPos(stateRatio);
+
+  // Breakdown table rows
+  const rows=tiers.map(t=>{
+    const lo=Math.round(stateMedian*t.min*scale);
+    const hi=t.max===Infinity?'and above':formatMoney(Math.round(stateMedian*t.max*scale));
+    const active=t===tier;
+    return `<tr class="${active?'active':''}">
+      <td><span class="dot" style="background:${t.color}"></span>${t.name}</td>
+      <td style="text-align:right">${formatMoney(lo)} ${t.max===Infinity?'+':'– '+hi}</td>
+    </tr>`;
+  }).join('');
+
+  // Share text
+  const shareText=`📊 Am I Middle Class? Calculator Results\n\nI earn ${formatMoney(income)}/year in ${stateName} with a ${hhSize}-person household.\n\nThat puts me in the ${tier.name} — top ${Math.round(statePct)}% of households in ${stateName}.\n\nNational comparison: top ${Math.round(nationalPct)}% of U.S. households.\n\nTry it yourself: https://www.freemaki.com/middle-class/`;
+
+  el.innerHTML=`
+    <div class="tier-badge" style="background:${tier.color}15;border:1px solid ${tier.color}30;">
+      <div class="tier-icon">${tier.icon}</div>
+      <div class="tier-label" style="color:${tier.color};">You are ${tier.name}</div>
+      <div class="tier-desc" style="color:${tier.color};">${tier.desc}</div>
+    </div>
+
+    <div class="pct-row">
+      <div class="pct-card">
+        <div class="pct-label">In ${stateName}</div>
+        <div class="pct-num" id="pctState">0</div>
+        <div class="pct-note">of households earn less</div>
+      </div>
+      <div class="pct-card">
+        <div class="pct-label">Nationwide</div>
+        <div class="pct-num" id="pctNat">0</div>
+        <div class="pct-note">of U.S. households earn less</div>
+      </div>
+    </div>
+
+    <div class="tier-bar-wrap">
+      <div class="tier-bar-title">Income Tier Spectrum</div>
+      <div class="tier-bar">
+        ${barSegs}
+        <div class="marker" style="left:${markerLeft}%"></div>
+      </div>
+    </div>
+
+    <div class="comps">
+      <div class="comp-card">
+        <div class="comp-label">${stateName} Median</div>
+        <div class="comp-median">${formatMoney(stateMedian)}/yr</div>
+        <div class="comp-val">${formatMoney(income)}</div>
+        <div class="comp-diff ${stateDiff>=0?'pos':'neg'}">
+          ${stateDiff>=0?'+':''}${stateDiff}% vs median
+        </div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-label">U.S. Median</div>
+        <div class="comp-median">${formatMoney(NATIONAL_MEDIAN)}/yr</div>
+        <div class="comp-val">${formatMoney(income)}</div>
+        <div class="comp-diff ${natDiff>=0?'pos':'neg'}">
+          ${natDiff>=0?'+':''}${natDiff}% vs median
+        </div>
+      </div>
+    </div>
+
+    <div class="breakdown">
+      <h3>Income Tiers in ${stateName} (${hhSize}-person household)</h3>
+      <table>
+        <thead><tr><th>Tier</th><th>Income Range</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+
+    <div class="share-section">
+      <h3>Share Your Result</h3>
+      <div class="share-text" id="shareText">${shareText.replace(/</g,'&lt;').replace(/\n/g,'<br>')}</div>
+      <div class="share-btns">
+        <button class="share-btn" onclick="copyResult()">📋 Copy</button>
+        <a class="share-btn" id="tweetBtn" href="#" target="_blank" rel="noopener">𝕏 Post</a>
+      </div>
+    </div>
+  `;
+
+  // Show results
+  el.style.display='block';
+  window.scrollTo({top:el.offsetTop-20,behavior:'smooth'});
+
+  // Animate counters
+  setTimeout(()=>{
+    animateCounter(document.getElementById('pctState'),Math.round(statePct));
+    animateCounter(document.getElementById('pctNat'),Math.round(nationalPct));
+  },100);
+
+  // Tweet link
+  const tweetText=`I earn ${formatMoney(income)}/year in ${stateName}. That puts me in the ${tier.name} — top ${Math.round(statePct)}% of my state.\n\nTry it:`;
+  document.getElementById('tweetBtn').href=`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=https%3A%2F%2Fwww.freemaki.com%2Fmiddle-class%2F`;
+
+  // Store raw text for copy
+  el.dataset.shareText=shareText;
+}
+
+function copyResult(){
+  const text=document.getElementById('results').dataset.shareText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=event.target;
+    btn.textContent='✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='📋 Copy';btn.classList.remove('copied');},2000);
+  });
+}
+
+// Enter key support
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&document.activeElement.tagName!=='BUTTON') calculate();
+});
+</script>
+</body>
+</html>
