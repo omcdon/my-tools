@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin/>
+<link rel="dns-prefetch" href="https://www.freemaki.com"/>
+<meta name="theme-color" content="#2563eb"/>
+<title>Loan & Compound Interest Calculator Guide | Freemaki Blog</title>
+<meta name="description" content="Understand how loans work, learn the compound interest formula, and make smarter financial decisions. Free calculators with visual amortization charts and growth curves."/>
+<meta name="keywords" content="loan calculator, compound interest calculator, amortization schedule, interest formula, mortgage calculator, personal finance, savings calculator, investment growth"/>
+<meta name="robots" content="index, follow, max-image-preview:large"/>
+<meta name="author" content="Freemaki"/>
+<link rel="canonical" href="https://www.freemaki.com/blog/personal-finance-calculator-guide/"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="Loan & Compound Interest Calculator: Complete Guide"/>
+<meta property="og:description" content="Master loan amortization and compound interest. Make better borrowing and investing decisions with free visual calculators."/>
+<meta property="og:url" content="https://www.freemaki.com/blog/personal-finance-calculator-guide/"/>
+<meta property="og:site_name" content="Freemaki"/>
+<meta name="twitter:card" content="summary"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Loan & Compound Interest Calculator: Complete Guide",
+  "datePublished": "2026-05-15",
+  "dateModified": "2026-05-15",
+  "author": {
+    "@type": "Person",
+    "name": "McDon"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Freemaki",
+    "url": "https://www.freemaki.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.freemaki.com/favicon.ico"
+    }
+  },
+  "description": "Understand how loans work, learn the compound interest formula, and make smarter financial decisions with free calculators."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.freemaki.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://www.freemaki.com/#articles"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Loan & Compound Interest Calculator Guide",
+      "item": "https://www.freemaki.com/blog/personal-finance-calculator-guide/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the formula for monthly loan payment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Monthly payment = P × [r(1+r)^n] / [(1+r)^n − 1], where P is the loan amount, r is the monthly interest rate (annual rate ÷ 12 ÷ 100), and n is the total number of payments (years × 12)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between simple and compound interest?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Simple interest is calculated only on the original principal. Compound interest is calculated on both the principal and previously accumulated interest, resulting in exponential growth over time. This is often called 'interest on interest.'"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much can I save by making early payments on my loan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Early payments reduce the outstanding principal, which means less interest accrues in future months. The savings depend on the loan amount, interest rate, remaining term, and timing of the extra payment. Even a small one-time extra payment can save significant interest over the life of a mortgage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should interest be compounded for maximum growth?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "More frequent compounding leads to slightly higher returns. Daily compounding yields more than monthly, which yields more than quarterly, which yields more than annual. However, the difference between daily and monthly compounding is usually small — less than 0.1% annually on typical savings accounts."
+      }
+    }
+  ]
+}
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2720354590115044" crossorigin="anonymous"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #f8f7f4; --surface: #ffffff; --surface2: #f2f0ec; --border: rgba(0,0,0,0.10); --text: #1a1a18; --text2: #5f5e5a; --text3: #9e9c97; --accent: #2563eb; --accent-bg: #eff6ff; --radius: 12px; --green: #16a34a; --green-bg: #f0fdf4; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.8; min-height: 100vh; }
+  .page { max-width: 720px; margin: 0 auto; padding: 48px 16px 80px; }
+  .breadcrumb { font-size: 13px; color: var(--text3); margin-bottom: 24px; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
+  .meta { font-size: 13px; color: var(--text3); margin-bottom: 32px; }
+  h2 { font-size: 20px; font-weight: 700; margin: 36px 0 12px; }
+  h3 { font-size: 17px; font-weight: 600; margin: 24px 0 8px; }
+  p { margin-bottom: 14px; color: var(--text2); }
+  ul, ol { padding-left: 20px; margin-bottom: 14px; }
+  li { margin-bottom: 6px; color: var(--text2); }
+  code { background: var(--surface2); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  blockquote { border-left: 3px solid var(--accent); padding-left: 16px; margin: 14px 0; color: var(--text3); font-style: italic; }
+  .formula { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 16px 20px; margin: 14px 0; font-family: 'Courier New', monospace; font-size: 15px; text-align: center; color: var(--text); }
+  .tip { background: var(--accent-bg); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 0 var(--radius) var(--radius) 0; margin: 16px 0; font-size: 14px; }
+  .tip strong { color: var(--accent); }
+  .green-tip { background: var(--green-bg); border-left: 3px solid var(--green); }
+  .green-tip strong { color: var(--green); }
+  .cta { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: var(--radius); display: inline-block; margin: 8px 4px; font-weight: 600; text-decoration: none; transition: opacity 0.15s; }
+  .cta:hover { opacity: 0.9; text-decoration: none; }
+  .comparison { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 16px 20px; margin: 14px 0; }
+  .comparison h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+  .comparison table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .comparison th, .comparison td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+  .comparison th { font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text3); }
+  .lang-btn { position: fixed; top: 16px; right: 16px; padding: 6px 14px; border: 0.5px solid var(--border); border-radius: 20px; background: var(--surface); font-size: 13px; cursor: pointer; color: var(--text2); z-index: 100; }
+  .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+  footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
+  .related-section{margin-top:32px;padding-top:20px;border-top:0.5px solid rgba(0,0,0,0.10);}
+  .related-section h3{font-size:15px;font-weight:600;margin-bottom:10px;color:#1a1a18;}
+  .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  @media(max-width:560px){.related-grid{grid-template-columns:1fr;}}
+  .related-card{display:block;background:#fff;border:1px solid rgba(0,0,0,0.10);border-radius:10px;padding:12px 14px;text-decoration:none;color:#1a1a18;transition:border-color .2s,box-shadow .2s;}
+  .related-card:hover{border-color:#2563eb;box-shadow:0 2px 12px rgba(37,99,235,0.08);}
+  .related-card h4{font-size:13px;font-weight:600;margin-bottom:2px;}
+  .related-card p{font-size:11px;color:#5f5e5a;line-height:1.4;}
+
+  .toc-sidebar{position:fixed;top:60px;right:16px;width:200px;max-height:calc(100vh - 80px);overflow-y:auto;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 12px;z-index:80;box-shadow:0 1px 8px rgba(0,0,0,0.06);}
+  .toc-sidebar h4{font-size:11px;font-weight:700;margin-bottom:8px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;}
+  .toc-sidebar ul{list-style:none;padding:0;margin:0;}
+  .toc-sidebar li{margin-bottom:1px;}
+  .toc-sidebar a{font-size:12px;color:var(--text2);text-decoration:none;display:block;padding:5px 8px;border-left:2px solid transparent;border-radius:0 4px 4px 0;transition:all .15s;line-height:1.4;}
+  .toc-sidebar a:hover,.toc-sidebar a.active{color:var(--accent);background:var(--accent-bg);border-left-color:var(--accent);}
+  .toc-sidebar a[data-level="H3"]{padding-left:18px;font-size:11px;}
+  .toc-btn{display:none;position:fixed;bottom:20px;right:20px;z-index:90;background:var(--accent);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:18px;cursor:pointer;box-shadow:0 2px 12px rgba(37,99,235,.3);align-items:center;justify-content:center;line-height:1;}
+  @media(max-width:900px){.toc-btn{display:flex;}.toc-sidebar{display:none;right:12px;width:220px;bottom:72px;top:auto;max-height:50vh;}.toc-sidebar.open{display:block;}}
+</style>
+</head>
+<body>
+<button class="lang-btn" onclick="toggleLang()" id="langBtn">中文</button>
+<div class="page">
+  <div class="breadcrumb"><a href="/">Freemaki</a> &rsaquo; <span data-i18n="bc">Blog</span></div>
+  <h1 data-i18n="title">Loan & Compound Interest: The Complete Calculator Guide</h1>
+  <p class="meta" data-i18n="meta">Published: May 15, 2026 · 12 min read</p>
+
+  <p data-i8n="intro" data-i18n="intro">Whether you are buying a house, comparing savings accounts, or planning for retirement, two concepts will shape almost every financial decision you make: <strong>loan amortization</strong> and <strong>compound interest</strong>. Understanding these isn't just helpful — it can save (or make) you tens of thousands of dollars over the years.</p>
+
+  <p data-i18n="intro2">This guide covers both topics in plain language, with formulas, examples, and free calculators you can use right now.</p>
+
+  <h2 id="s1" data-i18n="part1_title">Part 1: How Loans Work</h2>
+
+  <p data-i8n="p1_p1" data-i18n="p1_p1">A loan is simply an agreement: someone gives you money today, and you pay it back over time with interest. The two critical questions are always the same: <strong>How much per month?</strong> and <strong>How much total interest?</strong></p>
+
+  <h3 id="s2" data-i18n="monthly_title">The Monthly Payment Formula</h3>
+
+  <p data-i18n="monthly_p1">Most personal loans, auto loans, and mortgages use <strong>fixed-rate amortization</strong> — your monthly payment stays the same for the entire term. The formula is:</p>
+
+  <div class="formula" data-i18n="monthly_formula">M = P × [r(1+r)<sup>n</sup>] / [(1+r)<sup>n</sup> − 1]</div>
+
+  <p data-i18n="monthly_vars">Where:</p>
+  <ul>
+    <li data-i18n="mv1"><strong>P</strong> = Principal (loan amount)</li>
+    <li data-i18n="mv2"><strong>r</strong> = Monthly interest rate (annual rate ÷ 12 ÷ 100)</li>
+    <li data-i18n="mv3"><strong>n</strong> = Total number of payments (years × 12)</li>
+  </ul>
+
+  <div class="tip" data-i18n="monthly_tip"><strong>Quick example:</strong> A $300,000 mortgage at 6.5% for 30 years: M = 300,000 × [0.00542 × (1.00542)<sup>360</sup>] / [(1.00542)<sup>360</sup> − 1] ≈ <strong>$1,896/month</strong>. Total interest paid: $382,633. That's more than the house itself.</div>
+
+  <h3 id="s3" data-i18n="amort_title">What is an Amortization Schedule?</h3>
+
+  <p data-i18n="amort_p1">An amortization schedule breaks down every single payment into two parts: <strong>principal</strong> (reducing your debt) and <strong>interest</strong> (the bank's fee). In the early years, most of your payment goes to interest. Over time, the balance shifts — by the final years, nearly all of it goes to principal.</p>
+
+  <div class="comparison">
+    <h4 data-i18n="amort_table_title">Example: $300,000 Loan at 6.5% (30 years)</h4>
+    <table>
+      <thead>
+        <tr><th data-i18n="at_yr">Year</th><th data-i18n="at_payment">Payment</th><th data-i8n="at_principal" data-i18n="at_principal">Principal</th><th data-i8n="at_interest" data-i18n="at_interest">Interest</th><th data-i18n="at_balance">Balance</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>$22,752</td><td>$3,381</td><td>$19,371</td><td>$296,619</td></tr>
+        <tr><td>5</td><td>$22,752</td><td>$20,479</td><td>$109,282</td><td>$279,521</td></tr>
+        <tr><td>10</td><td>$22,752</td><td>$49,081</td><td>$178,438</td><td>$250,919</td></tr>
+        <tr><td>15</td><td>$22,752</td><td>$90,081</td><td>$251,298</td><td>$209,919</td></tr>
+        <tr><td>20</td><td>$22,752</td><td>$147,480</td><td>$307,560</td><td>$152,520</td></tr>
+        <tr><td>30</td><td>$22,752</td><td>$300,000</td><td>$382,633</td><td>$0</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p data-i18n="amort_p2">Notice how in Year 1, only $3,381 of your $22,752 in payments goes toward the actual loan. The rest ($19,371) is just interest. This is why making extra payments early in the loan has an outsized impact.</p>
+
+  <h3 id="s4" data-i18n="early_title">The Power of Early Payments</h3>
+
+  <p data-i18n="early_p1">Making even a small extra payment toward your loan principal can save you enormous amounts of interest. There are two main strategies:</p>
+
+  <ul>
+    <li data-i18n="early_s1"><strong>Keep the same payment, finish early:</strong> Your monthly payment stays the same, but the loan ends sooner. On a $300,000 / 30-year / 6.5% loan, a one-time $10,000 extra payment at month 12 saves about $42,000 in interest and pays off the loan 2 years early.</li>
+    <li data-i18n="early_s2"><strong>Reduce the payment, keep the term:</strong> Your monthly payment drops, but the loan still ends at the original date. The same $10,000 payment would reduce your monthly bill by roughly $65/month.</li>
+  </ul>
+
+  <div class="green-tip tip" data-i18n="early_tip"><strong>The golden rule of loans:</strong> A dollar of extra principal payment in Year 1 saves more interest than the same dollar in Year 20, because it prevents interest from compounding on that dollar for the remaining term.</div>
+
+  <div style="text-align:center;margin:24px 0;">
+    <a href="/loan-calculator/" class="cta" data-i8n="cta_loan" data-i18n="cta_loan">→ Try the Loan Calculator</a>
+  </div>
+
+  <h2 id="s5" data-i18n="part2_title">Part 2: Compound Interest — The Eighth Wonder</h2>
+
+  <p data-i18n="part2_intro">Albert Einstein allegedly called compound interest the "eighth wonder of the world." Whether he actually said it or not, the math is undeniable: <strong>when your money earns interest on interest, the results grow exponentially over time.</strong></p>
+
+  <h3 id="s6" data-i18n="compound_title">The Compound Interest Formula</h3>
+
+  <div class="formula" data-i18n="compound_formula">A = P × (1 + r/n)<sup>n×t</sup></div>
+
+  <p data-i18n="compound_vars">Where:</p>
+  <ul>
+    <li data-i8n="cv1" data-i18n="cv1"><strong>A</strong> = Final amount</li>
+    <li data-i8n="cv2" data-i18n="cv2"><strong>P</strong> = Principal (initial deposit)</li>
+    <li data-i8n="cv3" data-i18n="cv3"><strong>r</strong> = Annual interest rate (as a decimal)</li>
+    <li data-i8n="cv4" data-i18n="cv4"><strong>n</strong> = Compounding frequency (1=annual, 4=quarterly, 12=monthly, 365=daily)</li>
+    <li data-i8n="cv5" data-i18n="cv5"><strong>t</strong> = Time in years</li>
+  </ul>
+
+  <h3 id="s7" data-i18n="simple_vs_title">Simple vs Compound Interest</h3>
+
+  <p data-i18n="simple_vs_p1">The difference between simple and compound interest starts small but becomes dramatic over long periods:</p>
+
+  <div class="comparison">
+    <h4 data-i8n="sv_title" data-i18n="sv_title">$10,000 at 7% Over 30 Years</h4>
+    <table>
+      <thead>
+        <tr><th data-i8n="sv_type" data-i18n="sv_type">Type</th><th data-i8n="sv_final" data-i18n="sv_final">Final Amount</th><th data-i8n="sv_interest" data-i18n="sv_interest">Interest Earned</th></tr>
+      </thead>
+      <tbody>
+        <tr><td data-i8n="sv_simple" data-i18n="sv_simple">Simple Interest</td><td>$31,000</td><td>$21,000</td></tr>
+        <tr><td data-i8n="sv_compound" data-i18n="sv_compound">Compound (Annual)</td><td>$76,123</td><td>$66,123</td></tr>
+        <tr><td data-i8n="sv_compound_m" data-i18n="sv_compound_m">Compound (Monthly)</td><td>$81,445</td><td>$71,445</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p data-i8n="simple_vs_p2" data-i18n="simple_vs_p2">Compound interest earns <strong>3.9× more</strong> than simple interest over 30 years. That gap only widens with higher rates and longer timeframes.</p>
+
+  <h3 id="s8" data-i18n="compounding_title">Why Compounding Frequency Matters</h3>
+
+  <p data-i8n="compounding_p1" data-i18n="compounding_p1">More frequent compounding means slightly higher returns. But don't overthink it — the difference between daily and monthly compounding on a savings account is usually less than 0.1% per year. The real driver of growth is <strong>time</strong> and <strong>contributions</strong>.</p>
+
+  <h3 id="s9" data-i8n="contributions_title" data-i18n="contributions_title">The Real Secret: Regular Contributions</h3>
+
+  <p data-i8n="contributions_p1" data-i18n="contributions_p1">The compound interest formula above only covers a single lump sum. In real life, most people save through regular monthly contributions. Adding $500/month to a $10,000 initial investment at 7% annual return:</p>
+
+  <ul>
+    <li data-i8n="contrib_1" data-i18n="contrib_1"><strong>After 10 years:</strong> $106,183 ($10,000 initial + $60,000 contributed + $36,183 interest)</li>
+    <li data-i8n="contrib_2" data-i18n="contrib_2"><strong>After 20 years:</strong> $270,290 ($10,000 + $120,000 + $140,290 interest)</li>
+    <li data-i8n="contrib_3" data-i18n="contrib_3"><strong>After 30 years:</strong> $566,764 ($10,000 + $180,000 + $376,764 interest)</li>
+  </ul>
+
+  <div class="tip" data-i8n="contrib_tip" data-i18n="contrib_tip"><strong>Key insight:</strong> Your contributions totaled only $190,000, but compound interest added $376,764 — nearly double. Starting early is more important than investing large amounts.</div>
+
+  <div style="text-align:center;margin:24px 0;">
+    <a href="/compound-interest/" class="cta" data-i8n="cta_compound" data-i18n="cta_compound">→ Try the Compound Interest Calculator</a>
+  </div>
+
+  <h2 id="s10" data-i8n="practical_title" data-i18n="practical_title">Part 3: Practical Financial Tips</h2>
+
+  <h3 id="s11" data-i8n="tips_borrow_title" data-i8n="tips_borrow_title" data-i18n="tips_borrow_title">When Borrowing</h3>
+  <ul>
+    <li data-i8n="tip_b1" data-i18n="tip_b1">Always compare the <strong>APR</strong> (Annual Percentage Rate), not just the headline rate. APR includes fees and gives a true cost comparison.</li>
+    <li data-i8n="tip_b2" data-i18n="tip_b2">Shorter loan terms = higher monthly payments but dramatically less total interest. A 15-year mortgage vs 30-year on $300K at 6.5% saves about <strong>$230,000</strong> in interest.</li>
+    <li data-i8n="tip_b3" data-i18n="tip_b3">Make biweekly payments instead of monthly — you'll make 26 half-payments (equivalent to 13 full payments) per year, shaving years off the loan.</li>
+    <li data-i8n="tip_b4" data-i18n="tip_b4">Round up your payment. If your mortgage is $1,896, pay $2,000. The extra $104/month on a 30-year mortgage can cut 5+ years off the term.</li>
+  </ul>
+
+  <h3 id="s12" data-i8n="tips_invest_title" data-i8n="tips_invest_title" data-i18n="tips_invest_title">When Investing</h3>
+  <ul>
+    <li data-i8n="tip_i1" data-i18n="tip_i1"><strong>Start now.</strong> A 25-year-old investing $200/month until 65 will end up with more than a 35-year-old investing $400/month until 65, despite contributing less total money.</li>
+    <li data-i8n="tip_i2" data-i18n="tip_i2">Don't chase yield. A stable 7% return compounded over decades beats a volatile 15% return that crashes every few years.</li>
+    <li data-i8n="tip_i3" data-i8n="tip_i3" data-i18n="tip_i3">Take advantage of tax-advantaged accounts (401k, IRA, etc.) — the tax-free compounding is equivalent to an extra 1-2% annual return.</li>
+    <li data-i8n="tip_i4" data-i8n="tip_i4" data-i18n="tip_i4">Automate your contributions. Remove the decision-making and let compounding work silently in the background.</li>
+  </ul>
+
+  <h2 id="s13" data-i8n="tools_title" data-i8n="tools_title" data-i18n="tools_title">Try the Free Calculators</h2>
+
+  <p data-i8n="tools_p" data-i8n="tools_p" data-i18n="tools_p">Both calculators are free, work entirely in your browser (no data sent to any server), and include interactive visualizations:</p>
+
+  <ul>
+    <li data-i8n="tool_loan" data-i8n="tool_loan" data-i18n="tool_loan"><strong><a href="/loan-calculator/">Loan Calculator</a></strong> — Monthly payment, full amortization schedule, stacked chart (principal vs interest + balance curve), and early repayment comparison across 3 strategies.</li>
+    <li data-i8n="tool_compound" data-i8n="tool_compound" data-i18n="tool_compound"><strong><a href="/compound-interest/">Compound Interest Calculator</a></strong> — Growth curves with layered area chart (principal layer + contribution layer + interest layer), compounding frequency selector, and simple vs compound comparison.</li>
+  </ul>
+
+  <div class="related-section">
+    <h3 data-i8n="rt_title" data-i18n="rt_title">Related Tools</h3>
+    <div class="related-grid">
+      <a href="/meeting-cost/" class="related-card">
+        <h4 data-i8n="rt_meeting_t" data-i18n="rt_meeting_t">Meeting Cost Calculator</h4>
+        <p data-i8n="rt_meeting_d" data-i8n="rt_meeting_d" data-i18n="rt_meeting_d">See how much your meetings burn in real dollars.</p>
+      </a>
+      <a href="/middle-class/" class="related-card">
+        <h4 data-i8n="rt_middle_t" data-i8n="rt_middle_t" data-i18n="rt_middle_t">Middle Class Calculator</h4>
+        <p data-i8n="rt_middle_d" data-i8n="rt_middle_d" data-i18n="rt_middle_d">Find out where your household income ranks.</p>
+      </a>
+      <a href="/tax-1099/" class="related-card">
+        <h4 data-i8n="rt_tax_t" data-i8n="rt_tax_t" data-i18n="rt_tax_t">1099 Tax Calculator</h4>
+        <p data-i8n="rt_tax_d" data-i8n="rt_tax_d" data-i18n="rt_tax_d">Calculate freelance taxes, quarterly payments, and deductions.</p>
+      </a>
+    </div>
+  </div>
+  <footer>
+    <p><a href="/privacy/">Privacy Policy</a> · <a href="/disclaimer/">Disclaimer</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a></p>
+    <p style="margin-top:8px">© 2026 Freemaki · All rights reserved</p>
+  </footer>
+</div>
+<script>
+const i18n={en:{bc:'Blog',title:'Loan & Compound Interest: The Complete Calculator Guide',meta:'Published: May 15, 2026 · 12 min read',intro:'Whether you are buying a house, comparing savings accounts, or planning for retirement, two concepts will shape almost every financial decision you make: <strong>loan amortization</strong> and <strong>compound interest</strong>. Understanding these isn\'t just helpful — it can save (or make) you tens of thousands of dollars over the years.',intro2:'This guide covers both topics in plain language, with formulas, examples, and free calculators you can use right now.',part1_title:'Part 1: How Loans Work',p1_p1:'A loan is simply an agreement: someone gives you money today, and you pay it back over time with interest. The two critical questions are always the same: <strong>How much per month?</strong> and <strong>How much total interest?</strong>',monthly_title:'The Monthly Payment Formula',monthly_p1:'Most personal loans, auto loans, and mortgages use <strong>fixed-rate amortization</strong> — your monthly payment stays the same for the entire term. The formula is:',monthly_formula:'M = P × [r(1+r)<sup>n</sup>] / [(1+r)<sup>n</sup> − 1]',monthly_vars:'Where:',mv1:'<strong>P</strong> = Principal (loan amount)',mv2:'<strong>r</strong> = Monthly interest rate (annual rate ÷ 12 ÷ 100)',mv3:'<strong>n</strong> = Total number of payments (years × 12)',monthly_tip:'<strong>Quick example:</strong> A ¥200万 mortgage at 6.5% for 30 years ≈ <strong>$1,896/month</strong>. Total interest: $382,633 — more than the house itself.',amort_title:'What is an Amortization Schedule?',amort_p1:'An amortization schedule breaks down every payment into <strong>principal</strong> (reducing your debt) and <strong>interest</strong> (the bank\'s fee). In the early years, most of your payment goes to interest. Over time, the balance shifts.',amort_table_title:'Example: $300,000 Loan at 6.5% (30 years)',at_yr:'Year',at_payment:'Payment',at_principal:'Principal',at_interest:'Interest',at_balance:'Balance',amort_p2:'Notice how in Year 1, only $3,381 of your $22,752 in payments goes toward the actual loan. The rest is interest. This is why making extra payments early in the loan has an outsized impact.',early_title:'The Power of Early Payments',early_p1:'Making even a small extra payment toward your loan principal can save you enormous amounts of interest. Two strategies:',early_s1:'<strong>Keep the same payment, finish early:</strong> Same monthly payment, but the loan ends sooner. A one-time $10,000 extra payment at month 12 saves ~$42,000 in interest and pays off 2 years early.',early_s2:'<strong>Reduce the payment, keep the term:</strong> Monthly payment drops, loan ends at original date. Same $10,000 would reduce monthly bill by ~$65.',early_tip:'<strong>The golden rule of loans:</strong> A dollar of extra principal payment in Year 1 saves more interest than the same dollar in Year 20.',cta_loan:'→ Try the Loan Calculator',part2_title:'Part 2: Compound Interest — The Eighth Wonder',part2_intro:'Albert Einstein allegedly called compound interest the "eighth wonder of the world." Whether he said it or not, the math is undeniable: <strong>when your money earns interest on interest, the results grow exponentially.</strong>',compound_title:'The Compound Interest Formula',compound_formula:'A = P × (1 + r/n)<sup>n×t</sup>',compound_vars:'Where:',cv1:'<strong>A</strong> = Final amount',cv2:'<strong>P</strong> = Principal (initial deposit)',cv3:'<strong>r</strong> = Annual interest rate (decimal)',cv4:'<strong>n</strong> = Compounding frequency (1=annual, 4=quarterly, 12=monthly, 365=daily)',cv5:'<strong>t</strong> = Time in years',simple_vs_title:'Simple vs Compound Interest',simple_vs_p1:'The difference starts small but becomes dramatic over long periods:',sv_title:'$10,000 at 7% Over 30 Years',sv_type:'Type',sv_final:'Final Amount',sv_interest:'Interest Earned',sv_simple:'Simple Interest',sv_compound:'Compound (Annual)',sv_compound_m:'Compound (Monthly)',simple_vs_p2:'Compound interest earns <strong>3.9× more</strong> than simple interest over 30 years. That gap only widens with higher rates and longer timeframes.',compounding_title:'Why Compounding Frequency Matters',compounding_p1:'More frequent compounding = slightly higher returns. But the difference between daily and monthly is usually < 0.1%/year. The real drivers are <strong>time</strong> and <strong>contributions</strong>.',contributions_title:'The Real Secret: Regular Contributions',contributions_p1:'Adding $500/month to a $10,000 initial investment at 7% annual return:',contrib_1:'<strong>After 10 years:</strong> $106,183 ($10,000 + $60,000 contributed + $36,183 interest)',contrib_2:'<strong>After 20 years:</strong> $270,290 ($10,000 + $120,000 + $140,290 interest)',contrib_3:'<strong>After 30 years:</strong> $566,764 ($10,000 + $180,000 + $376,764 interest)',contrib_tip:'<strong>Key insight:</strong> You contributed $190,000, but compound interest added $376,764 — nearly double. Starting early matters more than investing large amounts.',cta_compound:'→ Try the Compound Interest Calculator',practical_title:'Part 3: Practical Financial Tips',tips_borrow_title:'When Borrowing',tip_b1:'Compare <strong>APR</strong> (Annual Percentage Rate), not just the headline rate. APR includes fees.',tip_b2:'Shorter terms = higher monthly payments but far less total interest. 15-year vs 30-year on $300K saves ~$230,000.',tip_b3:'Biweekly payments = 26 half-payments/year (13 full), shaving years off the loan.',tip_b4:'Round up your payment. An extra $104/month on a $1,896 mortgage can cut 5+ years.',tips_invest_title:'When Investing',tip_i1:'<strong>Start now.</strong> $200/month from age 25 beats $400/month from age 35.',tip_i2:'Don\'t chase yield. Stable 7% over decades beats volatile 15% that crashes periodically.',tip_i3:'Use tax-advantaged accounts (401k, IRA) — tax-free compounding equals an extra 1-2% return.',tip_i4:'Automate contributions. Remove the decision-making; let compounding work silently.',tools_title:'Try the Free Calculators',tools_p:'Both calculators are free, work in your browser (no data sent anywhere), and include interactive visualizations:',tool_loan:'<strong><a href="/loan-calculator/">Loan Calculator</a></strong> — Monthly payment, amortization schedule, stacked chart, and early repayment comparison.',tool_compound:'<strong><a href="/compound-interest/">Compound Interest Calculator</a></strong> — Growth curves, layered area chart, frequency selector, and simple vs compound comparison.',rt_title:'Related Tools',rt_meeting_t:'Meeting Cost Calculator',rt_meeting_d:'See how much meetings burn in real dollars.',rt_middle_t:'Middle Class Calculator',rt_middle_d:'Find out where your income ranks.',rt_tax_t:'1099 Tax Calculator',rt_tax_d:'Calculate freelance taxes and quarterly payments.'},zh:{bc:'博客',title:'贷款与复利：完全计算指南',meta:'发布：2026年5月15日 · 阅读 12 分钟',intro:'无论是买房、对比储蓄账户，还是规划退休，<strong>贷款摊销</strong>和<strong>复利</strong>这两个概念几乎会影响你的每一个财务决策。理解它们不仅能帮你省钱，还能帮你赚钱——差别可能高达数十万元。',intro2:'本文用通俗语言详细讲解两个主题，配有公式、实例和免费计算器。',part1_title:'第一部分：贷款原理',p1_p1:'贷款的本质很简单：今天借到钱，未来连本带利还回去。两个关键问题永远是：<strong>每月还多少？</strong>和<strong>总共付多少利息？</strong>',monthly_title:'月供计算公式',monthly_p1:'大多数个人贷款、车贷和房贷采用<strong>固定利率等额本息</strong>——月供在整个期限内保持不变。公式如下：',monthly_formula:'M = P × [r(1+r)<sup>n</sup>] / [(1+r)<sup>n</sup> − 1]',monthly_vars:'其中：',mv1:'<strong>P</strong> = 贷款本金',mv2:'<strong>r</strong> = 月利率（年利率 ÷ 12 ÷ 100）',mv3:'<strong>n</strong> = 总还款期数（年 × 12）',monthly_tip:'<strong>快速示例：</strong>200万元房贷，利率6.5%，30年期 ≈ <strong>¥12,641/月</strong>。总利息约255万元——比房子本身还多。',amort_title:'什么是还款计划表？',amort_p1:'还款计划表把每一笔还款拆分为<strong>本金</strong>（减少你的债务）和<strong>利息</strong>（银行的收费）。早期大部分还款是利息，后期大部分是本金。',amort_table_title:'示例：200万元贷款，利率6.5%，30年',at_yr:'年份',at_payment:'年还款额',at_principal:'本金',at_interest:'利息',at_balance:'剩余本金',amort_p2:'注意第一年，你支付的¥151,698中只有¥22,540是本金，其余全是利息。这就是为什么早期多还款效果特别明显。',early_title:'提前还款的力量',early_p1:'即使多还一小笔本金，也能省下巨额利息。两种策略：',early_s1:'<strong>保持月供不变，缩短年限：</strong>月供不变但贷款提前结束。在第12个月一次性多还10万元，可省约28万利息，提前2年还清。',early_s2:'<strong>降低月供，保持年限：</strong>月供减少，贷款到期日不变。同样10万元可每月少还约¥450。',early_tip:'<strong>贷款黄金法则：</strong>第1年多还1元本金，比第20年多还1元省的利息多得多，因为前者少算了20年的复利。',cta_loan:'→ 试试贷款计算器',part2_title:'第二部分：复利——世界第八大奇迹',part2_intro:'爱因斯坦据说把复利称为"世界第八大奇迹"。不管他有没有说过，数学不会骗人：<strong>当你的钱利滚利时，结果会随时间指数级增长。</strong>',compound_title:'复利公式',compound_formula:'A = P × (1 + r/n)<sup>n×t</sup>',compound_vars:'其中：',cv1:'<strong>A</strong> = 最终金额',cv2:'<strong>P</strong> = 本金（初始存款）',cv3:'<strong>r</strong> = 年利率（小数）',cv4:'<strong>n</strong> = 计息频率（1=年, 4=季, 12=月, 365=日）',cv5:'<strong>t</strong> = 年数',simple_vs_title:'单利 vs 复利',simple_vs_p1:'差距初期很小，但随时间急剧放大：',sv_title:'10万元本金，年化7%，30年',sv_type:'类型',sv_final:'最终金额',sv_interest:'利息收益',sv_simple:'单利',sv_compound:'复利（年复利）',sv_compound_m:'复利（月复利）',simple_vs_p2:'30年后复利收益是单利的<strong>3.9倍</strong>。利率越高、时间越长，差距越大。',compounding_title:'为什么计息频率很重要',compounding_p1:'计息越频繁，收益越高。但日复利和月复利差异通常不到年化0.1%。真正驱动增长的是<strong>时间</strong>和<strong>持续投入</strong>。',contributions_title:'真正的秘密：定期投入',contributions_p1:'10万元初始投资 + 每月追加5000元，年化7%：',contrib_1:'<strong>10年后：</strong>¥926,732（10万 + 60万投入 + 26.7万利息）',contrib_2:'<strong>20年后：</strong>¥2,545,287（10万 + 120万 + 122.5万利息）',contrib_3:'<strong>30年后：</strong>¥5,755,993（10万 + 180万 + 367.6万利息）',contrib_tip:'<strong>关键洞察：</strong>你总共投入190万，但复利带来了367.6万——接近翻倍。越早开始，比投入更多金额更重要。',cta_compound:'→ 试试复利计算器',practical_title:'第三部分：实用理财建议',tips_borrow_title:'借款时',tip_b1:'对比<strong>年化利率（APR）</strong>而非名义利率。APR包含了手续费，是真正的成本对比。',tip_b2:'期限越短，月供越高但总利息越少。200万房贷15年期比30年期省约<strong>155万</strong>利息。',tip_b3:'双周还款 = 每年26次半额还款（等于13次全额），可以省下数年利息。',tip_b4:'月供取整。¥12,641的房贷还¥13,000，每月多还的359元可以缩短5年以上。',tips_invest_title:'投资时',tip_i1:'<strong>现在就开始。</strong>25岁开始每月投2000元到65岁，比35岁开始每月投4000元到65岁攒得多。',tip_i2:'不要追逐高收益。稳定7%持续复利，比波动15%动不动暴跌要好得多。',tip_i3:'利用税收优惠账户（公积金、养老金等）——免税复利相当于额外1-2%的收益。',tip_i4:'设置自动定投。省去决策烦恼，让复利默默工作。',tools_title:'试试免费计算器',tools_p:'两个计算器完全免费，在浏览器内运行（不会上传任何数据），带交互式可视化图表：',tool_loan:'<strong><a href="/loan-calculator/">贷款计算器</a></strong>——月供计算、完整还款计划、本金利息堆叠图、提前还款三策略对比。',tool_compound:'<strong><a href="/compound-interest/">复利计算器</a></strong>——增长曲线、分层面积图、计息频率选择、单利vs复利对比。',rt_title:'相关工具',rt_meeting_t:'会议成本计算器',rt_meeting_d:'看看你的会议每小时烧了多少钱。',rt_middle_t:'中产阶层计算器',rt_middle_d:'看看你的家庭收入排在哪一层。',rt_tax_t:'1099 税务计算器',rt_tax_d:'计算自由职业税、季度预缴和抵扣。'}};
+let lang='en';function toggleLang(){lang=lang==='en'?'zh':'en';document.getElementById('langBtn').textContent=lang==='en'?'中文':'EN';document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(i18n[lang][k])el.innerHTML=i18n[lang][k]});}
+</script>
+<script>
+(function(){
+var p=document.querySelector('.page');if(!p)return;
+var hs=p.querySelectorAll('h2,h3');if(hs.length<3)return;
+hs.forEach(function(h,i){if(!h.id)h.id='s'+(i+1);});
+var sb=document.createElement('nav');sb.id='toc-sb';sb.className='toc-sidebar';
+sb.innerHTML='<h4>Table of Contents</h4><ul></ul>';
+document.body.appendChild(sb);
+var btn=document.createElement('button');btn.className='toc-btn';btn.innerHTML='&#9776;';btn.setAttribute('aria-label','TOC');
+btn.onclick=function(){sb.classList.toggle('open');};
+document.body.appendChild(btn);
+function build(){var u=sb.querySelector('ul');u.innerHTML='';hs.forEach(function(h){var li=document.createElement('li');var a=document.createElement('a');a.href='#'+h.id;a.textContent=h.textContent;a.dataset.level=h.tagName;li.appendChild(a);u.appendChild(li);});var t=sb.querySelector('h4');if(t)t.textContent=typeof lang!=='undefined'&&lang==='zh'?'目录':'Table of Contents';}
+build();
+var ot=window.toggleLang;if(ot){window.toggleLang=function(){ot();setTimeout(build,50);};}
+var cur='';window.addEventListener('scroll',function(){var c='';hs.forEach(function(h){if(h.getBoundingClientRect().top<=80)c=h.id;});if(c!==cur){cur=c;sb.querySelectorAll('a').forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='#'+c);});}});
+})();
+</script></body>
+</html>
