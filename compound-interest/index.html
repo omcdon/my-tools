@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Compound Interest Calculator – Investment Growth | Freemaki</title>
+  <meta name="description" content="Free compound interest calculator with growth curve chart. See how your savings grow over time with regular contributions. 中英双语。">
+  <meta name="keywords" content="compound interest calculator, investment calculator, savings growth, 复利计算器, 投资收益, 储蓄增长">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Freemaki">
+  <link rel="canonical" href="https://freemaki.com/compound-interest/">
+  <meta property="og:title" content="Free Compound Interest Calculator">
+  <meta property="og:description" content="Visualize how compound interest grows your money over time.">
+  <meta property="og:url" content="https://freemaki.com/compound-interest/">
+  <meta property="og:site_name" content="Freemaki">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root {
+      --bg: #0f0f1a; --surface: #1a1a2e; --surface2: #252540;
+      --accent: #6c5ce7; --accent2: #a29bfe; --accent-glow: rgba(108,92,231,0.35);
+      --green: #2ecc71; --yellow: #f1c40f; --orange: #e67e22; --red: #e74c3c;
+      --text: #e0e0ff; --text-dim: #8888bb;
+      --border: rgba(108,92,231,0.25); --radius: 14px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font);
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+
+    .lang-toggle { position: fixed; top: 20px; right: 20px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 8px; display: flex; overflow: hidden; z-index: 100; }
+    .lang-btn { padding: 6px 14px; background: none; border: none; color: var(--text-dim);
+      font-size: 13px; cursor: pointer; transition: all 0.2s; font-family: var(--font); }
+    .lang-btn.active { background: var(--accent); color: #fff; }
+    .lang-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    .breadcrumb { width: 100%; max-width: 800px; margin-bottom: 32px; display: flex;
+      gap: 8px; align-items: center; font-size: 14px; color: var(--text-dim); }
+    .breadcrumb a { color: var(--accent2); text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 32px 28px; width: 100%; max-width: 800px; }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 14px; color: var(--text-dim); margin-bottom: 24px; }
+
+    .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 20px; }
+    .input-group { text-align: left; }
+    .control-label { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; font-weight: 600; display: block; }
+    input[type="number"], select {
+      width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 10px 14px; font-size: 15px; color: var(--text); font-family: var(--font); outline: none;
+      transition: border-color 0.2s; -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+    input[type="number"]:focus { border-color: var(--accent2); }
+
+    .freq-toggle { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .freq-btn { flex: 1; padding: 9px; background: var(--surface2); border: none; color: var(--text-dim);
+      font-size: 12px; cursor: pointer; transition: all 0.15s; font-family: var(--font); font-weight: 600; }
+    .freq-btn.active { background: var(--accent); color: #fff; }
+    .freq-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    .btn-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+    .btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 9px 18px; font-size: 13px; color: var(--text); cursor: pointer; transition: all 0.15s;
+      font-family: var(--font); text-decoration: none; display: inline-block; text-align: center; }
+    .btn:hover { border-color: var(--accent2); color: #fff; }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.primary:hover { background: var(--accent2); border-color: var(--accent2); }
+
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 20px; }
+    .stat-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+    .stat-value { font-size: 22px; font-weight: 700; color: var(--accent2); margin-bottom: 4px; }
+    .stat-value.green { color: var(--green); }
+    .stat-label { font-size: 12px; color: var(--text-dim); }
+
+    /* Chart */
+    .chart-section { margin-top: 24px; }
+    .chart-legend { display: flex; gap: 16px; margin-bottom: 8px; font-size: 12px; color: var(--text-dim); flex-wrap: wrap; }
+    .chart-legend span { display: flex; align-items: center; gap: 4px; }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+    .chart-container { position: relative; width: 100%; height: 320px; margin-top: 8px; }
+    .chart-container canvas { width: 100% !important; height: 100% !important; }
+
+    /* Comparison */
+    .compare-section { margin-top: 24px; border-top: 1px solid var(--border); padding-top: 20px; }
+    .compare-section h3 { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+    .compare-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .compare-card { flex: 1; min-width: 180px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
+    .compare-card .stat-value { font-size: 18px; }
+    .compare-label { font-size: 12px; color: var(--text-dim); margin-bottom: 6px; font-weight: 600; }
+
+    .disclaimer { font-size: 11px; color: var(--text-dim); margin-top: 16px; line-height: 1.5; text-align: center; }
+    .footer { margin-top: 32px; font-size: 12px; color: var(--text-dim); display: flex; gap: 20px; }
+    .footer a { color: var(--accent2); text-decoration: none; }
+    .footer a:hover { color: #fff; }
+
+    [lang="en"] .zh { display: none; }
+    [lang="zh"] .en { display: none; }
+
+    .related-section { margin-top: 24px; }
+    .related-section h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+    .related-card { display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-decoration: none; color: var(--text); transition: border-color .2s; }
+    .related-card:hover { border-color: var(--accent); }
+    .related-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+    .related-card p { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+
+    .ad-slot { background: var(--surface2); border: 1px dashed var(--border); border-radius: var(--radius); padding: 24px; text-align: center; color: var(--text-dim); font-size: 12px; margin: 24px auto; max-width: 800px; width: 100%; min-height: 90px; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Free Compound Interest Calculator",
+    "url": "https://www.freemaki.com/compound-interest/",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate compound interest with regular contributions and visualize investment growth over time."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is compound interest?", "acceptedAnswer": { "@type": "Answer", "text": "Compound interest is interest calculated on both the initial principal and the accumulated interest from previous periods. Your money earns interest on interest, leading to exponential growth over time." } },
+      { "@type": "Question", "name": "How often should interest be compounded?", "acceptedAnswer": { "@type": "Answer", "text": "More frequent compounding yields slightly higher returns. Daily compounding is best, followed by monthly, quarterly, and annually. The difference is small at low rates but grows with higher rates and longer timeframes." } }
+    ]
+  }
+  </script>
+</head>
+<body lang="zh">
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+
+  <div class="breadcrumb">
+    <a href="/">Home</a><span>›</span>
+    <a href="/compound-interest/" class="en">Compound Interest Calculator</a>
+    <a href="/compound-interest/" class="zh">复利计算器</a>
+  </div>
+
+  <div class="card">
+    <h1 class="en">Compound Interest Calculator</h1>
+    <h1 class="zh">复利计算器</h1>
+    <p class="subtitle en">See how your money grows with compound interest and regular contributions.</p>
+    <p class="subtitle zh">看看复利和定期投入如何让你的钱增长。</p>
+
+    <div class="input-grid">
+      <div class="input-group">
+        <label class="control-label"><span class="en">Initial Deposit</span><span class="zh">初始本金</span></label>
+        <input type="number" id="principal" value="10000" min="0" step="1000">
+      </div>
+      <div class="input-group">
+        <label class="control-label"><span class="en">Annual Interest Rate (%)</span><span class="zh">年利率 (%)</span></label>
+        <input type="number" id="rate" value="7" min="0" max="50" step="0.1">
+      </div>
+      <div class="input-group">
+        <label class="control-label"><span class="en">Investment Period (years)</span><span class="zh">投资年限 (年)</span></label>
+        <input type="number" id="years" value="20" min="1" max="100">
+      </div>
+      <div class="input-group">
+        <label class="control-label"><span class="en">Monthly Contribution</span><span class="zh">每月追加投入</span></label>
+        <input type="number" id="monthly" value="500" min="0" step="100">
+      </div>
+    </div>
+
+    <div class="input-grid" style="margin-bottom:20px; max-width: 360px;">
+      <div class="input-group">
+        <label class="control-label"><span class="en">Compounding Frequency</span><span class="zh">复利频率</span></label>
+        <div class="freq-toggle" id="freqToggle">
+          <button class="freq-btn" onclick="setFreq(1)">Annually</button>
+          <button class="freq-btn" onclick="setFreq(4)">Quarterly</button>
+          <button class="freq-btn" onclick="setFreq(12)">Monthly</button>
+          <button class="freq-btn active" onclick="setFreq(365)">Daily</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn primary" onclick="calculate()">
+        <span class="en">Calculate</span><span class="zh">计算</span>
+      </button>
+      <button class="btn" onclick="copyResult()">
+        <span class="en">Copy Result</span><span class="zh">复制结果</span>
+      </button>
+    </div>
+
+    <div id="resultSection" style="display:none">
+      <div class="result-grid">
+        <div class="stat-card">
+          <div class="stat-value green" id="totalValue">--</div>
+          <div class="stat-label"><span class="en">Final Value</span><span class="zh">最终价值</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="totalContrib">--</div>
+          <div class="stat-label"><span class="en">Total Contributions</span><span class="zh">总投入</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="color:var(--orange)" id="totalEarnings">--</div>
+          <div class="stat-label"><span class="en">Total Interest Earned</span><span class="zh">总利息收入</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" style="color:var(--yellow)" id="earningsPct">--</div>
+          <div class="stat-label"><span class="en">Return on Investment</span><span class="zh">投资回报率</span></div>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="chart-section">
+        <div class="chart-legend">
+          <span><span class="dot" style="background:var(--accent)"></span><span class="en">Initial Deposit</span><span class="zh">初始本金</span></span>
+          <span><span class="dot" style="background:var(--green)"></span><span class="en">Contributions</span><span class="zh">追加投入</span></span>
+          <span><span class="dot" style="background:var(--orange)"></span><span class="en">Interest Earned</span><span class="zh">利息收入</span></span>
+        </div>
+        <div class="chart-container">
+          <canvas id="compoundChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Simple vs Compound -->
+      <div class="compare-section">
+        <h3><span class="en">Simple vs Compound Interest</span><span class="zh">单利 vs 复利对比</span></h3>
+        <div class="compare-row">
+          <div class="compare-card">
+            <div class="compare-label"><span class="en">Simple Interest</span><span class="zh">单利</span></div>
+            <div class="stat-value" id="simpleVal">--</div>
+          </div>
+          <div class="compare-card">
+            <div class="compare-label"><span class="en">Compound Interest</span><span class="zh">复利</span></div>
+            <div class="stat-value green" id="compoundVal">--</div>
+          </div>
+          <div class="compare-card" style="border-color:var(--green)">
+            <div class="compare-label"><span class="en">Difference</span><span class="zh">差额</span></div>
+            <div class="stat-value" style="color:var(--green)" id="diffVal">--</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="disclaimer en">This calculator assumes a fixed interest rate and regular contributions. Actual investment returns may vary.</p>
+    <p class="disclaimer zh">本计算器假设固定利率和定期投入。实际投资回报可能有所不同。</p>
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2720354590115044" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+
+  <div class="related-section en">
+    <h3>Related Tools</h3>
+    <div class="related-grid">
+      <a href="/loan-calculator/" class="related-card"><h4>Loan Calculator</h4><p>Calculate monthly payments and early repayment savings.</p></a>
+      <a href="/1099-tax-calculator/" class="related-card"><h4>1099 Tax Calculator</h4><p>Estimate self-employment taxes for freelancers.</p></a>
+      <a href="/middle-class/" class="related-card"><h4>Middle Class Calculator</h4><p>Find out where you stand in the US income distribution.</p></a>
+    </div>
+  </div>
+  <div class="related-section zh" style="display:none">
+    <h3>相关工具</h3>
+    <div class="related-grid">
+      <a href="/loan-calculator/" class="related-card"><h4>贷款计算器</h4><p>计算月供和提前还款省息方案。</p></a>
+      <a href="/1099-tax-calculator/" class="related-card"><h4>1099 税务计算器</h4><p>自由职业者自雇税估算。</p></a>
+      <a href="/middle-class/" class="related-card"><h4>中产阶层计算器</h4><p>看看你在美国家庭收入中的位置。</p></a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="/">← <span class="en">All Tools</span><span class="zh">返回首页</span></a>
+  </div>
+
+  <script>
+    let lang = 'zh';
+    let freq = 365;
+
+    function setLang(l) {
+      lang = l;
+      document.body.lang = l;
+      document.querySelectorAll('.lang-toggle .lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.lang-toggle .lang-btn[onclick="setLang(\'' + l + '\')"]').classList.add('active');
+      document.querySelectorAll('.related-section').forEach(s => s.style.display = 'none');
+      document.querySelectorAll('.related-section.' + l).forEach(s => s.style.display = '');
+      calculate();
+    }
+
+    function setFreq(f) {
+      freq = f;
+      document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      calculate();
+    }
+
+    function fmt(n) {
+      if (lang === 'zh') return '¥' + Math.round(n).toLocaleString('zh-CN');
+      return '$' + Math.round(n).toLocaleString('en-US');
+    }
+
+    function fmtShort(n) {
+      if (n >= 1e8) return (n / 1e8).toFixed(1) + (lang === 'zh' ? '亿' : '00M');
+      if (n >= 1e6) return (n / 1e6).toFixed(1) + (lang === 'zh' ? '百万' : 'M');
+      if (n >= 1e4) return (n / 1e4).toFixed(1) + (lang === 'zh' ? '万' : 'K');
+      return Math.round(n).toLocaleString();
+    }
+
+    function calculate() {
+      const P = parseFloat(document.getElementById('principal').value) || 0;
+      const annualRate = parseFloat(document.getElementById('rate').value) || 0;
+      const years = parseInt(document.getElementById('years').value) || 1;
+      const monthly = parseFloat(document.getElementById('monthly').value) || 0;
+
+      const r = annualRate / 100;
+      const n = freq;
+      const totalPeriods = years * n;
+      const ratePerPeriod = r / n;
+      const contribPerPeriod = monthly / 12 * (365 / n);
+
+      // Compound interest with contributions
+      let balance = P;
+      let totalContrib = P;
+      const yearlyData = [{ year: 0, balance: P, contrib: P, interest: 0 }];
+
+      let yearBalance = P;
+      let yearContrib = P;
+      let yearInterest = 0;
+
+      for (let i = 1; i <= totalPeriods; i++) {
+        const interest = balance * ratePerPeriod;
+        balance += interest + contribPerPeriod;
+        totalContrib += contribPerPeriod;
+        yearInterest += interest;
+        yearContrib += contribPerPeriod;
+
+        if (i % n === 0 || i === totalPeriods) {
+          const yr = Math.ceil(i / n);
+          yearlyData.push({
+            year: yr,
+            balance: balance,
+            contrib: yearContrib,
+            interest: yearInterest
+          });
+          yearBalance = balance;
+          yearContrib = 0;
+          yearInterest = 0;
+        }
+      }
+
+      const finalValue = balance;
+      const totalEarnings = finalValue - totalContrib;
+      const roi = totalContrib > 0 ? (totalEarnings / totalContrib * 100) : 0;
+
+      document.getElementById('resultSection').style.display = '';
+      document.getElementById('totalValue').textContent = fmt(finalValue);
+      document.getElementById('totalContrib').textContent = fmt(totalContrib);
+      document.getElementById('totalEarnings').textContent = fmt(totalEarnings);
+      document.getElementById('earningsPct').textContent = roi.toFixed(1) + '%';
+
+      // Simple interest for comparison
+      const simpleInterest = P * r * years + monthly * 12 * years * r * years / 2;
+      const simpleTotal = P + monthly * 12 * years + simpleInterest;
+      document.getElementById('simpleVal').textContent = fmt(simpleTotal);
+      document.getElementById('compoundVal').textContent = fmt(finalValue);
+      document.getElementById('diffVal').textContent = fmt(finalValue - simpleTotal);
+
+      drawChart(yearlyData, P);
+    }
+
+    function drawChart(data, initialP) {
+      const canvas = document.getElementById('compoundChart');
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const W = rect.width, H = 320;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.scale(dpr, dpr);
+
+      const pad = { top: 16, right: 16, bottom: 34, left: 60 };
+      const cW = W - pad.left - pad.right;
+      const cH = H - pad.top - pad.bottom;
+
+      const n = data.length;
+      const maxVal = Math.max(...data.map(d => d.balance)) * 1.08;
+
+      ctx.clearRect(0, 0, W, H);
+
+      // Grid
+      ctx.strokeStyle = 'rgba(136,136,187,0.12)';
+      ctx.lineWidth = 0.5;
+      for (let i = 0; i <= 5; i++) {
+        const y = pad.top + (cH / 5) * i;
+        ctx.beginPath();
+        ctx.moveTo(pad.left, y);
+        ctx.lineTo(W - pad.right, y);
+        ctx.stroke();
+      }
+
+      // Stacked area: contributions + interest
+      ctx.beginPath();
+      for (let i = 0; i < n; i++) {
+        const x = pad.left + (i / (n - 1)) * cW;
+        const y = pad.top + cH - (data[i].contrib / maxVal) * cH;
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      for (let i = n - 1; i >= 0; i--) {
+        const x = pad.left + (i / (n - 1)) * cW;
+        const y = pad.top + cH;
+        ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(46,204,113,0.3)';
+      ctx.fill();
+
+      // Interest area
+      ctx.beginPath();
+      for (let i = 0; i < n; i++) {
+        const x = pad.left + (i / (n - 1)) * cW;
+        const y = pad.top + cH - (data[i].balance / maxVal) * cH;
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      for (let i = n - 1; i >= 0; i--) {
+        const x = pad.left + (i / (n - 1)) * cW;
+        const y = pad.top + cH - (data[i].contrib / maxVal) * cH;
+        ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(230,126,34,0.35)';
+      ctx.fill();
+
+      // Total balance line
+      ctx.strokeStyle = '#e67e22';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      for (let i = 0; i < n; i++) {
+        const x = pad.left + (i / (n - 1)) * cW;
+        const y = pad.top + cH - (data[i].balance / maxVal) * cH;
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Contributions line
+      ctx.strokeStyle = '#2ecc71';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let i = 0; i < n; i++) {
+        const x = pad.left + (i / (n - 1)) * cW;
+        const y = pad.top + cH - (data[i].contrib / maxVal) * cH;
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Dots on balance line every 5 years
+      for (let i = 0; i < n; i += Math.max(1, Math.ceil(n / 10))) {
+        const x = pad.left + (i / (n - 1)) * cW;
+        const y = pad.top + cH - (data[i].balance / maxVal) * cH;
+        ctx.fillStyle = '#e67e22';
+        ctx.beginPath();
+        ctx.arc(x, y, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Y-axis labels
+      ctx.fillStyle = '#8888bb';
+      ctx.font = '10px system-ui';
+      ctx.textAlign = 'right';
+      for (let i = 0; i <= 5; i++) {
+        const val = (maxVal / 5) * (5 - i);
+        const y = pad.top + (cH / 5) * i;
+        ctx.fillText(fmtShort(val), pad.left - 8, y + 3);
+      }
+
+      // X-axis labels
+      ctx.textAlign = 'center';
+      const step = Math.max(1, Math.ceil(n / 10));
+      for (let i = 0; i < n; i += step) {
+        const x = pad.left + (i / (n - 1)) * cW;
+        ctx.fillText('Y' + data[i].year, x, H - 8);
+      }
+    }
+
+    function copyResult() {
+      const v = document.getElementById('totalValue').textContent;
+      const c = document.getElementById('totalContrib').textContent;
+      const e = document.getElementById('totalEarnings').textContent;
+      const r = document.getElementById('earningsPct').textContent;
+      const text = (lang === 'zh' ? '最终价值: ' : 'Final Value: ') + v + '\n' +
+        (lang === 'zh' ? '总投入: ' : 'Contributions: ') + c + '\n' +
+        (lang === 'zh' ? '利息收入: ' : 'Interest: ') + e + '\n' +
+        (lang === 'zh' ? '回报率: ' : 'ROI: ') + r;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('[onclick="copyResult()"]');
+        if (btn) { const orig = btn.innerHTML; btn.innerHTML = '<span class="en">Copied!</span><span class="zh">已复制!</span>'; setTimeout(() => btn.innerHTML = orig, 1500); }
+      });
+    }
+
+    // Auto-calculate
+    document.querySelectorAll('#principal,#rate,#years,#monthly').forEach(el => el.addEventListener('input', calculate));
+    calculate();
+  </script>
+</body>
+</html>

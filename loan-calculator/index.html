@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Loan Calculator – Mortgage, Car, Personal | Freemaki</title>
+  <meta name="description" content="Free loan calculator with amortization schedule and early repayment scenarios. Compare keeping monthly payment vs reducing term. Save on interest. 中英双语。">
+  <meta name="keywords" content="loan calculator, mortgage calculator, early repayment, amortization, 提前还款, 贷款计算器, 房贷计算器, 月供计算">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Freemaki">
+  <link rel="canonical" href="https://freemaki.com/loan-calculator/">
+  <meta property="og:title" content="Free Loan Calculator with Early Repayment">
+  <meta property="og:description" content="Calculate monthly payments, amortization schedule, and compare early repayment strategies.">
+  <meta property="og:url" content="https://freemaki.com/loan-calculator/">
+  <meta property="og:site_name" content="Freemaki">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root {
+      --bg: #0f0f1a; --surface: #1a1a2e; --surface2: #252540;
+      --accent: #6c5ce7; --accent2: #a29bfe; --accent-glow: rgba(108,92,231,0.35);
+      --green: #2ecc71; --yellow: #f1c40f; --orange: #e67e22; --red: #e74c3c;
+      --text: #e0e0ff; --text-dim: #8888bb;
+      --border: rgba(108,92,231,0.25); --radius: 14px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font);
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+
+    .lang-toggle { position: fixed; top: 20px; right: 20px; background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 8px; display: flex; overflow: hidden; z-index: 100; }
+    .lang-btn { padding: 6px 14px; background: none; border: none; color: var(--text-dim);
+      font-size: 13px; cursor: pointer; transition: all 0.2s; font-family: var(--font); }
+    .lang-btn.active { background: var(--accent); color: #fff; }
+    .lang-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+
+    .breadcrumb { width: 100%; max-width: 900px; margin-bottom: 32px; display: flex;
+      gap: 8px; align-items: center; font-size: 14px; color: var(--text-dim); }
+    .breadcrumb a { color: var(--accent2); text-decoration: none; }
+    .breadcrumb a:hover { color: #fff; }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 32px 28px; width: 100%; max-width: 900px; }
+    h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: #fff; }
+    .subtitle { font-size: 14px; color: var(--text-dim); margin-bottom: 24px; }
+
+    .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px; }
+    .input-group { text-align: left; }
+    .control-label { font-size: 13px; color: var(--text-dim); margin-bottom: 8px; font-weight: 600; display: block; }
+    input[type="number"], select {
+      width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 10px 14px; font-size: 15px; color: var(--text); font-family: var(--font); outline: none;
+      transition: border-color 0.2s; -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+    input[type="number"]:focus, select:focus { border-color: var(--accent2); }
+    select { cursor: pointer; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238888bb' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+    }
+    select option { background: var(--surface); }
+
+    .btn-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+    .btn { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 9px 18px; font-size: 13px; color: var(--text); cursor: pointer; transition: all 0.15s;
+      font-family: var(--font); text-decoration: none; display: inline-block; text-align: center; }
+    .btn:hover { border-color: var(--accent2); color: #fff; }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .btn.primary:hover { background: var(--accent2); border-color: var(--accent2); }
+
+    .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 20px; }
+    .stat-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+    .stat-value { font-size: 22px; font-weight: 700; color: var(--accent2); margin-bottom: 4px; }
+    .stat-label { font-size: 12px; color: var(--text-dim); }
+
+    /* Amortization Chart */
+    .chart-section { margin-top: 24px; }
+    .chart-container { position: relative; width: 100%; height: 260px; margin-top: 12px; }
+    .chart-legend { display: flex; gap: 16px; margin-bottom: 8px; font-size: 12px; color: var(--text-dim); }
+    .chart-legend span { display: flex; align-items: center; gap: 4px; }
+    .chart-legend .dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+    /* Table */
+    .table-wrap { overflow-x: auto; margin-top: 20px; border-radius: 10px; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead { background: var(--surface2); }
+    th { padding: 10px 12px; text-align: left; font-weight: 600; color: var(--accent2); font-size: 12px; white-space: nowrap; }
+    td { padding: 8px 12px; border-top: 1px solid var(--border); white-space: nowrap; }
+    tr:hover td { background: rgba(108,92,231,0.06); }
+    .show-toggle { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 13px; color: var(--text-dim); cursor: pointer; }
+    .show-toggle:hover { color: var(--text); }
+
+    /* Early Repayment */
+    .early-section { margin-top: 28px; border-top: 1px solid var(--border); padding-top: 24px; }
+    .early-section h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #fff; }
+    .early-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 16px; }
+    @media (max-width: 640px) { .compare-grid { grid-template-columns: 1fr; } }
+    .compare-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+    .compare-card.highlight { border-color: var(--green); background: rgba(46,204,113,0.08); }
+    .compare-card.highlight .stat-value { color: var(--green); }
+    .compare-title { font-size: 13px; font-weight: 600; margin-bottom: 12px; color: var(--text-dim); }
+    .savings-badge { display: inline-block; background: rgba(46,204,113,0.15); color: var(--green);
+      border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 700; margin-top: 8px; }
+
+    .disclaimer { font-size: 11px; color: var(--text-dim); margin-top: 16px; line-height: 1.5; text-align: center; }
+    .footer { margin-top: 32px; font-size: 12px; color: var(--text-dim); display: flex; gap: 20px; }
+    .footer a { color: var(--accent2); text-decoration: none; }
+    .footer a:hover { color: #fff; }
+
+    [lang="en"] .zh { display: none; }
+    [lang="zh"] .en { display: none; }
+
+    .related-section { margin-top: 24px; }
+    .related-section h3 { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+    .related-card { display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-decoration: none; color: var(--text); transition: border-color .2s; }
+    .related-card:hover { border-color: var(--accent); }
+    .related-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+    .related-card p { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+
+    .ad-slot { background: var(--surface2); border: 1px dashed var(--border); border-radius: var(--radius); padding: 24px; text-align: center; color: var(--text-dim); font-size: 12px; margin: 24px auto; max-width: 900px; width: 100%; min-height: 90px; }
+    .table-wrap.collapsed table tbody { display: none; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Free Loan Calculator",
+    "url": "https://www.freemaki.com/loan-calculator/",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Calculate monthly payments, amortization schedule, and compare early repayment strategies to save on interest."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How is monthly loan payment calculated?", "acceptedAnswer": { "@type": "Answer", "text": "Monthly payment = P * [r(1+r)^n] / [(1+r)^n - 1], where P = loan amount, r = monthly interest rate, n = total months." } },
+      { "@type": "Question", "name": "Does early repayment save money?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Early repayment reduces the principal, which means less interest accrues. Keeping the same monthly payment saves more interest than reducing the monthly payment." } }
+    ]
+  }
+  </script>
+</head>
+<body lang="zh">
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+
+  <div class="breadcrumb">
+    <a href="/">Home</a><span>›</span>
+    <a href="/loan-calculator/" class="en">Loan Calculator</a>
+    <a href="/loan-calculator/" class="zh">贷款计算器</a>
+  </div>
+
+  <div class="card">
+    <h1 class="en">Loan Calculator</h1>
+    <h1 class="zh">贷款计算器</h1>
+    <p class="subtitle en">Calculate monthly payments, amortization schedule, and early repayment savings.</p>
+    <p class="subtitle zh">计算月供、还款计划，对比提前还款省息方案。</p>
+
+    <div class="input-grid">
+      <div class="input-group">
+        <label class="control-label"><span class="en">Loan Amount</span><span class="zh">贷款金额</span></label>
+        <input type="number" id="principal" value="1000000" min="1000" step="10000">
+      </div>
+      <div class="input-group">
+        <label class="control-label"><span class="en">Annual Interest Rate (%)</span><span class="zh">年利率 (%)</span></label>
+        <input type="number" id="rate" value="4.2" min="0.01" max="30" step="0.01">
+      </div>
+      <div class="input-group">
+        <label class="control-label"><span class="en">Loan Term (years)</span><span class="zh">贷款期限 (年)</span></label>
+        <input type="number" id="term" value="30" min="1" max="50">
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn primary" onclick="calculate()">
+        <span class="en">Calculate</span><span class="zh">计算</span>
+      </button>
+      <button class="btn" onclick="copyResult()">
+        <span class="en">Copy Result</span><span class="zh">复制结果</span>
+      </button>
+    </div>
+
+    <!-- Results -->
+    <div id="resultSection" style="display:none">
+      <div class="result-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="monthlyPayment">--</div>
+          <div class="stat-label"><span class="en">Monthly Payment</span><span class="zh">每月月供</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="totalPayment">--</div>
+          <div class="stat-label"><span class="en">Total Payment</span><span class="zh">还款总额</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="totalInterest" style="color:var(--orange)">--</div>
+          <div class="stat-label"><span class="en">Total Interest</span><span class="zh">利息总额</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="interestRatio">--</div>
+          <div class="stat-label"><span class="en">Interest / Principal</span><span class="zh">利息/本金比</span></div>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="chart-section">
+        <div class="chart-legend">
+          <span><span class="dot" style="background:var(--accent)"></span><span class="en">Principal</span><span class="zh">本金</span></span>
+          <span><span class="dot" style="background:var(--orange)"></span><span class="en">Interest</span><span class="zh">利息</span></span>
+          <span><span class="dot" style="background:var(--green)"></span><span class="en">Remaining Balance</span><span class="zh">剩余本金</span></span>
+        </div>
+        <div class="chart-container">
+          <canvas id="loanChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Amortization Table -->
+      <div class="table-wrap collapsed" id="amortTable">
+        <table>
+          <thead>
+            <tr>
+              <th><span class="en">Year</span><span class="zh">年</span></th>
+              <th><span class="en">Payment</span><span class="zh">年还款</span></th>
+              <th><span class="en">Principal</span><span class="zh">本金</span></th>
+              <th><span class="en">Interest</span><span class="zh">利息</span></th>
+              <th><span class="en">Balance</span><span class="zh">剩余</span></th>
+            </tr>
+          </thead>
+          <tbody id="amortBody"></tbody>
+        </table>
+      </div>
+      <div class="show-toggle" onclick="toggleTable()">
+        <span class="en" id="toggleText">▶ Show amortization table</span>
+        <span class="zh" id="toggleTextZh">▶ 展开还款计划表</span>
+      </div>
+    </div>
+
+    <!-- Early Repayment -->
+    <div class="early-section" id="earlySection" style="display:none">
+      <h3><span class="en">Early Repayment Calculator</span><span class="zh">提前还款计算</span></h3>
+      <div class="early-inputs">
+        <div class="input-group">
+          <label class="control-label"><span class="en">Extra Payment (one-time)</span><span class="zh">一次性提前还款金额</span></label>
+          <input type="number" id="earlyAmount" value="200000" min="0" step="10000">
+        </div>
+        <div class="input-group">
+          <label class="control-label"><span class="en">After how many months?</span><span class="zh">在第几个月还款？</span></label>
+          <input type="number" id="earlyMonth" value="12" min="1" max="600">
+        </div>
+      </div>
+      <button class="btn primary" onclick="calcEarly()" style="margin-bottom:4px">
+        <span class="en">Compare Strategies</span><span class="zh">对比方案</span>
+      </button>
+
+      <div id="earlyResult" style="display:none">
+        <div class="compare-grid">
+          <div class="compare-card">
+            <div class="compare-title"><span class="en">No Early Payment</span><span class="zh">不提前还款</span></div>
+            <div class="stat-value" id="origTotal">--</div>
+            <div class="stat-label"><span class="en">Total Interest</span><span class="zh">总利息</span></div>
+            <div class="stat-value" id="origMonths" style="font-size:16px;margin-top:8px">--</div>
+            <div class="stat-label"><span class="en">Months to Pay Off</span><span class="zh">还款月数</span></div>
+          </div>
+          <div class="compare-card highlight">
+            <div class="compare-title"><span class="en">Keep Monthly Payment</span><span class="zh">保持月供不变</span></div>
+            <div class="stat-value" id="keepInterest">--</div>
+            <div class="stat-label"><span class="en">Total Interest</span><span class="zh">总利息</span></div>
+            <div class="stat-value" id="keepMonths" style="font-size:16px;margin-top:8px">--</div>
+            <div class="stat-label"><span class="en">Months to Pay Off</span><span class="zh">还款月数</span></div>
+            <div class="savings-badge" id="keepSave">--</div>
+          </div>
+          <div class="compare-card">
+            <div class="compare-title"><span class="en">Reduce Monthly Payment</span><span class="zh">缩短年限/月供不变</span></div>
+            <div class="stat-value" id="reduceInterest">--</div>
+            <div class="stat-label"><span class="en">Total Interest</span><span class="zh">总利息</span></div>
+            <div class="stat-value" id="reducePayment" style="font-size:16px;margin-top:8px">--</div>
+            <div class="stat-label"><span class="en">New Monthly Payment</span><span class="zh">新月供</span></div>
+            <div class="savings-badge" id="reduceSave">--</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="disclaimer en">Results are for reference only. Actual payments may vary depending on lender policies, fees, and rate changes.</p>
+    <p class="disclaimer zh">结果仅供参考。实际还款可能因贷款机构政策、手续费和利率调整而有所不同。</p>
+  </div>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2720354590115044" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+
+  <div class="related-section en">
+    <h3>Related Tools</h3>
+    <div class="related-grid">
+      <a href="/compound-interest/" class="related-card"><h4>Compound Interest Calculator</h4><p>See how your savings grow with compound interest.</p></a>
+      <a href="/1099-tax-calculator/" class="related-card"><h4>1099 Tax Calculator</h4><p>Estimate self-employment taxes for freelancers.</p></a>
+      <a href="/meeting-cost/" class="related-card"><h4>Meeting Cost Calculator</h4><p>How much does your meeting really cost?</p></a>
+    </div>
+  </div>
+  <div class="related-section zh" style="display:none">
+    <h3>相关工具</h3>
+    <div class="related-grid">
+      <a href="/compound-interest/" class="related-card"><h4>复利计算器</h4><p>看看复利如何让储蓄增长。</p></a>
+      <a href="/1099-tax-calculator/" class="related-card"><h4>1099 税务计算器</h4><p>自由职业者自雇税估算。</p></a>
+      <a href="/meeting-cost/" class="related-card"><h4>会议成本计算器</h4><p>算算你的会议真正花了多少钱。</p></a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="/">← <span class="en">All Tools</span><span class="zh">返回首页</span></a>
+  </div>
+
+  <script>
+    let lang = 'zh';
+    let baseResult = null;
+
+    function setLang(l) {
+      lang = l;
+      document.body.lang = l;
+      document.querySelectorAll('.lang-toggle .lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.lang-toggle .lang-btn[onclick="setLang(\'' + l + '\')"]').classList.add('active');
+      document.querySelectorAll('.related-section').forEach(s => s.style.display = 'none');
+      document.querySelectorAll('.related-section.' + l).forEach(s => s.style.display = '');
+      if (baseResult) calculate();
+    }
+
+    function fmt(n) {
+      if (lang === 'zh') return '¥' + Math.round(n).toLocaleString('zh-CN');
+      return '$' + Math.round(n).toLocaleString('en-US');
+    }
+
+    function fmtShort(n) {
+      if (n >= 1e8) return (n/1e8).toFixed(1) + (lang==='zh'?'亿':'00M');
+      if (n >= 1e4) return (n/1e4).toFixed(1) + (lang==='zh'?'万':'0K');
+      return Math.round(n).toLocaleString();
+    }
+
+    function calcMonthlyPayment(P, r, n) {
+      if (r === 0) return P / n;
+      return P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    }
+
+    function buildAmortization(P, r, n, m) {
+      let balance = P;
+      const schedule = [];
+      let totalInterest = 0;
+      for (let i = 1; i <= n && balance > 0.01; i++) {
+        const interest = balance * r;
+        let principal = m - interest;
+        if (principal > balance) principal = balance;
+        totalInterest += interest;
+        balance -= principal;
+        if (balance < 0) balance = 0;
+        schedule.push({ month: i, payment: m, principal, interest, balance });
+      }
+      return { schedule, totalInterest, totalPaid: totalInterest + P, months: schedule.length };
+    }
+
+    function calculate() {
+      const P = parseFloat(document.getElementById('principal').value);
+      const annualRate = parseFloat(document.getElementById('rate').value);
+      const years = parseInt(document.getElementById('term').value);
+      if (!P || !annualRate || !years) return;
+
+      const r = annualRate / 100 / 12;
+      const n = years * 12;
+      const m = calcMonthlyPayment(P, r, n);
+      const result = buildAmortization(P, r, n, m);
+      baseResult = result;
+
+      document.getElementById('resultSection').style.display = '';
+      document.getElementById('earlySection').style.display = '';
+      document.getElementById('monthlyPayment').textContent = fmt(m);
+      document.getElementById('totalPayment').textContent = fmt(result.totalPaid);
+      document.getElementById('totalInterest').textContent = fmt(result.totalInterest);
+      document.getElementById('interestRatio').textContent = (result.totalInterest / P * 100).toFixed(1) + '%';
+
+      // Build amortization table (yearly summary)
+      const tbody = document.getElementById('amortBody');
+      tbody.innerHTML = '';
+      let yearPay = 0, yearPrin = 0, yearInt = 0;
+      for (let i = 0; i < result.schedule.length; i++) {
+        const row = result.schedule[i];
+        yearPay += row.payment;
+        yearPrin += row.principal;
+        yearInt += row.interest;
+        if ((i + 1) % 12 === 0 || i === result.schedule.length - 1) {
+          const yr = Math.floor(i / 12) + 1;
+          const tr = document.createElement('tr');
+          tr.innerHTML = '<td>' + yr + '</td><td>' + fmt(yearPay) + '</td><td>' + fmt(yearPrin) + '</td><td>' + fmt(yearInt) + '</td><td>' + fmt(row.balance) + '</td>';
+          tbody.appendChild(tr);
+          yearPay = yearPrin = yearInt = 0;
+        }
+      }
+
+      drawChart(result.schedule, n);
+    }
+
+    function drawChart(schedule, totalMonths) {
+      const canvas = document.getElementById('loanChart');
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = 260 * dpr;
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = '260px';
+      ctx.scale(dpr, dpr);
+
+      const W = rect.width, H = 260;
+      const pad = { top: 10, right: 16, bottom: 30, left: 56 };
+      const cW = W - pad.left - pad.right;
+      const cH = H - pad.top - pad.bottom;
+
+      // Yearly aggregated data
+      const years = [];
+      let yearPrin = 0, yearInt = 0, lastBalance = schedule[0].payment + schedule[0].principal + schedule[0].interest;
+      for (let i = 0; i < schedule.length; i++) {
+        yearPrin += schedule[i].principal;
+        yearInt += schedule[i].interest;
+        lastBalance = schedule[i].balance;
+        if ((i + 1) % 12 === 0 || i === schedule.length - 1) {
+          years.push({ yr: Math.floor(i / 12) + 1, principal: yearPrin, interest: yearInt, balance: schedule[0].principal + schedule[0].interest - yearPrin - yearInt + yearPrin + yearInt - (schedule[0].principal - yearPrin) });
+          yearPrin = 0; yearInt = 0;
+        }
+      }
+      // Recalc balance properly
+      let bal = parseFloat(document.getElementById('principal').value);
+      const yearData = [];
+      yearPrin = 0; yearInt = 0;
+      for (let i = 0; i < schedule.length; i++) {
+        yearPrin += schedule[i].principal;
+        yearInt += schedule[i].interest;
+        bal = schedule[i].balance;
+        if ((i + 1) % 12 === 0 || i === schedule.length - 1) {
+          yearData.push({ yr: Math.floor(i / 12) + 1, principal: yearPrin, interest: yearInt, balance: bal });
+          yearPrin = 0; yearInt = 0;
+        }
+      }
+
+      const n = yearData.length;
+      const maxPay = Math.max(...yearData.map(d => d.principal + d.interest));
+      const maxBal = parseFloat(document.getElementById('principal').value);
+
+      ctx.clearRect(0, 0, W, H);
+
+      // Stacked bar chart
+      const barW = Math.max(4, Math.min(30, cW / n - 4));
+      const gap = (cW - barW * n) / (n + 1);
+
+      // Balance line
+      ctx.strokeStyle = '#2ecc71';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let i = 0; i < n; i++) {
+        const x = pad.left + gap + i * (barW + gap) + barW / 2;
+        const y = pad.top + cH - (yearData[i].balance / maxBal) * cH;
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      for (let i = 0; i < n; i++) {
+        const x = pad.left + gap + i * (barW + gap);
+        const pH = (yearData[i].principal / maxPay) * cH;
+        const iH = (yearData[i].interest / maxPay) * cH;
+        const y1 = pad.top + cH - pH - iH;
+        const y2 = pad.top + cH - pH;
+
+        ctx.fillStyle = '#6c5ce7';
+        ctx.fillRect(x, y1, barW, pH);
+        ctx.fillStyle = '#e67e22';
+        ctx.fillRect(x, y2, barW, iH);
+      }
+
+      // Y-axis labels
+      ctx.fillStyle = '#8888bb';
+      ctx.font = '10px system-ui';
+      ctx.textAlign = 'right';
+      for (let i = 0; i <= 4; i++) {
+        const val = (maxPay / 4) * i;
+        const y = pad.top + cH - (i / 4) * cH;
+        ctx.fillText(fmtShort(val), pad.left - 6, y + 3);
+        ctx.strokeStyle = 'rgba(136,136,187,0.15)';
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(pad.left, y);
+        ctx.lineTo(W - pad.right, y);
+        ctx.stroke();
+      }
+
+      // X-axis labels
+      ctx.textAlign = 'center';
+      const step = Math.max(1, Math.ceil(n / 12));
+      for (let i = 0; i < n; i += step) {
+        const x = pad.left + gap + i * (barW + gap) + barW / 2;
+        ctx.fillText('Y' + yearData[i].yr, x, H - 6);
+      }
+    }
+
+    function calcEarly() {
+      if (!baseResult) calculate();
+      if (!baseResult) return;
+
+      const P = parseFloat(document.getElementById('principal').value);
+      const annualRate = parseFloat(document.getElementById('rate').value);
+      const years = parseInt(document.getElementById('term').value);
+      const r = annualRate / 100 / 12;
+      const n = years * 12;
+      const m = calcMonthlyPayment(P, r, n);
+      const extra = parseFloat(document.getElementById('earlyAmount').value) || 0;
+      const earlyAt = parseInt(document.getElementById('earlyMonth').value) || 1;
+      if (extra <= 0) return;
+
+      // Strategy 1: Keep same monthly payment
+      let balance1 = P;
+      let totalInt1 = 0;
+      let months1 = 0;
+      for (let i = 1; i <= n && balance1 > 0.01; i++) {
+        if (i === earlyAt) balance1 -= extra;
+        if (balance1 < 0) balance1 = 0;
+        const interest = balance1 * r;
+        let prin = m - interest;
+        if (prin > balance1) prin = balance1;
+        totalInt1 += interest;
+        balance1 -= prin;
+        months1 = i;
+      }
+
+      // Strategy 2: Reduce monthly payment (same remaining term)
+      let balance2 = P;
+      let totalInt2 = 0;
+      let remainingMonths = n - earlyAt + 1;
+      for (let i = 1; i < earlyAt && balance2 > 0.01; i++) {
+        const interest = balance2 * r;
+        let prin = m - interest;
+        if (prin > balance2) prin = balance2;
+        totalInt2 += interest;
+        balance2 -= prin;
+      }
+      balance2 -= extra;
+      if (balance2 < 0) balance2 = 0;
+      const newM = balance2 > 0 ? calcMonthlyPayment(balance2, r, remainingMonths) : 0;
+      for (let i = 1; i <= remainingMonths && balance2 > 0.01; i++) {
+        const interest = balance2 * r;
+        let prin = newM - interest;
+        if (prin > balance2) prin = balance2;
+        totalInt2 += interest;
+        balance2 -= prin;
+      }
+
+      const origInt = baseResult.totalInterest;
+      const keepSave = origInt - totalInt1;
+      const reduceSave = origInt - totalInt2;
+
+      document.getElementById('earlyResult').style.display = '';
+      document.getElementById('origTotal').textContent = fmt(origInt);
+      document.getElementById('origMonths').textContent = n + (lang==='zh'?' 个月':' months');
+
+      document.getElementById('keepInterest').textContent = fmt(totalInt1);
+      document.getElementById('keepMonths').textContent = months1 + (lang==='zh'?' 个月':' months');
+      document.getElementById('keepSave').textContent = (lang==='zh'?'省 ':'Save ') + fmt(keepSave);
+
+      document.getElementById('reduceInterest').textContent = fmt(totalInt2);
+      document.getElementById('reducePayment').textContent = fmt(newM) + '/' + (lang==='zh'?'月':'mo');
+      document.getElementById('reduceSave').textContent = (lang==='zh'?'省 ':'Save ') + fmt(reduceSave);
+    }
+
+    function toggleTable() {
+      const t = document.getElementById('amortTable');
+      t.classList.toggle('collapsed');
+      const show = !t.classList.contains('collapsed');
+      document.getElementById('toggleText').textContent = show ? '▼ Hide amortization table' : '▶ Show amortization table';
+      document.getElementById('toggleTextZh').textContent = show ? '▼ 收起还款计划表' : '▶ 展开还款计划表';
+    }
+
+    function copyResult() {
+      if (!baseResult) return;
+      const m = document.getElementById('monthlyPayment').textContent;
+      const t = document.getElementById('totalPayment').textContent;
+      const i = document.getElementById('totalInterest').textContent;
+      const text = (lang==='zh'?'月供: ':'Monthly: ') + m + '\n' +
+        (lang==='zh'?'还款总额: ':'Total: ') + t + '\n' +
+        (lang==='zh'?'利息总额: ':'Interest: ') + i;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('[onclick="copyResult()"]');
+        if (btn) { const orig = btn.innerHTML; btn.innerHTML = '<span class="en">Copied!</span><span class="zh">已复制!</span>'; setTimeout(() => btn.innerHTML = orig, 1500); }
+      });
+    }
+
+    // Auto-calculate
+    document.querySelectorAll('#principal,#rate,#term').forEach(el => el.addEventListener('input', calculate));
+    calculate();
+  </script>
+</body>
+</html>
