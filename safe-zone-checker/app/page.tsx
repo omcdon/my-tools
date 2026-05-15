@@ -81,7 +81,7 @@ export default function Home() {
       </section>
 
       {/* Main Workspace */}
-      <main className="mx-auto max-w-7xl px-4 py-6">
+      <main className="mx-auto max-w-7xl px-4 py-6 dark:bg-neutral-950">
         <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
           {/* Left: Control Panel */}
           <aside className="space-y-5">
