@@ -8,7 +8,7 @@
 <link rel="dns-prefetch" href="https://www.freemaki.com"/>
 <meta name="theme-color" content="#2563eb"/>
 <title>Site Updates: May 2026 Changelog | Freemaki Blog</title>
-<meta name="description" content="What's new on Freemaki in May 2026: 14 new tools, 16 articles, homepage redesign, and performance optimization. Daily changelog."/>
+<meta name="description" content="What's new on Freemaki in May 2026: 16 new tools, 18 articles, homepage redesign, 1741-page SEO engine, and performance optimization. Daily changelog."/>
 <meta name="keywords" content="Freemaki更新日志，2026年5月：新增工具、博客文章、首页改版、性能优化"/>
 <meta name="robots" content="index, follow, max-image-preview:large"/>
 <meta name="author" content="Freemaki"/>
@@ -107,7 +107,7 @@
   "@type": "Article",
   "headline": "Freemaki Changelog — May 2026",
   "datePublished": "2026-05-13",
-  "dateModified": "2026-05-15",
+  "dateModified": "2026-05-17",
   "author": {
     "@type": "Person",
     "name": "McDon"
@@ -121,7 +121,7 @@
       "url": "https://www.freemaki.com/favicon.ico"
     }
   },
-  "description": "What's new on Freemaki in May 2026: 14 new tools, 16 articles, homepage redesign, and performance optimization. Daily changelog.",
+  "description": "What's new on Freemaki in May 2026: 16 new tools, 18 articles, homepage redesign, 1741-page SEO engine, and performance optimization. Daily changelog.",
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://www.freemaki.com/blog/changelog-may-2026/"
@@ -165,20 +165,70 @@
 
   <div class="stat-grid">
     <div class="stat-card">
-      <div class="stat-num">14</div>
-      <div class="stat-label" data-i18n="stat1">New Tools</div>
+      <div class="stat-num">16</div>
+      <div class="stat-label" data-i18n="stat1">New Tools This Month</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num">16</div>
+      <div class="stat-num">18</div>
       <div class="stat-label" data-i18n="stat2">Total Articles</div>
     </div>
     <div class="stat-card">
-      <div class="stat-num">36</div>
+      <div class="stat-num">38</div>
       <div class="stat-label" data-i18n="stat3">Total Tools</div>
     </div>
   </div>
 
   <p data-i18n="intro">May 2026 is a busy month for Freemaki. We're shipping new tools, blog articles, and improvements almost daily. This changelog is updated in real time &mdash; bookmark it to follow along.</p>
+
+  <!-- May 17 -->
+  <div class="date-group">
+    <div class="date-header">
+      <h2 data-i18n="d_may17_title">May 17</h2>
+      <span class="weekday">Saturday</span>
+    </div>
+
+    <div class="version">
+      <div class="version-header">
+        <span class="version-badge badge-tool" data-i18n="badge_tool">TOOLS</span>
+      </div>
+      <h3 data-i18n="d_may17_v1_title">Salary Survival Engine (1,741 Pages)</h3>
+      <ul class="change-list tool">
+        <li data-i18n="d_may17_v1_1"><a href="/salary-survival/">Salary Survival Engine</a> &mdash; A programmatic SEO powerhouse. 50 states &times; 35 salary buckets = 1,741 static pages built with Next.js 15. Features: federal + state tax calculator (2026 brackets), affordability score algorithm, stress level visualization, income percentile rankings, state comparison tool, JSON-LD structured data (FAQ + Article schema), dark mode. Target keyword: "can I afford to live here".</li>
+        <li data-i18n="d_may17_v1_2"><a href="/pricing-calculator/">Freelance Pricing Calculator</a> &mdash; Next.js 14 static export. 3-tier pricing (Survival/Comfortable/Growth), SVG donut chart, rate comparison table, dark mode. Committed and pushed.</li>
+      </ul>
+    </div>
+
+    <div class="version">
+      <div class="version-header">
+        <span class="version-badge badge-new" data-i18n="badge_new">ARTICLE</span>
+      </div>
+      <h3 data-i18n="d_may17_v2_title">New Blog: Salary Survival Guide 2026</h3>
+      <ul class="change-list new">
+        <li data-i18n="d_may17_v2_1"><a href="/blog/salary-survival-guide/">Salary Survival Guide 2026: Can You Actually Afford to Live There?</a> &mdash; Complete guide covering tax anatomy, state tax comparison, cost of living breakdown, affordability score methodology, stress level framework, and a $75K cross-state comparison table. Internal links to Salary Survival Engine and related tools.</li>
+      </ul>
+    </div>
+
+    <div class="version">
+      <div class="version-header">
+        <span class="version-badge badge-fix" data-i18n="badge_fix">FIX</span>
+      </div>
+      <h3 data-i18n="d_may17_v3_title">Bug Fixes &amp; Compliance</h3>
+      <ul class="change-list fix">
+        <li data-i18n="d_may17_v3_1"><strong>Palette page JS broken</strong> &mdash; i18n object had a syntax error where <code>zh:</code> was nested inside a string value, causing all JavaScript (including image upload) to fail silently. Also fixed HTML structure (Related Tools and FAQ sections were outside the page container). Updated styles to match light theme.</li>
+        <li data-i18n="d_may17_v3_2"><strong>Removed fake aggregateRating</strong> &mdash; 24 tool pages had self-reported 4.8/5 star ratings in JSON-LD schema. These violate Google's structured data guidelines and could harm search rankings and AdSense approval. All removed.</li>
+      </ul>
+    </div>
+
+    <div class="version">
+      <div class="version-header">
+        <span class="version-badge badge-improve" data-i18n="badge_improve">STATS</span>
+      </div>
+      <h3 data-i18n="d_may17_v4_title">Updated Totals</h3>
+      <ul class="change-list improve">
+        <li data-i18n="d_may17_v4_1">Total tools: <strong>38</strong> &middot; Total articles: <strong>18</strong> &middot; Total static pages: <strong>1,779+</strong></li>
+      </ul>
+    </div>
+  </div>
 
   <!-- May 15 -->
   <div class="date-group">
@@ -438,6 +488,17 @@ const i18n = {
     stat1:'New Tools', stat2:'Total Articles', stat3:'Total Tools',
     intro:'May 2026 is a busy month for Freemaki. We\'re shipping new tools, blog articles, and improvements almost daily. This changelog is updated in real time — bookmark it to follow along.',
     badge_tool:'TOOLS', badge_new:'NEW', badge_improve:'IMPROVE', badge_fix:'FIX', badge_perf:'PERF',
+    d_may17_title:'May 17',
+    d_may17_v1_title:'Salary Survival Engine (1,741 Pages)',
+    d_may17_v1_1:'<a href="/salary-survival/">Salary Survival Engine</a> — Programmatic SEO: 50 states × 35 salary buckets = 1,741 static pages. Next.js 15. Federal + state tax calculator, affordability score, stress levels, percentile rankings, state comparison, JSON-LD, dark mode.',
+    d_may17_v1_2:'<a href="/pricing-calculator/">Freelance Pricing Calculator</a> — Next.js 14. 3-tier pricing, SVG donut chart, rate comparison, dark mode.',
+    d_may17_v2_title:'New Blog: Salary Survival Guide 2026',
+    d_may17_v2_1:'<a href="/blog/salary-survival-guide/">Salary Survival Guide 2026: Can You Actually Afford to Live There?</a> — Tax anatomy, state tax comparison, cost of living, affordability score, stress levels, $75K cross-state comparison.',
+    d_may17_v3_title:'Bug Fixes & Compliance',
+    d_may17_v3_1:'Palette page: fixed broken i18n JS (zh: nested inside string), fixed HTML structure. Updated styles to light theme.',
+    d_may17_v3_2:'Removed fake aggregateRating (4.8/5) from 24 tool pages. Violated Google structured data guidelines.',
+    d_may17_v4_title:'Updated Totals',
+    d_may17_v4_1:'Total tools: <strong>38</strong> · Total articles: <strong>18</strong> · Static pages: <strong>1,779+</strong>',
     d_may15_title:'May 15',
     d_may15_v1_title:'3 New Tools',
     d_may15_v1_1:'<a href="/loan-calculator/">Loan Calculator</a> — Monthly payment, amortization schedule, stacked bar chart, early repayment comparison (3 strategies). Canvas-based.',
@@ -521,6 +582,17 @@ const i18n = {
     stat1:'新工具', stat2:'文章总数', stat3:'工具总数',
     intro:'2026年5月是 Freemaki 的密集更新月。我们几乎每天都在发布新工具、博客文章和体验优化。这份更新日志实时同步——收藏本页随时查看最新动态。',
     badge_tool:'工具', badge_new:'新增', badge_improve:'优化', badge_fix:'修复', badge_perf:'性能',
+    d_may17_title:'5月17日',
+    d_may17_v1_title:'薪资生存引擎（1,741 页）',
+    d_may17_v1_1:'<a href="/salary-survival/">薪资生存引擎</a> — 程序化SEO：50州×35薪资桶=1,741个静态页面。Next.js 15。联邦+州税计算器、可负担性评分、压力等级、百分位排名、州际对比、JSON-LD、暗色模式。',
+    d_may17_v1_2:'<a href="/pricing-calculator/">自由职业者定价计算器</a> — Next.js 14。3档定价、SVG甜甜圈图、费率对比、暗色模式。',
+    d_may17_v2_title:'新文章：薪资生存指南 2026',
+    d_may17_v2_1:'<a href="/blog/salary-survival-guide/">薪资生存指南2026：你真的在这里活得起吗？</a> — 税收解剖、州税对比、生活成本、可负担性评分、压力等级、$75K跨州对比。',
+    d_may17_v3_title:'Bug修复与合规',
+    d_may17_v3_1:'调色板页面：修复i18n JS语法错误（zh:嵌套在字符串内）、修复HTML结构。更新样式为浅色主题。',
+    d_may17_v3_2:'从24个工具页面移除虚假aggregateRating（4.8/5分）。违反Google结构化数据指南。',
+    d_may17_v4_title:'数据更新',
+    d_may17_v4_1:'工具总数：<strong>38</strong> · 文章总数：<strong>18</strong> · 静态页面：<strong>1,779+</strong>',
     d_may15_title:'5月15日',
     d_may15_v1_title:'3 个新工具',
     d_may15_v1_1:'<a href="/loan-calculator/">贷款计算器</a> — 月供计算、还款计划表、本金利息堆叠图、提前还款三策略对比。Canvas可视化。',
