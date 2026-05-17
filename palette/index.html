@@ -80,13 +80,19 @@
   .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
   footer { text-align: center; color: var(--text3); font-size: 13px; padding-top: 24px; border-top: 0.5px solid var(--border); margin-top: 48px; }
 
-.related-section{margin-top:24px;}
-.related-section h3{font-size:15px;font-weight:600;margin-bottom:10px;color:#e0e0ff;}
+.related-section{margin-top:32px;}
+.related-section h3{font-size:15px;font-weight:600;margin-bottom:10px;color:var(--text);}
 .related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;}
-.related-card{display:block;background:#1a1a2e;border:1px solid rgba(108,92,231,0.25);border-radius:10px;padding:12px;text-decoration:none;color:#e0e0ff;transition:border-color .2s,box-shadow .2s;}
-.related-card:hover{border-color:#a29bfe;box-shadow:0 2px 12px rgba(108,92,231,0.15);}
+.related-card{display:block;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px;text-decoration:none;color:var(--text);transition:border-color .2s,box-shadow .2s;}
+.related-card:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(37,99,235,0.1);}
 .related-card h4{font-size:13px;font-weight:600;margin-bottom:3px;}
-.related-card p{font-size:12px;color:#8888bb;line-height:1.4;}
+.related-card p{font-size:12px;color:var(--text3);line-height:1.4;}
+
+.faq-section{border-top:0.5px solid var(--border);padding-top:28px;margin-top:24px;}
+.faq-section h2{font-size:18px;font-weight:600;margin-bottom:14px;color:var(--text);}
+.faq-section ul{list-style:none;padding:0;margin-bottom:16px;}
+.faq-section li{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:12px;padding-left:0;}
+.faq-section li strong{color:var(--text);}
 </style>
 <script type="application/ld+json">
 {
@@ -176,6 +182,37 @@
       <li data-i18n="uc_2">Create color schemes from mood boards or reference images</li>
       <li data-i18n="uc_3">Match text/overlay colors to background photos</li>
       <li data-i18n="uc_4">Build cohesive palettes for web design projects</li>
+    </ul>
+  </div>
+
+  <div class="related-section">
+    <h3 data-i18n="rt_title">Related Tools</h3>
+    <div class="related-grid">
+      <a href="/color/" class="related-card">
+        <h4 data-i18n="rt_0_t">Color Converter</h4>
+        <p data-i18n="rt_0_d">Convert palette colors.</p>
+      </a>
+      <a href="/gradient/" class="related-card">
+        <h4 data-i18n="rt_1_t">CSS Gradient Generator</h4>
+        <p data-i18n="rt_1_d">Create gradients from palettes.</p>
+      </a>
+      <a href="/font/" class="related-card">
+        <h4 data-i18n="rt_2_t">Font Pairing</h4>
+        <p data-i18n="rt_2_d">Pair fonts with your palette.</p>
+      </a>
+      <a href="/image/" class="related-card">
+        <h4 data-i18n="rt_3_t">Image Converter</h4>
+        <p data-i18n="rt_3_d">Extract palettes from any image.</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="faq-section">
+    <h2 data-i18n="faq_title">Frequently Asked Questions</h2>
+    <ul>
+      <li data-i18n="faq_0"><strong>What image formats are supported?</strong> — You can upload PNG, JPG, WebP, and GIF images. The tool analyzes the image pixels to extract the most dominant colors.</li>
+      <li data-i18n="faq_1"><strong>How many colors does it extract?</strong> — By default, it extracts the top 5-8 dominant colors. You can adjust the number of colors in the settings.</li>
+      <li data-i18n="faq_2"><strong>Can I copy the color codes?</strong> — Yes! Click on any color swatch to copy its HEX code to your clipboard. The tool also shows RGB and HSL values.</li>
     </ul>
   </div>
 
@@ -355,22 +392,18 @@ const i18n = {
     uc_2:'Create color schemes from mood boards or reference images',
     uc_3:'Match text/overlay colors to background photos',
     uc_4:'Build cohesive palettes for web design projects',
+    rt_title:'Related Tools',
+    rt_0_t:'Color Converter', rt_0_d:'Convert palette colors.',
+    rt_1_t:'CSS Gradient Generator', rt_1_d:'Create gradients from palettes.',
+    rt_2_t:'Font Pairing', rt_2_d:'Pair fonts with your palette.',
+    rt_3_t:'Image Converter', rt_3_d:'Extract palettes from any image.',
+    faq_title:'Frequently Asked Questions',
+    faq_0:'<strong>What image formats are supported?</strong> — You can upload PNG, JPG, WebP, and GIF images. The tool analyzes the image pixels to extract the most dominant colors.',
+    faq_1:'<strong>How many colors does it extract?</strong> — By default, it extracts the top 5-8 dominant colors. You can adjust the number of colors in the settings.',
+    faq_2:'<strong>Can I copy the color codes?</strong> — Yes! Click on any color swatch to copy its HEX code to your clipboard. The tool also shows RGB and HSL values.',
     f_privacy:'Privacy Policy', f_disclaimer:'Disclaimer', f_about:'About', f_contact:'Contact', f_rights:'All rights reserved'
   },
-,
-    rt_title: "Related Tools",
-    rt_0_t: "Color Converter",
-    rt_0_d: "Convert palette colors.",
-    rt_1_t: "CSS Gradient Generator",
-    rt_1_d: "Create gradients from palettes.",
-    rt_2_t: "Font Pairing",
-    rt_2_d: "Pair fonts with your palette.",
-    rt_3_t: "Image Converter",
-    rt_3_d: "Extract palettes from any image.",
-    faq_title: "Frequently Asked Questions",
-    faq_0: "<strong>What image formats are supported?</strong> — You can upload PNG, JPG, WebP, and GIF images. The tool analyzes the image pixels to extract the most dominant colors.",
-    faq_1: "<strong>How many colors does it extract?</strong> — By default, it extracts the top 5-8 dominant colors. You can adjust the number of colors in the settings.",
-    faq_2: "<strong>Can I copy the color codes?</strong> — Yes! Click on any color swatch to copy its HEX code to your clipboard. The tool also shows RGB and HSL values."  zh: {
+  zh: {
     bc:'调色板提取器', title:'调色板提取器',
     subtitle:'上传任意图片，提取主色调。所有处理在浏览器本地完成。',
     dz_text:'拖拽图片到此处，或点击上传',
@@ -386,21 +419,17 @@ const i18n = {
     uc_2:'从情绪板或参考图中创建配色方案',
     uc_3:'让叠加文字颜色与背景照片匹配',
     uc_4:'为网页设计项目构建协调的调色板',
+    rt_title:'相关工具',
+    rt_0_t:'颜色转换器', rt_0_d:'转换调色板颜色。',
+    rt_1_t:'CSS 渐变生成器', rt_1_d:'从调色板创建渐变。',
+    rt_2_t:'字体搭配工具', rt_2_d:'将字体与调色板搭配。',
+    rt_3_t:'图片格式转换器', rt_3_d:'从任意图片提取调色板。',
+    faq_title:'常见问题',
+    faq_0:'<strong>支持什么图片格式？</strong> — 支持上传 PNG、JPG、WebP 和 GIF 图片。工具分析图片像素，提取最主要的颜色。',
+    faq_1:'<strong>能提取多少种颜色？</strong> — 默认提取前 5-8 种主色。你可以在设置中调整提取颜色数量。',
+    faq_2:'<strong>能复制颜色代码吗？</strong> — 可以！点击任意色块即可复制 HEX 色值到剪贴板。工具还显示 RGB 和 HSL 值。',
     f_privacy:'隐私政策', f_disclaimer:'免责声明', f_about:'关于我们', f_contact:'联系我们', f_rights:'版权所有'
-  ,
-    rt_title: "相关工具",
-    rt_0_t: "颜色转换器",
-    rt_0_d: "转换调色板颜色。",
-    rt_1_t: "CSS 渐变生成器",
-    rt_1_d: "从调色板创建渐变。",
-    rt_2_t: "字体搭配工具",
-    rt_2_d: "将字体与调色板搭配。",
-    rt_3_t: "图片格式转换器",
-    rt_3_d: "从任意图片提取调色板。",
-    faq_title: "常见问题",
-    faq_0: "<strong>支持什么图片格式？</strong> — 支持上传 PNG、JPG、WebP 和 GIF 图片。工具分析图片像素，提取最主要的颜色。",
-    faq_1: "<strong>能提取多少种颜色？</strong> — 默认提取前 5-8 种主色。你可以在设置中调整提取颜色数量。",
-    faq_2: "<strong>能复制颜色代码吗？</strong> — 可以！点击任意色块即可复制 HEX 色值到剪贴板。工具还显示 RGB 和 HSL 值。"}
+  }
 };
 
 let lang = 'en';
@@ -415,40 +444,5 @@ function toggleLang() {
   if (extractedColors.length) renderPalette();
 }
 </script>
-
-  <div class="related-section" style="max-width:720px;margin:32px auto 0;padding:0 16px;">
-    <h3 data-i18n="rt_title">Related Tools</h3>
-    <div class="related-grid">
-      <a href="/color/" class="related-card">
-        <h4 data-i18n="rt_0_t">Color Converter</h4>
-        <p data-i18n="rt_0_d">Convert palette colors.</p>
-      </a>
-      <a href="/gradient/" class="related-card">
-        <h4 data-i18n="rt_1_t">CSS Gradient Generator</h4>
-        <p data-i18n="rt_1_d">Create gradients from palettes.</p>
-      </a>
-      <a href="/font/" class="related-card">
-        <h4 data-i18n="rt_2_t">Font Pairing</h4>
-        <p data-i18n="rt_2_d">Pair fonts with your palette.</p>
-      </a>
-      <a href="/image/" class="related-card">
-        <h4 data-i18n="rt_3_t">Image Converter</h4>
-        <p data-i18n="rt_3_d">Extract palettes from any image.</p>
-      </a>
-
-    </div>
-  </div>
-
-
-    <div class="faq-section" style="border-top:0.5px solid rgba(108,92,231,0.25);padding-top:28px;margin-top:8px;">
-      <h2 style="font-size:18px;font-weight:600;margin-bottom:12px;" data-i18n="faq_title">Frequently Asked Questions</h2>
-      <ul style="list-style:none;padding:0;margin-bottom:16px;">
-      <li data-i18n="faq_0"><strong>What image formats are supported?</strong> — You can upload PNG, JPG, WebP, and GIF images. The tool analyzes the image pixels to extract the most dominant colors.</li>
-      <li data-i18n="faq_1"><strong>How many colors does it extract?</strong> — By default, it extracts the top 5-8 dominant colors. You can adjust the number of colors in the settings.</li>
-      <li data-i18n="faq_2"><strong>Can I copy the color codes?</strong> — Yes! Click on any color swatch to copy its HEX code to your clipboard. The tool also shows RGB and HSL values.</li>
-
-      </ul>
-    </div>
-
 </body>
 </html>
